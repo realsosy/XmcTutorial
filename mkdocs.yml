@@ -1,0 +1,38 @@
+site_name: XMC Tutorial
+
+pages:
+- Home: 'index.md'
+- Basic:
+    - Getting Started: GettingStartedXmc.md
+    - Development Environment: DevelopmentEnvironment.md
+    - CPU Subsystem: CpuSubsystem.md
+    - Digital IOs: DigitalIos.md
+    - PWM Basic: PwmBasic.md
+    - ADC Basic: AdcBasic.md
+    - DAC Basic: DacBasic.md
+    - Interrupt: Interrupt.md
+    - Counter: Counter.md
+    - Timer: Timer.md
+    - Real-time Clock: Rtc.md
+    - System Timer: SystemTimer.md
+    - uC-Probe: uc-Probe.md
+
+- Intermediate:
+    - DAC LUT: DacLut.md
+    - Watchdog: Watchdog.md
+    - DMA: DmaCh.md
+    - Event: Eru.md
+    - Compare & Capture: Ccu8SliceConfig.md
+    - UART: Uart.md
+    - USB: UsbdVcom.md
+    - Project Template: ProjectTemplate.md
+
+theme: readthedocs
+
+extra_javascript:
+    - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    
+markdown_extensions:
+    - mdx_math
+
+use_directory_urls: false
