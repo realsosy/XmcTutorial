@@ -30,12 +30,11 @@ pages:
     - USB: UsbdVcom.md
 
 - LabIntermediate:
-
+    - Counter: LabCounter.md
+    - Timer: LabTimer.md
+    
 - Advanced:
     - Project Template: ProjectTemplate.md
-
-- LabAdvanced:
-
 
 
 theme: readthedocs
