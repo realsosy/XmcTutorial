@@ -1,7 +1,6 @@
 # Welcome to XMC World
 
 Author: Wootaik Lee (wootaik@changwon.ac.kr)  
-Date: 2016-09-01
 
 # XMC tutorial
 
@@ -12,9 +11,9 @@ Date: 2016-09-01
     - 각 파트별  대표적 예제코드
 
 * Scopes
-    - 초급: 모듈별 개념 설명 with DAVE
-    - 중급: DAVE APP 고급 / XMC lib 활용 중심
-    - 고급: XMC의 고급 기능을 활용한 성능 극대화
+    - 초급: 모듈별 개념 설명 with DAVE APP
+    - 중급: DAVE APP 고급 / XMC lib 활용 소개
+    - 고급: XMC의 고급 기능을 활용예
 
 ## 초급
 * [Note]
@@ -35,10 +34,7 @@ Date: 2016-09-01
 6. ADC Basic
 7. DAC Basic
 8. Interrupt
-9. Counter
-10. Timer
-11. Real-time Clock
-12. System Timer & Foreground/Background Scheduler
+9. System Timer & Foreground/Background Scheduler
 13. uC-Probe
 14. Signal Generator & Monitor
 
@@ -50,12 +46,15 @@ Date: 2016-09-01
     - Capstone 연계 프로젝트: 장애물 회피 자동차
 
 1. DAC LUT
-3. CCU8 Slice Config & Input Capture
+2. Counter
+3. Timer
+4. Real-time Clock
+5. CCU8 Slice Config & Input Capture
 2. ADC Advanced
 3. Watchdog
 4. DMA
-5. ERU
-
+9. ERU
 6. UART
 7. USB(USBD_VCOM)
-8. I2C & SPI
+12. I2C & SPI
+

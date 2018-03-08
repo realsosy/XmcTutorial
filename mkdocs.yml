@@ -11,25 +11,36 @@ pages:
     - ADC Basic: AdcBasic.md
     - DAC Basic: DacBasic.md
     - Interrupt: Interrupt.md
+    - System Timer: SystemTimer.md
+    - uC-Probe: uc-Probe.md
+- LabBasic:
+    - Getting Started Part-I: LabGettingStartedPart1.md
+    - Getting Started Part-II: LabGettingStartedPart2.md
+
+- Intermediate:
     - Counter: Counter.md
     - Timer: Timer.md
     - Real-time Clock: Rtc.md
-    - System Timer: SystemTimer.md
-    - uC-Probe: uc-Probe.md
-
-- Intermediate:
+    - Compare & Capture: Ccu8SliceConfig.md
     - DAC LUT: DacLut.md
     - Watchdog: Watchdog.md
     - DMA: DmaCh.md
     - Event: Eru.md
-    - Compare & Capture: Ccu8SliceConfig.md
     - UART: Uart.md
     - USB: UsbdVcom.md
+
+- LabIntermediate:
+
+- Advanced:
     - Project Template: ProjectTemplate.md
+
+- LabAdvanced:
+
+
 
 theme: readthedocs
 
 extra_javascript:
     - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-    
+
 use_directory_urls: false
