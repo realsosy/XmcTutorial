@@ -1,0 +1,87 @@
+package Model.APPS.PIN_INTERRUPT.v4_0_2.Templates;
+
+import Model.APPS.PIN_INTERRUPT.v4_0_2.PIN_INTERRUPT
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2016, Infineon Technologies AG
+ * All rights reserved.                        
+ *                                             
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the           
+ * following conditions are met:   
+ *                                                                              
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following   
+ *   disclaimer.                        
+ * 
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following   
+ *   disclaimer in the documentation and/or other materials provided with the distribution.     
+ *                         
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote 
+ *   products derived from this software without specific prior written permission. 
+ *                                             
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,  
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE   
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,  
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR        
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,      
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE   
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.    
+ *                                                                              
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes       
+ * with Infineon Technologies AG (dave@infineon.com).         
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ * 2016-03-02:
+ *     - Initial version for DAVEv4. <BR>
+ *
+ * @endcond 
+ *
+ */
+#ifndef PIN_INTERRUPT_CONF_H
+#define PIN_INTERRUPT_CONF_H
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+
+/***********************************************************************************************************************
+* MACROS                                                                                                            
+***********************************************************************************************************************/
+""");
+String appInst = null;
+
+out.print("""
+/**< PIN_INTERRUPT APP version informations */
+#define PIN_INTERRUPT_MAJOR_VERSION (${(PIN_INTERRUPT.version).findAll( /\d+/ )*.toInteger()[0]}U)
+#define PIN_INTERRUPT_MINOR_VERSION (${(PIN_INTERRUPT.version).findAll( /\d+/ )*.toInteger()[1]}U)
+#define PIN_INTERRUPT_PATCH_VERSION (${(PIN_INTERRUPT.version).findAll( /\d+/ )*.toInteger()[2]}U)
+""")
+for (PIN_INTERRUPT Instance : appInstancesList ) {
+ appInst = Instance.getInstanceLabel()
+ List mappedUri = Instance.hwres_interrupt.getSolverUri()
+ 
+ if (mappedUri) {
+	 String nodeID = mappedUri[-1]
+	 String userFunc = Instance.gstring_interrupt_handler.value;
+if(userFunc != "")
+{
+	 out.print("""
+/**< Mapped IRQ Node Number */
+#define ${userFunc} IRQ_Hdlr_${nodeID}  
+		""");
+}
+ }
+ else {
+	 out.print("""
+/*INTERRUPT APP is not mapped for APP instance: ${objLabel} */
+		""");
+	 break;
+ }
+}
+out.print("""
+#endif /* End of PIN_INTERRUPT_CONF_H */""");

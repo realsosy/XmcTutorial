@@ -1,0 +1,78 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 600, 500">
+		<p1:GTab text="General Settings" widgetName="tab_general_settings" visible="true" enabled="true">
+			<p1:GTab.control>
+				<p1:Tab>
+					<p1:Tab.layout>
+						<GridLayout numColumns="2"/>
+					</p1:Tab.layout>
+					<p1:GCheck description="User interrupt handler is invoked upon enabling the trigger signal during initialization.&lt;br&gt;&#13;&#10;User explicitly need to ensure to call PIN_INTERRUPT_Enable() API in their code in order to invoke user interrupt handler when this option is disabled." manifestObj="true" text="Enable during initialization" widgetName="gcheck_enable_at_init">
+						<p1:GCheck.layoutData>
+							<GridData horizontalSpan="2"/>
+						</p1:GCheck.layoutData>
+					</p1:GCheck>
+					<p1:GGroup text="Input Settings" widgetName="ggroup_input_group">
+						<p1:GGroup.layoutData>
+							<GridData widthHint="314" heightHint="72" horizontalSpan="2" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout horizontalSpacing="10" verticalSpacing="10" numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel manifestObj="true" text="Mode:" widgetName="glabel_input_mode">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="LEFT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo description="Selection of weak pull-up or pull-down device in the pad.&#13;&#10;Continuous Sampling Mode used in Pin power save mode. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt; Tristate : No internal pull device active&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Pull Up :Internal pull-up device active&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Pull Down :Internal pull-down device active&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Continuous Sampling Mode :No internal pull device active; Pn_OUTx continuously samples the input value&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Tristate :No internal pull device active,but input value will be inverted.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Pull Up :Internal pull-up device active,but input value will be inverted.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Pull Down :Internal pull-down device active,but input value will be inverted.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Continuous Sampling Mode :No internal pull device active; Pn_OUTx continuously samples the input value&lt;/LI&gt;&#13;&#10;&lt;/UL&gt;&#13;&#10;" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Tristate&#13;&#10;Pull Up&#13;&#10;Pull Down&#13;&#10;Continuous Sampling Mode&#13;&#10;Inverted Tristate&#13;&#10;Inverted Pull Up&#13;&#10;Inverted Pull Down&#13;&#10;Inverted Continuous Sampling Mode&#13;&#10;" toolTipText="Select input pin characteristics." value="Tristate" widgetName="gcombo_input_mode">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="LEFT" widthHint="250"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel manifestObj="true" text="Hysteresis:" widgetName="glabel_hysteresis">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="LEFT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo description="Provides optimized pad oscillation behaviour for touch-sensing applications.&lt;br&gt;&#13;&#10;&#13;&#10;NOTE: Available only for XMC1x family.&lt;BR&gt;" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Standard&#13;&#10;Large" toolTipText="Select pad hysteresis control." value="Standard" widgetName="gcombo_hysteresis">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="LEFT" widthHint="250"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="Interrupt Settings" manifestObj="true" widgetName="ggroup_interrupt_settings">
+						<p1:GGroup.layoutData>
+							<GridData horizontalSpan="2" widthHint="315" heightHint="138" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Generate interrupt on:" visible="true" manifestObj="true" widgetName="glabel_interrupt_edge"/>
+						<p1:GCombo description="This field defines the edge of the event signal to be used for triggering the event.&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Rising Edge: The rising edge of the trigger event signal is used.&lt;/li&gt;&#13;&#10;&lt;li&gt;Falling Edge: The rising edge of the trigger event signal is used.&lt;/li&gt;&#13;&#10;&lt;li&gt;Both Edges: Both edges of the trigger event signal is used.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Rising Edge&#13;&#10;Falling Edge&#13;&#10;Both Edges&#13;&#10;None" toolTipText="Configures trigger edge for the generation of an event." value="Rising Edge" widgetName="gcombo_interrupt_edge">
+							<p1:GCombo.layoutData>
+								<GridData widthHint="194" verticalIndent="5"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel manifestObj="true" text="Interrupt handler:" widgetName="glabel_interrupt_handler"/>
+						<p1:GString description="Allow user to enter User defined interrupt service routine." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" toolTipText="User defined interrupt service routine." value="UserIRQHandler" widgetName="gstring_interrupt_handler" x:Style="BORDER">
+							<p1:GString.layoutData>
+								<GridData widthHint="186" verticalIndent="5"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GInterruptPrio description="This widget permits the configuration of the preemption priority and sub-priority.&#13;&#10;&lt;br&gt;&lt;br&gt;&#13;&#10;Note: The MAX_VALUE (for preemption priority and sub-priority) indicated in the range&#13;&#10;field will be dynamically assigned based on the number of bits configured in the CPU_CTRL_XMC1/4 APP.&#13;&#10;" manifestObj="true" maxPriority="63" maxSubPriority="0" minPriority="0" minSubPriority="0" priorityMandatory="false" priorityValue="63" subPriorityValue="0" text="Interrupt Priority" toolTipText="This configures interrupt preemption priority and subpriority for external input event pin." widgetName="ginterruptprio_interrupt">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalSpan="2" widthHint="319"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+						<Label/>
+					</p1:GGroup>
+					<p1:GMessage description="This reflects whether entered user defined interrupt service routine&#13;&#10;as per valid C syntax or not." isError="true" manifestObj="true" text="Not valid user defined ISR name." toolTipText="This reflects whether entered user defined interrupt service routine&#13;&#10;as per valid C syntax or not." widgetName="gmessage_valid_isr_name">
+						<p1:GMessage.layoutData>
+							<GridData grabExcessHorizontalSpace="true" horizontalAlignment="LEFT" widthHint="298"/>
+						</p1:GMessage.layoutData>
+					</p1:GMessage>
+					<Label/>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>

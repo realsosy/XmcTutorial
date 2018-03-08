@@ -1,0 +1,44 @@
+package Model.APPS.PIN_INTERRUPT.v4_0_2;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class PIN_INTERRUPT_GUI extends AppManifest {
+
+    /* IMPORTANT NOTE: This is an auto generated file, please do not edit manually. */
+    /* User modifications in the GUI editor will be updated here automatically.     */
+    /* Manually editing the contents of this file will corrupt the APP SDK project. */
+
+	/* Begin : UI variable section */
+	 public GCombo gcombo_input_mode;
+	 public GCombo gcombo_hysteresis;
+	 public GCombo gcombo_interrupt_edge;
+	 public GString gstring_interrupt_handler;
+	 public GCheck gcheck_enable_at_init;
+	 public GLabel glabel_input_mode;
+	 public GLabel glabel_hysteresis;
+	 public GLabel glabel_interrupt_edge;
+	 public GLabel glabel_interrupt_handler;
+	 public GGroup ggroup_interrupt_settings;
+	 public GInterruptPrio ginterruptprio_interrupt;
+	 public GMessage gmessage_valid_isr_name;
+
+	 public PIN_INTERRUPT_GUI(DaveEnv daveEnv){
+
+	 gcombo_input_mode = GCombo(widgetName:"gcombo_input_mode", options:["Tristate","Pull Up","Pull Down","Continuous Sampling Mode","Inverted Tristate","Inverted Pull Up","Inverted Pull Down","Inverted Continuous Sampling Mode"], value:"Tristate", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_hysteresis = GCombo(widgetName:"gcombo_hysteresis", options:["Standard","Large"], value:"Standard", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_interrupt_edge = GCombo(widgetName:"gcombo_interrupt_edge", options:["Rising Edge","Falling Edge","Both Edges","None"], value:"Rising Edge", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_interrupt_handler = GString(widgetName:"gstring_interrupt_handler", value:"UserIRQHandler", enabled:true, visible:true, isMandatoryValue:false)
+	 gcheck_enable_at_init = GCheck(widgetName:"gcheck_enable_at_init", value:false, enabled:true, visible:true)
+	 glabel_input_mode = GLabel(widgetName:"glabel_input_mode", text:"Mode:", enabled:true, visible:true)
+	 glabel_hysteresis = GLabel(widgetName:"glabel_hysteresis", text:"Hysteresis:", enabled:true, visible:true)
+	 glabel_interrupt_edge = GLabel(widgetName:"glabel_interrupt_edge", text:"Generate interrupt on:", enabled:true, visible:true)
+	 glabel_interrupt_handler = GLabel(widgetName:"glabel_interrupt_handler", text:"Interrupt handler:", enabled:true, visible:true)
+	 ggroup_interrupt_settings = GGroup(widgetName:"ggroup_interrupt_settings", text:"Interrupt Settings", enabled:true, visible:true)
+	 ginterruptprio_interrupt = GInterruptPrio(widgetName:"ginterruptprio_interrupt", priorityValue:63, minPriority:0, maxPriority:63, subPriorityValue:0, minSubPriority:0, maxSubPriority:0, subPriorityVisible:true, enabled:true, visible:true)
+	 gmessage_valid_isr_name = GMessage(widgetName:"gmessage_valid_isr_name", text:"Not valid user defined ISR name.", isError:true, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}
