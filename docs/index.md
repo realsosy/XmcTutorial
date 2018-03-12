@@ -12,7 +12,7 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 
 * Scopes
     - 초급: 모듈별 개념 설명 with DAVE
-    - 중급: DAVE APP 고급 / XMC lib 활용 중심
+    - 중급: DAVE APP 고급 / XMC lib 활용
     - 고급: XMC의 고급 기능 활용
 
 * 관련 URL
@@ -72,7 +72,6 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
     *   대상: XMC 성능을 최대한 활용하고자 하는 개발자
     *   내용: 고급 interface(MultiCAN, SDMMC, ETH), FreeRTOS, CMSIS, XMC Toolbox
     *   제외 interface 모듈(HRPWM, POSIF, DSD, EBU, LEDTS)
-    *   프로젝트: COMM emulator/analyzer
 
 1. Project Template
 1. FreeRTOS
@@ -81,7 +80,6 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 1. ADC Advanced
 1. Webserver I: Basic Settings (optional)
 1. Webserver II: Sending data from the MCU (optional)
-1. Basic control using ADC,PWM and NVIC
 1. Library for Servo motors(optional)
 
 *   [Programing 관련 필요 지식]

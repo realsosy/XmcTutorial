@@ -24,7 +24,6 @@ date: Sep 01 2016
 [J-link Software Package](https://www.segger.com/j-link-software.html)
 
 [KIT_XMC45_RELAX_V1](http://www.infineon.com/cms/en/product/evaluation-boards/KIT_XMC45_RELAX_V1/productType.html?productType=db3a304437849205013813b23ac17763#ispnTab1)
-    - Board_Users_Manual_XMC4500_Relax_Kit-V1_R1.2_released.pdf
 
 ## 개발환경
 
@@ -64,15 +63,15 @@ DAVE는 대표적인 통합개발환경인 이클립스(Eclipse)를 기반으로
     - 상단의 File 메뉴에서 [New]-[DAVE Project]를 선택한다.
     - 프로젝트의 이름을 입력하고 프로젝트 타입은 DAVE CE Project를 선택한다.
     - XMC4500-F100x1024 보드를 선택하고 Finish를 누른다.
-  ![DevEnv_CreatingProject1](./images/DevEnv_CreatingProject1.png)
+    ![DevEnv_CreatingProject1](./images/DevEnv_CreatingProject1.png)
 
 * 프로젝트 불러오기
     - 상단의 File 메뉴에서 import를 선택한다.
-  ![DevEnv_ProjectImport0](./images/DevEnv_ProjectImport0.png)
+    ![DevEnv_ProjectImport0](./images/DevEnv_ProjectImport0.png)
     - Existing Projects into Workspace를 선택한다.
-  ![DevEnv_ProjectImport1](./images/DevEnv_ProjectImport1.png)
+    ![DevEnv_ProjectImport1](./images/DevEnv_ProjectImport1.png)
     - 아래의 그림과 같이 Browse를 선택하고 프로젝트가 있는 폴더위치를 설정한다. 그리고 Import 하고자 하는 프로젝트를 체크하고 Finish를 누른다.
-  ![DevEnv_ProjectImport2](./images/DevEnv_ProjectImport2.png)
+    ![DevEnv_ProjectImport2](./images/DevEnv_ProjectImport2.png)
     - 위의 그림의 폴더 위치는 DAVE가 제공하는 예제코드의 위치이다. 이 곳에서 유용한 예제코드를 불러올 수 있다.
 
 > 예제코드 다운로드
@@ -82,19 +81,19 @@ DAVE는 대표적인 통합개발환경인 이클립스(Eclipse)를 기반으로
 
 * 헤더파일과 소스파일 추가
     - 상단의 File메뉴에서 [New]-[Other]을 선택한다.
-  ![DevEnv_AddHeaderSource0](./images/DevEnv_AddHeaderSource0.png)
+    ![DevEnv_AddHeaderSource0](./images/DevEnv_AddHeaderSource0.png)
     - 아래 그림과 같이 C/C++에서 헤더파일과 소스파일을 프로젝트에 추가 할 수 있다.
-  ![DevEnv_AddHeaderSource1](./images/DevEnv_AddHeaderSource1.png)
+    ![DevEnv_AddHeaderSource1](./images/DevEnv_AddHeaderSource1.png)
 
 * 프로젝트 활성화
     - 작업하고자 하는 프로젝트의 마우스 우클릭 메뉴에서 Set Active Project를 선택하여 활성화한다. 활성화 된 프로젝트의 이름은 bold체가 된다.
-  ![DevEnv_SetProject](./images/DevEnv_SetProject.png)
+    ![DevEnv_SetProject](./images/DevEnv_SetProject.png)
 
 * 프로젝트의 디버그/릴리즈 설정
     - 프로젝트의 디버그 설정이란 프로그램을 디버깅 관련 기능을 사용할 수 있도록 컴파일 시 컴파일 옵션들을 자동으로 설정하는 기능이다.
     - 프로젝트의 릴리즈 설정이란 프로그램을 배포하기 위해 코드를 최적화하여 컴파일 하는 설정이다. 릴리즈 설정으로 컴파일 시 디버깅 관련 옵션은 모두 제외되어 디버깅할 수 없다.
     - 마우스 우클릭 메뉴에서 [Build Configurations]-[Set Active]에서 프로젝트의 빌드 설정을 변경 할 수 있다.
-  ![DevEnv_DebugRelease](./images/DevEnv_DebugRelease.png)
+    ![DevEnv_DebugRelease](./images/DevEnv_DebugRelease.png)
 
 ## 컴파일러(Compiler)
 
@@ -107,7 +106,7 @@ DAVE에서는 GCC를 기반으로 하는 ARM 프로세서용 Cross-compiler를 �
     - 상단의 Project 메뉴에서 Properties를 선택한다.  
     ![DevEnv_CompilerConfiguration0](./images/DevEnv_CompilerConfiguration0.png)
     - 아래의 그림과 같이 메뉴들을 선택하면 C Compiler 설정을 확인 할 수 있다.
-  ![DevEnv_CompilerConfiguration1](./images/DevEnv_CompilerConfiguration1.png)
+    ![DevEnv_CompilerConfiguration1](./images/DevEnv_CompilerConfiguration1.png)
 
 * 컴파일러 설정 요소
     - 위의 그림에서 ARM-GCC C Compiler를 선택하면 우측에 Command와 All options가 나타난다. Command는 실제로 사용할 컴파일러 프로그램을 나타내고 All options는 컴파일 실행 시 사용할 옵션들이다. 이 옵션들은 좌측의 Preprocessor, Directories, Optimization, Warnings, Miscellaneous 탭에서 설정한 정보들이 반영된다.
@@ -147,8 +146,12 @@ DAVE에서 디버거를 사용하기 위해서는 보드와의 연결, 프로그
 ![DevEnv_DebugSetting1](./images/DevEnv_DebugSetting1.png)
 
 ### 디버거 활용: 실행 및 중지
-* DAVE Debugger 진입 시 상단 도구모음에는 다음 그림과 같은 버튼들이 추가된다. 1번은 프로그램을 시작하는 버튼이다. 2번은 프로그램을 일시정지, 3번은 프로그램을 완전 정지하는 버튼이다. 4번과 5번은 프로그램을 한 스탭 씩 실행하는 버튼이다. 둘의 차이점은 다음 프로그램 스탭이 함수인 경우 4번은 함수 내부로 들어가서 한 스탭씩 프로그램을 실행한다. 반면에 5번은 함수 루틴 전체를 한 스탭으로 실행한다.  
-![DevEnv_Debug0](./images/DevEnv_Debug0.png)
+* DAVE Debugger 진입 시 상단 도구모음에는 다음 그림과 같은 버튼들이 추가된다. 
+  * 1번은 프로그램을 시작하는 버튼이다. 
+  * 2번은 프로그램을 일시정지, 
+  * 3번은 프로그램을 완전 정지하는 버튼이다. 
+  * 4번과 5번은 프로그램을 한 스탭 씩 실행하는 버튼이다. 둘의 차이점은 다음 프로그램 스탭이 함수인 경우 4번은 함수 내부로 들어가서 한 스탭씩 프로그램을 실행한다. 반면에 5번은 함수 루틴 전체를 한 스탭으로 실행한다.  
+    ![DevEnv_Debug0](./images/DevEnv_Debug0.png)
 
 ### 디버거 활용: Breakpoint와 변수값 확인
 * Breakpoint는 특정 위치에서 프로그램의 실행을 정지시키는 기능이다. 아래의 그림에서는 PWM_SetFreq(&dhPWM_1, u32NewFreq) 함수가 실행되기 전 프로그램은 일시 정지된다. Breakpoint는 아래 그림의 표시 된 영역에서 정지시키고자 하는 라인에 맞춰 더블클릭하여 설정한다.
@@ -192,5 +195,5 @@ XMC4500을 위한 평가용 보드 또한 여러가지가 존재한다. 실습�
 * GettingStated 프로젝트의 dhPWM_0 APP의 주파수를 10 Hz로 변경하자. LED1에 어떠한 변화가 일어났는가?
 3. 브레이크 포인트를 넣고 변수값의 변화를 확인하자.
 * GettingStated의 디버그모드에서 u32NewFreq 변수를 Expressions 탭에 등록하자.
-* ISR_dhEVENT_GENERATOR_0_iout 함수의 ```PWM_SetFreq(&dhPWM_1, u32NewFreq);``` 프로그램 라인에서 Breakpoint을 설정해보자.
+* ISR_dhPIN_INTERRUPT_0 함수의 ```PWM_SetFreq(&dhPWM_1, u32NewFreq);``` 프로그램 라인에서 Breakpoint을 설정해보자.
 * 프로그램을 실행하고 BUTTON2를 눌러보자. u32NewFreq의 값에 어떠한 변화가 생겼는가?
