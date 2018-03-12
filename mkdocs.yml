@@ -17,6 +17,7 @@ pages:
 - LabBasic:
     - Getting Started Part-I: LabGettingStartedPart1.md
     - Getting Started Part-II: LabGettingStartedPart2.md
+    - Check Dev Environment: LabCheckDevEnv.md
 
 - Intermediate:
     - Counter: Counter.md
