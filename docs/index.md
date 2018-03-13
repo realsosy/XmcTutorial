@@ -47,7 +47,7 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
     *   Function
 
 ## 중급
-* [Note]
+* 
     - 대상: emb 경험자
     - 내용: 중급 interface(기본 interface 다시, GPDMA, CCU4/8, USIC or USB, FCE), XMC lib
     - 프로젝트: raidar & dc motor speed control
