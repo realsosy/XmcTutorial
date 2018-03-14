@@ -45,7 +45,7 @@ DAVE와 디버거가 올바르게 설치되었는지 확인한다.
 
 2. XMC4500을 처음 연결 시 드라이버를 설치한다. 드라이버 설치가 완료되면 아래 사진과 같이 장치관리자에서 J-Link driver를 확인 할 수 있다.
 
-![LabCheckDevEnv_HwConnection1](./images/LabCheckDevEnv_HwConnection1.png)
+![LabCheckDevEnv_HwConnection1](./images/LabCheckDevEnv_Hwconnection1.png)
 
 ### PC 개발환경 확인하기
 
