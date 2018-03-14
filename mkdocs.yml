@@ -39,6 +39,8 @@ pages:
     - Project Template: ProjectTemplate.md
 
 
+- References: 'References.md'
+
 theme: readthedocs
 
 extra_javascript:
