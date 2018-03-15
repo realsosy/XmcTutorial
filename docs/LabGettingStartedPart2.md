@@ -127,7 +127,7 @@ void ISR_dhPWM_0_period_match(void)
 13. 툴바에서 **Generate Code** 를 사용하여 APP 설정을 코드에 적용한다.
 14. main.c에 다음의 코드를 추가한다.
 
-`volatile uint32_t newfreq=1;(#Include 아래 전역변수로 선언)`
+`volatile uint32_t u32NewFreq=1;     //#Include 아래 전역변수로 선언`
 
 ```
 void ISR_dhEVENT_GENERATOR_0_iout(void)
