@@ -20,7 +20,7 @@ date: Sep 01 2016
 
 * [Webcast on DAVE™ - Getting started with version 4.0](http://2696.2871.m.edge-cdn.net/vsc_2871_2696_1_vid_863478/webcast-on-dave-getting-started-with-version-4-0.html)
     - Infineon-Working with DAVE-AN-v01_00-EN.pdf
-    - XMC4500 이용
+    - XMC4700 이용
     - 좋은 follow-up Example
     - MUST READ Article
 
@@ -142,6 +142,6 @@ XMC 하드웨어를 제일 밑으로 하고 그 위에 계층적으로 라이브
 ## 실습
 
 * Lab Getting Started 
-    * XMC4500 Lite board 로 DAVE project 하나 만들고 따라해 보기
+    * XMC4700 Lite board 로 DAVE project 하나 만들고 따라해 보기
 
 ## 요약
