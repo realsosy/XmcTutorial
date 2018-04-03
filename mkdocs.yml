@@ -18,6 +18,7 @@ pages:
     - Check Dev Environment: LabCheckDevEnv.md
     - Getting Started Part-I: LabGettingStartedPart1.md
     - Getting Started Part-II: LabGettingStartedPart2.md
+    - Digital IOs: LabDigitalIos.md
 
 - Intermediate:
     - Counter: Counter.md
