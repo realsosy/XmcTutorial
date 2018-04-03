@@ -210,8 +210,10 @@ typedef enum DIGITAL_IO_STATUS
 
 ### 사용예
 
+####초기화
+
 * Digital Input 설정
-사용자가 다음의 그림과 같이 디지털 입력으로 포트핀 14 번을 설정하고 Dave 로 코드를 생성한다면 다음의 코드와 같이 DIGITAL_IO_t 의 자료형으로 포트핀에 대한 구조체가 생성된다. 일반적으로 이와 같이 하드웨어를 추상화한 자료구조를 핸들러라 표현한다.
+  사용자가 다음의 그림과 같이 디지털 입력으로 포트핀 14 번을 설정하고 Dave 로 코드를 생성한다면 다음의 코드와 같이 DIGITAL_IO_t 의 자료형으로 포트핀에 대한 구조체가 생성된다. 일반적으로 이와 같이 하드웨어를 추상화한 자료구조를 핸들러라 표현한다.
 
     ![디지털 입력 설정](./images/DigitalIos_ConfigDI.png)
 
@@ -247,18 +249,18 @@ const DIGITAL_IO_t dhDIGITAL_OUT_0 =
 ```
 
 * 설정값의 초기화
-사용자는 이와 같이 DAVE APP을 설정하고 사용하면 main.c 함수에서 DAVE_Init() 함수가 호출되어 개별적인 APP 을 초기화 하지 않고 사용할 수 있다.  이 과정을 좀 더 상세히 살펴보면 다음과 같다.  
+  사용자는 이와 같이 DAVE APP을 설정하고 사용하면 main.c 함수에서 DAVE_Init() 함수가 호출되어 개별적인 APP 을 초기화 하지 않고 사용할 수 있다.  이 과정을 좀 더 상세히 살펴보면 다음과 같다.  
 
-    1. main 함수에서 DAVE_Init() 함수 호출
+[step1]  main 함수에서 DAVE_Init() 함수 호출
 ```
 int main(void)
 {
   DAVE_STATUS_t status;
   status = DAVE_Init();           /* Initialization of DAVE APPs  */
   ... 이하 생략 ...
-```   
+```
 
-    2. DAVE_Init() 함수에서 개별 APP 의 초기화 함수(DIGITAL_IO_Init 함수) 호출
+[step2] DAVE_Init() 함수에서 개별 APP 의 초기화 함수(DIGITAL_IO_Init 함수) 호출
 
 ```   
 DAVE_STATUS_t DAVE_Init(void)
@@ -282,8 +284,10 @@ DAVE_STATUS_t DAVE_Init(void)
 ```
 이와 같이 초기화는 자동으로 이루어 진다. 그러나 사용자가 실행중에 포트핀의 설정값을 바꾸고자 한다면 APP의 초기화 함수(DIGITAL_IO_Init 함수)를 명시적으로 호출하여야 한다.
 
+#### 입출력
+
 * 포트핀에 출력하기
-출력으로 설정된 포트핀에 전압을 High/Low/Toggle 로 내보내려면 다음과 같이 메소드를 사용하면 된다. 다음의 예는 각각 dhDIGITAL_OUT_0 로 High와 Low 전압을 출력하는 예이다.
+  출력으로 설정된 포트핀에 전압을 High/Low/Toggle 로 내보내려면 다음과 같이 메소드를 사용하면 된다. 다음의 예는 각각 dhDIGITAL_OUT_0 로 High와 Low 전압을 출력하는 예이다.
 
 ```
 DIGITAL_IO_SetOutputHigh(&dhDIGITAL_OUT_0);
