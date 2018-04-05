@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ProjectConfig>
+    <ResourceReserve/>
+    <Solver>
+        <SolverBndMap>
+            <BindMap MUri="devicepackage/0/78" Proxy="app/DIGITAL_IO/2/__pin_hwres_port_pin"/>
+            <BindMap MUri="port/p/1/pad/15" Proxy="app/DIGITAL_IO/1/hwres_port_pin"/>
+            <BindMap MUri="devicepackage/0/69" Proxy="app/DIGITAL_IO/0/__pin_hwres_port_pin"/>
+            <BindMap MUri="devicepackage/0/79" Proxy="app/DIGITAL_IO/3/__pin_hwres_port_pin"/>
+            <BindMap MUri="devicepackage/0/68" Proxy="app/DIGITAL_IO/1/__pin_hwres_port_pin"/>
+            <BindMap MUri="port/p/1/pad/14" Proxy="app/DIGITAL_IO/0/hwres_port_pin"/>
+            <BindMap MUri="port/p/1/pad/1" Proxy="app/DIGITAL_IO/2/hwres_port_pin"/>
+            <BindMap MUri="port/p/1/pad/0" Proxy="app/DIGITAL_IO/3/hwres_port_pin"/>
+        </SolverBndMap>
+    </Solver>
+</ProjectConfig>
