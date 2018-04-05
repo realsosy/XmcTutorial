@@ -25,9 +25,9 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 
 ## 초급
 * 개요
-    - 대상: 일반 C 프로그래밍 경험을 갖는 초보 emb 개발자
-    - 내용: emb 특징, 기본 interface 개론(DIO, ADC, DAC, PWM), Dave App, uC-Probe
-    - 프로젝트: Signal generator & monitor
+    * 대상: 일반 C 프로그래밍 경험을 갖는 초보 emb 개발자
+    * 내용: emb 특징, 기본 interface 개론(DIO, ADC, DAC, PWM), Dave App, uC-Probe
+    * 프로젝트: Signal generator & monitor
 
 1. Getting Started XMC: Follow-up example (DIO, PWM, ADC)  
 1. Development Environment
@@ -47,10 +47,10 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
     *   Function
 
 ## 중급
-* 개요    
-    - 대상: emb 경험자
-    - 내용: 중급 interface(기본 interface 다시, GPDMA, CCU4/8, USIC or USB, FCE), XMC lib
-    - 프로젝트: raidar & dc motor speed control
+* 개요
+    * 대상: emb 경험자
+    * 내용: 중급 interface(기본 interface 다시, GPDMA, CCU4/8, USIC or USB, FCE), XMC lib
+    * 프로젝트: raidar & dc motor speed control
 
 1. DAC LUT
 1. Counter, Timer
