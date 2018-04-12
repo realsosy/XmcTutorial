@@ -46,5 +46,6 @@ theme: readthedocs
 
 extra_javascript:
     - http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-
+    - mathjaxhelper.js
+    
 use_directory_urls: false
