@@ -19,6 +19,12 @@ pages:
     - Getting Started Part-I: LabGettingStartedPart1.md
     - Getting Started Part-II: LabGettingStartedPart2.md
     - Digital IOs: LabDigitalIos.md
+    - PWM Basic: LabPwmBasic.md
+#    - ADC Basic: LabAdcBasic.md
+#    - DAC Basic: LabDacBasic.md
+#    - Interrupt: LabInterrupt.md
+#    - System Timer: LabSystemTimer.md
+#    - uC-Probe: uc-Probe.md
 
 - Intermediate:
     - Counter: Counter.md
