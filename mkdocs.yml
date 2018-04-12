@@ -49,5 +49,5 @@ extra_javascript:
 
 markdown_extensions:
     - mdx_math
-    
+
 use_directory_urls: false
