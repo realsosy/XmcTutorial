@@ -289,7 +289,7 @@ Event와 관련된 상태를 읽고 Event 플래그를 초기화 한다.
 
 ### 사용예
 
-#### PWM Output 설정  
+#### PWM App 설정  
 
 DAVE 로 PWM APP 을 설정하면 PWM_t 자료 구조에 따라 레이블명으로 다음과 같은 구조체가 생성된다. 
 
