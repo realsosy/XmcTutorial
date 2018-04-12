@@ -38,7 +38,7 @@ $f(t)$ 파형이 $0<t<D\times T$ 동안 $Y_{max}$ 값을 유지하고, $D\times 
 
 $$
 \begin{aligned}
-\bar{y} &=\frac{1}{T} \left \{  \int_{0}^{D \cdot T}Y_{max}dt+ \int_{D \cdot T}^{T}Y_{min}dt \right \} \\
+\bar{y} &=\frac{1}{T} \left \{  \int_{0}^{D \cdot T} Y_{max} dt + \int_{D \cdot T}^{T} Y_{min} dt \right \} \\
 &= \frac{1}{T} \\
 &= D \cdot Y_{max} + (1-D)\cdot Y_{min}
 \end{aligned}
