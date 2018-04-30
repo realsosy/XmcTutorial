@@ -1,0 +1,561 @@
+package Model.APPS.ADC_MEASUREMENT.v4_1_22.Templates;
+
+import Model.APPS.ADC_MEASUREMENT.v4_1_22.ADC_MEASUREMENT
+
+out.print("""
+/* @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-02-16:
+ *     - Initial version for DAVEv4.<BR>
+ *
+ * 2015-02-19:
+ *     - Added GetResult APIs for XMC1100 devices.
+ *
+ * 2015-05-14:
+ *     - Optimized the Manifest.<BR>
+ *     - Modified the structure ADC_MEASUREMENT_channel_t to ADC_MEASUREMENT_CHANNEL_t.<BR>
+ *
+ * 2015-06-26:
+ *     - Added input class resource consumption.<BR>
+ *
+ * 2015-07-09:
+ *     - Documentation updated.<BR>
+ *
+ * 2015-07-31:
+ *     - Updated the APP to support new devices.<BR>
+ *
+ * 2015-10-01:
+ *     - Updated the APP to support the interrupt control in XMC14.<BR>
+ *
+ * 2015-10-08:
+ *     - Added support for XMC4700/XMC4800 devices.<BR>
+ *
+ * 2015-10-20:
+ *     - Documentation updated.<BR>
+ *
+ * 2015-12-03:
+ *     - Added support for XMC4300 device.<BR>
+ *
+ * 2015-02-09:
+ *     - Updated the APP for the minimum required ANALOG_IO APP version.<BR>
+ *
+ * 2016-03-18:
+ *     - Maximum number of channels for XMC41/42 increased to 9.<BR>
+ *     - Added Post calibration time for XMC1x series in Total conversion Time.<BR>
+ *     - Fixed the ADC_MEASUREMENT_Init() for ANALOG_IO initialization.<BR>
+ *     - For XMC1100 series only: Deprecated the API ADC_MEASUREMENT_GetResult() and 
+ *       ADC_MEASUREMENT_GetDetailedResult().<BR>
+ *     - For XMC1100 series only: Added new API ADC_MEASUREMENT_GetGlobalResult() and 
+ *       ADC_MEASUREMENT_GetGlobalDetailedResult().<BR>
+ *
+ * 2016-03-18:
+ *     - Minimum sample time at low frequencies changed to incorporate Errata ADC_AI.H006 and ADC_AI.H007.
+ *
+ * @endcond
+ *
+ */
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+
+#include "adc_measurement.h"
+
+/**********************************************************************************************************************
+* DATA STRUCTURES
+**********************************************************************************************************************/
+""");
+
+String MappedUri = null;
+def appInst  = null;
+String channel_number =null;
+String Group_number =null;
+String result_register =null;
+String PortNum =null;
+String PortPinNum =null;
+String event_gen_criteria = '';
+String event_gen_enable = '';
+
+List VarCnvModeArray = ['XMC_VADC_CONVMODE_12BIT','XMC_VADC_CONVMODE_10BIT','XMC_VADC_CONVMODE_8BIT','XMC_VADC_CONVMODE_FASTCOMPARE'];
+
+List ArbitterMode = ['XMC_VADC_GROUP_ARBMODE_ALWAYS','XMC_VADC_GROUP_ARBMODE_ONDEMAND'];
+
+//List Conv_class=['VADC_CH_CONV_GLOBAL_CLASS0','VADC_CH_CONV_GLOBAL_CLASS0'];
+List startMode=['XMC_VADC_STARTMODE_WFS','XMC_VADC_STARTMODE_CIR','XMC_VADC_STARTMODE_CNR'];
+
+List EdgeMode = ['XMC_VADC_TRIGGER_EDGE_NONE','XMC_VADC_TRIGGER_EDGE_RISING','XMC_VADC_TRIGGER_EDGE_FALLING','XMC_VADC_TRIGGER_EDGE_ANY'];
+
+
+List ch_name=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG']
+
+List ServiceRequestLines = [ 'XMC_VADC_SR_SHARED_SR0','XMC_VADC_SR_SHARED_SR1','XMC_VADC_SR_SHARED_SR2','XMC_VADC_SR_SHARED_SR3'];
+
+List All_SR_lines = [ 'XMC_VADC_SR_GROUP_SR0','XMC_VADC_SR_GROUP_SR1','XMC_VADC_SR_GROUP_SR2','XMC_VADC_SR_GROUP_SR3',
+	'XMC_VADC_SR_SHARED_SR0','XMC_VADC_SR_SHARED_SR1','XMC_VADC_SR_SHARED_SR2','XMC_VADC_SR_SHARED_SR3'];
+						
+List result_event_ptr =[ "grevnp0_rev0np","grevnp0_rev1p","grevnp0_rev2np","grevnp0_rev3np","grevnp0_rev4np","grevnp0_rev5np","grevnp0_rev6p","grevnp0_rev7np",
+						 "grevnp1_rev8np","grevnp1_rev9np","grevnp1_rev10np","grevnp1_rev11p","grevnp1_rev12np","grevnp1_rev13np","grevnp1_rev14np", "grevnp1_rev15np"]
+
+List Gating_signal  = [ 'XMC_VADC_REQ_GT_A','XMC_VADC_REQ_GT_B','XMC_VADC_REQ_GT_C','XMC_VADC_REQ_GT_D','XMC_VADC_REQ_GT_E','XMC_VADC_REQ_GT_F',
+						'XMC_VADC_REQ_GT_G','XMC_VADC_REQ_GT_H','XMC_VADC_REQ_GT_I','XMC_VADC_REQ_GT_J','XMC_VADC_REQ_GT_K','XMC_VADC_REQ_GT_L',
+						'XMC_VADC_REQ_GT_M','XMC_VADC_REQ_GT_N','XMC_VADC_REQ_GT_O','XMC_VADC_REQ_GT_P']
+
+List trigger_signal = [ 'XMC_VADC_REQ_TR_A','XMC_VADC_REQ_TR_B','XMC_VADC_REQ_TR_C','XMC_VADC_REQ_TR_D','XMC_VADC_REQ_TR_E','XMC_VADC_REQ_TR_F',
+						   'XMC_VADC_REQ_TR_G','XMC_VADC_REQ_TR_H','XMC_VADC_REQ_TR_I','XMC_VADC_REQ_TR_J','XMC_VADC_REQ_TR_K','XMC_VADC_REQ_TR_L',
+						'XMC_VADC_REQ_TR_M','XMC_VADC_REQ_TR_N','XMC_VADC_REQ_TR_O','XMC_VADC_REQ_TR_P']
+List rs_priority	  = ['XMC_VADC_GROUP_RS_PRIORITY_0','XMC_VADC_GROUP_RS_PRIORITY_1','XMC_VADC_GROUP_RS_PRIORITY_2','XMC_VADC_GROUP_RS_PRIORITY_3']
+
+List channel_resource   = [];
+List channel_uri 		= [];
+List result_resource    = [];
+List result_uri     	= [];
+List channeL_names  	= [];
+List array_flag			= [];
+List pad_uri        	= [];
+Boolean uses_gpio_app  = false;
+List shared_GPIO_instance_label = [];
+List res_evt_enable = [];
+List ch_evt_enable = [];
+
+
+for (Object appIns : appInstancesList ) {
+		
+  appInst = appIns.getInstanceLabel()
+
+  if (  appIns.gcheck_SharedPinA.value || ( appIns.ginteger_channel_number.value >=2 && appIns.gcheck_SharedPinB.value) \
+		||( appIns.ginteger_channel_number.value >=3 && appIns.gcheck_SharedPinC.value) || ( appIns.ginteger_channel_number.value >=4 && appIns.gcheck_SharedPinD.value) \
+		||( appIns.ginteger_channel_number.value >=5 && appIns.gcheck_SharedPinE.value) ||( appIns.ginteger_channel_number.value >=6 && appIns.gcheck_SharedPinF.value) ||( appIns.ginteger_channel_number.value >=7 && appIns.gcheck_SharedPinG.value) ||( appIns.ginteger_channel_number.value >=8 && appIns.gcheck_SharedPinH.value) \
+		||( appIns.ginteger_channel_number.value >=9 && appIns.gcheck_SharedPinI.value) ||( appIns.ginteger_channel_number.value >=10 && appIns.gcheck_SharedPinJ.value) ||( appIns.ginteger_channel_number.value >=11 && appIns.gcheck_SharedPinK.value) ||( appIns.ginteger_channel_number.value >=12 && appIns.gcheck_SharedPinL.value) \
+		||( appIns.ginteger_channel_number.value >=13 && appIns.gcheck_SharedPinM.value) ||( appIns.ginteger_channel_number.value >=14 && appIns.gcheck_SharedPinN.value) ||( appIns.ginteger_channel_number.value >=15 && appIns.gcheck_SharedPinO.value) ||( appIns.ginteger_channel_number.value >=16 && appIns.gcheck_SharedPinP.value) \
+		||( appIns.ginteger_channel_number.value >=17 && appIns.gcheck_SharedPinQ.value) ||( appIns.ginteger_channel_number.value >=18 && appIns.gcheck_SharedPinR.value) ||( appIns.ginteger_channel_number.value >=19 && appIns.gcheck_SharedPinS.value) ||( appIns.ginteger_channel_number.value >=20 && appIns.gcheck_SharedPinT.value) \
+		||( appIns.ginteger_channel_number.value >=21 && appIns.gcheck_SharedPinU.value) ||( appIns.ginteger_channel_number.value >=22 && appIns.gcheck_SharedPinV.value) ||( appIns.ginteger_channel_number.value >=23 && appIns.gcheck_SharedPinW.value) ||( appIns.ginteger_channel_number.value >=24 && appIns.gcheck_SharedPinX.value) \
+		||( appIns.ginteger_channel_number.value >=25 && appIns.gcheck_SharedPinY.value) ||( appIns.ginteger_channel_number.value >=26 && appIns.gcheck_SharedPinZ.value  ))
+  {
+   uses_gpio_app = true;
+  }
+/******************************************LIST INITALIZATION*******************************************************************/
+  String family = daveEnv.project.selectedDevice.deviceId.family;
+  String series = daveEnv.project.selectedDevice.deviceId.series;
+
+  
+  String alpha = "A";
+  for(i=1;i<=appIns.ginteger_channel_number.value;i++)
+  {
+	  res_evt_enable[i] = appIns.("gcheck_enable_res_evt_ch"+alpha).value
+	  alpha++;
+  }
+	 
+  for(i=1;i<=appIns.ginteger_channel_number.value;i++)
+  {
+	  channeL_names[i] = appIns.("gstring_CH_Name_"+i.toString()).value
+  }
+  
+  /**********************************************************************************************************************************/
+  /************************************** Dummy solver variable reads ***************************************************************/
+  for(i=1;i<=appIns.ginteger_channel_number.value;i++)
+  {
+	appIns.rarray_hwres_adc_measurement_channel_pin[i].getRegValue("","pdisc_pdis");
+	appIns.rarray_hwres_adc_measurement_channel_pin[i].getRegValue("","hwsel_hw");
+  }
+  
+  if(family+series == 'XMC11') /* Will be removed once DD is fixed*/
+  {
+	  appIns.hwres_adc_measurement_background.getRegValue("","brsctrl_xtwc");
+	  appIns.hwres_adc_measurement_background.getRegValue("","brsctrl_gtwc");
+  }
+  
+  /*****************************************************************************************************************/
+  /************************************************MUX Related Configurations *************************************************************************/
+/* This is the Result Event Mux configurations*/
+  complete_string_set= '';
+  if(family+series != 'XMC11')
+  {
+	  Integer reg_index;
+	  for(reg_index=1;reg_index<=appIns.ginteger_channel_number.value;reg_index++)
+	  {
+		  channel_uri = appIns.rarray_hwres_adc_measurement_channels[reg_index].getSolverUri();
+		  if(res_evt_enable[reg_index])
+		  {
+			  result_register = appIns.rarray_hwres_adc_measurement_result_reg[reg_index].getSolverUri()[8];
+			  complete_string_set+="""
+    /* Result Event Node Mux Configuration for ${channeL_names[reg_index]} (Group-${channel_uri[6]} channel-${channel_uri[8]} Result_Register-${result_register})*/
+    XMC_VADC_GROUP_SetResultInterruptNode(VADC_G${channel_uri[6]},${result_register},${String temp = appIns.rarray_hwres_adc_measurement_result_reg[reg_index].getRegValue("","grevnp_revnp"); if(temp !=null){ All_SR_lines[temp.toInteger()] } else { All_SR_lines[0]} });
+"""
+		  }
+		  
+	  }
+	  
+	  /* This is the Channel Event Mux configurations*/
+	  for(ch_index=1;ch_index<=appIns.ginteger_channel_number.value;ch_index++)
+	  {
+		  channel_uri = appIns.rarray_hwres_adc_measurement_channels[ch_index].getSolverUri();
+		  if(ch_evt_enable[ch_index])
+		  {
+			  channel_num = appIns.rarray_hwres_adc_measurement_channels[ch_index].getSolverUri()[8];
+			  complete_string_set+="""
+    /* Channel Event Node Mux Configuration for ${channeL_names[reg_index]} (Group-${channel_uri[6]} channel-${channel_num}*/
+    XMC_VADC_GROUP_ChannelSetEventInterruptNode(VADC_G${channel_uri[6]},${channel_num},${String temp = appIns.rarray_hwres_adc_measurement_channels[reg_index].getRegValue("","gcevnp0_cevnp"); if(temp !=null){ All_SR_lines[temp.toInteger()] } else { All_SR_lines[0]} });
+"""
+		  }
+		  
+	  }
+  }
+  
+  if (complete_string_set != '')
+  {
+	  mux_config= "(ADC_MEASUREMENT_MUX_CONFIG_t) (${appInst}_mux_config)";
+	  out.print("""
+/**
+ * The Result Event Node configurations are done by this API and is invoked from ADC_MEASUREMENT_Init().
+ */
+  void ${appInst}_mux_config(void)
+  {
+${complete_string_set}
+  }
+   """)
+  }
+  else
+  {
+	  mux_config = "NULL";
+  }
+  
+  
+  /*************************************************************************************************************************/
+	
+	out.print("""
+/* Global iclass0 configuration*/
+const  XMC_VADC_GLOBAL_CLASS_t global_iclass_config =
+{
+  .conversion_mode_standard  = (uint32_t) ${VarCnvModeArray[appIns.gcombo_conv_mode.options.indexOf(appIns.gcombo_conv_mode.value)]},
+  .sample_time_std_conv	     = (uint32_t) ${appIns.gint_adc_measurement_stc0.value},
+};
+
+/******************************* CHANNEL CONFIG *******************************/
+""");
+
+
+
+	for(i=1;i<=appIns.ginteger_channel_number.value;i++)
+	{
+		
+	channel_uri = appIns.rarray_hwres_adc_measurement_channels[i].getSolverUri();
+	
+	if (channel_uri !=null)
+	{
+		channel_number= channel_uri[8];
+		Group_number = channel_uri[6];
+		if(family+series != 'XMC11')
+		{
+//			result_register = appIns.rarray_hwres_adc_measurement_result_reg[i].getSolverUri()[8];
+			result_register = appIns.rarray_hwres_adc_measurement_channels[i].getRegValue("","gchctr_resreg").toInteger();
+			global_result_selection = ".use_global_result          = (uint32_t) 0, 				             /* Use Group result register*/"
+		}
+		else
+		{
+			result_register = '0'
+			global_result_selection = ".use_global_result          = (uint32_t) 1, 				             /* Use Global result register*/"
+		}
+		array_flag[i]=true;
+		/*For alias configurations only*/
+		if(family+series != 'XMC11')
+		{
+			alias_channel_number = ''
+			if(channel_number=='0' && appIns.rarray_hwres_adc_measurement_channels[i].getRegValue("","galias_alias0").toInteger() != 0)
+			{
+				alias_channel_number = "(int8_t) "+appIns.rarray_hwres_adc_measurement_channels[i].getRegValue("","galias_alias0").toString() +
+				"  /* Channel is Aliased*/"
+			}
+			else if (channel_number=='1'  && appIns.rarray_hwres_adc_measurement_channels[i].getRegValue("","galias_alias1").toInteger() != 1)
+			{
+				alias_channel_number = "(int8_t) "+appIns.rarray_hwres_adc_measurement_channels[i].getRegValue("","galias_alias1").toString()+
+				"  /* Channel is Aliased*/"
+			}
+			else
+			{
+				alias_channel_number = "(int8_t) -1,                         /* ALIAS is Disabled*/";
+			}
+		}
+		else
+		{
+			alias_channel_number = "(int8_t) -1,                         /* ALIAS is Disabled*/";
+		}
+		/* channel event */
+//		event_gen_criteria = ch_evt_enable[i]? "XMC_VADC_CHANNEL_EVGEN_ALWAYS  /*Channel Event Enabled */":"XMC_VADC_CHANNEL_EVGEN_NEVER  /*Channel Event disabled */";
+		
+		/* Result event */
+		if(res_evt_enable[i])
+		{
+			event_gen_enable =   "(uint32_t) 1   /* Result event Enabled*/"
+		}
+		else
+		{
+			 event_gen_enable = "(uint32_t) 0   /* Disable Result event */";
+		}
+		
+		if(family+series != 'XMC11')
+		{
+			group_handle = """
+  .group_handle  = (VADC_G_TypeDef*)(void*) VADC_G${Group_number},"""
+		}
+		else
+		{
+			group_handle='';
+		}
+		
+		String instance_label = ''
+		String analog_io = ''
+		if(uses_gpio_app == true)
+		{
+			instance_label=  appIns.("appres_analog_io_channel_"+ch_name[i-1].toLowerCase()).getInstanceLabel()
+			
+			analog_io = "\n  .analog_io_config = ${if(appIns.rarray_adc_measurement_shared_pins[i].value){'(ANALOG_IO_t*) &'+instance_label}else{'NULL'}},"
+//			analog_io = ""
+		}
+		
+		out.print("""
+/*********************** ${channeL_names[i]} Configurations ************************************/
+
+""");
+if(family+series != 'XMC11') /* channel config is not needed for XMC11xx series*/
+{
+	out.print("""
+/*${channeL_names[i]} ADC Channel configuration structure*/
+XMC_VADC_CHANNEL_CONFIG_t  ${channeL_names[i]}_ch_config =
+{
+  .input_class                = (uint32_t) XMC_VADC_CHANNEL_CONV_GLOBAL_CLASS${appIns.hwres_adc_measurement_global_iclass.getSolverUri()[6]},  /* Global ICLASS ${appIns.hwres_adc_measurement_global_iclass.getSolverUri()[6]} selected */
+  .lower_boundary_select 	  = (uint32_t) XMC_VADC_CHANNEL_BOUNDARY_GROUP_BOUND0,
+  .upper_boundary_select 	  = (uint32_t) XMC_VADC_CHANNEL_BOUNDARY_GROUP_BOUND0,
+  .event_gen_criteria         = (uint32_t) XMC_VADC_CHANNEL_EVGEN_NEVER, /*Channel Event disabled */
+  .sync_conversion  		  = (uint32_t) 0,                            /* Sync feature disabled*/
+  .alternate_reference        = (uint32_t) XMC_VADC_CHANNEL_REF_INTREF,  /* Internal reference selected */
+  .result_reg_number          = (uint32_t) ${result_register},                           /* GxRES[${result_register}] selected */
+  ${global_result_selection}
+  .result_alignment           = (uint32_t) XMC_VADC_RESULT_ALIGN_RIGHT,  /* Result alignment - Right Aligned*/
+  .broken_wire_detect_channel = (uint32_t) XMC_VADC_CHANNEL_BWDCH_VAGND, /* No Broken wire mode select*/
+  .broken_wire_detect		  = (uint32_t) 0,    		                 /* No Broken wire detection*/
+  .bfl                        = (uint32_t) 0,                            /* No Boundary flag */
+  .channel_priority           = (uint32_t) 0,                   		 /* Lowest Priority 0 selected*/
+  .alias_channel              = ${alias_channel_number}
+};
+
+/*${channeL_names[i]} Result configuration structure*/
+XMC_VADC_RESULT_CONFIG_t ${channeL_names[i]}_res_config =
+{
+  .data_reduction_control  = (uint8_t) 0,  /* No Accumulation */
+  .post_processing_mode    = (uint32_t) XMC_VADC_DMM_REDUCTION_MODE,
+  .wait_for_read_mode  	   = (uint32_t) 0,  /* Disabled */
+  .part_of_fifo       	   = (uint32_t) 0 , /* No FIFO */
+  .event_gen_enable   	   = ${event_gen_enable}
+};
+
+/* ${channeL_names[i]} ADC channel Handle */
+ADC_MEASUREMENT_CHANNEL_t ADC_MEASUREMENT_${channeL_names[i]}_handle =
+{
+  .ch_num        = (uint8_t) ${channel_number},${group_handle}
+  .group_index	 = (uint8_t) ${Group_number},
+  .ch_handle	 = (XMC_VADC_CHANNEL_CONFIG_t*) &${channeL_names[i]}_ch_config,
+  .res_handle	 = (XMC_VADC_RESULT_CONFIG_t*) &${channeL_names[i]}_res_config, ${analog_io}
+};
+
+""");
+}
+else /* for XMC11xx series this is hit*/
+{
+	out.print("""
+/* ${channeL_names[i]} ADC channel Handle */
+ADC_MEASUREMENT_CHANNEL_t ADC_MEASUREMENT_${channeL_names[i]}_handle =
+{
+  .ch_num        = (uint8_t) ${channel_number},${group_handle}
+  .group_index	 = (uint8_t) ${Group_number},
+  ${analog_io}
+};
+
+	""");
+}
+		
+		}else { array_flag[i] =false; }
+	
+}
+/// end of the Channel for loop
+
+	if(family+series == 'XMC11')
+	{
+		out.print("""
+/*Global Result Register configuration structure*/
+XMC_VADC_RESULT_CONFIG_t global_res_config =
+{
+  .data_reduction_control = (uint8_t) 0,  /* No Accumulation */
+  .post_processing_mode   = (uint32_t) XMC_VADC_DMM_REDUCTION_MODE,
+  .wait_for_read_mode  	  = (uint32_t) 1,  /* Enabled */
+  .part_of_fifo       	  = (uint32_t) 0 , /* No FIFO */
+  .event_gen_enable   	  = ${if(appIns.gcheck_enable_result_evt.value){'(uint32_t) 1   /* Enable Result event */'} else {'(uint32_t) 0   /* Disable Result event */'}}
+};
+	""");
+	}
+	
+	// populate the channel handle array
+	out.print("""
+/* ADC_MEASUREMENT channel handles */
+ADC_MEASUREMENT_CHANNEL_ARRAY_t ADC_MEASUREMENT_channel_array=
+{
+  .channel_array =
+	{""");
+	for(i=1;i<=appIns.ginteger_channel_number.value;i++)
+	{
+			out.print("""
+	  (ADC_MEASUREMENT_CHANNEL_t *)&ADC_MEASUREMENT_${channeL_names[i]}_handle,""");
+	}
+	if(family+series == 'XMC11')
+	{
+		out.print("""
+	},
+  .res_handle    = (XMC_VADC_RESULT_CONFIG_t*) &global_res_config,
+};
+""");
+	}
+	else
+	{
+		out.print("""
+	}
+};
+""");
+	}
+
+boolean ExtTrigFlag = false;
+List Nvic_URI = appIns.hwres_adc_measurement_nvicnode_srcevt.getSolverUri();
+String NVICNode='NULL';
+
+if(appIns.gcheck_enable_source_interrupt.value)
+{
+	CPU_HANDLE = """
+  .cpu_handle           = (CPU_CTRL_${daveEnv.project.selectedDevice.deviceId.family}_t *) &${appIns.appres_adc_measurement_cpu.getInstanceLabel()}, /* Holds the CPU APP handle*/"""
+}
+else
+{
+	CPU_HANDLE = ""
+}
+
+String sr_configuration_bitfield;
+String nvic_sharing ='';
+String irqctrl ='';
+
+if(family+series != 'XMC11')
+{
+	sr_configuration_bitfield = ServiceRequestLines[appIns.hwres_adc_measurement_background.getRegValue("","globevnp_sev0np").toInteger()]
+	if(Nvic_URI)
+	{
+		// Dummy read for NVIC
+		appIns.hwres_adc_measurement_nvicnode_srcevt.getRegValue("","iser_setena");
+		nvic_sharing = appIns.hwres_adc_measurement_nvicnode_srcevt.getRegValue("","intcr_insel")
+		if(nvic_sharing != null && nvic_sharing.toInteger() != 0)
+		{
+			irqctrl = ",\n  .irqctrl = (uint32_t) ${nvic_sharing}"
+		}
+		
+		NVICNode= '  .req_src_intr_handle	 = (ADC_MEASUREMENT_ISR_t *) &backgnd_rs_intr_handle'
+		out.print("""
+/* Background request source interrupt handler : End of Measurement Interrupt configuration structure*/
+const ADC_MEASUREMENT_ISR_t backgnd_rs_intr_handle=
+{
+  .node_id      = ${Nvic_URI[7]}U,
+  .priority    	= ${appIns.ginterruptprio_backgnd_rs_intr.priorityValue.value}U${if(family != "XMC1"){",\n"+
+"  .sub_priority = "+appIns.ginterruptprio_backgnd_rs_intr.subPriorityValue.value+"U,"}else{""}} ${if(irqctrl != "null"){irqctrl}else{}}
+};""")
+	
+	}
+	else
+	{
+		NVICNode= '  .req_src_intr_handle	 = (ADC_MEASUREMENT_ISR_t *) NULL'
+	}
+}
+else /* for xmc11 only*/
+{
+	sr_configuration_bitfield = ServiceRequestLines[appIns.hwres_adc_measurement_vadc_global_result.getRegValue("","globevnp_revnp").toInteger()]
+	if(Nvic_URI)
+	{
+		// Dummy read for NVIC
+		appIns.hwres_adc_measurement_nvicnode_srcevt.getRegValue("","iser_setena");
+		
+		NVICNode= '  .result_intr_handle	 = (ADC_MEASUREMENT_ISR_t *) &global_result_intr_handle'
+		out.print("""
+/* Result event interrupt : End of Single measurement interrupt configuration structure*/
+const ADC_MEASUREMENT_ISR_t global_result_intr_handle=
+{
+  .node_id      = ${Nvic_URI[7]}U,
+  .priority    	= ${appIns.ginterruptprio_result_intr.priorityValue.value}U
+};""")
+	
+	}
+	else
+	{
+		NVICNode= '  .result_intr_handle	 = (ADC_MEASUREMENT_ISR_t *) NULL'
+	}
+}
+
+
+if (appIns.gcombo_trigger_mode.options.indexOf(appIns.gcombo_trigger_mode.value)!=0) ExtTrigFlag=true;
+
+out.print("""
+
+/* LLD Background Scan Init Structure */
+const XMC_VADC_BACKGROUND_CONFIG_t backgnd_config =
+{
+  .conv_start_mode   = (uint32_t) XMC_VADC_STARTMODE_CIR, 		/* Conversion start mode selected as cancel inject repeat*/
+  .req_src_priority  = (uint32_t) XMC_VADC_GROUP_RS_PRIORITY_1, /* Priority of the Background request source in the VADC module*/
+  .trigger_signal    = (uint32_t) ${String temp = appIns.hwres_adc_measurement_background.getRegValue("","brsctrl_xtsel"); if(temp !=null){ trigger_signal[temp.toInteger()] } else { trigger_signal[0]} },            /*If Trigger needed then this denotes the Trigger signal*/
+  .trigger_edge      = (uint32_t) ${EdgeMode[appIns.gcombo_trigger_mode.options.indexOf(appIns.gcombo_trigger_mode.value)]},   /*If Trigger needed then this denotes Trigger edge selected*/
+  .gate_signal    	 = (uint32_t) ${String temp = appIns.hwres_adc_measurement_background.getRegValue("","brsctrl_gtsel"); if(temp !=null){ Gating_signal[temp.toInteger()] } else { Gating_signal[0]} },			 /*If Gating needed then this denotes the Gating signal*/
+  .timer_mode        = (uint32_t) 0,							 /*Timer Mode Disabled */
+  .external_trigger  = (uint32_t) ${if(ExtTrigFlag){1 } else { 0 } },  ${if(ExtTrigFlag){ "                             /*Trigger is Enabled */" } else { "                             /*Trigger is Disabled*/"} }
+  .req_src_interrupt = (uint32_t) ${if(appIns.gcheck_enable_source_interrupt.value){1 } else { 0 }}, ${if(appIns.gcheck_enable_source_interrupt.value){"                             /*Background Request source interrupt Enabled*/" } else { "                             /*Background Request source interrupt Disabled*/"} }
+  .enable_auto_scan  = (uint32_t) ${if(appIns.gcheck_autoscan.value){1 } else { 0 }},
+  .load_mode         = (uint32_t) XMC_VADC_SCAN_LOAD_OVERWRITE
+};
+
+ADC_MEASUREMENT_t ${appInst}=
+{
+  .array		 	     = (ADC_MEASUREMENT_CHANNEL_ARRAY_t*) &ADC_MEASUREMENT_channel_array,
+  .backgnd_config_handle = (XMC_VADC_BACKGROUND_CONFIG_t*) &backgnd_config,
+${NVICNode},
+  .iclass_config_handle  = ( XMC_VADC_GLOBAL_CLASS_t *) &global_iclass_config,
+  .srv_req_node          = ${sr_configuration_bitfield},
+  .global_handle    	 = (GLOBAL_ADC_t *) &${appIns.appres_adc_measurement_global_adc.getInstanceLabel()},
+  .start_conversion		 = (bool) ${appIns.gcheck_start_conversion.value},
+  .mux_config			 = ${mux_config},
+  .init_state 			 = ADC_MEASUREMENT_STATUS_UNINITIALIZED
+};
+
+""")
+
+}

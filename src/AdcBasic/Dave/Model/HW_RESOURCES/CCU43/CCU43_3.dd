@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/0.1.29/peripheral/ccu4/3" description="Capture/Compare Unit 4 (CAPCOM4)" baseAddress="0x48004000">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="global" URI="http://resources/0.1.29/peripheral/ccu4/3/global">
+    <resourcesList name="gctrl" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gctrl"/>
+    <resourcesList name="gctrl_pcis" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gctrl/pcis"/>
+    <resourcesList name="gstat" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gstat"/>
+    <resourcesList name="gidlc_sprb" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gidlc/sprb"/>
+    <resourcesList name="gidls_psic" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gidls/psic"/>
+    <resourcesList name="gidls_cprb" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gidls/cprb"/>
+    <resourcesList name="ecrd" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/ecrd"/>
+    <resourcesList name="midr" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/midr"/>
+    <resourcesList name="clk" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/clk"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/global_signal"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="GCTRL" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl" value="00000000" toolTipHelpDescription="Global Control Register" defaultValue="00000000" accessPermission="rw" addressOffset="0x0000" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <bitFields name="PRBC" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/prbc" value="0" toolTipHelpDescription="Prescaler Clear Configuration" defaultValue="0" startPos="0" stopPos="2" accessPermission="rw" maxValue="7" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="SW only"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="GSTATThe register contains the status of the prescaler and each timer slice (idle mode or running)..PRB and prescaler registers are cleared when the Run Bit of CC40 is cleared."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="GSTATThe register contains the status of the prescaler and each timer slice (idle mode or running)..PRB and prescaler registers are cleared when the Run Bit of CC41 is cleared."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="GSTATThe register contains the status of the prescaler and each timer slice (idle mode or running)..PRB and prescaler registers are cleared when the Run Bit of CC42 is cleared."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="GSTATThe register contains the status of the prescaler and each timer slice (idle mode or running)..PRB and prescaler registers are cleared when the Run Bit of CC43 is cleared."/>
+    </bitFields>
+    <bitFields name="PCIS" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/pcis" value="0" toolTipHelpDescription="Prescaler Input Clock Selection" defaultValue="0" startPos="4" stopPos="5" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Module clock"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="CCU4xECLK[A]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="CCU4xECLK[B]"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="CCU4xECLK[C]"/>
+    </bitFields>
+    <bitFields name="SUSCFG" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/suscfg" value="0" toolTipHelpDescription="Suspend Mode Configuration" defaultValue="0" startPos="8" stopPos="9" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Suspend request ignored. The module never enters in suspend"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Stops all the running slices immediately. Safe stop is not applied."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Stops the block immediately and clamps all the outputs to PASSIVE state. Safe stop is applied."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Waits for the roll over of each slice to stop and clamp the slices outputs. Safe stop is applied."/>
+    </bitFields>
+    <bitFields name="MSE0" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/mse0" value="0" toolTipHelpDescription="Slice 0 Multi Channel shadow transfer enable" defaultValue="0" startPos="10" stopPos="10" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Shadow transfer can only be requested by SW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Shadow transfer can be requested via SW and via the CCU4xMCSS input."/>
+    </bitFields>
+    <bitFields name="MSE1" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/mse1" value="0" toolTipHelpDescription="Slice 1 Multi Channel shadow transfer enable" defaultValue="0" startPos="11" stopPos="11" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Shadow transfer can only be requested by SW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Shadow transfer can be requested via SW and via the CCU4xMCSS input."/>
+    </bitFields>
+    <bitFields name="MSE2" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/mse2" value="0" toolTipHelpDescription="Slice 2 Multi Channel shadow transfer enable" defaultValue="0" startPos="12" stopPos="12" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Shadow transfer can only be requested by SW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Shadow transfer can be requested via SW and via the CCU4xMCSS input."/>
+    </bitFields>
+    <bitFields name="MSE3" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/mse3" value="0" toolTipHelpDescription="Slice 3 Multi Channel shadow transfer enable" defaultValue="0" startPos="13" stopPos="13" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Shadow transfer can only be requested by SW"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Shadow transfer can be requested via SW and via the CCU4xMCSS input."/>
+    </bitFields>
+    <bitFields name="MSDE" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/msde" value="0" toolTipHelpDescription="Multi Channel shadow transfer request configuration" defaultValue="0" startPos="14" stopPos="15" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Only the shadow transfer for period and compare values is requested"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="Shadow transfer for the compare, period and prescaler compare values is requested"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="Reserved"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="Shadow transfer for the compare, period, prescaler and dither compare values is requested"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PCIS" URI="http://resources/0.1.29/peripheral/ccu4/3/gctrl/pcis" value="0" toolTipHelpDescription="Prescaler Input Clock Selection" defaultValue="0" startPos="4" stopPos="5" accessPermission="rw" maxValue="3" minValue="0">
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="Module clock"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="CCU4xECLK[A]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="CCU4xECLK[B]"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="CCU4xECLK[C]"/>
+  </provided>
+  <addressBlock offset="0x0" size="0x4000" usage="registers"/>
+</ResourceModel:Peripheral>
