@@ -66,7 +66,45 @@ CPU와의 인터페이스를 포함하여 ADC 변환 과정을 순차적으로 �
   $$
   이 분해능이란 디지털 1비트의 정보가 아날로그 전압으로 얼마만큼을 나타내는지를 의미하는 것이다.  고정밀도의 분해능을 얻고자 한다면 입력 범위를 나타내는 $$V_r$$ 값이 작던지, 디지털로 변환하는 비트수 $$n$$이 크면 된다. 대부분의 경우 $$V_r$$ 은 3.3V 혹은 5V 의 값으로 고정되어 있으므로 높은 정밀도를 얻기 위해서는 비트수를 높여야 한다. 예를 들어 5V 범위의 신호를 가정하였을 경우 8-bit 의 경우 약 0.02V(0.4%) 의 분해능을, 10-bit 의 경우 0.005V(0.1%)의 분해능을 갖게 된다.
 
-  ​
+
+
+
+## VADC in XMC4XXX
+
+
+
+![AdcBasic_AdcKernelBlockDiagram](images/AdcBasic_AdcKernelBlockDiagram.png)
+
+* VADC 내부에는 그림과 같은 ADC Kernel이 1개 이상 존재한다. 
+* Request Control
+  * 여러개의 변환 요청이 동시에 활성화 될 수 있으므로 이것을 중재하고 관리하는 모듈
+* Conversion Control
+  * 직접적인 ADC을 관장하는 모듈
+  * 변환 속도, 레퍼런스 전압, 결과 분해능 등의 설정 정보를 바탕으로 Mux 와 ADC를 동작시킨다.
+* Result Handling
+  * 변환 결과값을 결과 레지스터에 저장하는 방법을 관장하는 모듈
+  * 필터링을 할 수 도 있고, 버퍼에 값을 저장하게 할 수도 있다.
+* Interrupt Generation
+  * 변환결과 관리 설정에 따라 CPU나 DMA에 이벤트(인터럽트)를 요청한다.
+
+
+
+![AdcBasic_AdcStructureOverview](images/AdcBasic_AdcStructureOverview.png)
+
+VADC의 중요한 특징은 다음과 같다.
+
+* 아날로그 공급 전압은 3.3V
+* 총 4개 까지 독립적인 ADC를 가지고 있고 각 ADC는 8채널까지 갖을 수 있다.
+* 외부에 Analog MUX를 연결할 수 있다.
+* 변환 속도와 샘플 타임을 센서의 특징에 따라 조정할 수 있다.
+  * 변환 시간은 1usec 보다 작게 설정할 수 있다.
+* 채널의 선택과 중재를 자유롭게 할 수 있다.
+* 변환 값을 다양하게 가공할 수 있다.
+  * 8/10/12 bits, 경계값 확인, 필터링 등
+* 변환 결과에 따라 다양한 이벤트를 발생시킬 수 있다.
+
+
+
 
 ## DAVE APP (ADC_MEASUREMENT)
 ADC_MEASUREMENT APP을 사용하여 여러개의 아날로그 입력 신호를 측정할 수 있다. 이 APP은 XMC4500의 Versatile Analog to Digital Converter(VADC) 모듈의 "background request source" 을 활용하여 다음과 같은 기능을 제공한다.
