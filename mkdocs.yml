@@ -21,7 +21,7 @@ pages:
     - Digital IOs: LabDigitalIos.md
     - PWM Basic: LabPwmBasic.md
     - ADC Basic: LabAdcBasic.md
-#    - DAC Basic: LabDacBasic.md
+    - DAC Basic: LabDacBasic.md
 #    - Interrupt: LabInterrupt.md
 #    - System Timer: LabSystemTimer.md
 #    - uC-Probe: uc-Probe.md
