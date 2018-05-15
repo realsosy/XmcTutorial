@@ -86,7 +86,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="main6_typedef_multi.c|PolarCartesian.c|main5_typedef.c|main4_ptr_ptr.c|main3_struct_ptr.c|main2_struct.c|main_struct_ptr.c|main_struct.c|main_xy.c|main.c|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="main1_xy.c|main6_typedef_multi.c|PolarCartesian.c|main4_ptr_ptr.c|main3_struct_ptr.c|main2_struct.c|main_struct_ptr.c|main_struct.c|main_xy.c|main.c|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -178,7 +178,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="main6_typedef_multi.c|PolarCartesian.c|main5_typedef.c|main4_ptr_ptr.c|main3_struct_ptr.c|main2_struct.c|main_struct_ptr.c|main_struct.c|main_xy.c|main.c|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="main1_xy.c|main6_typedef_multi.c|PolarCartesian.c|main4_ptr_ptr.c|main3_struct_ptr.c|main2_struct.c|main_struct_ptr.c|main_struct.c|main_xy.c|main.c|Dave/Model" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
