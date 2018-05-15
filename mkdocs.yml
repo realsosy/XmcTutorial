@@ -22,7 +22,7 @@ pages:
     - PWM Basic: LabPwmBasic.md
     - ADC Basic: LabAdcBasic.md
     - DAC Basic: LabDacBasic.md
-#    - Interrupt: LabInterrupt.md
+    - Interrupt: LabNVIC.md
 #    - System Timer: LabSystemTimer.md
 #    - uC-Probe: uc-Probe.md
 

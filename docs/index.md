@@ -17,9 +17,9 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 
 * 관련 URL
 
-    * Google Drive: https://goo.gl/vkcuA1
-    * Read the Docs: http://xmctutorial.readthedocs.io/ko/latest/
-    * GitHub: https://github.com/realsosy/XmcTutorial
+    * [Google Drive](https://goo.gl/vkcuA1)
+    * [Read the Docs](http://xmctutorial.readthedocs.io/ko/latest/)
+    * [GitHub](https://github.com/realsosy/XmcTutorial)
 
     ​
 
