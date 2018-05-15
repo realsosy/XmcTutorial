@@ -1,0 +1,299 @@
+package Model.APPS.PIN_INTERRUPT.v4_0_2.Templates;
+
+import Model.APPS.PIN_INTERRUPT.v4_0_2.PIN_INTERRUPT
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ * 2016-03-02:
+ *     - Initial version for DAVEv4. <BR>
+ * @endcond
+ *
+ */
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+#include "pin_interrupt.h"
+""");
+/* Variable declaration */
+List MappedUri_etl = null
+List MappedUri_ogu = null
+String appInst  = null
+String UnitInst_etl = null
+String ChannelInst_etl  = null
+String UnitInst_ogu = null
+String ChannelInst_ogu  = null
+String hysteresis = null
+/* Flag for XMC1xxx device */
+int target_1x = 0;
+/* Flag for XMC4xxx device */
+int target_4x = 1;
+Map triggersource = [
+	'Rising Edge'  : 'PIN_INTERRUPT_EDGE_RISING',
+	'Falling Edge' : 'PIN_INTERRUPT_EDGE_FALLING',
+	'Both Edges'   : 'PIN_INTERRUPT_EDGE_BOTH',
+	'None'         : 'PIN_INTERRUPT_EDGE_NONE'
+  ]
+  
+  Map eru_event_source = [
+	  a : 'XMC_ERU_ETL_SOURCE_A',
+	  b : 'XMC_ERU_ETL_SOURCE_B'
+	  ]
+  Map event_list = [
+	  0 : 'XMC_ERU_ETL_SOURCE_A',
+	  1 : 'XMC_ERU_ETL_SOURCE_B',
+	  2 : 'XMC_ERU_ETL_SOURCE_A_OR_B',
+	  3 : 'XMC_ERU_ETL_SOURCE_A_AND_B',
+	  4 : 'XMC_ERU_ETL_SOURCE_NOT_A',
+	  5 : 'XMC_ERU_ETL_SOURCE_B',
+	  6 : 'XMC_ERU_ETL_SOURCE_NOT_A_OR_B',
+	  7 : 'XMC_ERU_ETL_SOURCE_NOT_A_AND_B',
+	  8 : 'XMC_ERU_ETL_SOURCE_A',
+	  9 : 'XMC_ERU_ETL_SOURCE_NOT_B',
+	  10 : 'XMC_ERU_ETL_SOURCE_A_OR_NOT_B',
+	  11 : 'XMC_ERU_ETL_SOURCE_A_AND_NOT_B',
+	  12 : 'XMC_ERU_ETL_SOURCE_NOT_A',
+	  13 : 'XMC_ERU_ETL_SOURCE_NOT_B',
+	  14 : 'XMC_ERU_ETL_SOURCE_NOT_A_OR_NOT_B',
+	  15 : 'XMC_ERU_ETL_SOURCE_NOT_A_AND_NOT_B'
+	  ]
+  String family = daveEnv.project.selectedDevice.deviceId.family
+  String series = daveEnv.project.selectedDevice.deviceId.series
+ // Variable declaration
+// String appInst = null
+
+  // To identify the number of instances created in the project
+ for (PIN_INTERRUPT Instance : appInstancesList) {
+  appInst= Instance.getInstanceLabel()
+  Integer interruptsource = 0
+  Integer interrupt_enable = 0
+  List mappedUri_node = Instance.hwres_interrupt.getSolverUri()
+  String nodeID = mappedUri_node[-1]
+ MappedUri_etl = Instance.hwres_eru_ers_etl.getSolverUri()
+ MappedUri_ogu = Instance.hwres_eru_ogu.getSolverUri()
+ 
+ List mappedUri_pin = Instance.hwres_port_pin.getSolverUri()
+ 
+ String port = mappedUri_pin[-3]
+ String pin = mappedUri_pin[-1]
+ String gpio_mode;
+  /* This is the GUI configurations made for EVENT_DETECTOR app Instance */
+ if (MappedUri_etl != null && MappedUri_ogu != null) {
+	 UnitInst_etl = MappedUri_etl[4]
+	 ChannelInst_etl = MappedUri_etl[6]
+	 UnitInst_ogu = MappedUri_ogu[4]
+	 ChannelInst_ogu = MappedUri_ogu[6]
+	 Integer event_source = 0
+	 String pattern_detection_input = '0U'
+	 Integer no_of_inputs = 0
+	 String add_space = " "
+	 
+	 if(family+series == "XMC14" )
+	 {
+		interruptsource = Instance.hwres_interrupt.getRegValue("","intcr_insel")
+	 }
+	 interrupt_enable = Instance.hwres_interrupt.getRegValue("","iser_setena")
+	 String enableAtInit;
+	 
+	 if(Instance.gcheck_enable_at_init.value == true )
+	 {
+		 enableAtInit = "true";
+	 }
+	 else
+	 {
+		 enableAtInit = "false";
+	 }
+	 
+	 for(Integer i = 0; i < 31; i++)
+	 {
+		 add_space+= " "
+	 }
+	 if(Instance.hwres_eru_ogu.getRegValue("exocon", "exocon_ipen0"))
+	 {
+	   pattern_detection_input = 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT0'
+	   no_of_inputs++;
+	 }
+	 if(Instance.hwres_eru_ogu.getRegValue("exocon", "exocon_ipen1"))
+	 {
+	   if(no_of_inputs > 0)
+	   {
+		 pattern_detection_input += ' |\\' + '\n' + add_space + 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT1'
+	   }
+	   else
+	   {
+		 pattern_detection_input = 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT1'
+		 no_of_inputs++;
+	   }
+	 }
+	 if(Instance.hwres_eru_ogu.getRegValue("exocon", "exocon_ipen2"))
+	 {
+	   if(no_of_inputs > 0)
+	   {
+		 pattern_detection_input += ' |\\' + '\n' + add_space + 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT2'
+	   }
+	   else
+	   {
+		 pattern_detection_input = 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT2'
+		 no_of_inputs++;
+	   }
+	 }
+	 if(Instance.hwres_eru_ogu.getRegValue("exocon", "exocon_ipen3"))
+	 {
+	   if(no_of_inputs > 0)
+	   {
+		 pattern_detection_input += ' |\\' + '\n' + add_space + 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT3'
+	   }
+	   else
+	   {
+		 pattern_detection_input = 'XMC_ERU_OGU_PATTERN_DETECTION_INPUT3'
+		 no_of_inputs++;
+	   }
+	 }
+	 switch(Instance.gcombo_input_mode.value)
+	 {
+	   case "Tristate":
+	   gpio_mode = "XMC_GPIO_MODE_INPUT_TRISTATE"
+	   break
+					
+	   case "Pull Up":
+	   gpio_mode = "XMC_GPIO_MODE_INPUT_PULL_UP"
+	   break
+					
+	   case "Pull Down":
+	   gpio_mode = "XMC_GPIO_MODE_INPUT_PULL_DOWN"
+	   break
+					
+	  case "Continuous Sampling Mode":
+	  gpio_mode = "XMC_GPIO_MODE_INPUT_SAMPLING"
+	  break
+	
+	  case "Inverted Tristate":
+	  gpio_mode = "XMC_GPIO_MODE_INPUT_INVERTED_TRISTATE"
+	  break
+
+	  case "Inverted Pull Up":
+	  gpio_mode = "XMC_GPIO_MODE_INPUT_INVERTED_PULL_UP"
+	  break
+				 
+	  case "Inverted Pull Down":
+	  gpio_mode = "XMC_GPIO_MODE_INPUT_INVERTED_PULL_DOWN"
+	  break
+				 
+	  case "Inverted Continuous Sampling Mode":
+	  gpio_mode = "XMC_GPIO_MODE_INPUT_INVERTED_SAMPLING"
+	  break
+	}
+	 /* Updating input hysteresis enum */
+	 if(Instance.gcombo_hysteresis.value == "Standard")
+	 {
+	   hysteresis = "XMC_GPIO_INPUT_HYSTERESIS_STANDARD"
+	 }
+	 else
+	 {
+	   hysteresis = "XMC_GPIO_INPUT_HYSTERESIS_LARGE"
+	 }
+	 /* get Flag value for XMC1xxx device from manifest */
+	 target_1x= Instance.target_1x.value;
+	 /* get Flag value for XMC4xxx device from manifest */
+	 target_4x= Instance.target_4x.value;
+	 out.print("""
+/**********************************************************************************************************************
+ * DATA STRUCTURES
+ **********************************************************************************************************************/""");
+	 out.print("""
+/**
+* @brief Contents entered via GUI
+*/
+const PIN_INTERRUPT_t ${appInst} =
+{
+  .eru = XMC_ERU${UnitInst_etl},  /* ERU module ${UnitInst_etl} Mapped */
+  .port = XMC_GPIO_PORT${port},  /* PORT ${port} Mapped */
+  .gpio_config =
+   {""");
+if((Instance.daveEnv.project.selectedDevice.deviceId.family == "XMC1"))
+{
+  out.print("""
+	 .input_hysteresis = ${hysteresis},""");
+}
+out.print("""
+     .mode = ${gpio_mode}  /* Pin Characteristics */
+   },
+  .etl_config = 
+  {
+    .input_a = (uint32_t)XMC_ERU_ETL_INPUT_A${Instance.hwres_eru_ers_etl.getRegValue("exisel","exisel_exsxa")}, /* Event input selection for A(0-3) */
+    .input_b = (uint32_t)XMC_ERU_ETL_INPUT_B${Instance.hwres_eru_ers_etl.getRegValue("exisel","exisel_exsxb")}, /* Event input selection for B(0-3) */
+    .enable_output_trigger = (uint32_t)${Instance.hwres_eru_ers_etl.getRegValue("exicon","exicon_pe")},
+    .edge_detection = (XMC_ERU_ETL_EDGE_DETECTION_t)${triggersource[Instance.gcombo_interrupt_edge.value]}, /* Select the edge to convert as event */
+    .output_trigger_channel = ${'XMC_ERU_ETL_OUTPUT_TRIGGER_CHANNEL'+Instance.hwres_eru_ers_etl.getRegValue("exicon","exicon_ocs")}, /* Select the source for event */
+    .source = ${eru_event_source[Instance.sv_a_or_b.getSolverValue()]}
+  },""");
+if((Instance.daveEnv.project.selectedDevice.deviceId.family == "XMC1") && (Instance.daveEnv.project.selectedDevice.deviceId.series == "4"))
+{
+	out.print("""
+#if(UC_SERIES == XMC14)
+  .irqctrl = (XMC_SCU_IRQCTRL_t)${interruptsource}U,  /* Interrupt Source */
+#endif
+""");
+}
+
+out.print("""
+  .IRQn = (IRQn_Type)${nodeID},  /* Mapped Interrupt Request Number */
+  .irq_priority = ${Instance.ginterruptprio_interrupt.priorityValue}, /* Priority of the Interrupt */
+#if(UC_FAMILY == XMC4)
+  .irq_subpriority = ${Instance.ginterruptprio_interrupt.subPriorityValue},  /* Subpriority of the Interrupt */
+#endif
+  .etl = ${ChannelInst_etl}U,  /* ERU ETL channel number */
+  .ogu = ${ChannelInst_ogu}U,  /* ERU OGU channel number */
+  .pin = ${pin}U, /* Mapped pin number */ """);
+if(interrupt_enable == 1)
+{
+out.print("""
+  .enable_at_init = ${enableAtInit} /* Enable Interrupt during initialization */ """);
+}
+else
+{
+out.print("""
+/* sr_irq signal is not connected to any peripheral */
+  .enable_at_init = false """);
+}
+out.print("""
+  };""");
+ }
+ else {
+	 out.print("""
+  /*ERU Channel NOT MAPPED FOR APP INSTANCE: ${appInst} */
+		""");
+ }
+}/* End of for loop */

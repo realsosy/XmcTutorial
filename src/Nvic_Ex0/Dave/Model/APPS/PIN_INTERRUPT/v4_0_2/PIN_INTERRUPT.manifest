@@ -1,0 +1,282 @@
+package Model.APPS.PIN_INTERRUPT.v4_0_2;
+
+/*************** Revision History **********************************************
+ Version     Date          Description
+ 4.0.0       29-Mar-2016   Initial version for DAVEv4.<br>
+ 4.0.2       06-Apr-2016   1). Help Documentation is improved.<br>
+                           2). APP owner feedbacks are fixed.<br>								   
+ *******************************************************************************/
+// Import statements
+import ifx.davex.app.manifest.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+class  PIN_INTERRUPT extends PIN_INTERRUPT_GUI {
+
+	/* Note  : PIN_INTERRUPT properties are mandatory and important
+	 Begin : PIN_INTERRUPT property section */
+		 
+	 /**
+	  * APP version
+	  * Format: a string with three digit separated by a dot.
+	  */
+	 def version            = '4.0.2'
+	
+	 /**
+	  * APP categories declaration.
+	  * It is list of strings. Subcategories are separated by slash.
+	  * No limits on number of categories and subcategories depth.
+	  */
+	 def categoriesDescription = ['System']
+	
+	 /**
+	  * Minimum DAVE version required for this APP.
+	  *
+	  * It is string with three digit separated by a dot.
+	  */
+	 def minDaveVersion           = '4.0.0'
+	
+	 /**
+	  * Keywords used by search feature in APPs selection view
+	  *
+	  * It is a list of string.
+	  */
+	 def keywords      = [		
+		'Pin',
+		'PORT',
+		'Pad',
+		"NVIC",
+		"ISR",
+		'Interrupt',
+		'ALL'
+	 ]
+	
+	 /**
+	  * softwareIDs is used to declare which devices are compatible with this APP.
+	  * It is a map with key a string containing a pattern that shall match the SW id of
+	  * the device and as value the minimal version of the APP.
+	  *
+	  *
+	  */
+	 /* Any step of XMC4500F144 and XMC4400F144
+	 Any step of XMC4400F100 and XMC4400F64
+	 Any step, any variant and any packages of XMC1300 */
+	 def softwareIDs       = [
+	  "XMC4.8.*.*.*":"1.0.0",
+	  "XMC4.7.*.*.*":"1.0.0",
+	  "XMC4.5.*.*.*":"1.0.0",
+	  "XMC4.4.*.*.*":"1.0.0",
+	  "XMC4.3.*.*.*":"1.0.0",
+	  "XMC4.2.*.*.*":"1.0.0",
+	  "XMC4.1.*.*.*":"1.0.0",
+	  "XMC1.4.*.*.*":"1.0.0",
+	  "XMC1.3.*.*.*":"1.0.0",
+	  "XMC1.2.*.*.*":"1.0.0",
+	  "XMC1.1.*.*.*":"1.0.0"
+		]
+	
+	 /**
+	  * Singleton property:
+	  * When it is true the APP can be instantiated only once.
+	  */
+	 def singleton     = false
+	
+	 /**
+	  * initProvider property
+	  * It shall be true to add a call to <AppName>_Init()
+	  */
+	 def initProvider  = true
+	
+	 /**
+	  * Deprecated APP
+	  * Set it to true to indicate that the APP shall be not used for new projects.
+	  */
+	 def deprecated    = false
+	
+	 /**
+	  * Sharable property.
+	  * It shall be true to allows multiple APPs to require the same instance of this APP.
+	  */
+	 def sharable      = false
+	
+	 /**
+	  *  APP function description.
+	  */
+	 def description =  "The PIN_INTERRUPT APP invokes user interrupt handler in a response \nto rising and/or falling edge event signal on a pin."
+	 
+	 
+	
+	 /* End   : PIN_INTERRUPT property section */
+	
+	 /* Begin : User variable section */
+	
+	 /* solver variable for ERU signal a or b */
+	  SolverVariable sv_a_or_b = SolverVariable()
+	  
+	 /* List of virtual resource groups */	 
+	 MVirtualResourceGroup hwres_interrupt
+	 MVirtualResourceGroup hwres_port_pin
+	 MVirtualResourceGroup hwres_eru_ers_etl
+	 MVirtualResourceGroup hwres_eru_ogu
+	 MVirtualResourceGroup hwres_scu_gcu_interrupt_erunmi
+	 /* List of virtual signals */
+	 MVirtualSignal vs_pin_interrupt_input_A_B
+	 MVirtualSignal vs_pin_interrupt_iopad
+	 MVirtualSignal vs_pin_interrupt_TriggerPulse
+//	 MVirtualSignal vs_pin_interrupt_pdout
+	 MVirtualSignal vs_pin_interrupt_trin
+	 MVirtualSignal vs_pin_interrupt_iout
+	 MVirtualSignal vs_pin_interrupt_signal
+	 MVirtualSignal vs_pin_interrupt_erunmi_in
+	 MVirtualSignal vs_pin_interrupt_erunmi_out
+	 /* List of APPs consumption */
+	 MRequiredApp appres_cpu /* CPU APP consumption for XMC4xxx device and XMC1xxx device */
+	
+	 
+	 /*  flag variable for XMC4xxx device  */
+	 GInteger target_4x =GInteger(widgetName:"target_4x")
+	 /*  flag variable for XMC1xxx device  */
+	 GInteger target_1x =GInteger(widgetName:"target_1x")
+	
+	
+	 /* End   : User variable section */
+
+	/* PIN_INTERRUPT APP Constructor */
+	public PIN_INTERRUPT(DaveEnv daveEnv) {
+		/* Initialize manifest variables here */
+		String fn_regexp = ~/^[^\d\W]\w*\Z/
+		boolean family_4x      = false /* This variable will be true if target family is XMC4000 */
+		boolean step_45_aa      = false /* This variable will be true if target device is XMC4500 step AA */
+		boolean series_45      = false /* This variable will be true if target device XMC4500*/
+		/* Target based variables for resource consumption, UI dependency etc. */
+		String family = daveEnv.project.selectedDevice.deviceId.family /* ex:XMC4 or XMC1 */
+
+	 
+		if ( family == "XMC4")
+		{
+		  family_4x = true
+		  
+		}else
+		{
+		  family_4x      = false		  
+		}
+		if (family == "XMC4")
+		{
+		  glabel_hysteresis.visible = false
+		  gcombo_hysteresis.visible = false
+		  /* CPU APP consumption for XMC4xxx devices */
+		  appres_cpu =  MRequiredApp("CPU_CTRL_XMC4", "CPU", RSHARABLE, "4.0.2")	
+		  hwres_scu_gcu_interrupt_erunmi = MVirtualResourceGroup("erunmi", ["peripheral", "scu", "*", "gcu","interrupt","erunmi","*"], true)
+		  /* XMC4xxx flag is true  */
+		  target_4x.value=1;
+		  /* XMC1xxx flag is false  */
+		  target_1x.value=0;
+		  
+		  /* maximum Interrupt priority level value for Interrupt priority group  */
+		  ginterruptprio_interrupt.maxPriority = MF({			
+			  Integer temp = appres_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"]) as Integer
+			  return temp			
+		  }, Integer)
+		  /* maximum Interrupt priority level value for Interrupt subpriority group  */
+		  ginterruptprio_interrupt.maxSubPriority =  MF({			
+			  Integer temp = appres_cpu.getVal(["gint_maxInterruptSubPriority", "value"]) as Integer
+			  return temp			
+		  }, Integer)
+		}
+		else
+		{
+		  
+		  /* CPU APP consumption for XMC1xxx devices */
+		  appres_cpu =  MRequiredApp("CPU_CTRL_XMC1", "CPU", RSHARABLE, "4.0.2")
+		  /* XMC4xxx flag is false */
+		  target_4x.value=0;
+		  /* XMC1xxx flag is true  */
+		  target_1x.value=1;	
+		  /* maximum Interrupt priority level value for Interrupt priority group  */
+		  ginterruptprio_interrupt.maxPriority = MF({			
+			  Integer temp = appres_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"]) as Integer
+			  return temp			
+		  }, Integer)
+		}
+		/* consumption of port pin h/w resource based on GUI configuration for encoder output */
+		hwres_port_pin = MVirtualResourceGroup("Pin", ["port", "p", "*", "pad", "*"], true)
+		/* consumption of NVIC node for external event on a pin */
+		hwres_interrupt = MVirtualResourceGroup("External Event", ["peripheral", "cpu", "0", "nvic", "interrupt", "*"],true)
+		
+		hwres_eru_ers_etl =  MVirtualResourceGroup("ers_etl", ["peripheral", "eru", "*", "ers_etl","*"], true)
+		hwres_eru_ogu =  MVirtualResourceGroup("ogu", ["peripheral", "eru", "*", "ogu","*"], true)
+		
+		vs_pin_interrupt_input_A_B      = MVirtualSignal(hwres_eru_ers_etl,"signal_a_b",sv_a_or_b, true, true)
+		addUriElementRangeConstraint(sv_a_or_b, MF({["a", "b"]}, List))
+		
+		@AddPin
+		vs_pin_interrupt_iopad = MVirtualSignal(hwres_port_pin,"external_event_pin","pad",true,false)
+		vs_pin_interrupt_TriggerPulse = MVirtualSignal(hwres_eru_ers_etl,"trigger_out","tr", true, false)		
+		vs_pin_interrupt_trin  = MVirtualSignal(hwres_eru_ogu, "trigger_in", "trin", true, false)
+//		vs_pin_interrupt_pdout = MVirtualSignal(hwres_eru_ogu, "pdout", "pdout", true, true)
+		vs_pin_interrupt_signal = MVirtualSignal(hwres_interrupt, "sr_node", "signal_in",true,false)
+		
+		/* establish the connections between source and target */
+		addConnectionConstraint(vs_pin_interrupt_iopad, vs_pin_interrupt_input_A_B, true)
+		addConnectionConstraint(vs_pin_interrupt_TriggerPulse, vs_pin_interrupt_trin, true)
+		
+		if (family_4x == true)
+		{
+			vs_pin_interrupt_iout  = MVirtualSignal(hwres_eru_ogu, "ogu_iout", "iout", true, false)
+			vs_pin_interrupt_erunmi_in = MVirtualSignal(hwres_scu_gcu_interrupt_erunmi, "erunmi_in", "in", true, false)
+			vs_pin_interrupt_erunmi_out = MVirtualSignal(hwres_scu_gcu_interrupt_erunmi, "iout", "out", true, false)
+			addConnectionConstraint(vs_pin_interrupt_iout, vs_pin_interrupt_erunmi_in, true)
+			addConnectionConstraint(vs_pin_interrupt_erunmi_out, vs_pin_interrupt_signal, true)
+		}
+		else
+		{
+			vs_pin_interrupt_iout  = MVirtualSignal(hwres_eru_ogu, "iout", "iout", true, false)
+			addConnectionConstraint( vs_pin_interrupt_iout, vs_pin_interrupt_signal,true)
+		}
+		
+			
+		/* Controlling the visibility of gmessage based on validation of user entry against c syntax */
+		gmessage_valid_isr_name.visible = MF({
+		  Matcher matcher = (gstring_interrupt_handler.value =~ fn_regexp)
+		  Boolean temp = !matcher.matches()
+		  return temp
+		}, Boolean)
+		gmessage_valid_isr_name.isError = MF({
+			Matcher matcher = (gstring_interrupt_handler.value =~ fn_regexp)
+			Boolean temp = !matcher.matches()
+			return temp
+		  }, Boolean)
+		
+		/* Assign interrupt priority value based on XMC family */
+		ginterruptprio_interrupt.priorityValue = MF({
+		if(family == "XMC4"){return (63)}
+		else {return (3)}
+		}, Integer)
+		/* Assign interrupt subpriority value based on XMC family */
+		ginterruptprio_interrupt.subPriorityVisible = MF({
+		if(family == "XMC4"){return (true)}
+		else {return (false)}
+		}, Boolean)
+		/* minimum Interrupt priority level value for Interrupt priority group  */
+		ginterruptprio_interrupt.minPriority = MF({
+		 return (0)
+		}, Integer)
+		/* minimum Interrupt priority level value for Interrupt subpriority group  */
+		ginterruptprio_interrupt.minSubPriority = MF({
+		  return (0)
+		}, Integer)
+	}
+	
+	// File Generation
+	def generateFiles(){
+		
+		copy("pin_interrupt.c", "pin_interrupt.c")
+		copy("pin_interrupt.h", "pin_interrupt.h")
+		generate("pin_interrupt_confh.tmpl", "pin_interrupt_conf.h")
+		generate("pin_interrupt_confc.tmpl", "pin_interrupt_conf.c")
+		generate("pin_interrupt_externh.tmpl", "pin_interrupt_extern.h")
+	}
+	
+	/**
+	 * Add main code here
+	 */
+}
