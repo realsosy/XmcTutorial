@@ -7,7 +7,7 @@ date: Dec. 16 2016
 # Lab Interrupt
 
 ## 개요
-PWM APP을 사용하여 이벤트를 발생시킨다. 이 이벤트는 인터럽트를 트리거 하고 인터럽트를 사용하여 LED를 토글한다.
+PWM APP을 사용하여 이벤트를 발생시키고 인터럽트를 트리거 하도록한다.  이 인터럽트 서비스 루틴은 LED를 토글한다.
 
 ### 목적
 * INTERRUPT 관련설정 학습 후 DAVE INTERRUPT APP을 활용한 관련설정 실습
