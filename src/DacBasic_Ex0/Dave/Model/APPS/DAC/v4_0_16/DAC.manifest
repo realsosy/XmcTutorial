@@ -1,0 +1,981 @@
+package Model.APPS.DAC.v4_0_16;
+
+/*
+ *  * Copyright (c) 2015, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ */
+/*Import statements*/
+import ifx.davex.app.manifest.*
+
+/*************** Revision History **********************************************
+ Version       Date        Description //Retain this format
+ 4.0.0     15-Feb-2015     1. Initial version<br>
+ 4.0.1     20-Feb-2015     1. Help document update.<br>
+ 4.0.4     18-Jun-2015     1. Service request option disabled for single value mode 
+                              when synchronize with clock option is disabled. <br>
+                           2. Pattern generation Min. amplitude is restricted to 0.004V from GUI. <br>
+                           3. Manifest update with comments.<br>
+                           4. Pin sharing with ADC feature is added. <br>
+                           5. Configurable start after initialization option is added. <br>
+ 4.0.6     09-July-2015    1. Help documentation usage section updated. <br>
+ 4.0.8     14-July-2015    1. Required APP minimum version updated<br/>
+ 4.0.10    02-Sept-2015    1. APP Updated for XMC4800 device<br/>
+                           2. Included XMC42 condition for negate feature<br/>
+                           3. Updated Help documentation
+ 4.0.12    15-Dec-2015     1. ANALOG_IO APP Init function call added <br/>
+                           2. Added support for XMC4300 device <br/>  
+ 4.0.14    09-Feb-2016     1. Minimum required version of ANALOG_IO APP changed to 4.0.8 <br/>
+ 4.0.16    08-Jul-2016     Fixed incorrect case for an included header. <BR>                        
+ *******************************************************************************/
+
+class  DAC extends DAC_GUI {
+  /* Note  : Following App properties are mandatory and important */
+  
+  /* Begin : APP property section */
+
+  /**
+   * App version
+   * Format: a string with three digit separated by a dot.
+   */
+  def version            = '4.0.16'
+  /**
+   * App categories declaration.
+   * It is list of strings. Subcategories are separated by slash.
+   * No limits on number of categories and subcategories depth.
+   */
+  def categoriesDescription = [
+    "General Purpose/Digital to Analog Conversion"
+  ]
+
+  /** 
+   * Minimum DAVE version required for this APP.
+   * 
+   * It is string with three digit separated by a dot.
+   */
+  def minDaveVersion           = "4.0.0"
+
+  /**
+   * Keywords used by search feature in Apps selection view
+   *
+   * It is a list of string.
+   */
+  def keywords      = [
+    "DAC",
+    "Waveform Generator",
+    "Pattern Generator",
+    "Noise Generator",
+    "Ramp Generator",
+    "Single Value",
+    "all"
+  ]
+
+  /**
+   * softwareIDs is used to declare which devices are compatible with this APP.
+   * It is a map with key a string containing a pattern that shall match the SW id of
+   * the device and as value the minimal version of the APP.
+   */
+  
+  /**
+   * Any step , any variant and any packages of XMC4500, XMC4400, XMC4300, XMC4200 and XMC4100, XMC4800 and XMC4700
+   */
+  def softwareIDs       = 
+      [
+      "XMC4.5.*.*.*":"1.0.0",
+	  "XMC4.4.*.*.*":"1.0.0",
+	  "XMC4.3.*.*.*":"1.0.0",
+	  "XMC4.2.*.*.*":"1.0.0",
+	  "XMC4.1.*.*.*":"1.0.0",
+	  "XMC4.7.*.*.*":"1.0.0",
+	  "XMC4.8.*.*.*":"1.0.0"
+      ]
+
+    /**
+     * Singleton property:
+     * When it is true the APP can be instantiated only once.
+     */
+  def singleton     = false
+  /**
+   * initProvider property
+   * It shall be true to add a call to <AppName>_Init()
+   */
+  def initProvider  = true
+  /**
+   * Deprecated APP
+   * Set it to true to indicate that the APP shall be not used for new projects.
+   */
+  def deprecated    = false
+  /**
+   * Sharable property.
+   * It shall be true to allow multiple APPs to require the same instance of this APP.
+   */
+  def sharable      = false
+
+  /**
+   *  App function description.
+   */
+  def description = "Generates Pattern, Noise and Ramp waveform.\n It can be used for single value and data processing modes."
+
+  /* End   : App property section */
+  
+  /* Begin : User APP property section */
+  
+  /* --------------------------------------------------------------------------------- */
+  /* ------------------------- Begin : User variable section ------------------------- */
+  /* --------------------------------------------------------------------------------- */
+  
+  /* Required App */
+  MRequiredApp appres_clock_0
+  MRequiredApp appres_analog_io
+  
+    /* Required Resources */
+  MVirtualResourceGroup hwres_dac_slice
+  MVirtualResourceGroup hwres_dac_analogpin
+  
+    /* Required Signals */
+  MVirtualSignal vs_dac_output
+  MVirtualSignal vs_dac_trigger
+  MVirtualSignal vs_dac_sgn
+  MVirtualSignal vs_dac_sr
+  MVirtualSignal vs_io_pad
+  MVirtualSignalRA vsra_analog_io_pin
+
+  /* Required global variables */
+  GCombo   gfloat_ramp_conf      = GCombo(widgetName:"ramp_calculation",options:["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],value: "0")
+  GInteger gint_bit_shift_count  = GInteger(value :0)
+  GInteger gint_dac_shift        = GInteger(value :0)
+  GInteger gint_peripheral_clk   = GInteger(value :0)
+  GInteger gint_singleval_data   = GInteger(value :0)
+  GInteger gint_singleval_offset = GInteger(value :0)
+  
+  /* Solver variables */
+  SolverVariable sv_port_num = SolverVariable()
+  
+  /* Manifest user variable */
+  GCheck singleval_coupled       = GCheck(value :false)
+  GCheck pattern_generator_sel   = GCheck(value :false)
+  GCheck single_val_sel          = GCheck(value :false)
+  GCheck singleval_mode_enable   = GCheck(value :false)
+  
+  /* -------------------------- End   : User variable section ------------------------ */
+
+  // DAC Constructor
+  public DAC(DaveEnv daveEnv) 
+  {
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- Initialize manifest variables here ---------------------------------------------- */
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+    boolean negate_enable = true
+
+    List enum_DacAmpPos = [
+      1,
+      2,
+      4,
+      9,
+      17,
+      34,
+      69,
+      138,
+      275,
+      550,
+      1100,
+      2200
+    ]
+    int DAC_MIN_CLK_DIV = 16
+    int DAC_MAX_CLK_DIV = 1048575
+    float DAC_REGISTER_MAX_USIGN = 4095.0
+    float DAC_VSS_MAX =  2.20
+    float DAC_VOLT_MIN = 0.30
+    float DAC_VOLT_MAX = 2.50    
+    float DAC_OFFSET_SIGN = 1.40
+    float DAC_PATTERN_AMPLITUDE = 62.0
+    float DAC_REGISTER_MAX_SIGN = 2048.0
+
+    
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- Target Specific User Variable Initialization ------------------------------------ */
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+    /* Checking device family */
+    if((daveEnv.project.selectedDevice.deviceId.family == 'XMC4') && (daveEnv.project.selectedDevice.deviceId.series == '5'))
+    {
+      negate_enable = false
+    }
+	
+	/* Local MF function for internal clock in noise mode */
+	MF NOISE_INT_CLOCK     = MF({return (!gcheck_use_ext_clock_noise.value)},Boolean)
+	/* Local MF function for external clock in ramp mode */
+	MF RAMP_EXT_CLOCK     = MF({return (gcheck_use_ext_clock_ramp.value)},Boolean)
+	/* Local MF function for internal clock in ramp mode */
+	MF RAMP_INT_CLOCK     = MF({return (!gcheck_use_ext_clock_ramp.value)},Boolean)
+	
+	/* Local MF function for internal clock in single value mode */
+	MF SINGLEVAL_INT_CLOCK = MF({return (gcombo_clock.value == 'Internal Clock')},Boolean)
+	
+	/* Local MF function for internal clock in pattern mode */
+	MF PATTERN_INT_CLOCK = MF({return (gcombo_clock_selection_pattern.value == 'Internal Clock')},Boolean)
+	
+	
+	
+    /* Check if DAC coupled Mode is selected */
+    singleval_coupled.value = MF({return ((gcombo_waveform_type.value == 'SingleValue') && (gcheck_couple_dac_singleval.value == true))},Boolean)
+    /* Check if Pattern generator is selected */
+    pattern_generator_sel.value = MF({return (gcombo_waveform_type.value == 'Pattern Generator')},Boolean)
+    /* Check if Single Value is selected */
+    single_val_sel.value = MF({return (gcombo_waveform_type.value == 'SingleValue')},Boolean)
+    /* Check if Single value mode or Data Mode is enabled */
+    singleval_mode_enable.value = MF({return (gcheck_sync_singleval.value == false)},Boolean)
+    
+    /* DAC GPIO port solver variable */
+    addUriElementRangeConstraint(sv_port_num,[14])
+
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- App consumption Block ----------------------------------------------------------- */
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+    appres_clock_0 = MRequiredApp("CLOCK_XMC4","", RSHARABLE, "4.0.2")
+	
+	/* If expose pin option is selected then consume ANALOG_IO APP */
+	appres_analog_io = MRequiredApp("ANALOG_IO","ANALOG IO",RSHARABLE, "4.0.8", MF({return(gcheck_expose_pin.value == true)},Boolean))
+
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- Hardware resource consumption block --------------------------------------------- */
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+    hwres_dac_slice =  MVirtualResourceGroup("DAC Channel", ["peripheral","dac","*","slice","*"], true )
+    hwres_dac_analogpin = MVirtualResourceGroup("Pin", ["port","p",sv_port_num,"pad","*"], MF({return(gcheck_expose_pin.value == false)},Boolean))
+
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- APP IO Signals ------------------------------------------------------------------ */
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+    vs_dac_sr =  MVirtualSignal( hwres_dac_slice,"event_ch_sr","sr", MF({single_val_sel.value}, Boolean), true) /* required{}, exposeToUser{}  */
+    vs_dac_sgn =  MVirtualSignal(hwres_dac_slice, "sign", "sgn", MF({pattern_generator_sel.value}, Boolean), true)
+    vs_dac_output =  MVirtualSignal(hwres_dac_slice, "analog_ch_output","out", true, MF({return(gcheck_expose_pin.value == true)},Boolean))
+    vs_dac_trigger =  MVirtualSignal( hwres_dac_slice,"trigger","trig", true, true)
+    @AddPin
+    vs_io_pad = MVirtualSignal( hwres_dac_analogpin,"pad_signal", "pad", MF({return(gcheck_expose_pin.value == false)},Boolean), false)
+	
+	/* If expose pin option is selected then extract signal from ANALOG_IO APP */
+	vsra_analog_io_pin = MVirtualSignalRA( appres_analog_io, "vs_analog_io_pad_pin")
+    
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- APP IO Connections ---------------------------------------------------------------*/
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+    addConnectionConstraint(vs_dac_output, vs_io_pad, MF({return(gcheck_expose_pin.value == false)},Boolean))
+	/* If expose pin option is selected then connect DAC output to ANALOG_IO APP */
+	addConnectionConstraint(vs_dac_output, vsra_analog_io_pin, MF({return(gcheck_expose_pin.value == true)},Boolean))
+    /* ---------------------------------------------------------- ---------------------------------------------------------------*/
+    /* --------------------------------------- APP Configuration  ---------------------------------------------------------------*/
+    /* --------------------------------------------------------------------------------------------------------------------------*/
+        /* Read peripheral clock value from low level CLOCK App */
+    gint_peripheral_clk.value = MF({
+      int MGHz = 1000000
+      return (int)((appres_clock_0.getVal(["gfloat_peribusfreq","value"])) * MGHz)
+      }, Integer)
+    /* ---------------------------Pattern generation calculation - START --------------------------------------------------------*/
+    /*Desired Frequency Limitations calculations */
+    gint_desired_clk_pattern.maxValue = MF({
+      int pattern_steps = 32
+      if(gcombo_waveform_type.value == 'Pattern Generator')
+      {      
+         return (int)Math.floor((gint_peripheral_clk.value/DAC_MIN_CLK_DIV)/pattern_steps)
+      }
+      else
+      {
+        return Long.MAX_VALUE
+      }
+    },Integer)
+    
+    gint_desired_clk_pattern.minValue = MF({
+      int pattern_steps = 32
+      if(gcombo_waveform_type.value == 'Pattern Generator')
+      {
+        return (int)Math.ceil((gint_peripheral_clk.value/DAC_MAX_CLK_DIV)/pattern_steps)
+      }
+      else
+      {
+        return Long.MIN_VALUE
+      }
+      
+    },Integer)
+        
+    /* Actual frequency calculation for Pattern generation */
+    gfloat_actual_clk_pattern.value = MF({
+      int pattern_steps = 32
+      int clk_div_tmp = (int)(gint_peripheral_clk.value/gint_desired_clk_pattern.value/pattern_steps);
+      int clk_div = 0
+      if(clk_div_tmp < DAC_MIN_CLK_DIV)
+      {
+       /* Clock divider value can't be less than 16 */
+        clk_div = DAC_MIN_CLK_DIV
+      }
+      else if(clk_div_tmp > DAC_MAX_CLK_DIV)
+      {
+       /* Clock divider value can't be greater than 1048575 */
+        clk_div = DAC_MAX_CLK_DIV
+      }
+      else
+      {
+        clk_div = clk_div_tmp
+      }
+      return (float)(gint_peripheral_clk.value/clk_div/pattern_steps)
+    },Float)
+    
+    gfloat_desired_offset.maxValue = MF({ 
+      float int8_range_max = 127.0
+        return ((gcombo_amplitude_enum_pattern.value.toFloat() * (int8_range_max/DAC_PATTERN_AMPLITUDE)) + DAC_OFFSET_SIGN)
+    },Float)
+    
+    gfloat_desired_offset.minValue = MF({
+      float int8_range_min = -128.0
+        return ((gcombo_amplitude_enum_pattern.value.toFloat() * (int8_range_min/DAC_PATTERN_AMPLITUDE)) + DAC_OFFSET_SIGN)
+    },Float)
+
+
+    /* Actual offset calculation for Pattern generation */
+    gfloat_actual_offset.value = MF({
+      int enumpos = 0
+      int enumpos_2_2V = 12
+      int enumpos_34mV = 5
+      int int8_range_max = 127
+      int int8_range_min = -128
+      int i_offset,amplitude = 0
+
+      enumpos  = gcombo_amplitude_enum_pattern.options.indexOf(gcombo_amplitude_enum_pattern.value)+2
+
+      i_offset = (int)(((gfloat_desired_offset.value - DAC_OFFSET_SIGN)/gcombo_amplitude_enum_pattern.value.toFloat()) * DAC_PATTERN_AMPLITUDE)
+      
+      if(i_offset > int8_range_max )
+      {
+      /* DC offset can't be reached. */
+        i_offset = int8_range_max
+      }
+      else if(i_offset < int8_range_min)
+      {
+      /* DC offset can't be reached. */
+        i_offset = int8_range_min
+      }
+
+      return (float)(((i_offset * gcombo_amplitude_enum_pattern.value.toFloat())/DAC_PATTERN_AMPLITUDE) + DAC_OFFSET_SIGN);
+
+    },Float)
+    
+    /* Pattern resolution calculation */
+    /* Resolution in mV/step: Amplitude/63 = 1 step in mV; */
+    gfloat_resolution_pattern.value = MF({
+      return ((Float.parseFloat(gcombo_amplitude_enum_pattern.value))*1000)/(DAC_PATTERN_AMPLITUDE + 1)      
+    },Float)
+
+    gint_desired_clk_pattern.visible = PATTERN_INT_CLOCK
+    gfloat_actual_clk_pattern.visible = PATTERN_INT_CLOCK
+    glabel_desired_clk_pattern.visible = PATTERN_INT_CLOCK
+    glabel_actual_clk_pattern.visible = PATTERN_INT_CLOCK
+    
+    
+    /* Pattern selection waveform display logic */
+    /* Display sine waveform */
+    gimage_pattern_sine.visible = MF({return (gcombo_pattern_type.options.indexOf(gcombo_pattern_type.value) < 1)}, Boolean)
+    /* Display Rectangle waveform */
+    gimage_pattern_rectangle.visible = MF({return (gcombo_pattern_type.options.indexOf(gcombo_pattern_type.value) < 2)}, Boolean)
+    /* Display Triangle waveform */
+    gimage_pattern_triangle.visible = MF({return (gcombo_pattern_type.options.indexOf(gcombo_pattern_type.value) < 3)}, Boolean)
+    /* Display Custom waveform */
+    gimage_pattern_custom.visible = MF({return (gcombo_pattern_type.options.indexOf(gcombo_pattern_type.value) < 4)}, Boolean)  
+
+    
+    /* ---------------------------Pattern generation calculation - END --------------------------------------------------------*/
+
+    /* ---------------------------Single Value Calculation - START ------------------------------------------------------------*/
+
+    /* Actual frequency calculation for Single Value DAC */
+    gint_desired_clk_singleval.maxValue = MF({
+      if(gcombo_waveform_type.value == 'SingleValue')
+      {
+        return (int)Math.floor(gint_peripheral_clk.value/DAC_MIN_CLK_DIV)
+      }
+      else
+      {
+        return Long.MAX_VALUE
+      }        
+    },Integer)    
+    gint_desired_clk_singleval.minValue = MF({
+      if(gcombo_waveform_type.value == 'SingleValue')
+      {
+        return (int)Math.ceil(gint_peripheral_clk.value/DAC_MAX_CLK_DIV)
+      }
+      else
+      {
+        return Long.MIN_VALUE
+      }
+      },Integer)
+    
+    gfloat_singleval_default_vtg.value  = MF({
+		if(gcombo_singleval_sign.value == 'SignedValue')
+		{
+			return DAC_OFFSET_SIGN
+		}
+		else
+		{
+			return DAC_VOLT_MIN
+		}
+		},Float)
+    
+    gfloat_actual_clk_singleval.value = MF({
+      int clk_div_tmp = (int)(gint_peripheral_clk.value/gint_desired_clk_singleval.value);
+      int clk_div = 0
+      if(clk_div_tmp < DAC_MIN_CLK_DIV)
+      {
+      /* Clock divider value can't be less than 16 */
+        clk_div = DAC_MIN_CLK_DIV
+      }
+      else if(clk_div_tmp > DAC_MAX_CLK_DIV)
+      {
+      /* Clock divider value can't be greater than 1048575 */
+        clk_div = DAC_MAX_CLK_DIV
+      }
+      else
+      {
+        clk_div = clk_div_tmp
+      }
+
+      return (float)(gint_peripheral_clk.value/clk_div)
+	  },Float)
+
+    /* Negative values are forbidden when unsigned is selected  */
+    gfloat_desired_offset_singleval.maxValue = MF({
+      double signed_offset_range_max = 68.3 //max.possible sign offset
+      double unsigned_offset_range_max = 136.99 //max.possible un-sign offset
+      if(gcombo_singleval_sign.value == 'SignedValue')
+      {
+        return signed_offset_range_max
+      }
+      else
+      {
+        return unsigned_offset_range_max
+      }
+    },Float)
+    
+    gfloat_desired_offset_singleval.minValue = MF({
+      double signed_offset_range_min = -68.8 //min.possible sign offset
+      double unsigned_offset_range_min = 0.0 //min.possible unsign offset
+      if(gcombo_singleval_sign.value == 'SignedValue')
+      {
+        return signed_offset_range_min
+      }
+      else
+      {
+        return unsigned_offset_range_min
+      }
+    },Float)
+    
+    /* Offset calculations */
+    gint_singleval_offset.value = MF({
+      /* Convert offset voltage to 8 bit count */
+      float sign_max_voltage = 1.1
+      float unsign_max_voltage = 2.2
+      if(gcombo_singleval_sign.value == 'SignedValue')
+      {
+        return (int)(((gfloat_desired_offset_singleval.value/1000) * DAC_REGISTER_MAX_SIGN)/sign_max_voltage)
+      }
+      else
+      {
+        return (int)(((gfloat_desired_offset_singleval.value/1000) * DAC_REGISTER_MAX_USIGN)/unsign_max_voltage)
+      }      
+    },Integer)
+    
+    /* Configured Offset calculation */
+    gfloat_actual_offset_singleval.value = MF({
+      /* Convert configured 8 bit count to offset */
+      float sign_max_voltage = 1.1
+      float unsign_max_voltage = 2.2
+      if(gcombo_singleval_sign.value == 'SignedValue')
+      {
+        return (double)(((gint_singleval_offset.value * sign_max_voltage) / DAC_REGISTER_MAX_SIGN) * 1000)
+      }
+      else
+      {
+        return (double)(((gint_singleval_offset.value * unsign_max_voltage) / DAC_REGISTER_MAX_USIGN) * 1000)
+      }      
+    },Float)
+    
+    /* In Single Value Mode Default Startup Voltage configuration */
+    gint_singleval_data.value = MF({
+      if(gcombo_singleval_sign.value == 'SignedValue')
+        {
+        if(gfloat_singleval_default_vtg.value >= 0)
+        {
+             return (int)((gfloat_singleval_default_vtg.value * DAC_REGISTER_MAX_SIGN)/(DAC_VSS_MAX/2))
+        }
+        else
+        {
+          return (int)(((gfloat_singleval_default_vtg.value * DAC_REGISTER_MAX_SIGN)/(DAC_VSS_MAX/2)) - 1)
+        }
+        }
+        else
+        {
+         return Math.round(((gfloat_singleval_default_vtg.value - DAC_VOLT_MIN) * DAC_REGISTER_MAX_USIGN)/DAC_VSS_MAX)
+        }}, Integer)
+
+    /* Single value/Data mode selection */
+    gcombo_clock.enabled = MF({return (!singleval_mode_enable.value)},Boolean)
+    gfloat_desired_offset_singleval.enabled = MF({return (gcheck_offset_singleval.value)},Boolean)
+    gint_shift_bits_singleval.enabled = MF({return (gcheck_shift_singleval.value)},Boolean)
+    gint_desired_clk_singleval.enabled = MF({return ((gcombo_clock.value == 'Internal Clock') && (!singleval_mode_enable.value))},Boolean)
+    gint_desired_clk_singleval.visible = SINGLEVAL_INT_CLOCK
+    gfloat_actual_clk_singleval.visible = SINGLEVAL_INT_CLOCK
+    glabel_desired_clk_singleval.visible = SINGLEVAL_INT_CLOCK
+    glabel_actual_clk_singleval.visible = SINGLEVAL_INT_CLOCK
+    
+    /* Display which API to be called to change the default value based on coupled mode and Sign selection */
+    gstring_api_sel.value = MF({
+      
+      if(gcheck_couple_dac_singleval.value == true)
+      {
+        if(gcombo_singleval_sign.value == 'SignedValue')
+        {
+          return "DAC_SingleValue_SetValue_s16_Coupled( )"
+        }
+        else
+        {
+          return "DAC_SingleValue_SetValue_u16_Coupled( )"
+        }
+      }
+      else
+      {
+        if(gcombo_singleval_sign.value == 'SignedValue')
+        {
+          return "DAC_SingleValue_SetValue_s16( )"
+        }
+        else
+        {
+          return "DAC_SingleValue_SetValue_u16( )"
+        }        
+      }
+         },String)
+
+    
+    /* ---------------------------Single Value Calculation - END ------------------------------------------------------------*/
+
+    /* ---------------------------Noise generation Calculation - Start ------------------------------------------------------*/
+    /* Minimum configurable period for Noise generation */
+    gfloat_desired_period_noise.minValue = MF({
+      if(gcombo_waveform_type.value == 'Noise')
+      {
+        int temp_freq = (int)Math.floor(gint_peripheral_clk.value/DAC_MIN_CLK_DIV)
+        return (float)(1000000/temp_freq)
+      }
+      else
+      {
+        return Double.NEGATIVE_INFINITY
+      }      
+      },Float)
+    
+    gfloat_desired_period_noise.maxValue = MF({
+      if(gcombo_waveform_type.value == 'Noise')
+      {
+        int temp_freq = (int)Math.ceil(gint_peripheral_clk.value/DAC_MAX_CLK_DIV)
+        return (float)(1000000/temp_freq)
+      }
+      else
+      {
+        return Double.POSITIVE_INFINITY
+      }
+      },Float)
+    
+    /* Configured period for Noise generation */
+    gfloat_actual_period_noise.value = MF({
+      /* Convert period to frequency */
+      int desired_freq = (int)(1000000/gfloat_desired_period_noise.value)
+      /* Calculate clock divider value */
+      int clk_div_tmp = (int)(gint_peripheral_clk.value/desired_freq)
+      int clk_div = 0
+      if(clk_div_tmp < DAC_MIN_CLK_DIV)
+      {
+      /* Clock divider value can't be less than 16 */
+        clk_div = DAC_MIN_CLK_DIV
+      }
+      else if(clk_div_tmp > DAC_MAX_CLK_DIV)
+      {
+      /* Clock divider value can't be greater than 1048575 */
+        clk_div = DAC_MAX_CLK_DIV
+      }
+      else
+      {
+        clk_div = clk_div_tmp
+      }
+      return (float)(1000000/(gint_peripheral_clk.value/clk_div));
+    },Float)
+    
+    gfloat_desired_period_noise.visible = NOISE_INT_CLOCK
+    glabel_desired_period_noise.visible = NOISE_INT_CLOCK
+    glabel_actual_period_noise.visible = NOISE_INT_CLOCK
+    gfloat_actual_period_noise.visible = NOISE_INT_CLOCK
+    
+    /* ---------------------------Noise generation Calculation - End ------------------------------------------------------*/
+
+    /* ---------------------------Ramp generation calculation - START -----------------------------------------------------*/
+    gfloat_ramp_conf.options =
+    MF({
+      int DAC_SHIFT_RIGHT  = 0
+      int DAC_SHIFT_LEFT  = 1
+      int MAX_SHIFT = 7
+      int DAC_MAX_FREQ = 2000000
+      int dac_shift = DAC_SHIFT_RIGHT
+      int start_ramp,stop_ramp,arg_StartRamp,arg_StopRamp,bit_shift_count=0
+      int div_dac_clk,clk_ph = 0        
+      float temp_CalcStartRamp,temp_CalcStopRamp = 0    
+      int temp_CalcFreqHz,temp_DesiredFreqHz = 0
+      int config_not_posible = 1
+      int temp_steps,temp_ramp_start = 0;
+      boolean negate = false
+
+      if(gfloat_ramp_desired_start.value > gfloat_ramp_desired_stop.value)
+      {
+        /* Falling ramp required */
+        start_ramp = Math.round((gfloat_ramp_desired_stop.value - DAC_VOLT_MIN)*(DAC_REGISTER_MAX_USIGN/DAC_VSS_MAX))
+        stop_ramp  = Math.round((gfloat_ramp_desired_start.value - DAC_VOLT_MIN)*(DAC_REGISTER_MAX_USIGN/DAC_VSS_MAX))
+        negate = true
+      }
+      else
+      {
+          /* Rising ramp required */
+        start_ramp = Math.round((gfloat_ramp_desired_start.value - DAC_VOLT_MIN)*(DAC_REGISTER_MAX_USIGN/DAC_VSS_MAX))
+        stop_ramp  = Math.round((gfloat_ramp_desired_stop.value - DAC_VOLT_MIN)*(DAC_REGISTER_MAX_USIGN/DAC_VSS_MAX))
+      }
+      
+      /* Pre-configuration depending on the clock/trigger source*/
+      if(gcheck_use_ext_clock_ramp.value == true)
+      {
+        clk_ph = (float)gint_peripheral_clk.value
+        temp_DesiredFreqHz = (int)gint_ext_clk_ramp.value
+        
+        arg_StartRamp = start_ramp
+        arg_StopRamp = stop_ramp
+        
+        temp_CalcStartRamp = (float)(start_ramp)*(DAC_VSS_MAX/DAC_REGISTER_MAX_USIGN)+DAC_VOLT_MIN
+        temp_CalcStopRamp = (float)(stop_ramp)*(DAC_VSS_MAX/DAC_REGISTER_MAX_USIGN)+DAC_VOLT_MIN
+        temp_steps = stop_ramp-start_ramp
+        div_dac_clk = DAC_MIN_CLK_DIV
+        
+        if(negate == true)
+        {
+          /* Shift start/stop for negative ramp */
+          temp_ramp_start = start_ramp;
+          start_ramp = DAC_REGISTER_MAX_USIGN - stop_ramp;
+          stop_ramp  = DAC_REGISTER_MAX_USIGN - temp_ramp_start;
+          temp_steps = stop_ramp - start_ramp
+        }        
+          
+        if(temp_steps > 0)
+        {
+          temp_CalcFreqHz = Math.round(temp_DesiredFreqHz/temp_steps)
+          /* Configuration possible */
+          config_not_posible = 0
+        }
+        else
+        {
+          /* Configuration not possible */
+          config_not_posible = 1
+          temp_CalcFreqHz = (int)(1)
+        }
+
+            }
+      else
+      {
+           clk_ph = (float)gint_peripheral_clk.value
+           temp_DesiredFreqHz = (int)gint_desired_clk_ramp.value  
+          
+          if(stop_ramp != start_ramp)
+          {
+            temp_steps = stop_ramp - start_ramp + 1
+            /* Configuration possible */
+            config_not_posible = 0
+          }
+          else
+          {
+            temp_steps = 1
+            /* Not possible to configure */
+            config_not_posible = 1            
+          }
+          
+             div_dac_clk = Math.round(clk_ph/(temp_steps * temp_DesiredFreqHz))
+          if(div_dac_clk < 1)
+          {
+            div_dac_clk = 1
+          }
+          temp_CalcFreqHz = Math.round(clk_ph/div_dac_clk)
+  
+          /* Check if DAC clock divider is less than 2^20 - 1 */
+          if(config_not_posible == 0 )
+          {
+            if(div_dac_clk < DAC_MAX_CLK_DIV) 
+            {
+              if(temp_CalcFreqHz <= DAC_MAX_FREQ)
+              {
+                /* Configuration Possible */
+                config_not_posible = 0
+              }
+              else
+              {
+                /* Check if DAC frequency greater than 2 MHz */
+                while(temp_CalcFreqHz > DAC_MAX_FREQ)
+                {
+                  if(temp_steps < 3)
+                  {
+                    /* Not possible to configure */
+                    config_not_posible = 1
+                    break
+                  }
+                  else
+                  {
+                    if(bit_shift_count < MAX_SHIFT )
+                    {
+                      /* Decrease scaling factor and re-calculate start and stop ramp */
+                      dac_shift = DAC_SHIFT_LEFT
+                      stop_ramp = stop_ramp>>1
+                      start_ramp = start_ramp>>1
+                      bit_shift_count++;
+                      
+                      /* re-calculate clock divider based on change in steps */
+                      temp_steps = stop_ramp - start_ramp + 1
+                      div_dac_clk = Math.round(clk_ph/(temp_steps * temp_DesiredFreqHz))
+                      if(div_dac_clk < 1)
+                      {
+                        div_dac_clk = 1
+                      }
+                      temp_CalcFreqHz = Math.round(clk_ph/div_dac_clk)
+                      /* Configuration Possible */
+                      config_not_posible = 0
+                    }
+                    else
+                    {
+                      /* Not possible to configure */
+                      config_not_posible = 1
+                      break
+                    }
+                  }
+                }
+              }
+            }
+            else
+            {            
+              while(div_dac_clk > DAC_MAX_CLK_DIV)
+              {              
+                if(temp_steps > DAC_REGISTER_MAX_USIGN)
+                {
+                  /* Not possible to configure */
+                  config_not_posible = 1
+                  break
+                }
+                else
+                {
+                  if(bit_shift_count < MAX_SHIFT )
+                  {
+                    /* Increase scaling factor and re-calculate start and stop ramp */
+                    dac_shift = DAC_SHIFT_RIGHT
+                    stop_ramp = stop_ramp<<1
+                    start_ramp = start_ramp<<1
+                    
+                    if((stop_ramp <= DAC_REGISTER_MAX_USIGN) && (start_ramp <= DAC_REGISTER_MAX_USIGN))
+                    {
+                      bit_shift_count++;                      
+                      /* re-calculate clock divider based on change in steps */
+                      temp_steps = stop_ramp - start_ramp + 1
+                      div_dac_clk = Math.round(clk_ph/(temp_steps * temp_DesiredFreqHz))
+                      temp_CalcFreqHz = Math.round(clk_ph/div_dac_clk)
+                      /* Configuration Possible */
+                      config_not_posible = 0
+                    }
+                    else
+                    {
+                      /* Not possible to configure */
+                      config_not_posible = 1
+                      break
+                    }
+                  }
+                  else
+                  {
+                    /* Not possible to configure */
+                    config_not_posible = 1
+                    break
+                  }
+                }
+              }
+            }
+          }
+          arg_StartRamp = start_ramp
+          arg_StopRamp = stop_ramp
+          temp_CalcFreqHz = Math.round(temp_CalcFreqHz/temp_steps)
+          if(temp_CalcFreqHz < 1)
+          {
+            config_not_posible = 1
+          }
+          
+          if(dac_shift == DAC_SHIFT_RIGHT)
+          {
+             /* Scaling factor increased by bit_shift_count, re-calculate start and stop ramp */
+            temp_CalcStartRamp = (float)(start_ramp>>bit_shift_count)*(DAC_VSS_MAX/DAC_REGISTER_MAX_USIGN)+DAC_VOLT_MIN
+            temp_CalcStopRamp = (float)(stop_ramp>>bit_shift_count)*(DAC_VSS_MAX/DAC_REGISTER_MAX_USIGN)+DAC_VOLT_MIN
+          }
+          else
+          {
+            /* Scaling factor decreased by bit_shift_count, re-calculate start and stop ramp */
+            temp_CalcStartRamp = (float)(start_ramp<<bit_shift_count)*(DAC_VSS_MAX/DAC_REGISTER_MAX_USIGN)+DAC_VOLT_MIN
+            temp_CalcStopRamp = (float)(stop_ramp<<bit_shift_count)*(DAC_VSS_MAX/DAC_REGISTER_MAX_USIGN)+DAC_VOLT_MIN
+          }
+          
+          if((div_dac_clk < DAC_MIN_CLK_DIV)||(div_dac_clk > DAC_MAX_CLK_DIV))
+          {
+            config_not_posible = 1
+          }
+          
+          if(negate == true)
+          {
+            /* Shift start/stop for negative ramp */
+            temp_ramp_start = start_ramp;
+            start_ramp = DAC_REGISTER_MAX_USIGN - stop_ramp;
+            stop_ramp  = DAC_REGISTER_MAX_USIGN - temp_ramp_start;
+          }
+          
+          if(config_not_posible != 1)
+          {
+            temp_steps = stop_ramp - start_ramp + 1
+            div_dac_clk = Math.round(clk_ph/(temp_steps * temp_DesiredFreqHz))
+            temp_CalcFreqHz = Math.round(clk_ph/(temp_steps * div_dac_clk))
+          }
+      }
+
+      if(gfloat_ramp_desired_start.value > gfloat_ramp_desired_stop.value)
+        return [
+          temp_CalcFreqHz.toString(),
+          temp_CalcStopRamp.toString(),
+          temp_CalcStartRamp.toString(),
+          bit_shift_count.toString(),
+          dac_shift.toString(),
+          arg_StopRamp.toString(),
+          arg_StartRamp.toString(),
+          start_ramp.toString(),
+          stop_ramp.toString(),
+          config_not_posible.toString()
+        ]
+      else
+        return [
+          temp_CalcFreqHz.toString(),
+          temp_CalcStartRamp.toString(),
+          temp_CalcStopRamp.toString(),
+          bit_shift_count.toString(),
+          dac_shift.toString(),
+          arg_StartRamp.toString(),
+          arg_StopRamp.toString(),
+          start_ramp.toString(),
+          stop_ramp.toString(),
+          config_not_posible.toString()
+        ]
+    },List)
+    
+      
+      /* Re- calculated start,stop ramp and frequency */
+    gint_actual_clk_ramp.value = MF({return gfloat_ramp_conf.options[0].toInteger()}, Integer)
+    gfloat_ramp_actual_start.value = MF({return gfloat_ramp_conf.options[1].toDouble()}, Float)
+    gfloat_ramp_actual_stop.value = MF({return gfloat_ramp_conf.options[2].toDouble()}, Float)
+    gint_bit_shift_count.value = MF({return gfloat_ramp_conf.options[3].toInteger()}, Integer)
+    gint_dac_shift.value = MF({return gfloat_ramp_conf.options[4].toInteger()}, Integer)
+    /* User configuration is not possible */
+    gmessage_error_msg_ramp.visible = MF({
+      if(gcombo_waveform_type.value == 'Ramp')
+      {
+        return (Boolean)gfloat_ramp_conf.options[9].toInteger()
+      }
+      else
+      {
+        return false
+      }
+    }, Boolean)
+    /* dummy value placed in list to avoid the popup */
+    gfloat_ramp_conf.value = MF({gfloat_ramp_conf.options[9]},String)
+    
+    /* Ramp resolution calculation */
+    /* Resolution in mV/step: Amplitude/calculated_steps = 1 step in mV;*/
+    gfloat_resolution_ramp.value = MF({
+      float amplitude = gfloat_ramp_actual_stop.value - gfloat_ramp_actual_start.value
+      return (float)((Math.abs(amplitude) * 1000)/(gfloat_ramp_conf.options[8].toFloat() - gfloat_ramp_conf.options[7].toFloat()))
+    },Float)
+
+    /* if external clock selected then disable internal clock */
+    gint_ext_clk_ramp.visible = RAMP_EXT_CLOCK
+    glabel_ext_clk_ramp.visible = RAMP_EXT_CLOCK
+    gint_desired_clk_ramp.visible = RAMP_INT_CLOCK
+    glabel_desired_clk_ramp.visible = RAMP_INT_CLOCK
+    gint_desired_clk_ramp.enabled = RAMP_INT_CLOCK
+    
+        /* ---------------------------Ramp generation calculation - END -----------------------------------------------------*/
+
+    /* Images selection & Display Logic */
+    if(negate_enable == true)
+    {
+      gcombo_start_mode.visible = true
+      gimage_pattern_start_mode.visible = true
+      gimage_ramp_neg.visible = true
+      gcheck_invert_singleval.visible = true
+      glabel_start_mode.visible = true
+      gfloat_ramp_desired_stop.minValue = 0.3//DAC_VOLT_MIN
+    }
+    else  /* XMC45 */
+    {
+      gcombo_start_mode.visible = false
+      gimage_pattern_start_mode.visible = false
+      gimage_ramp_neg.visible = false
+      gcheck_invert_singleval.visible = false
+      glabel_start_mode.visible = false
+     /* Negative Ramp is not possible in XMC45 devices */
+      gfloat_ramp_desired_stop.minValue = MF({return ((float)gfloat_ramp_desired_start.value)},Float)
+    }
+    /*************************** Tab Display logic **************************************************************/
+    /* Tab display logic for Pattern generation */
+    gtab_pattern.visible = MF({return (pattern_generator_sel.value == true)},Boolean)
+    gtab_pattern_expert.visible = MF({return (pattern_generator_sel.value == true)},Boolean)
+    gtab_custom_pattern.visible = MF({return ((pattern_generator_sel.value == true) && (gcombo_pattern_type.value == 'Custom'))},Boolean)
+    
+    /* Tab display logic for Single Value/Data Mode generation */
+    gtab_single_value.visible = MF({return (single_val_sel.value == true)},Boolean)
+    gtab_singleval_expert.visible = MF({return (single_val_sel.value == true)},Boolean)
+    gtab_interrupt_conf.visible = MF({return ((single_val_sel.value == true) && (gcheck_sync_singleval.value == true))},Boolean)
+    
+    /* Tab display logic for Noise generation */
+    gtab_noise.visible = MF({return (gcombo_waveform_type.value == 'Noise')},Boolean)
+    
+    /* Tab display logic for ramp generation */
+    gtab_ramp.visible = MF({return (gcombo_waveform_type.value == 'Ramp')},Boolean)      
+  }
+
+  // File Generation
+  def generateFiles()
+  {
+    copy("dac.c", "dac.c")
+    copy("dac.h", "dac.h")
+    generate("dac_confc.tmpl", "dac_conf.c")
+    generate("dac_confh.tmpl", "dac_conf.h")
+    generate("dac_extern.tmpl", "dac_extern.h")
+  }
+  
+}
+

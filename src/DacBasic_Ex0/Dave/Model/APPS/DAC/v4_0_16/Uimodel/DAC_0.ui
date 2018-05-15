@@ -1,0 +1,438 @@
+<p1:Tab xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" widgetName="composite1" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 860, 592">
+		<p1:GTab text="Waveform Selection" enabled="true" manifestObj="true" visible="true" widgetName="gtab_waveform_sel">
+			<p1:GTab.control>
+				<p1:Tab widgetName="tab1_composite1" layout="{x:Null}">
+					<p1:GGroup text="Waveform Selection" widgetName="group_waveform_sel" bounds="2, 6, 844, 555" manifestObj="true" layout="{x:Null}">
+						<p1:GCombo widgetName="gcombo_waveform_type"  toolTipText="Selection of waveform type: &#13;&#10;Pattern Generator, Single Value / Data Mode, Ramp mode or Noise mode" options="Pattern Generator&#13;&#10;SingleValue&#13;&#10;Ramp&#13;&#10;Noise" manifestObj="true" value="Pattern Generator" bounds="221, 34, 151, 25" description="Pattern selection for waveform generation.This will configure the DAC mode configuration."/>
+						<p1:GLabel text="Waveform selection:" visible="true" widgetName="glabel_waveform_type" bounds="72, 38, 128, 15" toolTipText="" description="Pattern selection for Waveform generation."/>
+						<p1:GImage visible="true" manifestObj="true" widgetName="gimage_waveform_selection" bounds="23, 79, 806, 313" path="Uimodel/waveform_selection.png" x:Style="BORDER"/>
+						<p1:GGroup text="Pattern" manifestObj="true" widgetName="ggroup_pattern_info" bounds="30, 398, 199, 107">
+							<p1:GGroup.layout>
+								<GridLayout/>
+							</p1:GGroup.layout>
+							<p1:GLabel text="+ Repeating waveform" visible="true" widgetName="gLabel637" size="122, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="22" widthHint="134"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ No software interrupt" visible="true" widgetName="gLabel639" size="125, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="22" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ 32 steps per period" visible="true" widgetName="gLabel640" size="111, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="21"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+						</p1:GGroup>
+						<p1:GGroup text="Single value" manifestObj="true" widgetName="ggroup_singleval_info" bounds="230, 398, 199, 107">
+							<p1:GGroup.layout>
+								<GridLayout/>
+							</p1:GGroup.layout>
+							<p1:GLabel text="+ Optimized for single values" visible="true" widgetName="gLabel641" size="158, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="19" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ High resolution waves with LUT" visible="true" widgetName="gLabel642" size="185, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="21"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ Software impact necessary" visible="true" widgetName="gLabel643" size="153, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="22" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+						</p1:GGroup>
+						<p1:GGroup text="Ramp" manifestObj="true" widgetName="ggroup_ramp_info" bounds="431, 398, 199, 107">
+							<p1:GGroup.layout>
+								<GridLayout/>
+							</p1:GGroup.layout>
+							<p1:GLabel text="+ Optimized for ramp" visible="true" widgetName="gLabel644" size="120, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="19" widthHint="133"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ High resolution" visible="true" widgetName="gLabel645" size="96, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="19" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ No software interrupt" visible="true" widgetName="gLabel646" size="125, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="21" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+						</p1:GGroup>
+						<p1:GGroup text="Noise" manifestObj="true" widgetName="ggroup_noise_info" bounds="632, 398, 199, 107">
+							<p1:GGroup.layout>
+								<GridLayout/>
+							</p1:GGroup.layout>
+							<p1:GLabel text="+ Pseudo random noise" visible="true" widgetName="gLabel647" size="124, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="23" widthHint="146"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GLabel text="+ No software interrupt" visible="true" widgetName="gLabel648" size="125, 15">
+								<p1:GLabel.layoutData>
+									<GridData heightHint="24" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+						</p1:GGroup>
+						<p1:GCheck bounds="461, 47, 99, 16" description="If enabled ANALOG_IO APP will be consumed so that one can share the same pin with ADC." manifestObj="true" text="Expose pin" toolTipText="If selected ANALOG_IO APP will be consumed and pin can be shared with ADC." widgetName="gcheck_expose_pin"/>
+						<p1:GCheck bounds="461, 22, 159, 16" description="Enable/Disable Start After Initialization. If disabled then after configuration the mode will be configured to Idle mode. User has to explicitly call DAC_Enable( ) API to start waveform generation." manifestObj="true" text="Start after initialization" toolTipText="User has to call DAC_LUT_Start() API if checkbox is not selected." value="true" widgetName="gcheck_start_after_init"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Pattern" enabled="true" manifestObj="true" visible="true" widgetName="gtab_pattern">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite14">
+					<p1:GGroup widgetName="group_pattern" bounds="2, 2, 665, 504" layout="{x:Null}" manifestObj="true" text="Pattern Generator Configuration">
+						<p1:GImage widgetName="gimage_pattern_sine" path="Uimodel/pattern_sin.png" bounds="316, 21, 340, 205" manifestObj="true" x:Style="BORDER"/>
+						<p1:GImage manifestObj="true" widgetName="gimage_pattern_rectangle" path="Uimodel/pattern_rectangle.png" bounds="316, 21, 340, 205" visible="false" x:Style="BORDER"/>
+						<p1:GImage manifestObj="true" widgetName="gimage_pattern_triangle" path="Uimodel/pattern_triangle.png" bounds="316, 21, 340, 205" visible="false" x:Style="BORDER"/>
+						<p1:GImage manifestObj="true" widgetName="gimage_pattern_custom" path="Uimodel/pattern_custom.png" bounds="316, 21, 340, 205" visible="false" x:Style="BORDER"/>
+						<p1:GImage widgetName="image_pattern_offset" path="Uimodel/Offset.PNG" bounds="316, 237, 340, 257" manifestObj="true" x:Style="BORDER"/>
+						<p1:GGroup manifestObj="true" widgetName="group_clock_config_pattern" bounds="9, 102, 298, 124" text="Clock Configuration">
+							<p1:GGroup.layout>
+								<GridLayout numColumns="2" horizontalSpacing="10" marginHeight="0" verticalSpacing="10" marginWidth="10" marginTop="10"/>
+							</p1:GGroup.layout>
+							<p1:GLabel text="Clock selection:" visible="true" widgetName="glabel_clock_selection_pattern" size="81, 15"/>
+							<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_clock_selection_pattern" toolTipText="Trigger selection." description="Input trigger selection for DAC conversion." value="Internal Clock" options="Internal Clock&#13;&#10;External Trigger">
+								<p1:GCombo.layoutData>
+									<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+								</p1:GCombo.layoutData>
+							</p1:GCombo>
+							<p1:GLabel text="Desired frequency [Hz]:" visible="true" widgetName="glabel_desired_clk_pattern" manifestObj="true" toolTipText="Desired frequency for Pattern generation."/>
+							<p1:GInteger x:Style="NONE" minValue="4" maxValue="234375" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="gint_desired_clk_pattern" value="2000" toolTipText="Desired frequency for Pattern generation." description="Desired frequency for Pattern generation.&lt;br&gt;&#13;&#10;Min. and Max. values are depends upon the DAC clockdivider range.[16,1048575]">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel manifestObj="true" text="Actual frequency [Hz]:" toolTipText="Configured frequency for Pattern generation." visible="true" widgetName="glabel_actual_clk_pattern" size="117, 15"/>
+							<p1:GFloat x:Style="BORDER" minValue="1" maxValue="5000000" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,1" manifestObj="true" widgetName="gfloat_actual_clk_pattern" description="Configured frequency for Pattern generation.Based upon configured clock divider actual frequency will be recalculated." value="2000.0" toolTipText="Configured frequency for Pattern generation." enabled="false">
+								<p1:GFloat.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GFloat.layoutData>
+							</p1:GFloat>
+						</p1:GGroup>
+						<p1:GLabel text="Resolution: [mV/step]:" visible="true" widgetName="glabel_resolution_pattern" toolTipText="DAC resolution" bounds="15, 431, 126, 15"/>
+						<p1:GFloat enabled="false" format="*,3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="POSITIVE_INFINITY" minValue="0.0" value="1.0" widgetName="gfloat_resolution_pattern" x:Style="BORDER" toolTipText="DAC resolution" description="DAC resolution in mV/steps. In pattern mode steps are fixed to 32." bounds="158, 428, 139, 21"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="0.004&#13;&#10;0.009&#13;&#10;0.017&#13;&#10;0.034&#13;&#10;0.069&#13;&#10;0.138&#13;&#10;0.275&#13;&#10;0.55&#13;&#10;1.1&#13;&#10;2.2" toolTipText="Peak to Peak Amplitude" value="1.1" widgetName="gcombo_amplitude_enum_pattern" bounds="158, 66, 139, 21" description="Amplitude selection from configurable amplitudes.It will configure scaling factor in channel configuration."/>
+						<p1:GLabel text="Pattern selection:" toolTipText="Selet pre-defined patterns for Waveform generation." visible="true" widgetName="glabel_pattern_type" bounds="17, 37, 96, 15"/>
+						<p1:GGroup text="Offset Configuration" manifestObj="true" widgetName="ggroup_offset_config" bounds="10, 230, 297, 94" layout="{x:Null}">
+							<p1:GLabel text="Desired offset [V]:          " visible="true" widgetName="glabel_desired_offset" toolTipText="Offset before scaling operation." bounds="13, 28, 125, 15"/>
+							<p1:GFloat x:Style="BORDER" minValue="0" maxValue="2.5" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gfloat_desired_offset" value="1.4" manifestObj="true" format="*,3" toolTipText="If offset minus amplitude leads to negative voltage then register will overroll and generate positive voltage." description="Offset before scaling operation.Depends upon the amplitude selection the range will be calculated dynamically." bounds="148, 25, 138, 21" />
+							<p1:GLabel text="Actual offset [V]:" toolTipText="Configured offset before scaling operation." visible="true" widgetName="glabel_actual_offset" bounds="13, 59, 125, 15"/>
+							<p1:GFloat x:Style="BORDER" minValue="-3.132" maxValue="5.9056" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gfloat_actual_offset" value="1.4" manifestObj="true" enabled="false" format="*,3" toolTipText="Configured offset before scaling operation." description="Add offset to the signal. Only positive voltages can be generated. If offset minus amplitude leads to negative voltage then register will rollover and generate positive voltage. " bounds="148, 56, 139, 21" />
+						</p1:GGroup>
+						<p1:GLabel text="Amplitude [V]:" toolTipText="Set Peak amplitude in Volts." visible="true" widgetName="glabel_amplitude_enum_pattern" bounds="17, 69, 86, 15"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Sine&#13;&#10;Rectangle&#13;&#10;Triangle&#13;&#10;Custom&#13;&#10;" toolTipText="Pre-defined patterns selection - sine, rectangle, traingle or custom.&#13;&#10;For Custom, please enter the data points in the Custom tab." value="Sine" widgetName="gcombo_pattern_type" description="Pre-defined patterns selection for Waveform generation.It will configure DACxPATL and DACxPATH registers." bounds="158, 32, 139, 21"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Pattern Expert" enabled="true" manifestObj="true" visible="true" widgetName="gtab_pattern_expert">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite5">
+					<p1:GGroup text="Pattern Expert" widgetName="group_pattern_expert" bounds="4, 7, 650, 553" manifestObj="true" layout="{x:Null}">
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gcombo_start_mode" options="Start With Positive Half&#13;&#10;Start With Negative Half"  manifestObj="true" value="Start With Positive Half" bounds="9, 412, 164, 21" toolTipText="Starts with Positive/Negative halfwave" description="Start mode(Positive/Negative halfwave) configuration. Start with negative halfwave is available only on  XMC44 device."/>
+						<p1:GCheck text="Enable sign output" widgetName="gcheck_sign_mode" manifestObj="true" bounds="9, 136, 131, 15" toolTipText="Enables sign information of the generated pattern" description="Enables sign information of the generated pattern."/>
+						<p1:GImage widgetName="gimage_signed_output" path="Uimodel/pattern_sign_output.png" manifestObj="true" bounds="209, 24, 431, 241" x:Style="BORDER"/>
+						<p1:GLabel text="Start mode:" visible="true" manifestObj="true" widgetName="glabel_start_mode" bounds="9, 382, 74, 15"/>
+						<p1:GImage visible="true" manifestObj="true" widgetName="gimage_pattern_start_mode" bounds="209, 273, 431, 213" path="Uimodel/pattern_start_mode.PNG" x:Style="BORDER"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Custom Pattern" enabled="true" manifestObj="true" widgetName="gtab_custom_pattern" visible="true">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite7">
+					<p1:GGroup text="Custom Pattern" widgetName="group_custom_pattern" bounds="5, 5, 586, 484" manifestObj="true" layout="{x:Null}">
+						<p1:GGroup manifestObj="true" widgetName="group32" bounds="7, 22, 151, 449">
+							<p1:GGroup.layout>
+								<GridLayout numColumns="2" verticalSpacing="25" marginHeight="10" horizontalSpacing="10"/>
+							</p1:GGroup.layout>
+							<p1:GLabel text="Pattern 0:" visible="true" widgetName="glabel_pattern_0" toolTipText="Pattern 0 for Custom Pattern generation" size="57, 15">
+								<p1:GLabel.layoutData>
+									<GridData widthHint="57"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger x:Style="NONE" minValue="0" maxValue="31" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="gint_pattern_0" value="0" toolTipText="Pattern 0 for Custom Pattern generation" description="( 0/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData widthHint="68"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 1:" visible="true" widgetName="glabel_pattern_1" toolTipText="Pattern 1 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_1" toolTipText="Pattern 1 for Custom Pattern generation" description="( 1/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 2:" visible="true" widgetName="glabel_pattern_2" toolTipText="Pattern 2 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_2" toolTipText="Pattern 2 for Custom Pattern generation" description="( 2/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 3:" visible="true" widgetName="glabel_pattern_3" toolTipText="Pattern 3 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_3" toolTipText="Pattern 3 for Custom Pattern generation" description="( 3/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 4:" visible="true" widgetName="glabel_pattern_4" toolTipText="Pattern 4 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_4" toolTipText="Pattern 4 for Custom Pattern generation" description="( 4/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 5:" visible="true" widgetName="glabel_pattern_5" toolTipText="Pattern 5 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_5" toolTipText="Pattern 5 for Custom Pattern generation" description="( 5/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 6:" visible="true" widgetName="glabel_pattern_6" toolTipText="Pattern 6 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_6" toolTipText="Pattern 6 for Custom Pattern generation" description="( 6/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 7:" visible="true" widgetName="glabel_pattern_7" toolTipText="Pattern 7 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_7" toolTipText="Pattern 7 for Custom Pattern generation" description="( 7/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Pattern 8:" visible="true" widgetName="glabel_pattern_8" toolTipText="Pattern 8 for Custom Pattern generation">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="31" minValue="0" value="0" widgetName="gint_pattern_8" toolTipText="Pattern 8 for Custom Pattern generation" description="( 8/32 ) * 2 pi value">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+						</p1:GGroup>
+						<p1:GImage visible="true" manifestObj="true" widgetName="gimage_custom_pattern" bounds="165, 28, 413, 443" path="Uimodel/custom_pattern.PNG" x:Style="BORDER"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="SingleValue" enabled="true" manifestObj="true" visible="true" widgetName="gtab_single_value">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite9">
+					<p1:GGroup text="Single Value Configuration" widgetName="group_singleval" bounds="4, 5, 614, 491" manifestObj="true" layout="{x:Null}">
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gcombo_singleval_sign" options="SignedValue&#13;&#10;UnsignedValue"  manifestObj="true" value="SignedValue" bounds="224, 27, 258, 21" toolTipText="" description="Selects Signed/Unsigned DAC data type."/>
+						<p1:GLabel text="Sign selection:" visible="true" widgetName="glabel_singleval_sign" bounds="24, 30, 83, 15" toolTipText=""/>
+						<p1:GLabel bounds="24, 65, 148, 15" text="Startup voltage [V]:" toolTipText="Single Value Mode startup voltage" visible="true" widgetName="glabel_singleval_default_vtg"/>
+						<p1:GFloat bounds="224, 62, 258, 21" description="Single Value Mode startup voltage. &lt;br&gt;&#13;&#10;Unsigned mode - 0.3V &lt;br&gt;&#13;&#10;Signed mode - 1.4V &lt;br&gt;" format="*,3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="2.5" minValue="0.3" toolTipText="Single Value Mode startup voltage" value="1.4" widgetName="gfloat_singleval_default_vtg" x:Style="BORDER" enabled="false"/>
+						<p1:GImage visible="true" manifestObj="true" widgetName="gimage_singleval_sign_sel" bounds="24, 170, 572, 285" path="Uimodel/SingleVal_SignSelection.PNG" x:Style="BORDER"/>
+						<p1:GLabel text="API to set a new value :" visible="true" widgetName="glabel_api_sel" bounds="24, 103, 158, 15"/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_api_sel" bounds="224, 100, 258, 21" value="DAC_SingleValue_SetValue_s16( )" toolTipText="Please use this API to set a new value." description="API to set a new value in signle value mode.&lt;br&gt;&#13;&#10;SignedValue couple mode - &lt;br&gt;DAC_SingleValue_SetValue_s16_Coupled( )&lt;br&gt;&#13;&#10;UnsignedValue couple mode - DAC_SingleValue_SetValue_u16_Coupled( )&lt;br&gt;&#13;&#10;SignedValue mode  - DAC_SingleValue_SetValue_s16( )&lt;br&gt;&#13;&#10;UnsignedValue mode - DAC_SingleValue_SetValue_u16( )&lt;br&gt;" enabled="false"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="SingleValue Expert" visible="true" enabled="true" manifestObj="true" widgetName="gtab_singleval_expert">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite11">
+					<p1:GGroup text="Single Value Expert" widgetName="group_singleval_expert" bounds="4, 5, 510, 488" manifestObj="true" layout="{x:Null}">
+						<p1:GGroup manifestObj="true" widgetName="group_clk_conf" text="Synchronization" toolTipText="Select Internal clock/External trigger for synchronisation." bounds="11, 18, 482, 153">
+							<p1:GGroup.layout>
+								<GridLayout numColumns="2" horizontalSpacing="10" marginHeight="10" marginWidth="10" verticalSpacing="10"/>
+							</p1:GGroup.layout>
+							<p1:GCheck text="Synchronize with clock" widgetName="gcheck_sync_singleval" manifestObj="true" description="If enabled then Data mode will be configured else Single value mode." toolTipText="If checked, Data mode is used else Single value mode is used.">
+								<p1:GCheck.layoutData>
+									<GridData widthHint="196" horizontalAlignment="FILL"/>
+								</p1:GCheck.layoutData>
+							</p1:GCheck>
+							<Label/>
+							<p1:GLabel text="Clock selection:" visible="true" widgetName="glabel_clock" toolTipText="Select Internal clock/External trigger for synchronisation.">
+								<p1:GLabel.layoutData>
+									<GridData widthHint="196" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gcombo_clock" options="Internal Clock&#13;&#10;External Trigger&#13;&#10;" value="Internal Clock" manifestObj="true" toolTipText="Select Internal clock/External trigger for synchronisation." description="Select Internal clock/External trigger for synchronisation.">
+								<p1:GCombo.layoutData>
+									<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+								</p1:GCombo.layoutData>
+							</p1:GCombo>
+							<p1:GLabel text="Desired frequency [Hz]:    " visible="true" widgetName="glabel_desired_clk_singleval" manifestObj="true" toolTipText="Desired DAC frequency for synchronization.">
+								<p1:GLabel.layoutData>
+									<GridData widthHint="260" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GInteger x:Style="NONE" minValue="1" maxValue="5000000" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="gint_desired_clk_singleval" value="2000" toolTipText="Desired DAC frequency for synchronization." description="Desired DAC frequency for synchronization.">
+								<p1:GInteger.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GInteger.layoutData>
+							</p1:GInteger>
+							<p1:GLabel text="Actual frequency [Hz]:" visible="true" widgetName="glabel_actual_clk_singleval" manifestObj="true" toolTipText="Configured DAC frequency for synchronization.">
+								<p1:GLabel.layoutData>
+									<GridData widthHint="197" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GFloat x:Style="BORDER" minValue="1.0" maxValue="7500000.0" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,1" manifestObj="true" widgetName="gfloat_actual_clk_singleval" description="Configured DAC frequency for synchronization.Depends upon configured clock divider value actual frequency will be recalculated." toolTipText="Configured DAC frequency for synchronization." value="2000.0" enabled="false">
+								<p1:GFloat.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GFloat.layoutData>
+							</p1:GFloat>
+						</p1:GGroup>
+						<p1:GCheck text="Use DAC coupled register" widgetName="gcheck_couple_dac_singleval" manifestObj="true" toolTipText="If Selected configure another DAC instance in coupled Mode.&#13;&#10;DAC01DATA register is updated.&#13;&#10;" description="Enable DAC coupled mode to enable simultaneous data mode. If selected then it will update two DAC channel data in DATA01 register simultaneously." bounds="23, 425, 171, 15"/>
+						<p1:GGroup text="Offset Configuration" manifestObj="true" widgetName="group_offset_singleval" bounds="12, 181, 480, 126">
+							<p1:GGroup.layout>
+								<GridLayout numColumns="2" horizontalSpacing="10" marginHeight="10" marginWidth="10" verticalSpacing="10"/>
+							</p1:GGroup.layout>
+							<p1:GCheck text="Add offset" widgetName="gcheck_offset_singleval" manifestObj="true" toolTipText="Add an offset before scaling operation." description="Add an offset before scaling operation.">
+								<p1:GCheck.layoutData>
+									<GridData horizontalAlignment="FILL" heightHint="21"/>
+								</p1:GCheck.layoutData>
+							</p1:GCheck>
+							<Label/>
+							<p1:GLabel text="Desired offset value [mV]:" visible="true" widgetName="glabel_desired_offset_singleval" toolTipText="" description="Add an offset before scaling operation.">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL" widthHint="255"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GFloat x:Style="BORDER" minValue="-68.8" maxValue="68.3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,3" manifestObj="true" widgetName="gfloat_desired_offset_singleval" toolTipText="Configured offset before scaling operation. This will add a signed or &#13;&#10;unsigned 8 Bit offset depending on signed selection" description="Desired offset before scaling operation." value="0.0">
+								<p1:GFloat.layoutData>
+									<GridData widthHint="194" grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+								</p1:GFloat.layoutData>
+							</p1:GFloat>
+							<p1:GLabel description="Configured offset before scaling operation." text="Actual offset value [mV]:" toolTipText="" visible="true" widgetName="glabel_actual_offset_singleval">
+								<p1:GLabel.layoutData>
+									<GridData widthHint="195" horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GFloat description="Configured offset before scaling operation." format="*,3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="136.99" minValue="-68.8" toolTipText="Configured offset before scaling operation. This will add a signed or &#13;&#10;unsigned 8 Bit offset depending on signed selection" value="0.0" widgetName="gfloat_actual_offset_singleval" x:Style="BORDER" enabled="false">
+								<p1:GFloat.layoutData>
+									<GridData horizontalAlignment="FILL" grabExcessHorizontalSpace="true" widthHint="194"/>
+								</p1:GFloat.layoutData>
+							</p1:GFloat>
+						</p1:GGroup>
+						<p1:GCheck text="Invert output" widgetName="gcheck_invert_singleval" manifestObj="true" toolTipText="DAC value is converted to its two&apos;s complement value." description="DAC data value is converted to its two&apos;s complement value." bounds="23, 458, 171, 15"/>
+						<p1:GGroup text="Shift Configuration" manifestObj="true" widgetName="ggroup_shift_config" bounds="12, 317, 479, 89">
+							<p1:GCheck text="Shifted bits: [+/- bits] (Pos=Left, Neg=Right)" widgetName="gcheck_shift_singleval" manifestObj="true" toolTipText="Scale the amplitude" description="Enable Scaling operation" bounds="11, 24, 276, 15"/>
+							<p1:GLabel text="Shift value in bits:" visible="true" widgetName="glabel_shift_bits_singleval" bounds="13, 54, 114, 15"/>
+							<p1:GInteger x:Style="NONE" minValue="-7" maxValue="7" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="gint_shift_bits_singleval" value="0" toolTipText="Shift Value in Bits by X(Pos. = Left, Neg. = Right)" description="Shift the value to left or right by X Bits. If negative then downscaling else upscaling will be configured." enabled="false" bounds="280, 51, 186, 23"/>
+						</p1:GGroup>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Noise" enabled="true" manifestObj="true" visible="true" widgetName="gtab_noise">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite13">
+					<p1:GGroup text="Noise Configuration" widgetName="group_noise_conf" bounds="3, 3, 697, 557" manifestObj="true" layout="{x:Null}">
+						<p1:GGroup manifestObj="true" widgetName="group_clock_config" bounds="3, 85, 327, 121" text="Clock Configuration">
+							<p1:GGroup.layout>
+								<GridLayout numColumns="2" horizontalSpacing="10" marginHeight="10" marginWidth="10" verticalSpacing="10"/>
+							</p1:GGroup.layout>
+							<p1:GCheck manifestObj="true" text="Use external clock" widgetName="gcheck_use_ext_clock_noise" toolTipText="Configure DAC for external trigger.&#13;&#10;If selected then connect signal to external trigger (CCU, UART, PORT)" description="Configure DAC for external trigger.">
+								<p1:GCheck.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GCheck.layoutData>
+							</p1:GCheck>
+							<Label/>
+							<p1:GLabel text="Desired period [us]:" visible="true" widgetName="glabel_desired_period_noise" manifestObj="true" toolTipText="Desired frequency for Noise generation."/>
+							<p1:GFloat x:Style="BORDER" minValue="0" maxValue="1000000" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,3" manifestObj="true" widgetName="gfloat_desired_period_noise" toolTipText="Desired Period for Noise generation." description="Desired period for noise generation." value="500" location="195, 51">
+								<p1:GFloat.layoutData>
+									<GridData horizontalAlignment="FILL" grabExcessHorizontalSpace="true" verticalAlignment="FILL"/>
+								</p1:GFloat.layoutData>
+							</p1:GFloat>
+							<p1:GLabel manifestObj="true" text="Actual period [us]:" toolTipText="Configured frequency for Noise generation." visible="true" widgetName="glabel_actual_period_noise">
+								<p1:GLabel.layoutData>
+									<GridData horizontalAlignment="FILL"/>
+								</p1:GLabel.layoutData>
+							</p1:GLabel>
+							<p1:GFloat description="Configured period for noise generation." format="*,3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="1000000" minValue="0" toolTipText="Configured Period for Noise generation." value="500" widgetName="gfloat_actual_period_noise" x:Style="BORDER" enabled="false">
+								<p1:GFloat.layoutData>
+									<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" verticalAlignment="FILL"/>
+								</p1:GFloat.layoutData>
+							</p1:GFloat>
+						</p1:GGroup>
+						<p1:GImage widgetName="image_noise_pattern" path="Uimodel/Noiseconf.png" manifestObj="true" bounds="343, 16, 347, 266" x:Style="BORDER"/>
+						<p1:GLabel text="Amplitude [V]:" visible="true" widgetName="glabel_amplitude_enum_noise" toolTipText="Set Peak amplitude in Volts." description="Set Peak amplitude in Volts." bounds="16, 43, 95, 15"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_amplitude_enum_noise" toolTipText="Peak to Peak Amplitude" options="0.017&#13;&#10;0.034&#13;&#10;0.069&#13;&#10;0.138&#13;&#10;0.275&#13;&#10;0.55&#13;&#10;1.1&#13;&#10;2.2" value="1.1" bounds="144, 40, 171, 21" description="Amplitude selection from configurable amplitudes.It will configure scaling factor."/>
+						<p1:GImage visible="true" manifestObj="true" widgetName="image_noise_half_amp" path="Uimodel/NoiseHalfAmp.png" bounds="343, 286, 347, 266" x:Style="BORDER"/>
+						<p1:GCheck text="Use average offset 1.4V" manifestObj="true" widgetName="gcheck_use_half_amp_offset" bounds="16, 333, 163, 16" toolTipText="Generated Noise will be around 1.4V +/- amplitude/2" value="true" description="Generated Noise will be around 1.4V +/- amplitude/2"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Ramp" enabled="true" manifestObj="true" visible="true" widgetName="gtab_ramp">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite12">
+					<p1:GGroup text="Ramp" widgetName="group_ramp" bounds="1, 1, 703, 559" manifestObj="true" layout="{x:Null}">
+						<p1:GImage widgetName="gimage_ramp_pos" manifestObj="true" bounds="354, 16, 343, 255" path="Uimodel/positive_ramp.PNG" x:Style="BORDER"/>
+						<p1:GImage widgetName="gimage_ramp_neg" manifestObj="true" bounds="354, 296, 343, 255" path="Uimodel/negative_ramp.PNG" x:Style="BORDER"/>
+						<p1:GGroup manifestObj="true" widgetName="group_clock_config_ramp" bounds="8, 138, 331, 133" layout="{x:Null}" text="Clock Configuration">
+							<p1:GCheck text="Use external clock" widgetName="gcheck_use_ext_clock_ramp" manifestObj="true" toolTipText="Configure DAC for external trigger.&#13;&#10;If selected then connect signal to external trigger (CCU, UART, PORT)" description="Configure DAC for external trigger." bounds="7, 25, 117, 15"/>
+							<p1:GLabel text="External trigger frequency [Hz]:" visible="true" manifestObj="true" widgetName="glabel_ext_clk_ramp" bounds="7, 59, 186, 21"/>
+							<p1:GInteger x:Style="NONE" minValue="1" maxValue="5000000" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="gint_ext_clk_ramp" value="20000" toolTipText="External trigger frequency" description="External trigger frequency" bounds="219, 57, 101, 23"/>
+							<p1:GLabel text="Desired ramp frequency [Hz]:" visible="true" widgetName="glabel_desired_clk_ramp" manifestObj="true" toolTipText="Desired frequency for Ramp generation." bounds="7, 59, 188, 15"/>
+							<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="5000000" minValue="1" value="2000" widgetName="gint_desired_clk_ramp" toolTipText="Desired frequency for Ramp generation." description="Desired frequency for Ramp generation." bounds="219, 57, 101, 21"/>
+							<p1:GLabel manifestObj="true" text="Actual ramp frequency [Hz]:" toolTipText="Configured frequency for Ramp generation." visible="true" widgetName="glabel_actual_clk_ramp" bounds="7, 91, 167, 15"/>
+							<p1:GInteger enabled="false" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="5000000" minValue="0" value="2000" widgetName="gint_actual_clk_ramp" toolTipText="Configured frequency for Ramp generation." description="Configured frequency for Ramp generation. Depends upon Ramp start and stop voltage steps will be calculated. Based on steps the scaling factor will be adjusted internally to meet the desired frequency." bounds="219, 90, 101, 21"/>
+						</p1:GGroup>
+						<p1:GLabel manifestObj="true" text="Resolution [mV/step]:" visible="true" widgetName="glabel_resolution_ramp" toolTipText="DAC Resolution" bounds="15, 302, 129, 15"/>
+						<p1:GFloat enabled="false" format="*,3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="POSITIVE_INFINITY" minValue="0.0" value="1.0" widgetName="gfloat_resolution_ramp" x:Style="BORDER" toolTipText="DAC Resolution" description="DAC Resolution is depends upon the number of steps which are depends upon the configured ramp start and stop values." bounds="227, 299, 101, 21"/>
+						<p1:GLabel text="Desired start value  [V]:" visible="true" widgetName="glabel_ramp_desired_start" toolTipText="Ramp counter starts at Start value voltage." description="" bounds="13, 30, 136, 15"/>
+						<p1:GFloat x:Style="BORDER" minValue="0.3" maxValue="2.5" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gfloat_ramp_desired_start" text="0.3" manifestObj="true" value="0.3" format="*,2" toolTipText="Ramp starts at Start value voltage.&#13;&#10;Start and stop voltage will be recalculated if desired frequency can not be achived with the given values." description="Ramp counter starts at Start value voltage." bounds="227, 28, 101, 21"/>
+						<p1:GLabel text="Actual start value  [V]:" toolTipText="Configured Ramp Start value voltage." visible="true" widgetName="glabel_ramp_actual_start" bounds="13, 56, 121, 15"/>
+						<p1:GFloat x:Style="BORDER" minValue="0" maxValue="2.5" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gfloat_ramp_actual_start" text="0.3" manifestObj="true" enabled="false" value="0.3" format="*,3" toolTipText="Configured Ramp Start value voltage." description="Configured Ramp Start value voltage." bounds="227, 53, 101, 21"/>
+						<p1:GLabel text="Desired stop value [V]:" visible="true" widgetName="glabel_ramp_desired_stop" toolTipText="Ramp counter restarts at Stop value voltage." bounds="13, 82, 129, 15"/>
+						<p1:GFloat x:Style="BORDER" minValue="0.3" maxValue="2.5" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gfloat_ramp_desired_stop" text="2.0" manifestObj="true" value="2.2" format="*,2" toolTipText="Ramp counter restarts at Stop value voltage.&#13;&#10; Start and stop voltage will be recalculated if desired frequency can not be achived with the given values." description="Ramp counter restarts at Stop value voltage." bounds="227, 79, 101, 21"/>
+						<p1:GLabel text="Actual stop value [V]:" toolTipText="Configured stop Ramp voltage." visible="true" widgetName="glabel_ramp_actual_stop" bounds="13, 108, 115, 15"/>
+						<p1:GFloat x:Style="BORDER" minValue="0" maxValue="2.5" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" widgetName="gfloat_ramp_actual_stop" text="2.0" manifestObj="true" enabled="false" value="2.2" format="*,3" description="Configured stop Ramp voltage." toolTipText="Configured stop Ramp voltage." bounds="227, 105, 101, 21"/>
+						<p1:GMessage text="Above configuration is not possible. Change start,stop or frequency parameters." visible="false" manifestObj="true" isError="true" widgetName="gmessage_error_msg_ramp" bounds="9, 276, 462, 15"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Event Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_interrupt_conf" toolTipText="">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite22">
+					<p1:GGroup text="Event Settings" manifestObj="true" widgetName="group_interrupt_configuration" bounds="10, 12, 336, 58" toolTipText="Event configuration in SingleValue mode.">
+						<p1:GCheck bounds="14, 26, 160, 16" description="Enable service request event in SingleValue mode." manifestObj="true" text="Enable service request " toolTipText="Event configuration in SingleValue mode." widgetName="gcheck_enable_sr_singleval"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>

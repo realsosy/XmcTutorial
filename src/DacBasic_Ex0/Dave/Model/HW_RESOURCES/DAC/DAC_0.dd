@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/0.1.29/peripheral/dac/0" description="Digital to Analog Converter" baseAddress="0x48018000">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://resources/0.1.29/peripheral/dac/0/slice/1">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/DAC/v4_0_16/DAC_1.app#//@hwResources.0"/>
+    <resourcesList name="cfg0" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac1cfg0"/>
+    <resourcesList name="cfg1" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac1cfg1"/>
+    <resourcesList name="cfg1_trigsel" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/trigsel"/>
+    <resourcesList name="data" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac1data"/>
+    <resourcesList name="patl" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac1patl"/>
+    <resourcesList name="path" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac1path"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice1_global_signal"/>
+    <resourcesList name="trig" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice1_trig"/>
+    <resourcesList name="out" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice1_out"/>
+    <resourcesList name="sgn" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice1_sgn"/>
+    <resourcesList name="sr" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice1_sr"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="DAC1CFG1" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1" value="00000000" toolTipHelpDescription="DAC1 Configuration Register 1" defaultValue="00000000" addressOffset="0x010" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <bitFields name="SCALE" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/scale" value="0" toolTipHelpDescription="Scale value for up- or downscale of the DAC1 input data in steps by the power of 2 (=shift operation):" defaultValue="0" startPos="0" stopPos="2" accessPermission="rw" maxValue="7" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="no shift = multiplication/division by 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="shift by 1 = multiplication/division by 2"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="shift by 2 = multiplication/division by 4"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="shift left by 3 = multiplication/division by 8"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="shift left by 4 = multiplication/division by 16"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="shift left by 5 = multiplication/division by 32"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="shift left by 6 = multiplication/division by 64"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="shift left by 7 = multiplication/division by 128"/>
+    </bitFields>
+    <bitFields name="MULDIV" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/muldiv" value="0" toolTipHelpDescription="Switch between up- and downscale of the DAC1 input data values:" defaultValue="0" startPos="3" stopPos="3" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="downscale = division (shift SCALE positions to the right)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="upscale = multiplication (shift SCALE positions to the left)"/>
+    </bitFields>
+    <bitFields name="OFFS" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/offs" value="0" toolTipHelpDescription="8-bit offset value addition:" defaultValue="0" startPos="4" stopPos="11" accessPermission="rw" maxValue="255" minValue="0"/>
+    <bitFields name="TRIGSEL" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/trigsel" value="0" toolTipHelpDescription="Selects one of the eight external trigger sources for DAC1:" defaultValue="0" startPos="12" stopPos="14" accessPermission="rw" maxValue="7" minValue="0"/>
+    <bitFields name="SWTRIG" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/swtrig" value="0" toolTipHelpDescription="Software Trigger:" defaultValue="0" startPos="16" stopPos="16" accessPermission="rw" maxValue="1" minValue="0"/>
+    <bitFields name="TRIGMOD" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/trigmod" value="0" toolTipHelpDescription="Select the trigger source for channel 1:" defaultValue="0" startPos="17" stopPos="18" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="internal Trigger (integer divided clock - see FREQ parameter)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="external Trigger (preselected trigger by TRIGSEL parameter)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="software Trigger (see SWTRIG parameter)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="reserved"/>
+    </bitFields>
+    <bitFields name="ANACFG" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/anacfg" value="0" toolTipHelpDescription="DAC1 analog configuration/calibration parameters:" defaultValue="0" startPos="19" stopPos="23" accessPermission="rw" maxValue="31" minValue="0"/>
+    <bitFields name="ANAEN" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/anaen" value="0" toolTipHelpDescription="Enable analog DAC for channel 1:" defaultValue="0" startPos="24" stopPos="24" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="DAC1 is set to standby (analog output only)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable DAC1 (analog output only)"/>
+    </bitFields>
+    <bitFields name="REFCFGH" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/refcfgh" value="0" toolTipHelpDescription="Higher 4 band-gap configuration/calibration parameters:" defaultValue="0" startPos="28" stopPos="31" accessPermission="rw" maxValue="15" minValue="0"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TRIGSEL" URI="http://resources/0.1.29/peripheral/dac/0/dac1cfg1/trigsel" value="0" toolTipHelpDescription="Selects one of the eight external trigger sources for DAC1:" defaultValue="0" startPos="12" stopPos="14" accessPermission="rw" maxValue="7" minValue="0"/>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="0" URI="http://resources/0.1.29/peripheral/dac/0/slice/0">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/DAC/v4_0_16/DAC_0.app#//@hwResources.0"/>
+    <resourcesList name="cfg0" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac0cfg0"/>
+    <resourcesList name="cfg1" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac0cfg1"/>
+    <resourcesList name="cfg1_trigsel" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/trigsel"/>
+    <resourcesList name="data" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac0data"/>
+    <resourcesList name="patl" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac0patl"/>
+    <resourcesList name="path" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/dac0path"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice0_global_signal"/>
+    <resourcesList name="trig" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice0_trig"/>
+    <resourcesList name="out" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice0_out"/>
+    <resourcesList name="sgn" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice0_sgn"/>
+    <resourcesList name="sr" requiredResourceUri="http://resources/0.1.29/peripheral/dac/0/slice0_sr"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="DAC0CFG1" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1" value="00000000" toolTipHelpDescription="DAC0 Configuration Register 1" defaultValue="00000000" accessPermission="rw" addressOffset="0x008" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <bitFields name="SCALE" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/scale" value="0" toolTipHelpDescription="Scale value for up- or downscale of the DAC0 input data in steps by the power of 2 (=shift operation):" defaultValue="0" startPos="0" stopPos="2" accessPermission="rw" maxValue="7" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b000" description="no shift = multiplication/division by 1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b001" description="shift by 1 = multiplication/division by 2"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b010" description="shift by 2 = multiplication/division by 4"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b011" description="shift left by 3 = multiplication/division by 8"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b100" description="shift left by 4 = multiplication/division by 16"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b101" description="shift left by 5 = multiplication/division by 32"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b110" description="shift left by 6 = multiplication/division by 64"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b111" description="shift left by 7 = multiplication/division by 128"/>
+    </bitFields>
+    <bitFields name="MULDIV" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/muldiv" value="0" toolTipHelpDescription="Switch between up- and downscale of the DAC0 input data values:" defaultValue="0" startPos="3" stopPos="3" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="downscale = division (shift SCALE positions to the right)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="upscale = multiplication (shift SCALE positions to the left)"/>
+    </bitFields>
+    <bitFields name="OFFS" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/offs" value="0" toolTipHelpDescription="8-bit offset value addition:" defaultValue="0" startPos="4" stopPos="11" accessPermission="rw" maxValue="255" minValue="0"/>
+    <bitFields name="TRIGSEL" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/trigsel" value="0" toolTipHelpDescription="Selects one of the eight external trigger sources for DAC0." defaultValue="0" startPos="12" stopPos="14" accessPermission="rw" maxValue="7" minValue="0"/>
+    <bitFields name="DATMOD" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/datmod" value="0" toolTipHelpDescription="Switch between independent or simultaneous DAC mode and select the input data register for DAC0 and DAC1:" defaultValue="0" startPos="15" stopPos="15" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="independent data handling - process data from DATA0 register (bits 11:0) to DAC0 and data from DATA1 register (bits 11:0) to DAC1"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="simultaneous data handling - process data from DAC01 register to both DACs (bits 11:0 to DAC0 and bits 23:12 to DAC1)."/>
+    </bitFields>
+    <bitFields name="SWTRIG" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/swtrig" value="0" toolTipHelpDescription="Software Trigger:" defaultValue="0" startPos="16" stopPos="16" accessPermission="rw" maxValue="1" minValue="0"/>
+    <bitFields name="TRIGMOD" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/trigmod" value="0" toolTipHelpDescription="Select the trigger source for channel 0:" defaultValue="0" startPos="17" stopPos="18" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b00" description="internal Trigger (integer divided clock - see FREQ parameter)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b01" description="external Trigger (preselected trigger by TRIGSEL parameter)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b10" description="software Trigger (see SWTRIG parameter)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="reserved"/>
+    </bitFields>
+    <bitFields name="ANACFG" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/anacfg" value="0" toolTipHelpDescription="DAC0 analog configuration/calibration parameters:" defaultValue="0" startPos="19" stopPos="23" accessPermission="rw" maxValue="31" minValue="0"/>
+    <bitFields name="ANAEN" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/anaen" value="0" toolTipHelpDescription="Enable analog DAC for channel 0:" defaultValue="0" startPos="24" stopPos="24" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="DAC0 is set to standby (analog output only)"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="enable DAC0 (analog output only)"/>
+    </bitFields>
+    <bitFields name="REFCFGL" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/refcfgl" value="0" toolTipHelpDescription="Lower 4 band-gap configuration/calibration parameters:" defaultValue="0" startPos="28" stopPos="31" accessPermission="rw" maxValue="15" minValue="0"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="TRIGSEL" URI="http://resources/0.1.29/peripheral/dac/0/dac0cfg1/trigsel" value="0" toolTipHelpDescription="Selects one of the eight external trigger sources for DAC0." defaultValue="0" startPos="12" stopPos="14" accessPermission="rw" maxValue="7" minValue="0"/>
+  <addressBlock offset="0x0" size="0x4000" usage="registers"/>
+</ResourceModel:Peripheral>

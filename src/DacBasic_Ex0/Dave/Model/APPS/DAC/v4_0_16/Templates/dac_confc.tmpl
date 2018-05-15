@@ -1,0 +1,494 @@
+package Model.APPS.DAC.v4_0_16.Templates;
+
+import Model.APPS.DAC.v4_0_16.DAC
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+
+ * Copyright (c) 2015-2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-02-20:
+ *     - Initial version<br>
+ *
+ * 2015-06-20:
+ *     - Service request option is restricted only to data mode.<br>
+       - Pattern generation minimum amplitude is restricted to 0.004V.<br>
+ *
+ * 2015-12-15:
+ *     - ANALOG_IO APP Init function call added
+ * 2016-07-08:
+ *     - Fixed incorrect case for an included header.<br>
+ *
+ * @endcond
+ *
+ */
+/***********************************************************************************************************************
+ * HEADER FILES                                                                                                      
+ **********************************************************************************************************************/
+#include "dac.h"
+""");
+String appInst = "NULL"
+List ClkSourceEnum =
+[
+  'XMC_DAC_CH_TRIGGER_INTERNAL',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_CCU80_SR1',
+  'RESERVED',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_CCU40_SR1',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_CCU41_SR1',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_P2_9',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_P2_8',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_U0C0_DX1INS',
+  'XMC_DAC_CH_TRIGGER_EXTERNAL_U1C0_DX1INS',
+  'XMC_DAC_CH_TRIGGER_SOFTWARE'
+]
+List DacAmpEnum   =
+[
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_128',
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_64',
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_32',
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_16',
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_8',
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_4',
+  'XMC_DAC_CH_OUTPUT_SCALE_DIV_2',
+  'XMC_DAC_CH_OUTPUT_SCALE_NONE',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_2',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_4',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_8',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_16',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_32',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_64',
+  'XMC_DAC_CH_OUTPUT_SCALE_MUL_128'
+]
+
+out.print("""
+/**********************************************************************************************************************
+* DATA STRUCTURES
+**********************************************************************************************************************/
+""")
+/**********************************************************************************************************************/
+for (Object appIns : appInstancesList )
+{
+
+	List slice_uri;
+	List pin_uri;
+
+	String mode = "NULL"
+	String singleval_sign = "NULL"
+	String ramp_negate_op = "NULL"
+	String sign_output = "XMC_DAC_CH_PATTERN_SIGN_OUTPUT_DISABLED"
+	
+	Integer slice_num = 0
+	Integer clock_src = 0
+	Integer trigger_sel = 0
+	Integer singleval_offset = 0
+	Integer singleval_shift_qnty = 0
+	Integer i_offset = 0
+	Integer u_offset = 0
+	Integer offset = 0
+	Integer ramp_start = 0
+	Integer ramp_stop = 0
+	Integer ramp_start_mv = 0
+	Integer ramp_stop_mv = 0
+	Integer ramp_shift_qnty = 0
+	Integer frequency_in_Hz = 0
+	Integer service_request = 0
+	Integer coupled_mode = 0
+	Integer frequency = 0
+	
+  appInst = appIns.getInstanceLabel()
+  slice_uri = appIns.hwres_dac_slice.getSolverUri()
+  pin_uri = appIns.hwres_dac_analogpin.getSolverUri()
+  
+  float XMC_DAC_VSS_MAX = 2.2
+  float XMC_DAC_OFFSET_SIGN = 1.4
+  int XMC_DAC_REGISTER_MAX_SIGN = 2048
+  int XMC_DAC_PATTERN_AMPLITUDE = 62
+  int XMC_DAC_OFFSET_MAX = 127
+  int XMC_DAC_OFFSET_MIN = -128
+  int XMC_DAC_SCALE_NONE_INDEX = 7  
+
+  if(slice_uri != null)
+  {
+	slice_num  = slice_uri[6].toInteger();
+	trigger_sel = (int)appIns.hwres_dac_slice.getRegValue("cfg1","cfg1_trigsel")
+	/*dummy mux read*/
+	appIns.hwres_dac_analogpin.getRegValue("PDISC","pdisc_pdis")
+	
+	String analog_io_handle = null
+	if (appIns.gcheck_expose_pin.value == true)
+	{
+	  analog_io_handle = "&" + appIns.appres_analog_io.getInstanceLabel()
+	}
+	else
+	{
+		analog_io_handle = "NULL"
+	}
+	
+   /**********************************************Pattern Generator **************************************************/
+	if(appIns.gcombo_waveform_type.value  == 'Pattern Generator')
+	{
+	  mode = 'XMC_DAC_CH_MODE_PATTERN';
+	  if(appIns.gcombo_pattern_type.value == 'Sine')
+	  {
+		/* Sine waveform generation */
+out.print("""const uint8_t ${appInst}_pattern[]= XMC_DAC_PATTERN_SINE;""");
+	  }
+	  else if(appIns.gcombo_pattern_type.value == 'Rectangle')
+	  {
+out.print("""const uint8_t ${appInst}_pattern[]= XMC_DAC_PATTERN_RECTANGLE;""");
+	  }
+	  else if(appIns.gcombo_pattern_type.value == 'Triangle')
+	  {
+		/* Triangle waveform generation */
+out.print("""const uint8_t ${appInst}_pattern[]= XMC_DAC_PATTERN_TRIANGLE;""");
+	  }
+	  else
+	  {
+		/* Custom Pattern generation */
+out.print("""#define ${appInst}_PATTERN_CUSTOM {${appIns.gint_pattern_0.value}U,\
+\t${appIns.gint_pattern_1.value}U,\
+\t${appIns.gint_pattern_2.value}U,\
+\t${appIns.gint_pattern_3.value}U,\
+\t${appIns.gint_pattern_4.value}U,\
+\t${appIns.gint_pattern_5.value}U,\
+\t${appIns.gint_pattern_6.value}U,\
+\t${appIns.gint_pattern_7.value}U,\
+\t${appIns.gint_pattern_8.value}U }
+
+""");
+out.print("""const uint8_t ${appInst}_pattern[]= ${appInst}_PATTERN_CUSTOM;""");
+
+	  }
+	  
+	  PatternDataPtr = "&${appInst}_pattern[0]"
+
+	  /* Clk source selection */
+	  if(appIns.gcombo_clock_selection_pattern.value == 'Internal Clock')
+	  {
+		clock_src = 0  //'DAC_CLK_SOURCE_INTERN'
+		frequency = appIns.gint_desired_clk_pattern.value
+	  }
+	  else
+	  {
+		clock_src = 1 + (int)appIns.hwres_dac_slice.getRegValue("cfg1","cfg1_trigsel")
+		frequency = 0 //External Trigger selected
+	  }
+	  	  
+	  /* Configuration for DC offset*/
+	  i_offset = (int)(((appIns.gfloat_desired_offset.value-XMC_DAC_OFFSET_SIGN)/
+			           (appIns.gcombo_amplitude_enum_pattern.value.toFloat()))* XMC_DAC_PATTERN_AMPLITUDE);
+
+      if(i_offset > XMC_DAC_OFFSET_MAX )
+      {
+	     /* DC offset can't be reached. */
+	     i_offset = XMC_DAC_OFFSET_MAX
+      }
+      else if(i_offset < XMC_DAC_OFFSET_MIN)
+      {
+	     /* DC offset can't be reached. */
+	     i_offset = XMC_DAC_OFFSET_MIN
+      }
+	  if(appIns.gcombo_start_mode.value == 'Start With Negative Half')
+	  {
+		/* compensation of inversion*/
+		 i_offset = -i_offset;				
+	  }
+  
+	  /* convert int32_t to uint8_t */
+	  if(i_offset < 0)
+	  {
+		  u_offset = ((i_offset + 256) & 0x0FF);
+	  }
+	  else
+	  {
+		  u_offset = ((i_offset) & 0x0FF);
+	  }	
+	  
+	  if(appIns.gcheck_sign_mode.value == true)
+	  {
+		  sign_output = 'XMC_DAC_CH_PATTERN_SIGN_OUTPUT_ENABLED'
+	  }
+	  else
+	  {
+		  sign_output = 'XMC_DAC_CH_PATTERN_SIGN_OUTPUT_DISABLED'
+	  }
+	}
+	/**********************************************Single Value *******************************************************/
+	else if(appIns.gcombo_waveform_type.value  == 'SingleValue')
+	{
+	  PatternDataPtr = 'NULL'
+	  if(appIns.gcheck_sync_singleval.value == true)
+	  {
+		mode = 'XMC_DAC_CH_MODE_DATA';
+		/* Clk source selection */
+		if(appIns.gcombo_clock.value == 'Internal Clock')
+		{
+		  clock_src = 0 //'DAC_CLK_SOURCE_INTERN'
+		  frequency = appIns.gint_desired_clk_singleval.value
+		}
+		else
+		{
+		  /* External trigger enabled */
+		  clock_src = 1 + trigger_sel
+		  frequency = 0
+		}
+	  }
+	  else
+	  {
+		clock_src = 0    // Not necessary in case of DAC Single mode
+		frequency = 0
+		mode = 'XMC_DAC_CH_MODE_SINGLE';
+	  }
+
+	  if(appIns.gcheck_offset_singleval.value == true)
+	  {
+		  if(appIns.gint_singleval_offset.value < 0)
+		  {
+			  /* 2's compliment */
+			  singleval_offset = ((appIns.gint_singleval_offset.value + 256) & 0x0FF);
+		  }
+		  else
+		  {
+			  singleval_offset = ((appIns.gint_singleval_offset.value) & 0x0FF);
+		  }
+	  }
+	  else
+	  {
+		singleval_offset = 0;
+	  }
+	  if(appIns.gcombo_singleval_sign.value == 'SignedValue')
+	  {
+		singleval_sign = 'XMC_DAC_CH_DATA_TYPE_SIGNED'
+	  }
+	  else
+	  {
+		singleval_sign = 'XMC_DAC_CH_DATA_TYPE_UNSIGNED'
+	  }
+	  if(appIns.gcheck_shift_singleval.value == true)
+	  {
+		  singleval_shift_qnty = XMC_DAC_SCALE_NONE_INDEX + appIns.gint_shift_bits_singleval.value
+	  }
+	  else
+	  {
+		singleval_shift_qnty = XMC_DAC_SCALE_NONE_INDEX
+	  }
+	}
+	/********************************************** Ramp Generator ****************************************************/
+	else if(appIns.gcombo_waveform_type.value  == 'Ramp')
+	{
+	  mode = 'XMC_DAC_CH_MODE_RAMP';
+	  PatternDataPtr = 'NULL'
+	  /* Clk source selection */
+	  if(appIns.gcheck_use_ext_clock_ramp.value == false)
+	  {
+		clock_src = 0 //'DAC_CLK_SOURCE_INTERN'
+		frequency = appIns.gint_actual_clk_ramp.value
+	  }
+	  else
+	  {
+		clock_src = 1 + (int)appIns.hwres_dac_slice.getRegValue("cfg1","cfg1_trigsel")
+		frequency = 0
+	  }
+	  
+	  /* Scaling factor required for configured ramp generation */
+	  if(appIns.gint_dac_shift.value == 0)
+	  {
+		  ramp_shift_qnty = XMC_DAC_SCALE_NONE_INDEX - appIns.gint_bit_shift_count.value
+	  }
+	  else
+	  {
+		  ramp_shift_qnty = XMC_DAC_SCALE_NONE_INDEX + appIns.gint_bit_shift_count.value
+	  }
+	  
+	  if(appIns.gfloat_ramp_conf.options[5].toInteger() > appIns.gfloat_ramp_conf.options[6].toInteger())
+	  {
+		  /* Start ramp value is greater than stop value */
+		  ramp_negate_op = 'XMC_DAC_CH_OUTPUT_NEGATION_ENABLED'
+	  }
+	  else
+	  {
+		  ramp_negate_op = 'XMC_DAC_CH_OUTPUT_NEGATION_DISABLED'
+	  }
+	}
+	/********************************************** Noise Generator ***************************************************/
+	else if (appIns.gcombo_waveform_type.value  == 'Noise')
+	{
+	  mode = 'XMC_DAC_CH_MODE_NOISE';
+	  PatternDataPtr = 'NULL'
+
+	  /* Clk source selection */
+	  if(appIns.gcheck_use_ext_clock_noise.value == false)
+	  {
+		clock_src = 0 //'DAC_CLK_SOURCE_INTERN'
+		frequency = Math.round(1000000/appIns.gfloat_actual_period_noise.value)
+	  }
+	  else
+	  {
+		clock_src = 1 + (int)appIns.hwres_dac_slice.getRegValue("cfg1","cfg1_trigsel")
+		frequency = 0
+	  }
+	}
+
+	if(mode == 'XMC_DAC_CH_MODE_PATTERN')
+	{
+		ramp_start = 0
+		ramp_stop = 0
+		service_request = 0
+		coupled_mode = 0
+		out.print("""
+/* DAC Channel Configuration */
+XMC_DAC_CH_CONFIG_t ${appInst}_Channel_Config = 
+{
+  .data_type       = (uint8_t)XMC_DAC_CH_DATA_TYPE_SIGNED,     
+  .output_negation = (uint8_t)${["XMC_DAC_CH_OUTPUT_NEGATION_DISABLED","XMC_DAC_CH_OUTPUT_NEGATION_ENABLED"][appIns.gcombo_start_mode.options.indexOf(appIns.gcombo_start_mode.value)]},
+  .output_scale    = (uint8_t)${DacAmpEnum[(appIns.gcombo_amplitude_enum_pattern.options.indexOf(appIns.gcombo_amplitude_enum_pattern.value))+4]},
+  .output_offset   = ${u_offset}U
+};
+""");
+	}
+		
+	else if(mode == 'XMC_DAC_CH_MODE_SINGLE')
+	{
+		ramp_start = 0
+		ramp_stop = 0
+		service_request  = 0
+		coupled_mode = appIns.gcheck_couple_dac_singleval.value ? 1 : 0
+out.print("""
+
+/* DAC Channel Configuration */
+XMC_DAC_CH_CONFIG_t ${appInst}_Channel_Config = 
+{
+  .data_type       = (uint8_t)${singleval_sign},     
+  .output_negation = (uint8_t)${["XMC_DAC_CH_OUTPUT_NEGATION_DISABLED","XMC_DAC_CH_OUTPUT_NEGATION_ENABLED"][appIns.gcheck_invert_singleval.value ? 1 : 0]},
+  .output_scale    = (uint8_t)${DacAmpEnum[singleval_shift_qnty]},     
+  .output_offset   = ${singleval_offset}U
+};
+""");
+
+	}
+	else if(mode == 'XMC_DAC_CH_MODE_DATA')
+	{
+		ramp_start = 0
+		ramp_stop = 0
+		service_request  = appIns.gcheck_enable_sr_singleval.value ? 1 : 0
+		coupled_mode = appIns.gcheck_couple_dac_singleval.value ? 1 : 0
+out.print("""
+
+/* DAC Channel Configuration */
+XMC_DAC_CH_CONFIG_t ${appInst}_Channel_Config = 
+{
+  .data_type       = (uint8_t)${singleval_sign},     
+  .output_negation = (uint8_t)${["XMC_DAC_CH_OUTPUT_NEGATION_DISABLED","XMC_DAC_CH_OUTPUT_NEGATION_ENABLED"][appIns.gcheck_invert_singleval.value ? 1 : 0]},
+  .output_scale    = (uint8_t)${DacAmpEnum[singleval_shift_qnty]},     
+  .output_offset   = ${singleval_offset}U
+};
+""");
+
+	}
+	else if(mode == 'XMC_DAC_CH_MODE_RAMP')
+	{
+	  out.print("""
+
+/* DAC Channel Configuration */
+XMC_DAC_CH_CONFIG_t ${appInst}_Channel_Config = 
+{
+  .data_type       = (uint8_t)XMC_DAC_CH_DATA_TYPE_UNSIGNED,     
+  .output_negation = (uint8_t)${ramp_negate_op},
+  .output_scale    = (uint8_t)${DacAmpEnum[ramp_shift_qnty]},     
+  .output_offset   = 0U
+};
+
+""");
+/* DAC Ramp generation Initialization */
+  ramp_start  = appIns.gfloat_ramp_conf.options[7].toInteger()
+  ramp_stop   = appIns.gfloat_ramp_conf.options[8].toInteger()
+  ramp_start_mv = (int)(appIns.gfloat_ramp_actual_start.value * 1000)
+  ramp_stop_mv = (int)(appIns.gfloat_ramp_actual_stop.value * 1000)
+  service_request = 0
+  coupled_mode = 0
+	}
+	else
+	{
+		/* XMC_DAC_CH_MODE_NOISE Selected */
+		ramp_start = 0
+		ramp_stop = 0
+		service_request = 0
+		coupled_mode = 0
+	  out.print("""
+
+/* DAC Channel Configuration */
+XMC_DAC_CH_CONFIG_t ${appInst}_Channel_Config = 
+{
+  .data_type       = (uint8_t)${["XMC_DAC_CH_DATA_TYPE_UNSIGNED","XMC_DAC_CH_DATA_TYPE_SIGNED"][appIns.gcheck_use_half_amp_offset.value ? 1 : 0]},     
+  .output_negation = (uint8_t)XMC_DAC_CH_OUTPUT_NEGATION_DISABLED,
+  .output_scale    = (uint8_t)${DacAmpEnum[appIns.gcombo_amplitude_enum_noise.options.indexOf(appIns.gcombo_amplitude_enum_noise.value)]},     
+  .output_offset   = 0U
+};
+
+""");
+	}
+
+out.print("""
+
+/* DAC App Handle */
+DAC_t ${appInst} =
+{
+  .dac_module_ptr                  = (XMC_DAC_t  *)(void *)DAC,
+  .dac_config_ptr                  = &${appInst}_Channel_Config,
+#if (DAC_ANALOG_IO_USED == 1U)
+  .analog_io_config_ptr            = ${analog_io_handle},
+#endif
+  .dac_mode                        = ${mode},
+  .dac_input_trigger               = ${ClkSourceEnum[clock_src]},
+  .dac_sign_output                 = ${sign_output},
+  .dac_frequency                   = ${frequency}U,
+  .dac_ramp_start                  = ${ramp_start}U,
+  .dac_ramp_stop                   = ${ramp_stop}U,
+  .dac_ramp_start_mv               = ${ramp_start_mv}U,
+  .dac_ramp_stop_mv                = ${ramp_stop_mv}U,
+  .dac_service_request             = ${service_request}U,
+  .dac_coupled                     = ${coupled_mode}U,
+  .dac_ch                          = ${slice_num}U,
+  .dac_pat_table_ptr               = ${PatternDataPtr},
+  .dac_start_after_init            = ${appIns.gcheck_start_after_init.value ? 1 : 0}U
+};
+
+""")
+  }
+  else
+  {
+	out.print("""
+  /*DAC App is not mapped for app instant: ${appInst} */""");
+
+  }
+}
