@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="com.ifx.davex.graphiti.pin.mapping" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms">
+  <pi:Diagram visible="true" gridUnit="10" diagramTypeId="com.ifx.davex.pin.allocator.diagramType" name="PinAllocator" version="0.11.0">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.1" foreground="/0/@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+    <colors red="227" green="238" blue="249"/>
+    <colors red="255" green="255" blue="255"/>
+  </pi:Diagram>
+  <PackageDetail height="547" width="537">
+    <Pads pinNo="1" xCoordinate="183" yCoordinate="214" type="rect" width="1" height="1"/>
+    <Pads pinNo="2" xCoordinate="183" yCoordinate="234" type="rect" width="1" height="1"/>
+    <Pads pinNo="3" xCoordinate="183" yCoordinate="254" type="rect" width="1" height="1"/>
+    <Pads pinNo="4" xCoordinate="183" yCoordinate="275" type="rect" width="1" height="1"/>
+    <Pads pinNo="5" xCoordinate="183" yCoordinate="295" type="rect" width="1" height="1"/>
+    <Pads pinNo="6" xCoordinate="183" yCoordinate="315" type="rect" width="1" height="1"/>
+    <Pads pinNo="7" xCoordinate="183" yCoordinate="336" type="rect" width="1" height="1"/>
+    <Pads pinNo="8" xCoordinate="183" yCoordinate="356" type="rect" width="1" height="1"/>
+    <Pads pinNo="9" xCoordinate="183" yCoordinate="376" type="rect" width="1" height="1"/>
+    <Pads pinNo="10" xCoordinate="183" yCoordinate="397" type="rect" width="1" height="1"/>
+    <Pads pinNo="11" xCoordinate="183" yCoordinate="417" type="rect" width="1" height="1"/>
+    <Pads pinNo="12" xCoordinate="183" yCoordinate="437" type="rect" width="1" height="1"/>
+    <Pads pinNo="13" xCoordinate="183" yCoordinate="458" type="rect" width="1" height="1"/>
+    <Pads pinNo="14" xCoordinate="183" yCoordinate="478" type="rect" width="1" height="1"/>
+    <Pads pinNo="15" xCoordinate="183" yCoordinate="498" type="rect" width="1" height="1"/>
+    <Pads pinNo="16" xCoordinate="183" yCoordinate="519" type="rect" width="1" height="1"/>
+    <Pads pinNo="17" xCoordinate="183" yCoordinate="539" type="rect" width="1" height="1"/>
+    <Pads pinNo="18" xCoordinate="183" yCoordinate="559" type="rect" width="1" height="1"/>
+    <Pads pinNo="19" xCoordinate="183" yCoordinate="580" type="rect" width="1" height="1"/>
+    <Pads pinNo="20" xCoordinate="183" yCoordinate="600" type="rect" width="1" height="1"/>
+    <Pads pinNo="21" xCoordinate="183" yCoordinate="620" type="rect" width="1" height="1"/>
+    <Pads pinNo="22" xCoordinate="183" yCoordinate="641" type="rect" width="1" height="1"/>
+    <Pads pinNo="23" xCoordinate="183" yCoordinate="661" type="rect" width="1" height="1"/>
+    <Pads pinNo="24" xCoordinate="183" yCoordinate="681" type="rect" width="1" height="1"/>
+    <Pads pinNo="25" xCoordinate="183" yCoordinate="701" type="rect" width="1" height="1"/>
+    <Pads pinNo="26" xCoordinate="234" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="27" xCoordinate="254" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="28" xCoordinate="275" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="29" xCoordinate="295" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="30" xCoordinate="315" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="31" xCoordinate="336" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="32" xCoordinate="356" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="33" xCoordinate="376" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="34" xCoordinate="397" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="35" xCoordinate="417" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="36" xCoordinate="437" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="37" xCoordinate="458" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="38" xCoordinate="478" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="39" xCoordinate="498" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="40" xCoordinate="519" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="41" xCoordinate="539" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="42" xCoordinate="559" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="43" xCoordinate="580" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="44" xCoordinate="600" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="45" xCoordinate="620" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="46" xCoordinate="641" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="47" xCoordinate="661" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="48" xCoordinate="681" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="49" xCoordinate="702" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="50" xCoordinate="722" yCoordinate="757" type="rect" width="1" angle="90" height="1"/>
+    <Pads pinNo="51" xCoordinate="755" yCoordinate="690" type="rect" width="1" angle="180" height="1"/>
+    <Pads pinNo="52" xCoordinate="755" yCoordinate="671" type="rect" width="1" height="1"/>
+    <Pads pinNo="53" xCoordinate="755" yCoordinate="651" type="rect" width="1" height="1"/>
+    <Pads pinNo="54" xCoordinate="755" yCoordinate="631" type="rect" width="1" height="1"/>
+    <Pads pinNo="55" xCoordinate="755" yCoordinate="610" type="rect" width="1" height="1"/>
+    <Pads pinNo="56" xCoordinate="755" yCoordinate="590" type="rect" width="1" height="1"/>
+    <Pads pinNo="57" xCoordinate="755" yCoordinate="570" type="rect" width="1" height="1"/>
+    <Pads pinNo="58" xCoordinate="755" yCoordinate="549" type="rect" width="1" height="1"/>
+    <Pads pinNo="59" xCoordinate="755" yCoordinate="529" type="rect" width="1" height="1"/>
+    <Pads pinNo="60" xCoordinate="755" yCoordinate="509" type="rect" width="1" height="1"/>
+    <Pads pinNo="61" xCoordinate="755" yCoordinate="488" type="rect" width="1" height="1"/>
+    <Pads pinNo="62" xCoordinate="755" yCoordinate="468" type="rect" width="1" height="1"/>
+    <Pads pinNo="63" xCoordinate="755" yCoordinate="448" type="rect" width="1" height="1"/>
+    <Pads pinNo="64" xCoordinate="755" yCoordinate="428" type="rect" width="1" height="1"/>
+    <Pads pinNo="65" xCoordinate="755" yCoordinate="407" type="rect" width="1" height="1"/>
+    <Pads pinNo="66" xCoordinate="755" yCoordinate="387" type="rect" width="1" height="1"/>
+    <Pads pinNo="67" xCoordinate="755" yCoordinate="367" type="rect" width="1" height="1"/>
+    <Pads pinNo="68" xCoordinate="755" yCoordinate="346" type="rect" width="1" height="1"/>
+    <Pads pinNo="69" xCoordinate="755" yCoordinate="326" type="rect" width="1" height="1"/>
+    <Pads pinNo="70" xCoordinate="755" yCoordinate="306" type="rect" width="1" height="1"/>
+    <Pads pinNo="71" xCoordinate="755" yCoordinate="285" type="rect" width="1" height="1"/>
+    <Pads pinNo="72" xCoordinate="755" yCoordinate="265" type="rect" width="1" height="1"/>
+    <Pads pinNo="73" xCoordinate="755" yCoordinate="245" type="rect" width="1" height="1"/>
+    <Pads pinNo="74" xCoordinate="755" yCoordinate="224" type="rect" width="1" height="1"/>
+    <Pads pinNo="75" xCoordinate="755" yCoordinate="204" type="rect" width="1" height="1"/>
+    <Pads pinNo="76" xCoordinate="722" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="77" xCoordinate="702" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="78" xCoordinate="681" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="79" xCoordinate="661" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="80" xCoordinate="641" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="81" xCoordinate="620" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="82" xCoordinate="600" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="83" xCoordinate="580" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="84" xCoordinate="559" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="85" xCoordinate="539" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="86" xCoordinate="519" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="87" xCoordinate="498" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="88" xCoordinate="478" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="89" xCoordinate="458" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="90" xCoordinate="437" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="91" xCoordinate="417" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="92" xCoordinate="397" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="93" xCoordinate="376" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="94" xCoordinate="356" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="95" xCoordinate="336" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="96" xCoordinate="315" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="97" xCoordinate="295" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="98" xCoordinate="275" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="99" xCoordinate="254" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <Pads pinNo="100" xCoordinate="234" yCoordinate="173" type="rect" width="1" angle="270" height="1"/>
+    <deviceName name="XMC4500" xCoordinate="400" yCoordinate="440"/>
+    <packageName name="LQFP100" xCoordinate="400" yCoordinate="487"/>
+    <lines startX="203.2" startY="193.04" endX="740.0" endY="193.04"/>
+    <lines startX="740.0" startY="740.0" endX="740.0" endY="193.04"/>
+    <lines startX="203.2" startY="740.0" endX="740.0" endY="740.0"/>
+    <lines startX="200.0" startY="200.0" endX="200.0" endY="740.0"/>
+  </PackageDetail>
+</xmi:XMI>

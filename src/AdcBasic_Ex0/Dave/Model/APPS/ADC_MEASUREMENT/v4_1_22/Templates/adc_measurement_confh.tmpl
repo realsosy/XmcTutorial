@@ -1,0 +1,218 @@
+package Model.APPS.ADC_MEASUREMENT.v4_1_22.Templates;
+
+import Model.APPS.ADC_MEASUREMENT.v4_1_22.ADC_MEASUREMENT
+
+out.print("""
+/* @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2015-2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-02-16:
+ *     - Initial version for DAVEv4.<BR>
+ *
+ * 2015-02-19:
+ *     - Added GetResult APIs for XMC1100 devices.
+ *
+ * 2015-05-14:
+ *     - Optimized the Manifest.<BR>
+ *     - Modified the structure ADC_MEASUREMENT_channel_t to ADC_MEASUREMENT_CHANNEL_t.<BR>
+ *
+ * 2015-06-26:
+ *     - Added input class resource consumption.<BR>
+ *
+ * 2015-07-09:
+ *     - Documentation updated.<BR>
+ *
+ * 2015-07-31:
+ *     - Updated the APP to support new devices.<BR>
+ *
+ * 2015-10-01:
+ *     - Updated the APP to support the interrupt control in XMC14.<BR>
+ *
+ * 2015-10-08:
+ *     - Added support for XMC4700/XMC4800 devices.<BR>
+ *
+ * 2015-10-20:
+ *     - Documentation updated.<BR>
+ *
+ * 2015-12-03:
+ *     - Added support for XMC4300 device.<BR>
+ *
+ * 2015-02-09:
+ *     - Updated the APP for the minimum required ANALOG_IO APP version.<BR>
+ *
+ * 2016-03-18:
+ *     - Maximum number of channels for XMC41/42 increased to 9.<BR>
+ *     - Added Post calibration time for XMC1x series in Total conversion Time.<BR>
+ *     - Fixed the ADC_MEASUREMENT_Init() for ANALOG_IO initialization.<BR>
+ *     - For XMC1100 series only: Deprecated the API ADC_MEASUREMENT_GetResult() and 
+ *       ADC_MEASUREMENT_GetDetailedResult().<BR>
+ *     - For XMC1100 series only: Added new API ADC_MEASUREMENT_GetGlobalResult() and 
+ *       ADC_MEASUREMENT_GetGlobalDetailedResult().<BR>
+ *
+ * 2016-08-18:
+ *     - Minimum sample time at low frequencies changed to incorporate Errata ADC_AI.H006 and ADC_AI.H007.
+ *
+ * @endcond
+ *
+ */
+
+#ifndef ADC_MEASUREMENTCONF_H
+#define ADC_MEASUREMENTCONF_H
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+""");
+for (Object appIns : appInstancesList ) {
+	if(  appIns.gcheck_SharedPinA.value || ( appIns.ginteger_channel_number.value >=2 && appIns.gcheck_SharedPinB.value) \
+		||( appIns.ginteger_channel_number.value >=3 && appIns.gcheck_SharedPinC.value) || ( appIns.ginteger_channel_number.value >=4 && appIns.gcheck_SharedPinD.value) \
+		||( appIns.ginteger_channel_number.value >=5 && appIns.gcheck_SharedPinE.value) ||( appIns.ginteger_channel_number.value >=6 && appIns.gcheck_SharedPinF.value) ||( appIns.ginteger_channel_number.value >=7 && appIns.gcheck_SharedPinG.value) ||( appIns.ginteger_channel_number.value >=8 && appIns.gcheck_SharedPinH.value) \
+		||( appIns.ginteger_channel_number.value >=9 && appIns.gcheck_SharedPinI.value) ||( appIns.ginteger_channel_number.value >=10 && appIns.gcheck_SharedPinJ.value) ||( appIns.ginteger_channel_number.value >=11 && appIns.gcheck_SharedPinK.value) ||( appIns.ginteger_channel_number.value >=12 && appIns.gcheck_SharedPinL.value) \
+		||( appIns.ginteger_channel_number.value >=13 && appIns.gcheck_SharedPinM.value) ||( appIns.ginteger_channel_number.value >=14 && appIns.gcheck_SharedPinN.value) ||( appIns.ginteger_channel_number.value >=15 && appIns.gcheck_SharedPinO.value) ||( appIns.ginteger_channel_number.value >=16 && appIns.gcheck_SharedPinP.value) \
+		||( appIns.ginteger_channel_number.value >=17 && appIns.gcheck_SharedPinQ.value) ||( appIns.ginteger_channel_number.value >=18 && appIns.gcheck_SharedPinR.value) ||( appIns.ginteger_channel_number.value >=19 && appIns.gcheck_SharedPinS.value) ||( appIns.ginteger_channel_number.value >=20 && appIns.gcheck_SharedPinT.value) \
+		||( appIns.ginteger_channel_number.value >=21 && appIns.gcheck_SharedPinU.value) ||( appIns.ginteger_channel_number.value >=22 && appIns.gcheck_SharedPinV.value) ||( appIns.ginteger_channel_number.value >=23 && appIns.gcheck_SharedPinW.value) ||( appIns.ginteger_channel_number.value >=24 && appIns.gcheck_SharedPinX.value) \
+		||( appIns.ginteger_channel_number.value >=25 && appIns.gcheck_SharedPinY.value) ||( appIns.ginteger_channel_number.value >=26 && appIns.gcheck_SharedPinZ.value  ))
+	{
+		out.print("""\n#include "ANALOG_IO/analog_io.h" """);
+	}
+}
+out.print("""
+/**********************************************************************************************************************
+ * MACROS
+ **********************************************************************************************************************/
+
+""");
+
+
+
+for (Object appIns : appInstancesList ) {
+int channels = appIns.ginteger_channel_number.value;
+List NvicNode = appIns.hwres_adc_measurement_nvicnode_srcevt.getSolverUri();
+if(  appIns.gcheck_SharedPinA.value || ( appIns.ginteger_channel_number.value >=2 && appIns.gcheck_SharedPinB.value) \
+		||( appIns.ginteger_channel_number.value >=3 && appIns.gcheck_SharedPinC.value) || ( appIns.ginteger_channel_number.value >=4 && appIns.gcheck_SharedPinD.value) \
+		||( appIns.ginteger_channel_number.value >=5 && appIns.gcheck_SharedPinE.value) ||( appIns.ginteger_channel_number.value >=6 && appIns.gcheck_SharedPinF.value) ||( appIns.ginteger_channel_number.value >=7 && appIns.gcheck_SharedPinG.value) ||( appIns.ginteger_channel_number.value >=8 && appIns.gcheck_SharedPinH.value) \
+		||( appIns.ginteger_channel_number.value >=9 && appIns.gcheck_SharedPinI.value) ||( appIns.ginteger_channel_number.value >=10 && appIns.gcheck_SharedPinJ.value) ||( appIns.ginteger_channel_number.value >=11 && appIns.gcheck_SharedPinK.value) ||( appIns.ginteger_channel_number.value >=12 && appIns.gcheck_SharedPinL.value) \
+		||( appIns.ginteger_channel_number.value >=13 && appIns.gcheck_SharedPinM.value) ||( appIns.ginteger_channel_number.value >=14 && appIns.gcheck_SharedPinN.value) ||( appIns.ginteger_channel_number.value >=15 && appIns.gcheck_SharedPinO.value) ||( appIns.ginteger_channel_number.value >=16 && appIns.gcheck_SharedPinP.value) \
+		||( appIns.ginteger_channel_number.value >=17 && appIns.gcheck_SharedPinQ.value) ||( appIns.ginteger_channel_number.value >=18 && appIns.gcheck_SharedPinR.value) ||( appIns.ginteger_channel_number.value >=19 && appIns.gcheck_SharedPinS.value) ||( appIns.ginteger_channel_number.value >=20 && appIns.gcheck_SharedPinT.value) \
+		||( appIns.ginteger_channel_number.value >=21 && appIns.gcheck_SharedPinU.value) ||( appIns.ginteger_channel_number.value >=22 && appIns.gcheck_SharedPinV.value) ||( appIns.ginteger_channel_number.value >=23 && appIns.gcheck_SharedPinW.value) ||( appIns.ginteger_channel_number.value >=24 && appIns.gcheck_SharedPinX.value) \
+		||( appIns.ginteger_channel_number.value >=25 && appIns.gcheck_SharedPinY.value) ||( appIns.ginteger_channel_number.value >=26 && appIns.gcheck_SharedPinZ.value  ))
+{
+out.print("""
+#define ADC_MEASUREMENT_ANALOG_IO_USED
+""")
+}
+List channel_names=[appIns.gstring_CH_Name_1.value, appIns.gstring_CH_Name_2.value,appIns.gstring_CH_Name_3.value,
+	appIns.gstring_CH_Name_4.value,appIns.gstring_CH_Name_5.value,appIns.gstring_CH_Name_6.value,
+	appIns.gstring_CH_Name_7.value,appIns.gstring_CH_Name_8.value,appIns.gstring_CH_Name_9.value,
+	appIns.gstring_CH_Name_10.value,appIns.gstring_CH_Name_11.value,appIns.gstring_CH_Name_12.value,
+	appIns.gstring_CH_Name_13.value,appIns.gstring_CH_Name_14.value,appIns.gstring_CH_Name_15.value,
+	appIns.gstring_CH_Name_16.value,appIns.gstring_CH_Name_17.value,appIns.gstring_CH_Name_18.value,
+	appIns.gstring_CH_Name_19.value,appIns.gstring_CH_Name_20.value,appIns.gstring_CH_Name_21.value,
+	appIns.gstring_CH_Name_22.value,appIns.gstring_CH_Name_23.value,appIns.gstring_CH_Name_24.value,
+	appIns.gstring_CH_Name_25.value,appIns.gstring_CH_Name_26.value,];
+// TODO generate macro for all the channel config stru
+out.print("""
+#define ADC_MEASUREMENT_MAXCHANNELS (${channels}U)
+""");
+if (NvicNode != null)
+{ 
+	if(appIns.gcheck_enable_source_interrupt.value)
+	{
+		out.print("""
+#define ${appIns.gstring_request_source_interrupt_handler.value} IRQ_Hdlr_${NvicNode[7]}
+""");
+	}
+	else if(appIns.gcheck_enable_result_evt.value)
+	{
+		out.print("""
+#define ${appIns.gstring_result_event_interrupt_handler.value} IRQ_Hdlr_${NvicNode[7]}
+""");
+	}
+}
+
+for(i=0;i<channels;i++)
+{
+	out.print("""#define ADC_MEASUREMENT_${channel_names[i]} (ADC_MEASUREMENT_${channel_names[i]}_handle)\n""")
+	if(daveEnv.project.selectedDevice.deviceId.family +daveEnv.project.selectedDevice.deviceId.series != 'XMC11')
+	{
+		group_num = appIns.rarray_hwres_adc_measurement_channels[i+1].getSolverUri()[6];
+		res_reg =  appIns.rarray_hwres_adc_measurement_channels[i+1].getRegValue("","gchctr_resreg").toInteger();
+		out.print("""#define ADC_MEASUREMENT_${channel_names[i]}_RES (VADC_G${group_num}->RES[$res_reg])\n\n""")
+	}
+}
+
+if(appIns.gcheck_enable_source_interrupt.value || appIns.gcheck_enable_result_evt.value )
+{
+	if(daveEnv.project.selectedDevice.deviceId.family == 'XMC4')
+	{
+		out.print("""
+#define ADC_MEASUREMENT_CPU_4X
+""");
+	}
+	else
+	{
+		out.print("""
+#define ADC_MEASUREMENT_CPU_1X
+""");
+	}
+	
+	String nvic_sharing = appIns.hwres_adc_measurement_nvicnode_srcevt.getRegValue("","intcr_insel")
+	if(nvic_sharing != null && nvic_sharing.toInteger() != 0)
+	{
+		out.print("""\n#define ADC_MEASUREMENT_NON_DEFAULT_IRQ_SOURCE_SELECTED (1U)\n""");
+	}
+	
+}
+
+if(daveEnv.project.selectedDevice.deviceId.family +daveEnv.project.selectedDevice.deviceId.series != 'XMC11')
+{
+	out.print("""#define ADC_MEASUREMENT_ICLASS_NUM (${appIns.hwres_adc_measurement_global_iclass.getSolverUri()[6]}U)""")
+}
+else
+{
+	out.print("""#define ADC_MEASUREMENT_ICLASS_NUM (0U)\n""")
+	out.print("""#define ADC_MEASUREMENT_ICLASS_NUM_XMC11 (1U)\n""")
+}
+
+
+out.print("""
+#define ADC_MEASUREMENT_MAJOR_VERSION (${ADC_MEASUREMENT.version.split("\\.")[0]}U) /**< Major version number of ADC_MEASUREMENT APP*/
+#define ADC_MEASUREMENT_MINOR_VERSION (${ADC_MEASUREMENT.version.split("\\.")[1]}U) /**< Minor version number of ADC_MEASUREMENT APP*/
+#define ADC_MEASUREMENT_PATCH_VERSION (${ADC_MEASUREMENT.version.split("\\.")[2]}U) /**< Patch version number of ADC_MEASUREMENT APP*/
+""");
+
+out.print("""
+  
+#endif //ADC_MEASUREMENTCONF_H_
+""")
+}

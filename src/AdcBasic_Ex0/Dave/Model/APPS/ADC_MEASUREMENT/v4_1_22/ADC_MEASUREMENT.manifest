@@ -1,0 +1,1070 @@
+package Model.APPS.ADC_MEASUREMENT.v4_1_22;
+
+/*
+ Copyright (c) 2016, Infineon Technologies AG
+ All rights reserved.
+											
+ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+ following conditions are met:
+																			 
+ Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+ disclaimer.
+  
+ Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+ disclaimer in the documentation and/or other materials provided with the distribution.
+  
+ Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ products derived from this software without specific prior written permission.
+																			 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+																			 
+ To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with
+ Infineon Technologies AG: dave@infineon.com. */
+
+/*************** Revision History **********************************************
+ Version        Date          Description 
+ 4.0.0       16-Feb-2015   Initial version for DAVEv4.<BR>
+ 4.0.1       19-Feb-2015   Added GetResult APIs for XMC1100 devices.<BR>
+ 4.1.2       14-May-2015   1. Optimized the Manifest.<BR>
+                           2. Modified the structure ADC_MEASUREMENT_channel_t to
+                              ADC_MEASUREMENT_CHANNEL_t.<BR>
+ 4.1.4       26-Jun-2015   Added input class resource consumption.<BR>
+ 4.1.6       09-Jul-2015   Documentation updated.<BR>
+ 4.1.7       31-Jul-2015   Updated the APP to support new devices.<BR>
+ 4.1.9       01-Oct-2015   Updated the APP to support the interrupt control in XMC14 .<BR>      
+ 4.1.10      08-Oct-2015   Added support for XMC4700/XMC4800 devices.<BR>
+ 4.1.12      20-Oct-2015   Documentation updated.<BR>
+ 4.1.14      03-Dec-2015   Added support for XMC4300 device. <BR>
+ 4.1.16      09-Feb-2016   Updated the APP for the minimum required ANALOG_IO APP version. <BR>
+ 4.1.18      18-Mar-2016   1. Maximum number of channels for XMC41/42 increased to 9.<BR>
+                           2. Added Post calibration time for XMC1x series in Total conversion Time.<BR>
+                           3. Fixed the ADC_MEASUREMENT_Init() for ANALOG_IO initialization.<BR>
+                           4. For XMC1100 series only: Deprecated the API ADC_MEASUREMENT_GetResult() and ADC_MEASUREMENT_GetDetailedResult().<BR>
+                           5. For XMC1100 series only: Added new API ADC_MEASUREMENT_GetGlobalResult() and ADC_MEASUREMENT_GetGlobalDetailedResult().<BR>
+ 4.1.20      25-Apr-2016   1. Tooltip added for "Enable Continuous Conversion" checkbox.<BR>
+ 4.1.22      18-Aug-2016   Minimum sample time at low frequencies changed to incorporate Errata ADC_AI.H006 and ADC_AI.H007.<BR>                           
+ *******************************************************************************/
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+class  ADC_MEASUREMENT extends ADC_MEASUREMENT_GUI {
+
+	private static final int MAX_CHANNELS = 26
+	
+	/*-------------------------------Begin: ADC_MEASUREMENT property section---------------------------------------*/
+	/**
+	 * APP version
+	 * Format: a string with three digit separated by a dot.
+	 */
+	def version            = '4.1.22'
+
+	/**
+	 * APP categories declaration.
+	 * It is list of strings. Subcategories are separated by slash.
+	 * No limits on number of categories and subcategories depth.
+	 */
+	def categoriesDescription = ["General Purpose/Analog to Digital Conversion"]
+	
+	/**
+	 * Minimum DAVE version required for this APP.
+	 *
+	 * It is string with three digit separated by a dot.
+	 */
+	def minDaveVersion           = '4.0.0'
+
+	/**
+	 * Keywords used by search feature in APPS selection view
+	 *
+	 * It is a list of string.
+	 */
+	def keywords      = ['ADC_MEASUREMENT', 'VADC', 'Background', 'Request Source', 'measurement', "all"]
+
+	/**
+	 * softwareIDs is used to declare which devices are compatible with this APP.
+	 * It is a map with key a string containing a pattern that shall match the SW id of
+	 * the device and as value the minimal version of the APP.
+	 */
+	def softwareIDs       = ["XMC1.[1,2,3,4].*.*.*":"1.0.0", "XMC4.[1,2,3,4,5,7,8].*.*.*":"1.0.0"]
+
+	/**
+	 * Singleton property:
+	 * When it is true the APP can be instantiated only once.
+	 */
+	def singleton     = true
+	
+	/**
+	 * initProvider property
+	 * It shall be true to add a call to <AppName>_Init()
+	 */
+	def initProvider  = true
+	
+	/**
+	 * Deprecated app
+	 * Set it to true to indicate that the APP shall be not used for new projects.
+	 */
+	def deprecated    = false
+	
+	/**
+	 * Shareable property.
+	 * It shall be true to allows multiple APPS to require the same instance of this APP.
+	 */
+	def sharable      = false
+
+	/**
+	 *  APP function description.
+	 */
+	def description = "Incorporates analog to digital conversion for the required measurements."
+
+	/*-------------------------------End: ADC_MEASUREMENT property section---------------------------------------*/
+
+	/*-------------------------------Begin: User variable section---------------------------------------*/
+	MVirtualResourceGroup hwres_adc_measurement_background
+	MVirtualResourceGroup hwres_adc_measurement_global_iclass
+	MVirtualResourceGroup hwres_adc_measurement_global_iclass_xmc11
+
+	MRequiredApp appres_adc_measurement_global_adc
+	MRequiredApp appres_adc_measurement_cpu
+	MRequiredApp appres_analog_io_channel_a
+	MRequiredApp appres_analog_io_channel_b
+	MRequiredApp appres_analog_io_channel_c
+	MRequiredApp appres_analog_io_channel_d
+	MRequiredApp appres_analog_io_channel_e
+	MRequiredApp appres_analog_io_channel_f
+	MRequiredApp appres_analog_io_channel_g
+	MRequiredApp appres_analog_io_channel_h
+	MRequiredApp appres_analog_io_channel_i
+	MRequiredApp appres_analog_io_channel_j
+	MRequiredApp appres_analog_io_channel_k
+	MRequiredApp appres_analog_io_channel_l
+	MRequiredApp appres_analog_io_channel_m
+	MRequiredApp appres_analog_io_channel_n
+	MRequiredApp appres_analog_io_channel_o
+	MRequiredApp appres_analog_io_channel_p
+	MRequiredApp appres_analog_io_channel_q
+	MRequiredApp appres_analog_io_channel_r
+	MRequiredApp appres_analog_io_channel_s
+	MRequiredApp appres_analog_io_channel_t
+	MRequiredApp appres_analog_io_channel_u
+	MRequiredApp appres_analog_io_channel_v
+	MRequiredApp appres_analog_io_channel_w
+	MRequiredApp appres_analog_io_channel_x
+	MRequiredApp appres_analog_io_channel_y
+	MRequiredApp appres_analog_io_channel_z
+
+	RArray<MVirtualResourceGroup> rarray_hwres_adc_measurement_channel_pin = RArray(27);
+	RArray<MVirtualResourceGroup> rarray_hwres_adc_measurement_pin_pad = RArray(27);
+
+	RArray<MVirtualResourceGroup> rarray_hwres_adc_measurement_channels = RArray(27);
+
+	MVirtualResourceGroup hwres_adc_measurement_vadc_global_result
+
+	RArray<MVirtualResourceGroup> rarray_hwres_adc_measurement_result_reg = RArray(27);
+
+	RArray<MVirtualSignal> rarray_vs_adc_measurement_channels = RArray(27);
+
+	MVirtualSignal vs_adc_measurement_channel_a
+	MVirtualSignal vs_adc_measurement_channel_b
+	MVirtualSignal vs_adc_measurement_channel_c
+	MVirtualSignal vs_adc_measurement_channel_d
+	MVirtualSignal vs_adc_measurement_channel_e
+	MVirtualSignal vs_adc_measurement_channel_f
+	MVirtualSignal vs_adc_measurement_channel_g
+	MVirtualSignal vs_adc_measurement_channel_h
+	MVirtualSignal vs_adc_measurement_channel_i
+	MVirtualSignal vs_adc_measurement_channel_j
+	MVirtualSignal vs_adc_measurement_channel_k
+	MVirtualSignal vs_adc_measurement_channel_l
+	MVirtualSignal vs_adc_measurement_channel_m
+	MVirtualSignal vs_adc_measurement_channel_n
+	MVirtualSignal vs_adc_measurement_channel_o
+	MVirtualSignal vs_adc_measurement_channel_p
+	MVirtualSignal vs_adc_measurement_channel_q
+	MVirtualSignal vs_adc_measurement_channel_r
+	MVirtualSignal vs_adc_measurement_channel_s
+	MVirtualSignal vs_adc_measurement_channel_t
+	MVirtualSignal vs_adc_measurement_channel_u
+	MVirtualSignal vs_adc_measurement_channel_v
+	MVirtualSignal vs_adc_measurement_channel_w
+	MVirtualSignal vs_adc_measurement_channel_x
+	MVirtualSignal vs_adc_measurement_channel_y
+	MVirtualSignal vs_adc_measurement_channel_z
+
+	RArray<MVirtualSignal> rarray_vs_adc_measurement_channel_pin = RArray(27);
+
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_a;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_b;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_c;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_d;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_e;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_f;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_g;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_h;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_i;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_j;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_k;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_l;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_m;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_n;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_o;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_p;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_q;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_r;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_s;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_t;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_u;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_v;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_w;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_x;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_y;
+	MVirtualSignal vs_adc_measurement_channel_pin_signal_z;
+
+	RArray<MVirtualSignal> rarray_vs_adc_measurement_pin_pad_signal = RArray(27);
+
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_a;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_b;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_c;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_d;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_e;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_f;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_g;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_h;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_i;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_j;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_k;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_l;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_m;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_n;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_o;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_p;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_q;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_r;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_s;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_t;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_u;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_v;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_w;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_x;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_y;
+	MVirtualSignal vs_adc_measurement_pin_pad_signal_z;
+
+	MVirtualSignalRA vs_adc_measurement_channel_a_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_b_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_c_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_d_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_e_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_f_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_g_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_h_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_i_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_j_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_k_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_l_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_m_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_n_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_o_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_p_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_q_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_r_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_s_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_t_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_u_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_v_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_w_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_x_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_y_analog_io_pin
+	MVirtualSignalRA vs_adc_measurement_channel_z_analog_io_pin
+
+	MVirtualSignalRA vs_adc_measurement_global_adc_global_signal
+
+	RArray<MVirtualSignal> rarray_vs_adc_measurement_result = RArray(27);
+
+	MVirtualSignal vs_adc_measurement_channel_a_result
+	MVirtualSignal vs_adc_measurement_channel_b_result
+	MVirtualSignal vs_adc_measurement_channel_c_result
+	MVirtualSignal vs_adc_measurement_channel_d_result
+	MVirtualSignal vs_adc_measurement_channel_e_result
+	MVirtualSignal vs_adc_measurement_channel_f_result
+	MVirtualSignal vs_adc_measurement_channel_g_result
+	MVirtualSignal vs_adc_measurement_channel_h_result
+	MVirtualSignal vs_adc_measurement_channel_i_result
+	MVirtualSignal vs_adc_measurement_channel_j_result
+	MVirtualSignal vs_adc_measurement_channel_k_result
+	MVirtualSignal vs_adc_measurement_channel_l_result
+	MVirtualSignal vs_adc_measurement_channel_m_result
+	MVirtualSignal vs_adc_measurement_channel_n_result
+	MVirtualSignal vs_adc_measurement_channel_o_result
+	MVirtualSignal vs_adc_measurement_channel_p_result
+	MVirtualSignal vs_adc_measurement_channel_q_result
+	MVirtualSignal vs_adc_measurement_channel_r_result
+	MVirtualSignal vs_adc_measurement_channel_s_result
+	MVirtualSignal vs_adc_measurement_channel_t_result
+	MVirtualSignal vs_adc_measurement_channel_u_result
+	MVirtualSignal vs_adc_measurement_channel_v_result
+	MVirtualSignal vs_adc_measurement_channel_w_result
+	MVirtualSignal vs_adc_measurement_channel_x_result
+	MVirtualSignal vs_adc_measurement_channel_y_result
+	MVirtualSignal vs_adc_measurement_channel_z_result
+
+	RArray<MVirtualSignal> rarray_vs_adc_measurement_ch_select = RArray(27);
+
+	MVirtualSignal vs_adc_measurement_channel_a_select
+	MVirtualSignal vs_adc_measurement_channel_b_select
+	MVirtualSignal vs_adc_measurement_channel_c_select
+	MVirtualSignal vs_adc_measurement_channel_d_select
+	MVirtualSignal vs_adc_measurement_channel_e_select
+	MVirtualSignal vs_adc_measurement_channel_f_select
+	MVirtualSignal vs_adc_measurement_channel_g_select
+	MVirtualSignal vs_adc_measurement_channel_h_select
+	MVirtualSignal vs_adc_measurement_channel_i_select
+	MVirtualSignal vs_adc_measurement_channel_j_select
+	MVirtualSignal vs_adc_measurement_channel_k_select
+	MVirtualSignal vs_adc_measurement_channel_l_select
+	MVirtualSignal vs_adc_measurement_channel_m_select
+	MVirtualSignal vs_adc_measurement_channel_n_select
+	MVirtualSignal vs_adc_measurement_channel_o_select
+	MVirtualSignal vs_adc_measurement_channel_p_select
+	MVirtualSignal vs_adc_measurement_channel_q_select
+	MVirtualSignal vs_adc_measurement_channel_r_select
+	MVirtualSignal vs_adc_measurement_channel_s_select
+	MVirtualSignal vs_adc_measurement_channel_t_select
+	MVirtualSignal vs_adc_measurement_channel_u_select
+	MVirtualSignal vs_adc_measurement_channel_v_select
+	MVirtualSignal vs_adc_measurement_channel_w_select
+	MVirtualSignal vs_adc_measurement_channel_x_select
+	MVirtualSignal vs_adc_measurement_channel_y_select
+	MVirtualSignal vs_adc_measurement_channel_z_select
+
+	RArray<MVirtualSignal> rarray_vs_result_select = RArray(27);
+
+	MVirtualSignal vs_adc_measurement_channel_a_result_select
+	MVirtualSignal vs_adc_measurement_channel_b_result_select
+	MVirtualSignal vs_adc_measurement_channel_c_result_select
+	MVirtualSignal vs_adc_measurement_channel_d_result_select
+	MVirtualSignal vs_adc_measurement_channel_e_result_select
+	MVirtualSignal vs_adc_measurement_channel_f_result_select
+	MVirtualSignal vs_adc_measurement_channel_g_result_select
+	MVirtualSignal vs_adc_measurement_channel_h_result_select
+	MVirtualSignal vs_adc_measurement_channel_i_result_select
+	MVirtualSignal vs_adc_measurement_channel_j_result_select
+	MVirtualSignal vs_adc_measurement_channel_k_result_select
+	MVirtualSignal vs_adc_measurement_channel_l_result_select
+	MVirtualSignal vs_adc_measurement_channel_m_result_select
+	MVirtualSignal vs_adc_measurement_channel_n_result_select
+	MVirtualSignal vs_adc_measurement_channel_o_result_select
+	MVirtualSignal vs_adc_measurement_channel_p_result_select
+	MVirtualSignal vs_adc_measurement_channel_q_result_select
+	MVirtualSignal vs_adc_measurement_channel_r_result_select
+	MVirtualSignal vs_adc_measurement_channel_s_result_select
+	MVirtualSignal vs_adc_measurement_channel_t_result_select
+	MVirtualSignal vs_adc_measurement_channel_u_result_select
+	MVirtualSignal vs_adc_measurement_channel_v_result_select
+	MVirtualSignal vs_adc_measurement_channel_w_result_select
+	MVirtualSignal vs_adc_measurement_channel_x_result_select
+	MVirtualSignal vs_adc_measurement_channel_y_result_select
+	MVirtualSignal vs_adc_measurement_channel_z_result_select
+
+	MVirtualSignal vs_adc_measurement_global_res_event
+	MVirtualSignal vs_adc_measurement_channel_a_result_event
+	MVirtualSignal vs_adc_measurement_channel_b_result_event
+	MVirtualSignal vs_adc_measurement_channel_c_result_event
+	MVirtualSignal vs_adc_measurement_channel_d_result_event
+	MVirtualSignal vs_adc_measurement_channel_e_result_event
+	MVirtualSignal vs_adc_measurement_channel_f_result_event
+	MVirtualSignal vs_adc_measurement_channel_g_result_event
+	MVirtualSignal vs_adc_measurement_channel_h_result_event
+	MVirtualSignal vs_adc_measurement_channel_i_result_event
+	MVirtualSignal vs_adc_measurement_channel_j_result_event
+	MVirtualSignal vs_adc_measurement_channel_k_result_event
+	MVirtualSignal vs_adc_measurement_channel_l_result_event
+	MVirtualSignal vs_adc_measurement_channel_m_result_event
+	MVirtualSignal vs_adc_measurement_channel_n_result_event
+	MVirtualSignal vs_adc_measurement_channel_o_result_event
+	MVirtualSignal vs_adc_measurement_channel_p_result_event
+	MVirtualSignal vs_adc_measurement_channel_q_result_event
+	MVirtualSignal vs_adc_measurement_channel_r_result_event
+	MVirtualSignal vs_adc_measurement_channel_s_result_event
+	MVirtualSignal vs_adc_measurement_channel_t_result_event
+	MVirtualSignal vs_adc_measurement_channel_u_result_event
+	MVirtualSignal vs_adc_measurement_channel_v_result_event
+	MVirtualSignal vs_adc_measurement_channel_w_result_event
+	MVirtualSignal vs_adc_measurement_channel_x_result_event
+	MVirtualSignal vs_adc_measurement_channel_y_result_event
+	MVirtualSignal vs_adc_measurement_channel_z_result_event
+
+	MVirtualSignal vs_adc_measurement_src_event
+	MVirtualSignal vs_adc_measurement_bgreqtrsel
+	MVirtualSignal vs_adc_measurement_bgreqgtsel
+	MVirtualSignal vs_adc_measurement_global
+
+	MVirtualResourceGroup hwres_adc_measurement_nvicnode_srcevt
+
+	MVirtualSignal vs_adc_measurement_signal_src
+
+	RArray<GString> rarray_adc_measurement_channel_names = RArray(27);
+	RArray<GString> rarray_adc_measurement_shared_pins = RArray(27);
+	RArray<GString> rarray_adc_measurement_enable_res_evt = RArray(27);
+
+	GFloat gfloat_adc_measurement_tadci        	= GFloat(widgetName:"gfloat_adc_measurement_tadci")
+	GFloat gfloat_adc_measurement_tadc         	= GFloat(widgetName:"gfloat_adc_measurement_tadc")
+	GFloat gfloat_peripherial_clk_freq 	        = GFloat(widgetName:"gfloat_peripherial_clk_freq")
+	GInteger gint_adc_measurement_stc0       	= GInteger(widgetName:"gint_adc_measurement_stc0")
+	GInteger gint_adc_measurement_temp_dm    	= GInteger(widgetName:"gint_adc_measurement_temp_dm")
+	GInteger gint_adc_measurement_temp_pc    	= GInteger(widgetName:"gint_adc_measurement_temp_pc")
+	GFloat gfloat_act_analog_clk 		        = GFloat(widgetName:"gfloat_act_analog_clk")
+	GInteger gint_adc_measurement_conv_bits 	= GInteger(widgetName:"gint_adc_measurement_conv_bits")
+	GString gstring_global_instance  	        = GString(widgetName:"gstring_global_instance")
+	GInteger gint_adc_measurement_sst 			= GInteger(widgetName:"gint_adc_measurement_sst")
+	GInteger gint_adc_measurement_divs			= GInteger(widgetName:"gint_adc_measurement_divs")
+	GFloat gfloat_adc_measurement_tsh 			= GFloat(widgetName:"gfloat_adc_measurement_tsh")
+
+
+	/*-------------------------------End: User variable section---------------------------------------*/
+
+	public ADC_MEASUREMENT(DaveEnv daveEnv)
+	{
+
+		int i; /* needed for all indexing options*/
+		List conv_bits_array=[12, 10, 8, 14]
+		List valid_port_list = [];
+		String fn_regexp = ~/^[^\d\W]\w*\Z/
+		List alphabets = ['0', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+		/* Read the family of Micro-Controller*/
+		String family = daveEnv.project.selectedDevice.deviceId.family
+		String series = daveEnv.project.selectedDevice.deviceId.series
+
+		/* Rarray initialization*/
+/*		rarray_hwres_adc_measurement_channel_pin = RArray(27);
+		rarray_hwres_adc_measurement_pin_pad  = RArray(27);
+		rarray_hwres_adc_measurement_channels = RArray(27);
+		rarray_hwres_adc_measurement_result_reg = RArray(27);
+		rarray_vs_adc_measurement_channels = RArray(27);
+		rarray_vs_adc_measurement_channel_pin = RArray(27);
+		rarray_vs_adc_measurement_pin_pad_signal = RArray(27);
+		rarray_vs_adc_measurement_result = RArray(27);
+		rarray_vs_adc_measurement_ch_select = RArray(27);
+		rarray_vs_result_select = RArray(27);
+		rarray_solver_port_no = RArray(27);
+		rarray_adc_measurement_channel_names = RArray(27);
+		rarray_adc_measurement_shared_pins = RArray(27);
+		rarray_adc_measurement_enable_res_evt = RArray(27);
+*/
+		
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			/* populate the channel names */
+			rarray_adc_measurement_channel_names[i] = this."gstring_CH_Name_${i}"
+			
+			/* populate the shared pin gcheck box  */
+			rarray_adc_measurement_shared_pins[i] = this."gcheck_SharedPin${alphabets[i].toUpperCase()}"
+			
+			/* populate the result event check box*/
+			rarray_adc_measurement_enable_res_evt[i] = this."gcheck_enable_res_evt_ch${alphabets[i].toUpperCase()}"
+		}
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ---------------------------------------- App consumption Block ------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+
+		/* Required apps for the calculations */
+		appres_adc_measurement_global_adc=MRequiredApp("GLOBAL_ADC","Global",RSHARABLE,"4.0.16")
+
+		/* Consume the CPU APP if the Interrupt is enabled*/
+		if(family =='XMC4')
+		{
+			appres_adc_measurement_cpu = MRequiredApp("CPU_CTRL_XMC4","CPU",RSHARABLE,"4.0.2",MF({gcheck_enable_source_interrupt.value },Boolean))
+		}
+		else
+		{
+			appres_adc_measurement_cpu = MRequiredApp("CPU_CTRL_XMC1","CPU",RSHARABLE,"4.0.2",MF({gcheck_enable_source_interrupt.value || gcheck_enable_result_evt.value  },Boolean))
+		}
+
+		/* Consume the ANALOG IO if the Expose Pin in the UI is enabled*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index = i;
+			this."appres_analog_io_channel_${alphabets[index]}" = MRequiredApp("ANALOG_IO","Channel_${alphabets[index]}",RSHARABLE,"4.0.8",
+					MF({
+						if (ginteger_channel_number.value < index)
+							false
+						else
+							rarray_adc_measurement_shared_pins[index].value
+					},Boolean))
+		}
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* -------------------------------- Hardware resource consumption block ------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+
+		/* Consume background request source */
+		hwres_adc_measurement_background =  MVirtualResourceGroup("Background", ["peripheral", "vadc", "*", "backgnd"])
+		
+		if(family+series == 'XMC11')
+		{
+			hwres_adc_measurement_global_iclass_xmc11 =  MVirtualResourceGroup("Background class group 0", ["peripheral", "vadc", "*", "class", "0"])
+			hwres_adc_measurement_global_iclass =  MVirtualResourceGroup("Background class group 1", ["peripheral", "vadc", "*", "class", "1"])
+		}
+		else
+		{
+			hwres_adc_measurement_global_iclass =  MVirtualResourceGroup("Background class", ["peripheral", "vadc", "*", "class", "*"])
+		}
+
+		/* Consume NVIC resource group for Background request source interrupt */
+		hwres_adc_measurement_nvicnode_srcevt =  MVirtualResourceGroup(MF({if(gcheck_enable_result_evt.value) {"Global Result Interrupt" } else { "Source Event Interrupt"} },String),
+			["peripheral", "cpu", "0", "nvic", "interrupt", "*"],
+			MF({gcheck_enable_source_interrupt.value || gcheck_enable_result_evt.value},Boolean))
+
+		/* Consume analog port pins and assign to channels
+		 * do not consume the pad resource if the threshold number of channels is not met and if sharing is enabled
+		 */
+
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			int index2 =i;
+			rarray_hwres_adc_measurement_channel_pin[i] =  MVirtualResourceGroup(MF({rarray_adc_measurement_channel_names[index].value + "_pin"},String),
+			["port", "p", "*", "pad", "*"],
+			MF({if(ginteger_channel_number.value <index){ false } else { !rarray_adc_measurement_shared_pins[index].value} }, Boolean))
+		}
+
+		/* Consume channel corresponding to the pin available form the Device descriptions*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int localI = i
+			rarray_hwres_adc_measurement_channels[i] = MVirtualResourceGroup(MF({rarray_adc_measurement_channel_names[localI].value},String),["peripheral", "vadc", "0", "group", "*", "ch", "*"],
+			MF({if (ginteger_channel_number.value <localI) false else true}, Boolean))
+		}
+
+		/* Consume result registers for allocated channels*/
+		if(family+series !="XMC11")
+		{
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index =i
+				rarray_hwres_adc_measurement_result_reg[i] = MVirtualResourceGroup(MF({rarray_adc_measurement_channel_names[index].value + " Result"},String),["peripheral", "vadc", "0", "group", "*", "*", "*"],
+				MF({if (ginteger_channel_number.value <index) false else true}, Boolean))
+			}
+
+		}
+
+		/* if XMC1100 is selected then global result event is generated.*/
+		if(family+series =="XMC11")
+		{
+			hwres_adc_measurement_vadc_global_result = MVirtualResourceGroup("Global Result Register",["peripheral", "vadc", "*", "global_result"],true)
+		}
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ------------------------------------------- APP Configuration -------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ---------- TAB : Background Scan and Class Configuration related configuration --------------------- */
+
+		/***********Class-0/1 Actual sample time and Conversion time calculation for conversion mode**************************************/
+
+		/* This holds the clock frequency. this is got from the GLOBAL_ADC app.*/
+		gfloat_peripherial_clk_freq.value         = MF({appres_adc_measurement_global_adc.getVal(["gfloat_peripherial_clk_freq", "value"])}, Float)
+
+		/* this holds the Actual Analog clock frequency (fADCI). This is got from the GLOBAL_ADC app. */
+		gfloat_act_analog_clk.value    = MF({appres_adc_measurement_global_adc.getVal(["gfloat_act_analog_clk", "value"])}, Float)
+
+		/*ActDigClk.value        = MF({appres_adc_measurement_global_adc.getVal(["gfloat_ActDigClk", "value"])}, Float)*/
+
+		/* Calculating the time period of the analog clock*/
+		gfloat_adc_measurement_tadci.value = MF({1000/gfloat_act_analog_clk.value},Float)
+
+		gfloat_desired_sampling_time.maxValue = MF({258*gfloat_adc_measurement_tadci.value},Float)
+		if(family != "XMC1")
+		{
+			gfloat_desired_sampling_time.minValue = MF({2*gfloat_adc_measurement_tadci.value},Float)
+		}
+		else
+		{
+			gfloat_desired_sampling_time.minValue = MF({
+				Float divs_min_value = (Float)(4*(1000/32)*(gint_adc_measurement_divs.value +1)).toDouble()
+				Float diva_min_value = 2*gfloat_adc_measurement_tadci.value				
+			(divs_min_value>diva_min_value?divs_min_value:diva_min_value)},Float)
+		}
+
+		/*Sample time coding value. This will add additional sample time by dividing the clock */
+		gint_adc_measurement_stc0.value = MF({
+			Float arg = ((gfloat_desired_sampling_time.value/gfloat_adc_measurement_tadci.value)-2)
+			if(arg < 0) {0}
+			else if (arg > 256) {31}
+			else if ((arg > 16) && (arg <= 256) ) {(int)((Math.round(arg/16)) + 15 )}
+			else {(int)(Math.round(arg))}
+		},Integer)
+
+
+		/*This will calculate the actual sample time that is possible*/
+		gfloat_actual_sampling_time.value = MF({
+			Float arg = ((gfloat_desired_sampling_time.value/gfloat_adc_measurement_tadci.value)-2)
+			if(arg < 0) {arg=0}
+			else if (arg > 256) {arg=256}
+			else if ((arg > 16) && (arg <= 256) ) {arg=((Math.round(arg/16))*16)}
+			else { arg=Math.round(arg)}
+			((2 +arg)*gfloat_adc_measurement_tadci.value) /*This is actual sampling time for class0 standard conversion mode*/
+		},Float)
+
+		/*Get the result width N needed for normal conversion.*/
+		gint_adc_measurement_conv_bits.value = MF({conv_bits_array[(gcombo_conv_mode.options.indexOf(gcombo_conv_mode.value))]},Integer)
+
+		if(family =='XMC4')
+		{
+			
+			if((family+series == "XMC48") || (family+series == "XMC47") || (family+series == "XMC43"))
+			{
+				gfloat_desired_sampling_time.value = 70;
+			}
+			else if((family+series == "XMC42") || (family+series == "XMC41") )
+			{
+				gfloat_desired_sampling_time.value = 75;
+			}
+			else
+			{
+				gfloat_desired_sampling_time.value = 67;
+			}
+			/*Calculating the time period of the clock*/
+			gfloat_adc_measurement_tadc.value  = MF({((2000)/gfloat_peripherial_clk_freq.value)},Float)
+
+			/*
+			 * The conversion time is the sum of sample time, conversion steps, and synchronization.
+			 * It can be computed with the following formulas:
+			 * Standard conversions: tCN = (2 + STC + N + DM + PC) × tADCI + 2 × tADC
+			 * Fast compare mode: tCN = (2 + STC + 2) × tADCI + 2 × tADC
+			 */
+			gint_adc_measurement_temp_pc.value = 2;
+			
+			gFloat_conversion_Time.value = MF({
+				Integer arg
+				if(gint_adc_measurement_stc0.value > 30) {arg=256}
+				else if (gint_adc_measurement_stc0.value < 0) {arg=0}
+				else if ((gint_adc_measurement_stc0.value > 16) && (gint_adc_measurement_stc0.value < 31)) { arg= 16+(gint_adc_measurement_stc0.value-16)*16 }
+				else {arg=gint_adc_measurement_stc0.value}
+
+				if (gcombo_conv_mode.value == "10 Bit Fast Conversion") {
+					((2+arg+2)*gfloat_adc_measurement_tadci.value + gfloat_adc_measurement_tadc.value)  /*This is standard conversion time for class0 in fast compare mode*/
+				} else {
+					((2+arg+gint_adc_measurement_conv_bits.value+gint_adc_measurement_temp_dm.value+gint_adc_measurement_temp_pc.value)*gfloat_adc_measurement_tadci.value + gfloat_adc_measurement_tadc.value) /*This is standard conversion time for class0*/
+				}
+			},Float)
+
+		}
+		else
+		{
+			/* For Accelerated Mode in XMC1X devices*/
+			gfloat_desired_sampling_time.value = 125;
+			/* fconv for XMC1x is fixed at 32MHz*/
+			Float fconv = 32.0
+
+			/* getting tadc value in nsec from the clk freq */
+			gfloat_adc_measurement_tadc.value = MF({((1000)/gfloat_peripherial_clk_freq.value)},Float)
+
+			gint_adc_measurement_divs.value = MF({appres_adc_measurement_global_adc.getVal(["gint_global_adc_divs", "value"])},Integer)
+
+			/* Converter clock time period using SHSCFG value */
+			gfloat_adc_measurement_tsh.value = MF({ (((gint_adc_measurement_divs.value+1)*(1000))/fconv)},Float)
+
+			/*
+			 * conversion time for accelerated mode is given by this formula
+			 * tCN = (SST + 5) × tADC + (N + 10) × tSH + (4 × tSH)2)
+			 * new conversion formula
+			 * tCN = (2+ STC) * tADCI +(4 * tSH)+ (N+ 8) * tSH +(5 * tADC)
+			 */
+			gFloat_conversion_Time.value = MF({
+				if (gcombo_conv_mode.value == "10 Bit Fast Conversion") {
+					(2*gfloat_adc_measurement_tadci.value) + gfloat_actual_sampling_time.value
+				} else {
+					(gfloat_actual_sampling_time.value + ((12 + gint_adc_measurement_conv_bits.value ) * gfloat_adc_measurement_tsh.value) + (5 * gfloat_adc_measurement_tadc.value) + (12 * gfloat_adc_measurement_tsh.value))
+				}
+			},Float)
+		}
+
+		gfloat_actual_sampling_time.maxValue = MF({gfloat_desired_sampling_time.maxValue},Float)
+
+
+		/**************** End of Sample time and Conversion time calculation for conversion mode***********************************/
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ------------------------------------------- APP Configuration -------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* -------------------- TAB : Measurements ------------------------------ ----------------------------- */
+
+		/* Dynamically change the ADC Channel table allocation visibility property on user requested channel count*/
+		gstring_CH_Name_1.visible    = true
+		gcheck_SharedPinA.visible    = true
+		
+		for(i=2;i<=MAX_CHANNELS;i++)
+		{
+			int index = i;
+			rarray_adc_measurement_channel_names[i].visible =  MF({ if (ginteger_channel_number.value < index) false else true},Boolean);
+
+			rarray_adc_measurement_shared_pins[i].visible =  MF({ if (ginteger_channel_number.value < index)  false else true},Boolean)
+
+			if(family + series == "XMC11")
+			{
+				glabel_result_evt_label1.visible = false
+				
+				rarray_adc_measurement_enable_res_evt[i].visible = false
+			}
+			else /* specific result events can be used for devices other than xmc11*/
+			{
+				/*Enable the Gcheck for conditional consumption of ANALOG_IO app*/
+				
+				rarray_adc_measurement_enable_res_evt[i].visible = MF({ if (ginteger_channel_number.value < index)  false else true},Boolean)
+			}
+
+		}
+		
+		if(family + series == "XMC11")
+		{
+			rarray_adc_measurement_enable_res_evt[1].visible = false
+		}
+		
+		/* To set the max number of channels that can be consumed*/
+		switch(family + series)
+		{
+			case "XMC11":
+				ginteger_channel_number.maxValue= 12
+				break;
+			case "XMC12":
+				ginteger_channel_number.maxValue= 12
+				break;
+			case "XMC13":
+				ginteger_channel_number.maxValue= 12
+				break;
+			case "XMC14":
+				ginteger_channel_number.maxValue= 16
+				break;
+			case "XMC41":
+				ginteger_channel_number.maxValue= 9
+				break;
+			case "XMC42":
+				ginteger_channel_number.maxValue= 9
+				break;
+			case "XMC43":
+				ginteger_channel_number.maxValue= 14
+				break;
+			case "XMC44":
+				ginteger_channel_number.maxValue= 18
+				break;
+			case "XMC45":
+				ginteger_channel_number.maxValue= 26
+				break;
+			case "XMC47":
+				ginteger_channel_number.maxValue= 26
+				break;
+			case "XMC48":
+				ginteger_channel_number.maxValue= 26
+				break;
+			default:
+				ginteger_channel_number.maxValue= 12
+				break;
+		}
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ------------------------------------------- APP Configuration -------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* -------------------- TAB : Measurements (set -2 )------------------------------ ----------------------------- */
+		gtab_ChannelConfiguration2.visible = MF({ginteger_channel_number.value>13},Boolean)
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ------------------------------------------- APP Configuration -------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* -------------------- TAB : Interrupt Configuration ------------------------------------------------- */
+
+		/* Disable the Background request source intr for XMC1100*/
+		if(family + series == "XMC11")
+		{
+			gtab_RequestSourceInterruptConfiguration.visible = false;
+			ginterruptprio_backgnd_rs_intr.visible = false;
+		}
+		else
+		{ /* Disable the  global result event isr*/
+			gtab_GlobalResultInterruptConfiguration.visible = false;
+			ginterruptprio_result_intr.visible = false;
+		}
+
+		if(family == 'XMC1')
+		{
+			/* visibility of the sub priority is removed*/
+			ginterruptprio_backgnd_rs_intr.subPriorityVisible=false;
+			ginterruptprio_backgnd_rs_intr.priorityValue = 3;
+		}
+		else
+		{
+			ginterruptprio_backgnd_rs_intr.priorityValue = 63;
+		}
+		/* Enable these widgets if the interrupt is requested*/
+		ginterruptprio_backgnd_rs_intr.enabled = MF({gcheck_enable_source_interrupt.value},Boolean)
+		gstring_request_source_interrupt_handler.enabled = MF({gcheck_enable_source_interrupt.value},Boolean)
+
+		/* Read the max priority from the CPU APP*/
+		ginterruptprio_backgnd_rs_intr.maxPriority =
+				MF({if(gcheck_enable_source_interrupt.value){appres_adc_measurement_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"])}else 63},Integer)
+
+		if(family != 'XMC1')
+		{
+			/* Read the max priority from the CPU APP for the global result interrupt */
+			ginterruptprio_backgnd_rs_intr.maxSubPriority =
+					MF({if(gcheck_enable_source_interrupt.value){appres_adc_measurement_cpu.getVal(["gint_maxInterruptSubPriority", "value"])}else 0},Integer)
+		}
+		
+		/* Error is issued when a illegal char is inserted in the interrupt handler name*/
+		gmessage_background_handler.visible = MF({
+			Matcher matcher = (gstring_request_source_interrupt_handler.value =~ fn_regexp)
+			Boolean ExpressionMatch = !matcher.matches()
+			return ExpressionMatch
+		}, Boolean)
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ------------------------------------------- APP Configuration -------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* -------------------- TAB : Interrupt Configuration (for XMC11) ------------------------------------- */
+
+		/* Enable the global result intr for XMC1100*/
+		if(family + series == "XMC11")
+		{
+			gtab_GlobalResultInterruptConfiguration.visible = true;
+
+			ginterruptprio_result_intr.enabled = MF({gcheck_enable_result_evt.value},Boolean)
+			gstring_result_event_interrupt_handler.enabled = MF({gcheck_enable_result_evt.value},Boolean)
+
+			/* Read the max priority from the CPU APP for the global result interrupt */
+			ginterruptprio_result_intr.maxPriority =
+					MF({if(gcheck_enable_result_evt.value){appres_adc_measurement_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"])}else 3},Integer)
+
+		}
+		/* Error is issued when a illegal char is inserted in the interrupt handler name*/
+		gmessage_result_handler.visible = MF({
+			Matcher matcher = (gstring_result_event_interrupt_handler.value =~ fn_regexp)
+			Boolean ExpressionMatch = !matcher.matches()
+			return ExpressionMatch
+		}, Boolean)
+
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- APP IO Signals ------------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+
+		if(family+series =="XMC11")
+		{ /* for XMC11 result event signal*/
+			vs_adc_measurement_global_res_event = MVirtualSignal(hwres_adc_measurement_vadc_global_result,"event_result","rev0",true,true);
+		}
+
+
+		/* assign the virtual resource group to virtual signal along with the signal */
+		vs_adc_measurement_signal_src =  MVirtualSignal(hwres_adc_measurement_nvicnode_srcevt, "sr_interrupt_signal", "signal_in",
+				MF({gcheck_enable_source_interrupt.value || gcheck_enable_result_evt.value},Boolean), false)
+		
+		if(family+series != "XMC11")
+		{
+			/*create a virtual signal for background request source*/
+			vs_adc_measurement_src_event   = MVirtualSignal(hwres_adc_measurement_background,"event_background_source",  "sev0",  true ,true)
+		}
+		/*create a virtual signal for background request source trigger selection*/
+		vs_adc_measurement_bgreqtrsel = MVirtualSignal(hwres_adc_measurement_background,"trigger_input", "bgreqtrsel",  true ,true)
+		
+		/*create a virtual signal for background request source gating selection*/
+		vs_adc_measurement_bgreqgtsel = MVirtualSignal(hwres_adc_measurement_background,"gating_input", "bgreqgtsel",  true ,true)
+		
+		/*create a virtual signal for background request source connection to global*/
+		vs_adc_measurement_global     = MVirtualSignal(hwres_adc_measurement_background,"background_connection_to_global_signal",  "global_signal",  true ,true)
+		
+		/*create a virtual signal for the global_signal from GLOBAL_ADC APP*/
+		vs_adc_measurement_global_adc_global_signal = MVirtualSignalRA(appres_adc_measurement_global_adc,"vs_global_adc_global")
+
+
+
+		/* Consume Group specific result Event select virtual signal */
+		if(family+series !="XMC11")
+		{
+			/* not for XMC1100 */
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index = i;
+				this."vs_adc_measurement_channel_${alphabets[index]}_result_event"  = MVirtualSignal(rarray_hwres_adc_measurement_result_reg[index], MF({"event_result_" +rarray_adc_measurement_channel_names[index].value},String), "rev",
+				MF({
+					if (ginteger_channel_number.value < index)
+						false
+					else
+						rarray_adc_measurement_enable_res_evt[index].value
+				},Boolean))
+			}
+		}
+
+
+
+		/* Consume Group specific channel virtual signal*/
+
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			rarray_vs_adc_measurement_channels[i] =  MVirtualSignal(rarray_hwres_adc_measurement_channels[index],
+					MF({rarray_adc_measurement_channel_names[index].value},String),  "gch",
+					MF({if (ginteger_channel_number.value < index) false else true}, Boolean),
+					MF({if (ginteger_channel_number.value <index) false else {rarray_adc_measurement_shared_pins[index].value}},Boolean))
+		}
+
+		/* Assign from an RArray to an explicit virtual signal*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			this."vs_adc_measurement_channel_${alphabets[index]}" = rarray_vs_adc_measurement_channels[index]
+		}
+
+		/* Consume Group specific channel select virtual signal*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			rarray_vs_adc_measurement_ch_select[i] = MVirtualSignal(rarray_hwres_adc_measurement_channels[index],
+					MF({"channel_select"+ rarray_adc_measurement_channel_names[index].value},String) , "select",
+					MF({if (ginteger_channel_number.value < index) false else true}, Boolean),false)
+		}
+
+		/* Assign from an RArray to an explicit virtual signal*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			this."vs_adc_measurement_channel_${alphabets[index]}_select" = rarray_vs_adc_measurement_ch_select[index]
+		}
+
+		/* Consume Group specific channel result register select virtual signal*/
+		if(family+series !="XMC11")
+		{
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index =i;
+				rarray_vs_result_select[i] = MVirtualSignal(rarray_hwres_adc_measurement_channels[index],
+						MF({"result_select_"+ rarray_adc_measurement_channel_names[index].value },String), "res_sel",
+						MF({if (ginteger_channel_number.value < index) false else true}, Boolean),false)
+			}
+
+			/* Assign from an RArray to an explicit virtual signal*/
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index =i;
+				this."vs_adc_measurement_channel_${alphabets[index]}_result_select" = rarray_vs_result_select[index]
+			}
+
+			/* Consume Group specific channel result register select virtual signal*/
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index =i;
+				rarray_vs_adc_measurement_result[i] = MVirtualSignal(rarray_hwres_adc_measurement_result_reg[index],
+						MF({"result_register_" +rarray_adc_measurement_channel_names[index].value},String), "res_sel",
+						MF({if (ginteger_channel_number.value < index) false else true}, Boolean),false)
+			}
+
+			/* Assign from an RArray to an explicit virtual signal*/
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index =i;
+				this."vs_adc_measurement_channel_${alphabets[index]}_result" = rarray_vs_adc_measurement_result[index]
+			}
+		}
+
+		/* Consume a pad virtual signal*/
+
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			/*@AddPin*/
+			rarray_vs_adc_measurement_channel_pin[i] = MVirtualSignal(rarray_hwres_adc_measurement_channel_pin[index],
+					MF({"pad_signal_" +rarray_adc_measurement_channel_names[index].value},String), "pad",
+					MF({if(ginteger_channel_number.value <index){ false } else { !rarray_adc_measurement_shared_pins[index].value} }, Boolean),false)
+
+			rarray_hwres_adc_measurement_pin_pad[i] = MVirtualResourceGroup(MF({"pin_" +rarray_adc_measurement_channel_names[index].value},String),["devicepackage", "0", "*"],
+			MF({if(ginteger_channel_number.value <index){ false } else { !rarray_adc_measurement_shared_pins[index].value} }, Boolean));
+
+			rarray_vs_adc_measurement_pin_pad_signal[i] = MVirtualSignal(rarray_hwres_adc_measurement_pin_pad[i],
+					MF({rarray_adc_measurement_channel_names[index].value + "_pin_signal"},String), "pin",
+					true,false);
+			addConnectionConstraint(rarray_vs_adc_measurement_channel_pin[i],rarray_vs_adc_measurement_pin_pad_signal[i]);
+			addConnectionConstraint(rarray_vs_adc_measurement_pin_pad_signal[i] ,rarray_vs_adc_measurement_channel_pin[i]);
+
+		}
+		
+		/* Assign from an RArray to an explicit virtual signal*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			this."vs_adc_measurement_pin_pad_signal_${alphabets[index]}" = rarray_vs_adc_measurement_pin_pad_signal[index]
+			this."vs_adc_measurement_channel_pin_signal_${alphabets[index]}" = rarray_vs_adc_measurement_channel_pin[index]
+		}
+
+		/* create a virtual signal for pad signal from ANALOG_IO*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			this."vs_adc_measurement_channel_${alphabets[index]}_analog_io_pin" = MVirtualSignalRA( this."appres_analog_io_channel_${alphabets[index]}" ,"vs_analog_io_pad_pin")
+		}
+
+		/* ---------------------------------------------------------------------------------------------------- */
+		/* ----------------------------------------- APP IO Connections --------------------------------------- */
+		/* ---------------------------------------------------------------------------------------------------- */
+
+		if(family + series != 'XMC11')
+		{
+			/* constraint for the nvic*/
+			addConnectionConstraint(vs_adc_measurement_src_event,vs_adc_measurement_signal_src,MF({gcheck_enable_source_interrupt.value},Boolean))
+		}
+		else /* for XMC1100 devices*/
+		{
+			/* constraint for the nvic*/
+			addConnectionConstraint(vs_adc_measurement_global_res_event,vs_adc_measurement_signal_src,MF({gcheck_enable_result_evt.value},Boolean))
+		}
+		/* constraint for the global signal*/
+		addConnectionConstraint(vs_adc_measurement_global_adc_global_signal,vs_adc_measurement_global)
+
+		/* constraint for the pins*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+
+			addConnectionConstraint(rarray_vs_adc_measurement_channel_pin[index], rarray_vs_adc_measurement_channels[index],
+					MF({if(ginteger_channel_number.value <index){ false } else { !rarray_adc_measurement_shared_pins[index].value} }, Boolean))
+		}
+
+		/* Assign from an RArray to an explicit virtual signal*/
+		for(i=1;i<=MAX_CHANNELS;i++)
+		{
+			int index =i;
+			addConnectionConstraint(this."vs_adc_measurement_channel_${alphabets[index]}_analog_io_pin", rarray_vs_adc_measurement_channels[index], MF({rarray_adc_measurement_shared_pins[index].value}, Boolean))
+		}
+
+
+		/* constraint for the result register */
+		if(family+series != "XMC11")
+		{
+			for(i=1;i<=MAX_CHANNELS;i++)
+			{
+				int index =i;
+				int index2 =i;
+				addConnectionConstraint(rarray_vs_result_select[index],rarray_vs_adc_measurement_result[index2],
+						MF({if (ginteger_channel_number.value < index) false else true}, Boolean))
+			}
+
+		}
+
+
+	}
+
+	/* File Generation*/
+	def generateFiles(){
+		copy("adc_measurement.c", "adc_measurement.c")
+		copy("adc_measurement.h", "adc_measurement.h")
+		generate("adc_measurement_confh.tmpl", "adc_measurement_conf.h")
+		generate("adc_measurement_confc.tmpl", "adc_measurement_conf.c")
+		generate("adc_measurement_externh.tmpl", "adc_measurement_extern.h")
+	}
+
+
+}

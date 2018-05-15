@@ -1,0 +1,715 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 500, 600">
+		<p1:GTab text="General Settings" visible="true" enabled="true" widgetName="gtab_BackgroundScanandClassConfiguration" toolTipText="">
+			<p1:GTab.control>
+				<p1:Tab>
+					<p1:Tab.layout>
+						<GridLayout marginBottom="5" marginLeft="5" marginRight="5" marginTop="5"/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Measurement Settings" widgetName="ggroup_BackgroundScanConfig">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData widthHint="385" grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GLabel text="Number of measurements:" visible="true" widgetName="glabel_channel_number"/>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" maxValue="26" minValue="1" toolTipText="Configure the required number of ADC measurements." value="1" widgetName="ginteger_channel_number" description="Specify number of analog input channels to be measured.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;The maximum value will depend on the available number of channels for the given device &lt;/LI&gt;">
+							<p1:GInteger.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+						<p1:GLabel text="Trigger edge selection:" visible="true" widgetName="glabel_trigger_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_trigger_mode" value="No External Trigger" options="No External Trigger&#13;&#10;External Trigger Upon Rising Edge&#13;&#10;External Trigger Upon Falling Edge&#13;&#10;External Trigger Upon Both The Edge" toolTipText="Select the trigger operating mode to start ADC conversions." description="Select the Trigger edge for background request source.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;No External Trigger: To ignore the Trigger signal. &lt;/LI&gt;&#13;&#10;&lt;LI&gt;External Trigger Upon Rising Edge : To trigger the conversion on a rising edge.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;External Trigger Upon Falling Edge :  To trigger the conversion on a falling edge .&lt;/LI&gt;&#13;&#10;&lt;LI&gt;External Trigger Upon Both The Edge: To trigger the conversion on both rising and falling edges.&lt;/LI&gt;"/>
+						<p1:GCheck text="Enable continuous conversion" manifestObj="true" widgetName="gcheck_autoscan" description="Enable this option to do a continuous conversion for all the available measurements.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Enables the continuous conversion (Autoscan) feature. &#13;&#10;&lt;LI&gt;The conversion of the last channel in the sequence will cause a load event to occur. &lt;LI&gt;Causes continuous conversion of the background scan sequence once it has started." toolTipText="Select to operate adc in continuous mode. Deselect to enable single shot mode."/>
+						<Label/>
+						<p1:GCheck text="Start conversion after initialization" manifestObj="true" widgetName="gcheck_start_conversion" value="true" description="Starts the conversion as soon as ADC_MEASUREMENT_Init() completes." toolTipText="Measurements start immediately after initialization."/>
+						<Label/>
+					</p1:GGroup>
+					<p1:GGroup text="Conversion class Settings" widgetName="ggroup_ConvClass0Configuration">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GLabel text="Conversion mode:" visible="true" widgetName="glabel_conv_mode"/>
+						<p1:GCombo widgetName="gcombo_conv_mode" options="12 Bit Conversion&#13;&#10;10 Bit Conversion&#13;&#10;8 Bit Conversion&#13;&#10;10 Bit Fast Conversion" value="12 Bit Conversion" description="Select a required result data width.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;12 Bit Conversion: The result of the conversion will have a resolution of 12 bits. &lt;/LI&gt;&#13;&#10;&lt;LI&gt;10 Bit Conversion: The result of the conversion will have a resolution of 10 bits. &lt;/LI&gt;&#13;&#10;&lt;LI&gt;8 Bit Conversion: The result of the conversion will have a resolution of 8 bits. &lt;/LI&gt;&#13;&#10;&lt;LI&gt;10 Bit Fast Conversion: This mode will raise only one bit in the result register. After comparison with the actual signal, if the analog signal value is greater than the compare value, the result register&apos;s FCM bit will be set to high, else it will set low.&lt;/LI&gt;" toolTipText="Select result data width (12/10/8 bit ) or Fast Compare mode." manifestObj="true"/>
+						<p1:GLabel text="Desired sample time [nsec]:" visible="true" widgetName="glabel_desired_sampling_time"/>
+						<p1:GFloat x:Style="BORDER" minValue="0.0" maxValue="8000.0" format="*,6" manifestObj="true" widgetName="gfloat_desired_sampling_time" value="67.0" description="Set the required sample time.&#13;&#10;This is the duration for which the ADC would sample the input signal." toolTipText="Time nedeed to sample the analog input.">
+							<p1:GFloat.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GFloat.layoutData>
+						</p1:GFloat>
+						<p1:GLabel text="Actual sample time [nsec]:" visible="true" widgetName="glabel_actual_sampling_time"/>
+						<p1:GFloat format="*,3" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="8068" minValue="0" value="67" widgetName="gfloat_actual_sampling_time" x:Style="BORDER" enabled="false" description=" This is the closest possible sample time value (non-editable) .">
+							<p1:GFloat.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GFloat.layoutData>
+						</p1:GFloat>
+						<p1:GLabel text="Total conversion time [nsec]:" visible="true" widgetName="glabel_conversion_Time"/>
+						<p1:GFloat x:Style="BORDER" minValue="0" maxValue="POSITIVE_INFINITY" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,3" manifestObj="true" widgetName="gFloat_conversion_Time" enabled="false" description="This is the total conversion time for a given sample time(non-editable). To vary the total conversion time, change the sample time.&#13;&#10;For XMC4x devices:&#13;&#10;If post calibration is disabled ( in GLOBAL_ADC APP),  the  total conversion time will be reduced by 2/fADC (GLOBAL_ADC APP).">
+							<p1:GFloat.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GFloat.layoutData>
+						</p1:GFloat>
+					</p1:GGroup>
+					<p1:GLabel text="Note: Total conversion time is always calculated with post calibration enabled." visible="true" widgetName="glabel_conversion_limitation">
+						<p1:GLabel.layoutData>
+							<GridData heightHint="68" widthHint="450" horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Measurements" visible="true" enabled="true" widgetName="gtab_ChannelConfiguration">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite4">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2"/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Measurement table" widgetName="ggroup_ChannelTable">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="3"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData verticalSpan="12" grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GLabel text="Measurement names" visible="true" widgetName="glabel_ChannelName_1_16" manifestObj="true"/>
+						<p1:GLabel text="Expose pin" visible="true" widgetName="glabel_Shareable_Pin1" manifestObj="true"/>
+						<p1:GLabel text="Result event" visible="true" widgetName="glabel_result_evt_label1" manifestObj="true"/>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_A" widgetName="gstring_CH_Name_1" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 1." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinA" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chA" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_B" widgetName="gstring_CH_Name_2" x:Style="BORDER"  description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 2." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinB" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chB" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_C" widgetName="gstring_CH_Name_3" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 3." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinC" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck widgetName="gcheck_enable_res_evt_chC" manifestObj="true" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_D" widgetName="gstring_CH_Name_4" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 4." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinD" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chD" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_E" widgetName="gstring_CH_Name_5" x:Style="BORDER"  description="It defines the measurement channel name.&lt;BR&gt;&#13;&#10; Visible if the number of channels required are more than or equal to 5." manifestObj="true" toolTipText="Decide the name of measurement for Channel-E (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinE" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chE" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_F" widgetName="gstring_CH_Name_6" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 6." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinF" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chF" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_G" widgetName="gstring_CH_Name_7" x:Style="BORDER"  description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 7." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinG" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chG" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_H" widgetName="gstring_CH_Name_8" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 8." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinH" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chH" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_I" widgetName="gstring_CH_Name_9" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 9." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinI" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chI" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_J" widgetName="gstring_CH_Name_10" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 10." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinJ" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chJ" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_K" widgetName="gstring_CH_Name_11" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 11." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinK" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chK" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_L" widgetName="gstring_CH_Name_12" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 12." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinL" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chL" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" value="Channel_M" widgetName="gstring_CH_Name_13" x:Style="BORDER" description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 13." manifestObj="true" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="151"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck widgetName="gcheck_SharedPinM" manifestObj="true" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chM" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+					</p1:GGroup>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel B" widgetName="glabel_CH_Name_2">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel C" widgetName="glabel_CH_Name_3">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel D" widgetName="glabel_CH_Name_4">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel E" widgetName="glabel_CH_Name_5">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel F" widgetName="glabel_CH_Name_6">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel G" widgetName="glabel_CH_Name_7">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel H" widgetName="glabel_CH_Name_8">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel I" widgetName="glabel_CH_Name_9">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel J" widgetName="glabel_CH_Name_10">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel K" widgetName="glabel_CH_Name_11">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel L" widgetName="glabel_CH_Name_12">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel M" widgetName="glabel_CH_Name_13">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<Label/>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel A" widgetName="glabel_CH_Name_1">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Measurements Cont&apos;d" visible="true" enabled="true" manifestObj="true" widgetName="gtab_ChannelConfiguration2">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_1">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2"/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Measurement table" widgetName="ggroup_ChannelTable2">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="3"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData verticalSpan="13" grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GLabel text="Measurement names" widgetName="glabel_ChannelName_17_32">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="161"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GLabel text="Expose pin" widgetName="gLabel_Shareable_Pin2"/>
+						<p1:GLabel text="Result event" widgetName="glabel_result_evt_label2"/>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 14." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_N" widgetName="gstring_CH_Name_14" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinN" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chN" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 15." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_O" widgetName="gstring_CH_Name_15" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinO" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chO" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 16." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_P" widgetName="gstring_CH_Name_16" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinP" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chP" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 17." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_Q" widgetName="gstring_CH_Name_17" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinQ" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chQ" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 18." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_R" widgetName="gstring_CH_Name_18" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinR" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chR" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 19." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_S" widgetName="gstring_CH_Name_19" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinS" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chS" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 20." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_T" widgetName="gstring_CH_Name_20" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinT" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chT" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 21." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_U" widgetName="gstring_CH_Name_21" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinU" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chU" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 22." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_V" widgetName="gstring_CH_Name_22" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinV" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chV" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 23." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_W" widgetName="gstring_CH_Name_23" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinW" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chW" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 24." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_X" widgetName="gstring_CH_Name_24" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinX" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chX" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;Visible if the number of channels required are more than or equal to 25." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_Y" widgetName="gstring_CH_Name_25" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinY" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chY" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString description="It defines the measurement channel name. &lt;BR&gt;&#13;&#10;Visible if the number of channels required are more than or equal to 26." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Channel_Z" widgetName="gstring_CH_Name_26" x:Style="BORDER" toolTipText="Decide the name of measurement (Use only C-style naming convention).">
+							<p1:GString.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_SharedPinZ" description="Expose the GPIO Pin out. This feature enables sharing of the GPIO Pin between Apps." toolTipText="Allows the pin to be shared.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_enable_res_evt_chZ" description="Enables the result event for this channel. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Connect the signal to the INTERRUPT APP in order to get an interrupt for the event.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This allows event generation each time this channel provides a new result.&lt;/LI&gt;" toolTipText="Enable generation of a event on conversion result.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="CENTER"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+					</p1:GGroup>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel N" widgetName="glabel_CH_Name_14">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel O" widgetName="glabel_CH_Name_15">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel P" widgetName="glabel_CH_Name_16">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="true" text="Channel Q" widgetName="glabel_CH_Name_17">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel R" widgetName="glabel_CH_Name_18">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel S" widgetName="glabel_CH_Name_19">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel T" widgetName="glabel_CH_Name_20">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel U" widgetName="glabel_CH_Name_21">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel V" widgetName="glabel_CH_Name_22">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel W" widgetName="glabel_CH_Name_23">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel X" widgetName="glabel_CH_Name_24">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel Y" widgetName="glabel_CH_Name_25">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GLabel enabled="false" manifestObj="false" text="Channel Z" widgetName="glabel_CH_Name_26">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="0"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" widgetName="gtab_RequestSourceInterruptConfiguration" manifestObj="true">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite5">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Interrupt Settings" widgetName="ggroup_request_src_intr">
+						<p1:GGroup.layoutData>
+							<GridData widthHint="392" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GCheck text="Enable end of measurements interrupt" manifestObj="true" widgetName="gcheck_enable_source_interrupt" description="Enable Request Source Interrupt. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;This generates a interrupt after all the measurements have been converted. &#13;&#10;&lt;LI&gt;When the callback function is called all the conversion results are ready and can be read.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GLabel text="Interrupt handler name:" visible="true" widgetName="glabel_request_source_interrupt_handler" manifestObj="true">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="176"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_request_source_interrupt_handler" toolTipText="Name of the function to handle the end of measurement." value="Adc_Measurement_Handler" description="End of measurements interrupt callback handler.">
+							<p1:GString.layoutData>
+								<GridData widthHint="193"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name." visible="true" manifestObj="true" isError="false" widgetName="gmessage_background_handler">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2" widthHint="169"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<p1:GInterruptPrio text="End of measurements interrupt" x:Style="NONE" minPriority="0" maxPriority="64" minSubPriority="0" maxSubPriority="0" priorityValue="3" subPriorityValue="0" subPriorityMandatory="true" manifestObj="true" widgetName="ginterruptprio_backgnd_rs_intr" description="This provides the interrupt priority configuration for the end of measurement interrupt.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalSpan="2" widthHint="255" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt  Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_GlobalResultInterruptConfiguration">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_2">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Interrupt Settings" widgetName="ggroup_Interrupt_config">
+						<p1:GGroup.layoutData>
+							<GridData widthHint="395" heightHint="148" grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GCheck description="Enables the Result Interrupt. This will give a interrupt after every single measurement result is ready. Only applicable for XMC1100 device." manifestObj="true" text="Enable interrupt after each measurement" widgetName="gcheck_enable_result_evt">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GLabel manifestObj="true" text="Interrupt handler name:" widgetName="glabel_result_event_interrupt_handler">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="176"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GString description="Callback function name for the single measurement interrupt. Only  applicable for XMC1100 device." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" value="Adc_Measurement_Handler" widgetName="gstring_result_event_interrupt_handler" x:Style="BORDER" toolTipText="Name of the function to handle the end of single measurement.">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="193"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage isError="false" manifestObj="true" text="Invalid function name." widgetName="gmessage_result_handler">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<p1:GInterruptPrio manifestObj="true" maxPriority="64" maxSubPriority="0" minPriority="0" minSubPriority="0" priorityValue="3" subPriorityValue="0" text="Interrupt after each measurement" widgetName="ginterruptprio_result_intr" subPriorityVisible="false" description="This provides the interrupt priority configuration for the single measurement interrupt.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalAlignment="FILL" horizontalSpan="2" widthHint="341" grabExcessHorizontalSpace="true"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>
