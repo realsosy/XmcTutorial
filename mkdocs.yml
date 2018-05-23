@@ -27,23 +27,23 @@ pages:
 #    - uC-Probe: uc-Probe.md
 
 - Intermediate:
-    - Counter: Counter.md
-    - Timer: Timer.md
-    - Real-time Clock: Rtc.md
-    - Compare & Capture: Ccu8SliceConfig.md
-    - DAC LUT: DacLut.md
-    - Watchdog: Watchdog.md
-    - DMA: DmaCh.md
-    - Event: Eru.md
-    - UART: Uart.md
-    - USB: UsbdVcom.md
+#    - Counter: Counter.md
+#    - Timer: Timer.md
+#    - Real-time Clock: Rtc.md
+#    - Compare & Capture: Ccu8SliceConfig.md
+#    - DAC LUT: DacLut.md
+#    - Watchdog: Watchdog.md
+#    - DMA: DmaCh.md
+#    - Event: Eru.md
+#    - UART: Uart.md
+#    - USB: UsbdVcom.md
 
 - LabIntermediate:
-    - Counter: LabCounter.md
-    - Timer: LabTimer.md
+#    - Counter: LabCounter.md
+#    - Timer: LabTimer.md
     
 - Advanced:
-    - Project Template: ProjectTemplate.md
+#    - Project Template: ProjectTemplate.md
 
 
 - References: 'References.md'

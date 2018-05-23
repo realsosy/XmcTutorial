@@ -11,12 +11,14 @@ date: Sep 01 2016
 
 ## 참고자료
 
-* [XMC4500 Reference Manual v1.5 2014-04]
-    - xmc4500_rm_v1.5_2014_04.pdf
-* [XMC4500 Data Sheet v1.4 2016-01]
-    - Infineon-XMC4500-DS-v01.04-EN.pdf
 * [SYSTIMER] (DAVE APP on-line help)
 * [MicroC/OS-II The Real-Time Kernel]
+
+
+
+효과적으로 주기적인 이벤트를 발생하기 위해서 타이머라는 것을 사용하고, 이벤트를 효율적으로 처리하기 위해서 인터럽트를 활용한다.  
+
+
 
 ## Real-time system의 main loop
 
@@ -233,53 +235,47 @@ typedef enum SYSTIMER_MODE
 
 * 설정 값의 초기화 사용자는 이와 같이 DAVE APP을 설정하고 사용하면 main.c 함수에서 DAVE_Init() 함수가 호출되어 개별적인 APP을 초기화 하지 않고 사용할 수 있다.
 
-* 소프트웨어 타이머 생성 및 삭제
-    - SYSTIMER_CreateTimer 함수를 사용하여 소프트웨어 타이머를 생성 할 수 있다.
-    - SYSTIMER_DeleteTimer 함수를 사용하여 소프트웨어 타이머를 삭제 할 수 있다.
 
-```
-void CB_timer_id0(void)
+
+```c
+#include <DAVE.h>
+#define ONESEC 1000000U
+
+void LED_Toggle_EverySec(void)
 {
-  ... 콜백 루틴 ...
+    // LED Toggle for every second
+    DIGITAL_IO_ToggleOutput(&DIGITAL_IO_0);
 }
-uint32_t timer_id0;
-SYSTIMER_STATUS_t systimer_status;
-timer_id = SYSTIMER(1000000, SYSTIMER_MODE_ONE_SHOT, CB_timer_id0, NULL);
-systimer_status = SYSTIMER_DeleteTimer(timer_id);
-```
 
-* 소프트웨어 타이머 시작과 정지
-    - SYSTIMER_GetTimerState 함수로 소프트웨어 타이머의 상태를 확인하고
-    - 소프트웨어 타이머가 정지해 있으면 SYSTIMER_StartTimer 함수를 사용하여 소프트웨어 타이머를 시작 할 수 있다.
-    - 소프트웨어 타이머가 실행 중이면 SYSTIMER_StopTimer 함수를 사용하여 소프트웨어 타이머를 정지 할 수 있다.
-
-```
-SYSTIMER_STATUS_t systimer_status;
-if (SYSTIMER_GetTimerState == SYSTIMER_STATE_STOPPED)
+int main(void)
 {
-  systimer_status = SYSTIMER_StartTimer(&dhSYSTIMER_0);
+    uint32_t TimerId,status;
+    DAVE_Init(); // SYSTIMER APP Initialized during DAVE Initialization
+
+    // Create Software Timer with one second time interval 
+    //in order to generate software timer callback event at every second
+    TimerId = SYSTIMER_CreateTimer(ONESEC,SYSTIMER_MODE_PERIODIC,(void*)LED_Toggle_EverySec,NULL);
+    if(TimerId != 0U)
+    {   //Timer is created successfully
+        // Start/Run Software Timer
+        status = SYSTIMER_StartTimer(TimerId);
+        if(status == SYSTIMER_STATUS_SUCCESS){    // Timer is running
+        }
+        else{ // Error during software timer start operation
+        }
+    }
+    else { // Timer ID Can not be zero
+    }
+     
+    while(1)
+    {
+
+    }
+    return (1);
 }
-else
-{
-  systimer_status = SYSTIMER_StopTimer(&dhSYSTIMER_0);
-}
-```
-
-* 소프트웨어 타이머 시간 구간 설정
-    - SYSTIMER_RestartTimer 함수를 사용하여 소프트웨어 타이머의 시간 구간을 재설정하여 다시 시작 할 수 있다.
-```
-SYSTIMER_RestartTimer(timer_id, 1000000);
-```
-
-* 시스템 타이머 시작 후 흐른 시간
-    - SYSTIMER_GetTime 함수를 사용하여 하드웨어 시스템 타이머가 시작 후 현재 까지 시간을 마이크로 초 단위로 알 수 있다.
-    - SYSTIMER_GetTickCount 함수를 사용하여 시스템 타이머가 시작 후 몇 번의 틱이 발생했는지 알 수 있다.
 
 ```
-uint32_t sys_time, tick_count;
-sys_time = SYSTIMER_GetTime();
-tick_count = SYSTIMER_GetTickCount();
-```
+
 
 ## 실습프로젝트
 
