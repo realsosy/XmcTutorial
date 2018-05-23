@@ -26,7 +26,7 @@ pages:
 #    - System Timer: LabSystemTimer.md
 #    - uC-Probe: uc-Probe.md
 
-- Intermediate:
+#- Intermediate:
 #    - Counter: Counter.md
 #    - Timer: Timer.md
 #    - Real-time Clock: Rtc.md
@@ -38,11 +38,11 @@ pages:
 #    - UART: Uart.md
 #    - USB: UsbdVcom.md
 
-- LabIntermediate:
+#- LabIntermediate:
 #    - Counter: LabCounter.md
 #    - Timer: LabTimer.md
     
-- Advanced:
+#- Advanced:
 #    - Project Template: ProjectTemplate.md
 
 
