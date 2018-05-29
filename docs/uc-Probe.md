@@ -65,6 +65,10 @@ uC/Probe 는 임베디드 시스템의 내부 정보를 손쉽게 그래픽한 �
 
 위의 대표적인 사례들을 예제를 통하여 설명하고자 한다.
 
+
+
+
+
 ## Monitoring & Calibration 기본
 
 * 목적
@@ -80,69 +84,82 @@ uc/Probe 를 사용하여 중요 변수를 monitoring 하고 calibration 하는 
 
 프로젝트 xmc4500_relaxlite_ucprobe_ex1 를 import 한다.
 
-```
-/******************************************************************************
- * HEADER FILES
- *****************************************************************************/
-#include <xmc_common.h>
-#include <xmc_gpio.h>
+```c
+#include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
 
-/******************************************************************************
- * MACROS
- *****************************************************************************/
-/* 1ms tick */
+
 #define TICKS_PER_SECOND (1000U)
-#define SECONDS_PER_TICK (1.0F / (float)TICKS_PER_SECOND)
 
-#define LED1 P1_1
-
-/******************************************************************************
- * GLOBAL DATA
- *****************************************************************************/
 uint8_t g_var;
 
-/**
- * @brief main() - Application entry point
- */
+uint32_t Timer_1ms_Id;
+
+void CB_Timer_1ms(void)
+{
+    static uint32_t ticks = 0;
+
+	ticks++;
+
+	if (ticks == TICKS_PER_SECOND)
+	{
+  	  	 ticks = 0;
+
+		 DIGITAL_IO_ToggleOutput(&dhDIGITAL_OUT_0);
+	  	 g_var++;
+	 }
+}
 
 int main(void)
 {
-  g_var = 0;
+    DAVE_STATUS_t status;
 
-  XMC_GPIO_SetMode(LED1, XMC_GPIO_MODE_OUTPUT_PUSH_PULL);
+    status = DAVE_Init();           /* Initialization of DAVE APPs  */
 
-  SysTick_Config(SystemCoreClock / TICKS_PER_SECOND);
+    if(status != DAVE_STATUS_SUCCESS)
+    {
+        /* Placeholder for error handler code. The while loop below can be replaced with an user error handler. */
+        XMC_DEBUG("DAVE APPs initialization failed\n");
+        while(1U)
+        {
 
-  while(1U);
+        }
+    }
+
+    g_var = 0;
+
+    Timer_1ms_Id = SYSTIMER_CreateTimer(1000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_1ms, NULL);
+
+    SYSTIMER_StartTimer(Timer_1ms_Id);
+
+    /* Placeholder for user application code. The while loop below can be replaced with user application code. */
+    while(1U)
+    {
+
+    }
 }
 
-void SysTick_Handler(void)
-{
-  static uint32_t ticks = 0;
-
-  ticks++;
-
-  if (ticks == TICKS_PER_SECOND)
-  {
-  	ticks = 0;
-
-  	XMC_GPIO_ToggleOutput(LED1);
-  	g_var++;
-  }
-}
 ```
 
 * 시스템타이머 설정
-    `SysTick_Config(SystemCoreClock / TICKS_PER_SECOND);`
-    * 시스템타이머가 1KHz 로 동작하도록, 즉 1msec 마다 SysTick_Handler 인터럽트가 수행되도록 설정한다.
+    `Timer_1ms_Id = SYSTIMER_CreateTimer(1000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_1ms, NULL);`
+    * 시스템타이머가 1KHz 로 동작하도록, 즉 1msec 마다 `CB_Timer_1ms` 인터럽트가 수행되도록 설정한다.
+
+* 시스템타이머 시작
+    `SYSTIMER_StartTimer(Timer_1ms_Id);`
+
+    * Timer_1ms 동작 시작
+
 * tick 카운터 변수 관리
-    * SysTick_Handler 함수 내에서 `static uint32_t ticks = 0;` 으로 정적변수로 선언하여 카운터 값을 관리한다.
+    * `CB_Timer_1ms()` 함수 내에서 `static uint32_t ticks = 0;` 으로 정적변수로 선언하여 카운터 값을 관리한다.
     * 핸들러의 수행시 마다 `ticks++;` 하여 1씩 증가시키고,
     * `if (ticks == TICKS_PER_SECOND)` 로 비교하여 1000번 수행되었는지, 즉 1초가 되었는지 확인하고,
     * 1초가 되었을 때 마다 `ticks = 0;`로 rollover 시킨다.
+
 * 전역변수 g_var
     * 전역변수로 `uint8_t g_var;` 선언되어있고,
     * `g_var++; `1초마다 그 값을 1씩 증가시킨다.
+
+    
 
 ### uC/Probe 의 설정
 
@@ -154,7 +171,7 @@ void SysTick_Handler(void)
     * 프로젝트 단위로 함께 관리하는 것이 용이하므로 프로젝트의 디렉토리에 프로젝트명으로 저장한다.
 ![CreateProject](./images/ucProbe_CreateProject.png)
 
-* Symbole 파일의 등록
+* Symbol 파일의 등록
     * 프로젝트에서 생성된 실행파일 (./Debug/xmc4500_relaxlite_ucprobe_ex1.elf) 을 등록 선택한다.
     * 만약 이 파일이 없다면 프로젝트를 빌드하여 실행파일을 만들고 다시 선택한다.
 
@@ -217,30 +234,23 @@ uC/Probe의 ProbeScope 기능을 활성화하고 활용하는 방법을 배운�
 
 프로젝트 xmc4500_relaxlite_ucprobe_ex2 를 import 한다.
 
-```
-/******************************************************************************
- * HEADER FILES
- *****************************************************************************/
-#include <DAVE.h>
-#include <xmc_gpio.h>
+```c
+#include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
+#include <probe_scope.h>
 
-/******************************************************************************
- * MACROS
- *****************************************************************************/
-/* Timer frequency (Hz) */
-#define TICKS_PER_SECOND (10000U)
+#include <math.h>
+
+#define TICKS_PER_SECOND (1000U)
 #define SECONDS_PER_TICK (1.0F / (float)TICKS_PER_SECOND)
-
-#define LED1 P1_1
 
 /******************************************************************************
  * ENUMS
  *****************************************************************************/
 typedef enum  CHANNEL_WAVEFORM
 {
-  CHANNEL_WAVEFORM_SIN = 0,
-  CHANNEL_WAVEFORM_SQUARE = 1,
-  CHANNEL_WAVEFORM_TRIANGLE = 2,
+	CHANNEL_WAVEFORM_SIN = 0,
+	CHANNEL_WAVEFORM_SQUARE = 1,
+	CHANNEL_WAVEFORM_TRIANGLE = 2,
 } CHANNEL_WAVEFORM_t;
 
 /******************************************************************************
@@ -248,12 +258,12 @@ typedef enum  CHANNEL_WAVEFORM
  *****************************************************************************/
 typedef struct channel
 {
-  uint32_t frequency;
-  float offset;
-  float amplitude;
-  float radians;
-  float value;
-  CHANNEL_WAVEFORM_t waveform;
+	uint32_t frequency;
+	float offset;
+	float amplitude;
+	float radians;
+	float value;
+	CHANNEL_WAVEFORM_t waveform;
 } channel_t;
 
 /******************************************************************************
@@ -261,122 +271,123 @@ typedef struct channel
  *****************************************************************************/
 channel_t channel_0 =
 {
-  .frequency = 1,
-  .offset = 0.0F,
-  .amplitude = 1.0F,
-  .waveform = CHANNEL_WAVEFORM_SIN,
-  .value = 0.0F
+		.frequency = 1,
+		.offset = 0.0F,
+		.amplitude = 1.0F,
+		.waveform = CHANNEL_WAVEFORM_SIN,
+		.value = 0.0F
 };
 
 channel_t channel_1 =
 {
-  .frequency = 1,
-  .offset = 0.0F,
-  .amplitude = 1.0F,
-  .waveform = CHANNEL_WAVEFORM_SQUARE,
-  .value = 0.0F
+		.frequency = 1,
+		.offset = 0.0F,
+		.amplitude = 1.0F,
+		.waveform = CHANNEL_WAVEFORM_SQUARE,
+		.value = 0.0F
 };
 
 /******************************************************************************
  * LOCAL ROUTINES
  *****************************************************************************/
-__STATIC_INLINE void generate_channel_sample(channel_t *const channel, uint32_t ticks)
+void generate_channel_sample(channel_t *const channel, uint32_t ticks)
 {
-  int32_t i;
-  float elapsed_time = 0.0F;
+	float elapsed_time = 0.0F;
+	int32_t tick_period = 0;
+	tick_period = TICKS_PER_SECOND/channel->frequency;
+	ticks = ticks % tick_period;
 
-  // Compute the elapsed time in decimal seconds, in floating point format.
-  elapsed_time = (float)ticks * SECONDS_PER_TICK;
-
-  // Convert the time to radians
-  channel->radians = elapsed_time * 2.0F * PI * (float)channel->frequency;
-
-  switch (channel->waveform)
-  {
-    case CHANNEL_WAVEFORM_SIN:
-      channel->value = arm_sin_f32(channel->radians);
-      break;
+	switch (channel->waveform)
+	{
+	case CHANNEL_WAVEFORM_SIN:
+		// Compute the elapsed time in decimal seconds, in floating point format.
+		elapsed_time = (float)ticks * SECONDS_PER_TICK;
+		// Convert the time to radians
+		channel->radians = elapsed_time * 2.0F * 3.141592F * (float)channel->frequency;
+		channel->value = sin(channel->radians);
+		break;
 
 	case CHANNEL_WAVEFORM_SQUARE:
-	  channel->value = arm_sin_f32(channel->radians);
-	  for (i = 3; i < 11; i += 2)
-	  {
-		  channel->value += (1 / (float)i) * arm_sin_f32(channel->radians * (float)i);
-	  }
-	  channel->value *= (4.0F / PI);
-	  break;
+		if(ticks < tick_period/2){
+			channel->value = -1.0;
+		}
+		else{
+			channel->value = 1.0;
+		}
+		break;
 
 	case CHANNEL_WAVEFORM_TRIANGLE:
-	  channel->value = arm_sin_f32(channel->radians);
-	  for (i = 3; i < 11; i += 4)
-	  {
-		  channel->value -= (1 / (float)(i * i)) * arm_sin_f32(channel->radians * (float)i);
-	  }
-
-	  for (i = 5; i < 13; i += 4)
-	  {
-		  channel->value += (1 / (float)(i * i)) * arm_sin_f32(channel->radians * (float)i);
-	  }
-
-	  channel->value *= (8.0F / (PI * PI));
-	  break;
+		if(ticks < tick_period/2){
+			channel->value = -1.0 + 4.0* (float)ticks/(float)tick_period;
+		}
+		else{
+			channel->value = 3.0 - 4.0* (float)ticks/(float)tick_period;
+		}
+		break;
 
 	default:
-	  break;
-  }
+		break;
+	}
 
-  channel->value *= channel->amplitude * 0.5F;
-  channel->value += channel->offset;
+	channel->value *= channel->amplitude * 0.5F;
+	channel->value += channel->offset;
 }
 
-/******************************************************************************
- * @brief main() - Application entry point
- *****************************************************************************/
+uint8_t g_var;
+
+uint32_t Timer_1ms_Id;
+
+void CB_Timer_1ms(void)
+{
+	static uint32_t ticks = 0;
+
+	ticks++;
+
+	if (ticks == TICKS_PER_SECOND)
+	{
+		ticks = 0;
+
+		DIGITAL_IO_ToggleOutput(&dhDIGITAL_OUT_0);
+		g_var++;
+	}
+	generate_channel_sample(&channel_0, ticks);
+	generate_channel_sample(&channel_1, ticks);
+
+	/* Take a sample of the active oscilloscope channels */
+	ProbeScope_Sampling();
+
+}
 
 int main(void)
 {
-  DAVE_STATUS_t status;
+	DAVE_STATUS_t status;
 
-  status = DAVE_Init();           /* Initialization of DAVE APPs  */
+	status = DAVE_Init();           /* Initialization of DAVE APPs  */
 
-  if(status == DAVE_STATUS_FAILURE)
-  {
-    /* Placeholder for error handler code. The while loop below can be replaced with an user error handler. */
-    XMC_DEBUG("DAVE APPs initialization failed\n");
+	if(status != DAVE_STATUS_SUCCESS)
+	{
+		/* Placeholder for error handler code. The while loop below can be replaced with an user error handler. */
+		XMC_DEBUG("DAVE APPs initialization failed\n");
 
-    while(1U)
-    {    }
-  }
+		while(1U)
+		{
 
-  XMC_GPIO_SetMode(LED1, XMC_GPIO_MODE_OUTPUT_PUSH_PULL);
+		}
+	}
 
-  /* Initialize ProbeScope */
-  // ProbeScope_Init(SystemCoreClock / TICKS_PER_SECOND);
+	g_var = 0;
 
-  /* Initialize timer */
-  SysTick_Config(SystemCoreClock / TICKS_PER_SECOND);
+	/* Initialize ProbeScope */
+	ProbeScope_Init(SystemCoreClock / TICKS_PER_SECOND);
 
-  /* Placeholder for user application code. The while loop below can be replaced with user application code. */
-  while(1U);
-}
+	Timer_1ms_Id = SYSTIMER_CreateTimer(1000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_1ms, NULL);
+	SYSTIMER_StartTimer(Timer_1ms_Id);
 
-void SysTick_Handler(void)
-{
-  static uint32_t ticks = 0;
+	/* Placeholder for user application code. The while loop below can be replaced with user application code. */
+	while(1U)
+	{
 
-  ticks++;
-
-  if ((ticks % TICKS_PER_SECOND) == 0)
-  {
-    ticks = 0;
-    XMC_GPIO_ToggleOutput(LED1);
-  }
-
-  generate_channel_sample(&channel_0, ticks);
-  generate_channel_sample(&channel_1, ticks);
-
-  /* Take a sample of the active oscilloscope channels */
-  // ProbeScope_Sampling();
+	}
 }
 
 ```
@@ -387,45 +398,9 @@ void SysTick_Handler(void)
 
 * `generate_channel_sample(channel_t * const channel, uint32_t ticks)` 함수
     * 현재의 `ticks` 값으로 각도 `channel->radians` 계산
-    * 파형의 종류에 따라 `channel->value` 계산, 이때 CMSIS-DSP의 `arm_sine_f32()` 함수 사용
+    * 파형의 종류에 따라 `channel->value` 계산
 
-* 사인파 계산
-```
-channel->value = arm_sin_f32(channel->radians);
-```
-
-* 구형파 계산
-```
-channel->value = arm_sin_f32(channel->radians);
-for (i = 3; i < 11; i += 2)
-{
-  channel->value += (1 / (float)i) * arm_sin_f32(channel->radians * (float)i);
-}
-channel->value *= (4.0F / PI);
-```
-
-  ![SquareWave](./images/ucProbe_FourierSeriesSquareWave.gif)
-
-$$ f(x) = \frac{4}{\pi}\sum_{n=1,3,5,...}^{\inf} \frac{1}{n}sin \left ( \frac{n\pi x}{L} \right ) $$
-
-* 삼각파 계산
-```
-channel->value = arm_sin_f32(channel->radians);
-for (i = 3; i < 11; i += 4)
-{
-channel->value -= (1 / (float)(i * i)) * arm_sin_f32(channel->radians * (float)i);
-}
-
-for (i = 5; i < 13; i += 4)
-{
-channel->value += (1 / (float)(i * i)) * arm_sin_f32(channel->radians * (float)i);
-}
-channel->value *= (8.0F / (PI * PI));
-```
-
-  ![SquareWave](./images/ucProbe_FourierSeriesTriangleWave.gif)
-
-$$ f(x) = \frac{8}{\pi^2}\sum_{n=1,3,5,...}^{\inf} \frac{\left( -1 \right )^{(n-1)/2}}{n^2}sin \left ( \frac{n\pi x}{L} \right ) $$
+    
 
 ### uC/Probe 설정
 
@@ -435,7 +410,7 @@ $$ f(x) = \frac{8}{\pi^2}\sum_{n=1,3,5,...}^{\inf} \frac{\left( -1 \right )^{(n-
     * 정상적으로 설치되었다면 다음과 같이
         * Communication/Scope/ 디렉토리에 `probe_scope.c`, `probe_scope.h` 파일이 존재하고
         * Communication/Scope/cfg 디렉토리에 `probe_scope_cfg.h` 파일이 존재한다.
-  ![AddScopeCode](./images/uCProbe_AddScopeCode.png)
+        ![AddScopeCode](./images/uCProbe_AddScopeCode.png)
 1. Scope code 포함
     * 위의 세개의 파일을 프로젝트에 포함시켜야 한다.
         * scope 라이브러리 파일: `probe_scope.c`, `probe_scope.h`
@@ -536,3 +511,4 @@ Pause("Pause until user button");
 ```
 
   * scipt 파일의 구체적인 문법은 매뉴얼을 참고하도록 한다.
+

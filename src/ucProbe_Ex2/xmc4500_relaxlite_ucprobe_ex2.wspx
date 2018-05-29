@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<workspace>
+  <symbolbrowser>
+    <symbolfiles>
+      <symbolfile Filepath="D:\GitRepo\XmcTutorial\src\ucProbe_Ex2\Debug\ucProbe_Ex2.elf" />
+    </symbolfiles>
+  </symbolbrowser>
+  <screens SelectedScreenId="DataScreen1">
+    <screen RegisteredName="DataScreen1" ScreenHeader="DataScreen" ScreenType="DataScreen" />
+  </screens>
+  <nodes>
+    <node ScreenId="DataScreen1" OffsetX="220" OffsetY="0" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="640" Height="100" ZIndex="10" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="24" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="&#xD;&#xA;XMC4700 &#xD;&#xA;Micrium uc/Probe XMC Demo" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="20" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="80" ZIndex="9" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="Bitmap" Type="Bitmap">
+          <definitions Width="200" Height="80" IsTransitionEffectEnabled="false" />
+          <images>
+            <image Comparison="IsEqualTo" ComparisonValue="0" Path="" Tooltip="" Source="System.Windows.Interop.InteropBitmap" ImageRepresentation="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" FileExtension=".png" Width="200" Height="80" />
+          </images>
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="220" OffsetY="259" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="8" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextboxControl" Type="TextboxControl">
+          <definitions ColorBackground="#FFFFFFFF" Font="Arial Black" FontSizeValue="50" FontStyleValue="Normal" FontWeightValue="Normal" ColorFont="#FF000000" TextAlignmentValue="Right" SeparateThousandsWithComma="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" NumberOfDecimalPlaces="0" ColorBorder="#FF000000" BorderThickness="1.5" CornerRadius="0" Width="140" Height="40" ContainsAssignedSymbols="true" Text="" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="channel_0.frequency" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="60" OffsetY="259" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="250" Height="50" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Frequency (Hz)" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="60" OffsetY="319" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="250" Height="50" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Offset" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="220" OffsetY="320" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextboxControl" Type="TextboxControl">
+          <definitions ColorBackground="#FFFFFFFF" Font="Arial Black" FontSizeValue="50" FontStyleValue="Normal" FontWeightValue="Normal" ColorFont="#FF000000" TextAlignmentValue="Right" SeparateThousandsWithComma="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" NumberOfDecimalPlaces="2" ColorBorder="#FF000000" BorderThickness="1.5" CornerRadius="0" Width="140" Height="40" ContainsAssignedSymbols="true" Text="" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="channel_0.offset" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="60" OffsetY="379" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="250" Height="50" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Amplitude" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="220" OffsetY="379" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextboxControl" Type="TextboxControl">
+          <definitions ColorBackground="#FFFFFFFF" Font="Arial Black" FontSizeValue="50" FontStyleValue="Normal" FontWeightValue="Normal" ColorFont="#FF000000" TextAlignmentValue="Right" SeparateThousandsWithComma="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" NumberOfDecimalPlaces="2" ColorBorder="#FF000000" BorderThickness="1.5" CornerRadius="0" Width="140" Height="40" ContainsAssignedSymbols="true" Text="" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="channel_0.amplitude" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="60" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="350" Height="200" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="RadioButtonsControl" Type="RadioButtonsControl">
+          <definitions Width="350" Height="200" RadioButtons="AAEAAAD/////AQAAAAAAAAAMAgAAAFdNaWNyaXVtLlVjcHJvYmUuSW5mcmFzdHJ1Y3R1cmUsIFZlcnNpb249NC4wLjE2LjU0LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwHAQAAAAABAAAAAwAAAAR2TWljcml1bS5VY3Byb2JlLkluZnJhc3RydWN0dXJlLlZpZXcuRGlhZ3JhbS5Ub29scy5Qcm9wZXJ0aWVzLk1pc2NlbGxhbmVvdXMuUmFkaW9CdXR0b25zQ29udHJvbC5SYWRpb09wdGlvblNlcmlhbGl6YWJsZQIAAAAJAwAAAAkEAAAACQUAAAAFAwAAAHZNaWNyaXVtLlVjcHJvYmUuSW5mcmFzdHJ1Y3R1cmUuVmlldy5EaWFncmFtLlRvb2xzLlByb3BlcnRpZXMuTWlzY2VsbGFuZW91cy5SYWRpb0J1dHRvbnNDb250cm9sLlJhZGlvT3B0aW9uU2VyaWFsaXphYmxlBAAAABY8VmFsdWU+a19fQmFja2luZ0ZpZWxkGjxJc0NoZWNrZWQ+a19fQmFja2luZ0ZpZWxkGjxHcm91cE5hbWU+a19fQmFja2luZ0ZpZWxkFjxMYWJlbD5rX19CYWNraW5nRmllbGQAAAEBBgECAAAAAAAAAAAAAAABBgYAAAAkYTQxOGYyNTgtYmMzMC00NzYxLTkzMWEtODgwMjQ2MTY1Y2M1BgcAAAADU2luAQQAAAADAAAAAAAAAAAA8D8ACQYAAAAGCQAAAAZTcXVhcmUBBQAAAAMAAAAAAAAAAAAAQAAJBgAAAAYLAAAACFRyaWFuZ2xlCw==" InstanceId="a418f258-bc30-4761-931a-880246165cc5" ColumnWidth="250" Title="Channel 0" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="channel_0.waveform" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="440" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="350" Height="200" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="RadioButtonsControl" Type="RadioButtonsControl">
+          <definitions Width="350" Height="200" RadioButtons="AAEAAAD/////AQAAAAAAAAAMAgAAAFdNaWNyaXVtLlVjcHJvYmUuSW5mcmFzdHJ1Y3R1cmUsIFZlcnNpb249NC4wLjE2LjU0LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwHAQAAAAABAAAAAQAAAAR2TWljcml1bS5VY3Byb2JlLkluZnJhc3RydWN0dXJlLlZpZXcuRGlhZ3JhbS5Ub29scy5Qcm9wZXJ0aWVzLk1pc2NlbGxhbmVvdXMuUmFkaW9CdXR0b25zQ29udHJvbC5SYWRpb09wdGlvblNlcmlhbGl6YWJsZQIAAAAJAwAAAAUDAAAAdk1pY3JpdW0uVWNwcm9iZS5JbmZyYXN0cnVjdHVyZS5WaWV3LkRpYWdyYW0uVG9vbHMuUHJvcGVydGllcy5NaXNjZWxsYW5lb3VzLlJhZGlvQnV0dG9uc0NvbnRyb2wuUmFkaW9PcHRpb25TZXJpYWxpemFibGUEAAAAFjxWYWx1ZT5rX19CYWNraW5nRmllbGQaPElzQ2hlY2tlZD5rX19CYWNraW5nRmllbGQaPEdyb3VwTmFtZT5rX19CYWNraW5nRmllbGQWPExhYmVsPmtfX0JhY2tpbmdGaWVsZAAAAQEGAQIAAAAAAAAAAAAAAAAGBAAAACRiOWU1MzcxNS05ODg4LTRlYWMtODZmNi1jM2MwNTU5MDVkZDAGBQAAAAhPcHRpb24gMAs=" InstanceId="b9e53715-9888-4eac-86f6-c3c055905dd0" ColumnWidth="250" Title="Channel 1" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="channel_1.waveform" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+  </nodes>
+  <explorer>
+    <content>
+      <nodes>
+        <node IsEnable="true" Name="Project" NodeType="Project" ScreenType="None" UniqueID="Project2">
+          <node IsEnable="true" Name="DataScreen" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen1" />
+        </node>
+      </nodes>
+    </content>
+  </explorer>
+  <infineon XMC_Family="XMC_4000" />
+  <application>
+    <docking>
+      <ArrayOfDockingParams xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>-1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>192.85500801848144</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>683.2</PreviousDesiredHeightInDockedMode>
+          <Name>workspaceExplorerMainView</Name>
+          <State>Dock</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Right</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>192.85500801848144</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>683.2</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>165</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>true</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>true</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>5</IndexInDockMode>
+          <IndexInFloatMode>5</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>-1</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>false</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>1363.2</Width>
+            <Height>683.2</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>-1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>1166.3449919815187</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>1166.3449919815187</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>184.94193066015265</PreviousDesiredHeightInDockedMode>
+          <Name>usrSymbolBrowser</Name>
+          <State>Dock</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Bottom</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>1166.3449919815187</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>184.94193066015265</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>200</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>true</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>true</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>5</IndexInDockMode>
+          <IndexInFloatMode>5</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>-1</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>false</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>1166.3449919815187</Width>
+            <Height>683.2</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>-1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>494.25806933984745</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>180.12820236116809</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>494.25806933984745</PreviousDesiredHeightInDockedMode>
+          <Name>toolboxMainView</Name>
+          <State>Dock</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Left</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>180.12820236116809</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>494.25806933984745</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>175</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>true</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>true</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>5</IndexInDockMode>
+          <IndexInFloatMode>5</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>-1</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>false</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>1166.3449919815187</Width>
+            <Height>494.25806933984745</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <Name>DataScreen1</Name>
+          <State>Document</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Left</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>90</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>90</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>false</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>false</IsSelectedTab>
+          <IsActiveWindow>true</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>4</IndexInDockMode>
+          <IndexInFloatMode>4</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>0</TDIIndex>
+          <IsSelected>true</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>true</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>-373</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+      </ArrayOfDockingParams>
+    </docking>
+  </application>
+</workspace>

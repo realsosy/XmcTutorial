@@ -23,8 +23,7 @@ pages:
     - ADC Basic: LabAdcBasic.md
     - DAC Basic: LabDacBasic.md
     - Interrupt: LabNVIC.md
-#    - System Timer: LabSystemTimer.md
-#    - uC-Probe: uc-Probe.md
+    - System Timer: LabSystemTimer.md
 
 #- Intermediate:
 #    - Counter: Counter.md
