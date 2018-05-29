@@ -20,55 +20,55 @@
  * code.
  */
 
-SYSTIMER_STATE_t eu32SwTimer_200ms_State;
-SYSTIMER_STATE_t eu32SwTimer_1s_State;
-uint32_t u32SwTimer_200ms;
-uint32_t u32SwTimer_1s;
-uint32_t u32SwTimer_100ms;
+SYSTIMER_STATE_t Timer_200ms_State;
+SYSTIMER_STATE_t Timer_1s_State;
+uint32_t Timer_200ms_Id;
+uint32_t Timer_1s_Id;
+uint32_t Timer_100ms_Id;
 
-void CB_dhSYSTIMER_0_u32SwTimer_200ms(void)
+void CB_Timer_200ms(void)
 {
 	DIGITAL_IO_ToggleOutput(&dhDIGITAL_OUT_0);
 }
 
-void CB_dhSYSTIMER_0_u32SwTimer_1s(void)
+void CB_Timer_1s(void)
 {
 	DIGITAL_IO_ToggleOutput(&dhDIGITAL_OUT_1);
 }
 
-void CB_dhSYSTIMER_0_u32SwTimer_100ms(void)
+void CB_Timer_100ms(void)
 {
-  eu32SwTimer_200ms_State = SYSTIMER_GetTimerState(u32SwTimer_200ms);
-  eu32SwTimer_1s_State = SYSTIMER_GetTimerState(u32SwTimer_1s);
+  Timer_200ms_State = SYSTIMER_GetTimerState(Timer_200ms_Id);
+  Timer_1s_State = SYSTIMER_GetTimerState(Timer_1s_Id);
 
   if (DIGITAL_IO_GetInput(&dhDIGITAL_IN_0) == 0 && DIGITAL_IO_GetInput(&dhDIGITAL_IN_1) == 0)
   {
-	  if (eu32SwTimer_200ms_State == SYSTIMER_STATE_NOT_INITIALIZED)
+	  if (Timer_200ms_State == SYSTIMER_STATE_NOT_INITIALIZED)
 	  {
-		  u32SwTimer_200ms = SYSTIMER_CreateTimer(200000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_200ms, NULL);
-		  SYSTIMER_StartTimer(u32SwTimer_200ms);
+		  Timer_200ms_Id = SYSTIMER_CreateTimer(200000, SYSTIMER_MODE_PERIODIC, CB_Timer_200ms, NULL);
+		  SYSTIMER_StartTimer(Timer_200ms_Id);
 	  }
 
-	  if (eu32SwTimer_1s_State == SYSTIMER_STATE_NOT_INITIALIZED)
+	  if (Timer_1s_State == SYSTIMER_STATE_NOT_INITIALIZED)
 	  {
-		  u32SwTimer_1s = SYSTIMER_CreateTimer(1000000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_1s, NULL);
-		  SYSTIMER_StartTimer(u32SwTimer_1s);
+		  Timer_1s_Id = SYSTIMER_CreateTimer(1000000, SYSTIMER_MODE_PERIODIC, CB_Timer_1s, NULL);
+		  SYSTIMER_StartTimer(Timer_1s_Id);
 	  }
   }
   else if (DIGITAL_IO_GetInput(&dhDIGITAL_IN_0) == 0)
   {
-	  if (eu32SwTimer_200ms_State == SYSTIMER_STATE_RUNNING)
+	  if (Timer_200ms_State == SYSTIMER_STATE_RUNNING)
 	  {
-		  SYSTIMER_StopTimer(u32SwTimer_200ms);
-		  SYSTIMER_DeleteTimer(u32SwTimer_200ms);
+		  SYSTIMER_StopTimer(Timer_200ms_Id);
+		  SYSTIMER_DeleteTimer(Timer_200ms_Id);
 	  }
   }
   else if (DIGITAL_IO_GetInput(&dhDIGITAL_IN_1) == 0)
   {
-	  if (eu32SwTimer_1s_State == SYSTIMER_STATE_RUNNING)
+	  if (Timer_1s_State == SYSTIMER_STATE_RUNNING)
 	  {
-		  SYSTIMER_StopTimer(u32SwTimer_1s);
-		  SYSTIMER_DeleteTimer(u32SwTimer_1s);
+		  SYSTIMER_StopTimer(Timer_1s_Id);
+		  SYSTIMER_DeleteTimer(Timer_1s_Id);
 	  }
   }
 }
@@ -90,13 +90,13 @@ int main(void)
     }
   }
 
-  u32SwTimer_200ms = SYSTIMER_CreateTimer(200000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_200ms, NULL);
-  u32SwTimer_1s = SYSTIMER_CreateTimer(1000000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_1s, NULL);
-  u32SwTimer_100ms = SYSTIMER_CreateTimer(100000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_100ms, NULL);
+  Timer_200ms_Id = SYSTIMER_CreateTimer(200000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_200ms, NULL);
+  Timer_1s_Id = SYSTIMER_CreateTimer(1000000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_1s, NULL);
+  Timer_100ms_Id = SYSTIMER_CreateTimer(100000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_100ms, NULL);
 
-  SYSTIMER_StartTimer(u32SwTimer_200ms);
-  SYSTIMER_StartTimer(u32SwTimer_1s);
-  SYSTIMER_StartTimer(u32SwTimer_100ms);
+  SYSTIMER_StartTimer(Timer_200ms_Id);
+  SYSTIMER_StartTimer(Timer_1s_Id);
+  SYSTIMER_StartTimer(Timer_100ms_Id);
 
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)

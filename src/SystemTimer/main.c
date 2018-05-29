@@ -20,15 +20,15 @@
  * code.
  */
 
-uint32_t u32SwTimer_200ms;
-uint32_t u32SwTimer_1s;
+uint32_t Timer_200ms_Id;
+uint32_t Timer_1s_Id;
 
-void CB_dhSYSTIMER_0_u32SwTimer_200ms(void)
+void CB_Timer_200ms(void)
 {
 	DIGITAL_IO_ToggleOutput(&dhDIGITAL_OUT_0);
 }
 
-void CB_dhSYSTIMER_0_u32SwTimer_1s(void)
+void CB_Timer_1s(void)
 {
 	DIGITAL_IO_ToggleOutput(&dhDIGITAL_OUT_1);
 }
@@ -50,11 +50,11 @@ int main(void)
     }
   }
 
-  u32SwTimer_200ms = SYSTIMER_CreateTimer(200000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_200ms, NULL);
-  u32SwTimer_1s = SYSTIMER_CreateTimer(1000000, SYSTIMER_MODE_PERIODIC, CB_dhSYSTIMER_0_u32SwTimer_1s, NULL);
+  Timer_200ms_Id = SYSTIMER_CreateTimer(200000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_200ms, NULL);
+  Timer_1s_Id = SYSTIMER_CreateTimer(1000000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_1s, NULL);
 
-  SYSTIMER_StartTimer(u32SwTimer_200ms);
-  SYSTIMER_StartTimer(u32SwTimer_1s);
+  SYSTIMER_StartTimer(Timer_200ms_Id);
+  SYSTIMER_StartTimer(Timer_1s_Id);
 
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
