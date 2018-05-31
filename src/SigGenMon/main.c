@@ -148,12 +148,6 @@ int main(void)
 
 	uint32_t timer_1ms;
 	uint32_t timer_100ms;
-	//  uint16_t u16_pre_dac0_value;
-	//  uint16_t u16_pre_dac1_value;
-	//
-	//  float flt_pre_dac0_value;
-	//  float flt_pre_dac1_value;
-
 
 	status = DAVE_Init();           /* Initialization of DAVE APPs  */
 	if(status != DAVE_STATUS_SUCCESS)
