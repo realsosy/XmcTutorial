@@ -1,0 +1,221 @@
+package Model.APPS.ADC_MEASUREMENT.v4_1_22;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class ADC_MEASUREMENT_GUI extends AppManifest {
+	/* Begin : UI variable section */
+	 public GTab gtab_ChannelConfiguration2;
+	 public GTab gtab_RequestSourceInterruptConfiguration;
+	 public GTab gtab_GlobalResultInterruptConfiguration;
+	 public GInteger ginteger_channel_number;
+	 public GCombo gcombo_trigger_mode;
+	 public GCombo gcombo_conv_mode;
+	 public GFloat gfloat_desired_sampling_time;
+	 public GFloat gfloat_actual_sampling_time;
+	 public GFloat gFloat_conversion_Time;
+	 public GString gstring_CH_Name_1;
+	 public GString gstring_CH_Name_2;
+	 public GString gstring_CH_Name_3;
+	 public GString gstring_CH_Name_4;
+	 public GString gstring_CH_Name_5;
+	 public GString gstring_CH_Name_6;
+	 public GString gstring_CH_Name_7;
+	 public GString gstring_CH_Name_8;
+	 public GString gstring_CH_Name_9;
+	 public GString gstring_CH_Name_10;
+	 public GString gstring_CH_Name_11;
+	 public GString gstring_CH_Name_12;
+	 public GString gstring_CH_Name_13;
+	 public GString gstring_CH_Name_14;
+	 public GString gstring_CH_Name_15;
+	 public GString gstring_CH_Name_16;
+	 public GString gstring_CH_Name_17;
+	 public GString gstring_CH_Name_18;
+	 public GString gstring_CH_Name_19;
+	 public GString gstring_CH_Name_20;
+	 public GString gstring_CH_Name_21;
+	 public GString gstring_CH_Name_22;
+	 public GString gstring_CH_Name_23;
+	 public GString gstring_CH_Name_24;
+	 public GString gstring_CH_Name_25;
+	 public GString gstring_CH_Name_26;
+	 public GString gstring_request_source_interrupt_handler;
+	 public GString gstring_result_event_interrupt_handler;
+	 public GCheck gcheck_autoscan;
+	 public GCheck gcheck_start_conversion;
+	 public GCheck gcheck_SharedPinA;
+	 public GCheck gcheck_enable_res_evt_chA;
+	 public GCheck gcheck_SharedPinB;
+	 public GCheck gcheck_enable_res_evt_chB;
+	 public GCheck gcheck_SharedPinC;
+	 public GCheck gcheck_enable_res_evt_chC;
+	 public GCheck gcheck_SharedPinD;
+	 public GCheck gcheck_enable_res_evt_chD;
+	 public GCheck gcheck_SharedPinE;
+	 public GCheck gcheck_enable_res_evt_chE;
+	 public GCheck gcheck_SharedPinF;
+	 public GCheck gcheck_enable_res_evt_chF;
+	 public GCheck gcheck_SharedPinG;
+	 public GCheck gcheck_enable_res_evt_chG;
+	 public GCheck gcheck_SharedPinH;
+	 public GCheck gcheck_enable_res_evt_chH;
+	 public GCheck gcheck_SharedPinI;
+	 public GCheck gcheck_enable_res_evt_chI;
+	 public GCheck gcheck_SharedPinJ;
+	 public GCheck gcheck_enable_res_evt_chJ;
+	 public GCheck gcheck_SharedPinK;
+	 public GCheck gcheck_enable_res_evt_chK;
+	 public GCheck gcheck_SharedPinL;
+	 public GCheck gcheck_enable_res_evt_chL;
+	 public GCheck gcheck_SharedPinM;
+	 public GCheck gcheck_enable_res_evt_chM;
+	 public GCheck gcheck_SharedPinN;
+	 public GCheck gcheck_enable_res_evt_chN;
+	 public GCheck gcheck_SharedPinO;
+	 public GCheck gcheck_enable_res_evt_chO;
+	 public GCheck gcheck_SharedPinP;
+	 public GCheck gcheck_enable_res_evt_chP;
+	 public GCheck gcheck_SharedPinQ;
+	 public GCheck gcheck_enable_res_evt_chQ;
+	 public GCheck gcheck_SharedPinR;
+	 public GCheck gcheck_enable_res_evt_chR;
+	 public GCheck gcheck_SharedPinS;
+	 public GCheck gcheck_enable_res_evt_chS;
+	 public GCheck gcheck_SharedPinT;
+	 public GCheck gcheck_enable_res_evt_chT;
+	 public GCheck gcheck_SharedPinU;
+	 public GCheck gcheck_enable_res_evt_chU;
+	 public GCheck gcheck_SharedPinV;
+	 public GCheck gcheck_enable_res_evt_chV;
+	 public GCheck gcheck_SharedPinW;
+	 public GCheck gcheck_enable_res_evt_chW;
+	 public GCheck gcheck_SharedPinX;
+	 public GCheck gcheck_enable_res_evt_chX;
+	 public GCheck gcheck_SharedPinY;
+	 public GCheck gcheck_enable_res_evt_chY;
+	 public GCheck gcheck_SharedPinZ;
+	 public GCheck gcheck_enable_res_evt_chZ;
+	 public GCheck gcheck_enable_source_interrupt;
+	 public GCheck gcheck_enable_result_evt;
+	 public GLabel glabel_ChannelName_1_16;
+	 public GLabel glabel_Shareable_Pin1;
+	 public GLabel glabel_result_evt_label1;
+	 public GLabel glabel_CH_Name_17;
+	 public GLabel glabel_request_source_interrupt_handler;
+	 public GLabel glabel_result_event_interrupt_handler;
+	 public GInterruptPrio ginterruptprio_backgnd_rs_intr;
+	 public GInterruptPrio ginterruptprio_result_intr;
+	 public GMessage gmessage_background_handler;
+	 public GMessage gmessage_result_handler;
+
+	 public ADC_MEASUREMENT_GUI(DaveEnv daveEnv){
+
+	 gtab_ChannelConfiguration2 = GTab(widgetName:"gtab_ChannelConfiguration2", text:"Measurements Cont'd", enabled:true, visible:true)
+	 gtab_RequestSourceInterruptConfiguration = GTab(widgetName:"gtab_RequestSourceInterruptConfiguration", text:"Interrupt Settings", enabled:true, visible:true)
+	 gtab_GlobalResultInterruptConfiguration = GTab(widgetName:"gtab_GlobalResultInterruptConfiguration", text:"Interrupt  Settings", enabled:true, visible:true)
+	 ginteger_channel_number = GInteger(widgetName:"ginteger_channel_number", value:1, minValue:1, maxValue:26, enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_trigger_mode = GCombo(widgetName:"gcombo_trigger_mode", options:["No External Trigger","External Trigger Upon Rising Edge","External Trigger Upon Falling Edge","External Trigger Upon Both The Edge"], value:"No External Trigger", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_conv_mode = GCombo(widgetName:"gcombo_conv_mode", options:["12 Bit Conversion","10 Bit Conversion","8 Bit Conversion","10 Bit Fast Conversion"], value:"12 Bit Conversion", enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_desired_sampling_time = GFloat(widgetName:"gfloat_desired_sampling_time", value:67.0, minValue:0.0, maxValue:8000.0, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_sampling_time = GFloat(widgetName:"gfloat_actual_sampling_time", value:67, minValue:0, maxValue:8068, enabled:false, visible:true, isMandatoryValue:false)
+	 gFloat_conversion_Time = GFloat(widgetName:"gFloat_conversion_Time", value:0.0, minValue:0, maxValue:Double.POSITIVE_INFINITY, enabled:false, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_1 = GString(widgetName:"gstring_CH_Name_1", value:"Channel_A", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_2 = GString(widgetName:"gstring_CH_Name_2", value:"Channel_B", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_3 = GString(widgetName:"gstring_CH_Name_3", value:"Channel_C", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_4 = GString(widgetName:"gstring_CH_Name_4", value:"Channel_D", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_5 = GString(widgetName:"gstring_CH_Name_5", value:"Channel_E", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_6 = GString(widgetName:"gstring_CH_Name_6", value:"Channel_F", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_7 = GString(widgetName:"gstring_CH_Name_7", value:"Channel_G", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_8 = GString(widgetName:"gstring_CH_Name_8", value:"Channel_H", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_9 = GString(widgetName:"gstring_CH_Name_9", value:"Channel_I", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_10 = GString(widgetName:"gstring_CH_Name_10", value:"Channel_J", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_11 = GString(widgetName:"gstring_CH_Name_11", value:"Channel_K", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_12 = GString(widgetName:"gstring_CH_Name_12", value:"Channel_L", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_13 = GString(widgetName:"gstring_CH_Name_13", value:"Channel_M", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_14 = GString(widgetName:"gstring_CH_Name_14", value:"Channel_N", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_15 = GString(widgetName:"gstring_CH_Name_15", value:"Channel_O", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_16 = GString(widgetName:"gstring_CH_Name_16", value:"Channel_P", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_17 = GString(widgetName:"gstring_CH_Name_17", value:"Channel_Q", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_18 = GString(widgetName:"gstring_CH_Name_18", value:"Channel_R", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_19 = GString(widgetName:"gstring_CH_Name_19", value:"Channel_S", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_20 = GString(widgetName:"gstring_CH_Name_20", value:"Channel_T", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_21 = GString(widgetName:"gstring_CH_Name_21", value:"Channel_U", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_22 = GString(widgetName:"gstring_CH_Name_22", value:"Channel_V", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_23 = GString(widgetName:"gstring_CH_Name_23", value:"Channel_W", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_24 = GString(widgetName:"gstring_CH_Name_24", value:"Channel_X", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_25 = GString(widgetName:"gstring_CH_Name_25", value:"Channel_Y", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_CH_Name_26 = GString(widgetName:"gstring_CH_Name_26", value:"Channel_Z", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_request_source_interrupt_handler = GString(widgetName:"gstring_request_source_interrupt_handler", value:"Adc_Measurement_Handler", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_result_event_interrupt_handler = GString(widgetName:"gstring_result_event_interrupt_handler", value:"Adc_Measurement_Handler", enabled:true, visible:true, isMandatoryValue:false)
+	 gcheck_autoscan = GCheck(widgetName:"gcheck_autoscan", value:false, enabled:true, visible:true)
+	 gcheck_start_conversion = GCheck(widgetName:"gcheck_start_conversion", value:true, enabled:true, visible:true)
+	 gcheck_SharedPinA = GCheck(widgetName:"gcheck_SharedPinA", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chA = GCheck(widgetName:"gcheck_enable_res_evt_chA", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinB = GCheck(widgetName:"gcheck_SharedPinB", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chB = GCheck(widgetName:"gcheck_enable_res_evt_chB", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinC = GCheck(widgetName:"gcheck_SharedPinC", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chC = GCheck(widgetName:"gcheck_enable_res_evt_chC", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinD = GCheck(widgetName:"gcheck_SharedPinD", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chD = GCheck(widgetName:"gcheck_enable_res_evt_chD", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinE = GCheck(widgetName:"gcheck_SharedPinE", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chE = GCheck(widgetName:"gcheck_enable_res_evt_chE", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinF = GCheck(widgetName:"gcheck_SharedPinF", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chF = GCheck(widgetName:"gcheck_enable_res_evt_chF", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinG = GCheck(widgetName:"gcheck_SharedPinG", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chG = GCheck(widgetName:"gcheck_enable_res_evt_chG", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinH = GCheck(widgetName:"gcheck_SharedPinH", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chH = GCheck(widgetName:"gcheck_enable_res_evt_chH", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinI = GCheck(widgetName:"gcheck_SharedPinI", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chI = GCheck(widgetName:"gcheck_enable_res_evt_chI", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinJ = GCheck(widgetName:"gcheck_SharedPinJ", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chJ = GCheck(widgetName:"gcheck_enable_res_evt_chJ", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinK = GCheck(widgetName:"gcheck_SharedPinK", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chK = GCheck(widgetName:"gcheck_enable_res_evt_chK", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinL = GCheck(widgetName:"gcheck_SharedPinL", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chL = GCheck(widgetName:"gcheck_enable_res_evt_chL", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinM = GCheck(widgetName:"gcheck_SharedPinM", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chM = GCheck(widgetName:"gcheck_enable_res_evt_chM", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinN = GCheck(widgetName:"gcheck_SharedPinN", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chN = GCheck(widgetName:"gcheck_enable_res_evt_chN", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinO = GCheck(widgetName:"gcheck_SharedPinO", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chO = GCheck(widgetName:"gcheck_enable_res_evt_chO", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinP = GCheck(widgetName:"gcheck_SharedPinP", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chP = GCheck(widgetName:"gcheck_enable_res_evt_chP", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinQ = GCheck(widgetName:"gcheck_SharedPinQ", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chQ = GCheck(widgetName:"gcheck_enable_res_evt_chQ", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinR = GCheck(widgetName:"gcheck_SharedPinR", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chR = GCheck(widgetName:"gcheck_enable_res_evt_chR", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinS = GCheck(widgetName:"gcheck_SharedPinS", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chS = GCheck(widgetName:"gcheck_enable_res_evt_chS", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinT = GCheck(widgetName:"gcheck_SharedPinT", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chT = GCheck(widgetName:"gcheck_enable_res_evt_chT", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinU = GCheck(widgetName:"gcheck_SharedPinU", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chU = GCheck(widgetName:"gcheck_enable_res_evt_chU", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinV = GCheck(widgetName:"gcheck_SharedPinV", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chV = GCheck(widgetName:"gcheck_enable_res_evt_chV", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinW = GCheck(widgetName:"gcheck_SharedPinW", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chW = GCheck(widgetName:"gcheck_enable_res_evt_chW", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinX = GCheck(widgetName:"gcheck_SharedPinX", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chX = GCheck(widgetName:"gcheck_enable_res_evt_chX", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinY = GCheck(widgetName:"gcheck_SharedPinY", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chY = GCheck(widgetName:"gcheck_enable_res_evt_chY", value:false, enabled:true, visible:true)
+	 gcheck_SharedPinZ = GCheck(widgetName:"gcheck_SharedPinZ", value:false, enabled:true, visible:true)
+	 gcheck_enable_res_evt_chZ = GCheck(widgetName:"gcheck_enable_res_evt_chZ", value:false, enabled:true, visible:true)
+	 gcheck_enable_source_interrupt = GCheck(widgetName:"gcheck_enable_source_interrupt", value:false, enabled:true, visible:true)
+	 gcheck_enable_result_evt = GCheck(widgetName:"gcheck_enable_result_evt", value:false, enabled:true, visible:true)
+	 glabel_ChannelName_1_16 = GLabel(widgetName:"glabel_ChannelName_1_16", text:"Measurement names", enabled:true, visible:true)
+	 glabel_Shareable_Pin1 = GLabel(widgetName:"glabel_Shareable_Pin1", text:"Expose pin", enabled:true, visible:true)
+	 glabel_result_evt_label1 = GLabel(widgetName:"glabel_result_evt_label1", text:"Result event", enabled:true, visible:true)
+	 glabel_CH_Name_17 = GLabel(widgetName:"glabel_CH_Name_17", text:"Channel Q", enabled:false, visible:true)
+	 glabel_request_source_interrupt_handler = GLabel(widgetName:"glabel_request_source_interrupt_handler", text:"Interrupt handler name:", enabled:true, visible:true)
+	 glabel_result_event_interrupt_handler = GLabel(widgetName:"glabel_result_event_interrupt_handler", text:"Interrupt handler name:", enabled:true, visible:true)
+	 ginterruptprio_backgnd_rs_intr = GInterruptPrio(widgetName:"ginterruptprio_backgnd_rs_intr", priorityValue:3, minPriority:0, maxPriority:64, subPriorityValue:0, minSubPriority:0, maxSubPriority:0, subPriorityVisible:true, enabled:true, visible:true)
+	 ginterruptprio_result_intr = GInterruptPrio(widgetName:"ginterruptprio_result_intr", priorityValue:3, minPriority:0, maxPriority:64, subPriorityValue:0, minSubPriority:0, maxSubPriority:0, subPriorityVisible:false, enabled:true, visible:true)
+	 gmessage_background_handler = GMessage(widgetName:"gmessage_background_handler", text:"Invalid function name.", isError:false, visible:true)
+	 gmessage_result_handler = GMessage(widgetName:"gmessage_result_handler", text:"Invalid function name.", isError:false, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}
