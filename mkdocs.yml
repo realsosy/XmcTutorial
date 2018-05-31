@@ -24,6 +24,7 @@ pages:
     - DAC Basic: LabDacBasic.md
     - Interrupt: LabNVIC.md
     - System Timer: LabSystemTimer.md
+    - Final SignalGeneratorMonitor: LabSigMonGen.md
 
 #- Intermediate:
 #    - Counter: Counter.md
