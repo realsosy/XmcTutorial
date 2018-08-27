@@ -39,7 +39,7 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 1. Interrupt
 1. System Timer & Foreground/Background Scheduler
 1. uC-Probe
-1. Signal Generator & Monitor
+1. [Mini Project] Signal Generator & Monitor
 
 *   [Programing 관련 필요 지식]
     *   Pointer
@@ -48,24 +48,24 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 
 ## 중급
 * 개요
-    * 대상: emb 경험자
-    * 내용: 중급 interface(기본 interface 다시, GPDMA, CCU4/8, USIC or USB, FCE), XMC lib
-    * 프로젝트: raidar & dc motor speed control
+    * 대상: emb 경험자
+    * 내용: 중급 interface(Timer CCU4/8, USIC or USB), XMC lib
+    * 프로젝트: raidar
 
-1. DAC LUT
+1. [Prog] Function, File, and module design
+1. [Prog] State-machine 설계 및 구현
 1. Counter, Timer
 1. CCU8 Slice Config
 1. Real-time Clock
 1. Watchdog
-1. DMA
-1. ERU
+1. I2C & SPI
 1. UART
 1. USB(USBD_VCOM)
-1. I2C & SPI
+1. [Example] Raidar
 
 *   [Programing 관련 필요 지식]
-    *   모듈화
-    *   Library
+    *   모듈화 & Library
+    *   State-machine
 
 ## 고급
 *   개요
@@ -73,6 +73,9 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
     *   내용: 고급 interface(MultiCAN, SDMMC, ETH), FreeRTOS, CMSIS, XMC Toolbox
     *   제외 interface 모듈(HRPWM, POSIF, DSD, EBU, LEDTS)
 
+1. DAC LUT
+1. DMA
+1. ERU
 1. Project Template
 1. FreeRTOS
 1. CMSIS_DSP
