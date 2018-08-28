@@ -1,0 +1,133 @@
+package Model.APPS.BUS_IO.v4_0_2.Templates;
+
+import Model.APPS.BUS_IO.v4_0_2.BUS_IO
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2016-04-06
+ *     - Initial version<br>
+ *
+ * @endcond
+ *
+ */
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+#include "bus_io.h"
+""");
+
+
+
+
+Map input_gpio_mode = [
+	"Tristate"                          :"XMC_GPIO_MODE_INPUT_TRISTATE",
+	"Pull Up"                           :"XMC_GPIO_MODE_INPUT_PULL_UP",
+	"Pull Down"                         :"XMC_GPIO_MODE_INPUT_PULL_DOWN",
+	"Continuous Sampling Mode"          :"XMC_GPIO_MODE_INPUT_SAMPLING",
+	"Inverted Tristate"                 :"XMC_GPIO_MODE_INPUT_INVERTED_TRISTATE",
+	"Inverted Pull Up"                  :"XMC_GPIO_MODE_INPUT_INVERTED_PULL_UP",
+	"Inverted Pull Down"                :"XMC_GPIO_MODE_INPUT_INVERTED_PULL_DOWN",
+	"Inverted Continuous Sampling Mode" :"XMC_GPIO_MODE_INPUT_INVERTED_SAMPLING",
+	"Tristate"                          :"XMC_GPIO_MODE_INPUT_TRISTATE",
+	"Tristate"                          :"XMC_GPIO_MODE_INPUT_TRISTATE",
+	
+	];
+
+Map output_gpio_mode = [
+	"Push Pull"  : "XMC_GPIO_MODE_OUTPUT_PUSH_PULL",
+	"Open Drain" : "XMC_GPIO_MODE_OUTPUT_OPEN_DRAIN"
+	]
+
+Map output_strength = [
+	"Weak Driver"                          :"\n    .output_strength = XMC_GPIO_OUTPUT_STRENGTH_WEAK",
+	"Medium Driver"                        :"\n    .output_strength = XMC_GPIO_OUTPUT_STRENGTH_MEDIUM",
+	"Strong Driver Slow Edge"              :"\n    .output_strength = XMC_GPIO_OUTPUT_STRENGTH_STRONG_SLOW_EDGE",
+	"Strong Driver Soft Edge"              :"\n    .output_strength = XMC_GPIO_OUTPUT_STRENGTH_STRONG_SOFT_EDGE",
+	"Strong Driver Medium Edge"            :"\n    .output_strength = XMC_GPIO_OUTPUT_STRENGTH_STRONG_MEDIUM_EDGE",
+	"Strong Driver Sharp Edge"             :"\n    .output_strength = XMC_GPIO_OUTPUT_STRENGTH_STRONG_SHARP_EDGE",
+	"Don't Care"                           :" "
+	]
+
+for (Object appIns : appInstancesList ) {
+	
+	String family = daveEnv.project.selectedDevice.deviceId.family;
+	
+	Map mode_selection = ["Input" :input_gpio_mode[appIns.gcombo_input_mode.value], "Input/Output" :output_gpio_mode[appIns.gcombo_output_mode.value] ]
+	
+	Map	get_output_level = ["Input" :"", "Input/Output" :"\n    .output_level = XMC_GPIO_OUTPUT_LEVEL_${appIns.gcombo_initial_output_level.value.toUpperCase()}," ]
+		
+	Map get_output_strength_or_input_hysteresis;
+	if(family == "XMC4")
+	{
+		get_output_strength_or_input_hysteresis = ["Input" :"", "Input/Output" : output_strength[appIns.gcombo_driver_strength.value] ]
+	}
+	else
+	{
+		get_output_strength_or_input_hysteresis = ["Input" :"\n    .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_${appIns.gcombo_hysteresis.value.toUpperCase()},", "Input/Output" :"" ];
+	}
+	
+	number_of_pins = appIns.ginteger_io_pins.value;
+	
+	out.print("""
+const BUS_IO_PORT_PIN_t ${appIns.getInstanceLabel()}_pin_list[] =
+{\n       """);
+
+	for(i=0 ;i <number_of_pins ; i++)
+	{
+		int index = i;
+		List port_uri = appIns.rarray_hwres_port_pin[index].getSolverUri();
+		
+		String port = port_uri[-3]
+		String pin = port_uri[-1]
+		
+		out.print("""{P${port}_${pin}}""");
+		if(i+1 < number_of_pins){out.print(""",\n       """);}
+		
+	}
+	out.print("""\n}; \n"""); // close braces for the PORT_PIN_t
+	
+
+	out.print(""" 
+BUS_IO_t ${appIns.getInstanceLabel()} =
+{
+  .pin_array = ${appIns.getInstanceLabel()}_pin_list,
+  .gpio_config = {
+  .mode = ${mode_selection[appIns.gcombo_io_function.value]}, ${get_output_level[appIns.gcombo_io_function.value]} ${get_output_strength_or_input_hysteresis[appIns.gcombo_io_function.value]}
+  },
+  .number_of_pins = (uint8_t)${number_of_pins}
+};""");
+	
+}

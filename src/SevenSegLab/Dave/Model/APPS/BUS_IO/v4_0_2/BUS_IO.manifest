@@ -1,0 +1,362 @@
+package Model.APPS.BUS_IO.v4_0_2;
+
+/*************** Revision History **********************************************
+ Version     Date          Description
+ 4.0.0       01-Apr-2016   Initial version for DAVEv4.<br>
+ 4.0.2       06-Apr-2016   1). Help Documentation is improved.<br>
+                           2). Code size is optimized.<br>
+                           3). APP owner feedbacks are fixed.<br>
+ *******************************************************************************/
+// Import statements
+import ifx.davex.app.manifest.*
+
+class  BUS_IO extends BUS_IO_GUI {
+
+	private static final int TOTAL_NUMBER_PINS = 16
+
+	 /* Note  : Following APP properties are mandatory and important */
+	 
+	 /* Begin : APP property section */
+	
+	/**
+	 * APP version
+	 * Format: a string with three digit separated by a dot.
+	 */
+	def version            = '4.0.2'
+	
+	/**
+	 * APP categories declaration. 
+	 * It is list of strings. Subcategories are separated by slash.
+	 * No limits on number of categories and subcategories depth.
+	 */
+	def categoriesDescription = ['System']
+
+	/** 
+	 * Minimum DAVE version required for this APP.
+	 * 
+	 * It is string with three digit separated by a dot.
+	 */
+	def minDaveVersion           = '4.0.0'
+	
+	/** 
+	 * Keywords used by search feature in APPs selection view
+	 * 
+	 * It is a list of string.
+	 */
+	def keywords      = [
+		'GPIO',
+		'Port',
+		'IO',
+		'Pin',
+		'Pad',
+		'ALL'
+	]
+	
+	/** 
+	 * softwareIDs is used to declare which devices are compatible with this APP.
+	 * It is a map with key a string containing a pattern that shall match the SW id of
+	 * the device and as value the minimal version of the APP.
+	 */
+	
+    /**
+     * Any step of XMC4500F144 and XMC4400F144
+	 * Any step of XMC4400F100 and XMC4400F64
+	 * Any step, any variant and any packages of XMC1300
+	 */
+
+	def softwareIDs       = ["XMC1.[1,2,3,4].*.*.*":"1.0.0", "XMC4.[1,2,3,4,5,7,8].*.*.*":"1.0.0"]
+	
+	/**
+	 * Singleton property:
+	 * When it is true the APP can be instantiated only once. 
+	 */
+	def singleton     = false
+
+
+	/**
+	 * initProvider property
+	 * It shall be true to add a call to <AppName>_Init() 
+	 */
+	def initProvider  = true
+	
+	/**
+	 * Deprecated APP
+	 * Set it to true to indicate that the APP shall be not used for new projects.
+	 */
+	def deprecated    = false
+	
+	/**
+	 * Sharable property.
+	 * It shall be true to allows multiple APPs to require the same instance of this APP.
+	 */
+	def sharable      = false
+
+	/**
+	 *  APP function description.
+	 */
+	def description = "BUS_IO APP is used to configure/control several GPIO pins as one entity."
+	
+	/* ---------------------------------------------------------End: APP Properties------------------------------------------------------------- */
+	
+		/* -----------------------Begin : User Variables for hardware resources and virtual signals------------------------------------------------- */
+	
+//		SolverVariable port_no = SolverVariable();
+		RArray<SolverVariable> rarray_port_no = RArray(16);
+		RArray<MVirtualResourceGroup> rarray_hwres_port_pin = RArray(16)
+		RArray<MVirtualResourceGroup> rarray_hwres_bus_io_pin_pad = RArray(16)
+		
+		MVirtualSignal vs_digital_io_sw_pin
+		MVirtualSignal vs_digital_io_pad_pin
+		MVirtualSignal vs_digital_io_hwsel
+		
+//		MVirtualSignal 
+		
+		RArray<MVirtualSignal> rarray_vs_bus_io_channel_pin = RArray(16)
+		RArray<MVirtualSignal> rarray_vs_bus_io_pin_pad_signal = RArray(16)
+		
+		
+		
+		MVirtualSignal vs_bus_io_channel_pin_0
+		MVirtualSignal vs_bus_io_channel_pin_1
+		MVirtualSignal vs_bus_io_channel_pin_2
+		MVirtualSignal vs_bus_io_channel_pin_3
+		MVirtualSignal vs_bus_io_channel_pin_4
+		MVirtualSignal vs_bus_io_channel_pin_5
+		MVirtualSignal vs_bus_io_channel_pin_6
+		MVirtualSignal vs_bus_io_channel_pin_7
+		MVirtualSignal vs_bus_io_channel_pin_8
+		MVirtualSignal vs_bus_io_channel_pin_9
+		MVirtualSignal vs_bus_io_channel_pin_10
+		MVirtualSignal vs_bus_io_channel_pin_11
+		MVirtualSignal vs_bus_io_channel_pin_12
+		MVirtualSignal vs_bus_io_channel_pin_13
+		MVirtualSignal vs_bus_io_channel_pin_14
+		MVirtualSignal vs_bus_io_channel_pin_15
+				
+		MVirtualSignal vs_bus_io_pin_pad_signal_0
+		MVirtualSignal vs_bus_io_pin_pad_signal_1
+		MVirtualSignal vs_bus_io_pin_pad_signal_2
+		MVirtualSignal vs_bus_io_pin_pad_signal_3
+		MVirtualSignal vs_bus_io_pin_pad_signal_4
+		MVirtualSignal vs_bus_io_pin_pad_signal_5
+		MVirtualSignal vs_bus_io_pin_pad_signal_6
+		MVirtualSignal vs_bus_io_pin_pad_signal_7
+		MVirtualSignal vs_bus_io_pin_pad_signal_8
+		MVirtualSignal vs_bus_io_pin_pad_signal_9
+		MVirtualSignal vs_bus_io_pin_pad_signal_10
+		MVirtualSignal vs_bus_io_pin_pad_signal_11
+		MVirtualSignal vs_bus_io_pin_pad_signal_12
+		MVirtualSignal vs_bus_io_pin_pad_signal_13
+		MVirtualSignal vs_bus_io_pin_pad_signal_14
+		MVirtualSignal vs_bus_io_pin_pad_signal_15
+		
+		
+		
+		
+		
+	
+		/*-----------------------End : User Variables for hardware resources and virtual signals---------------------------------------------------- */
+	
+		/*-------------------------------------------------------Begin : APP Constructor and Logic -------------------------------------------------*/
+	
+		public BUS_IO(DaveEnv daveEnv) {
+	
+			MF digital_input
+			MF digital_output
+			MF input_or_hwcontrol
+			MF output_or_hwcontrol
+			MF digital_output_speedclass
+			MF port_constraint
+			MF iocr_oe_en
+			MF speed_class
+			List hw = [0]
+	
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			/*                          Target Specific User Variable initialization                                                                     */
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			if (daveEnv.project.selectedDevice.deviceId.family == "XMC4") {
+				gcombo_driver_strength.options = [
+					"Don't Care",
+					"Weak Driver",
+					"Medium Driver",
+					"Strong Driver Soft Edge",
+					"Strong Driver Slow Edge",
+					"Strong Driver Sharp Edge",
+					"Strong Driver Medium Edge"
+				]
+	
+				gcombo_driver_strength.value = "Don't Care"
+	
+				/* device based port range constraint */
+				port_constraint = MF({
+					List a;
+					if (gcombo_io_function.value == 'Input') {
+						a= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 14, 15]
+					}
+					else {
+						a= [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+					}
+					a}, List)
+			}
+	
+			/* device based port range constraint */
+			if (daveEnv.project.selectedDevice.deviceId.family == "XMC1") {
+				glabel_driver_strength.visible = false
+				gcombo_driver_strength.visible = false
+		
+				port_constraint = MF({ [0, 1, 2, 3, 4]}, List)
+			}
+	
+			/* checking mode selection to update enable property of input widgets */
+			digital_input = MF({
+				if(gcombo_io_function.value == 'Input') {
+					true
+				}
+				else {
+					false
+				}
+			}, Boolean)
+	
+			/* checking mode selection to update enable property of output widgets */
+			digital_output = MF({gcombo_io_function.value == 'Input/Output'}, Boolean)
+						
+//			non_hw_control = MF({gcombo_io_function.value != 'Hardware Controlled'}, Boolean)
+			
+			input_or_hwcontrol = MF({(gcombo_io_function.value == 'Input')},Boolean)
+			output_or_hwcontrol = MF({(gcombo_io_function.value == 'Input/Output')},Boolean)
+	
+			/* updating output enable of solver register constraint */
+			iocr_oe_en = MF({(gcombo_io_function.value == "Input/Output")?[1]:[0]}, List)
+	
+			gcombo_input_mode.enabled = input_or_hwcontrol
+			glabel_input_mode.enabled = input_or_hwcontrol
+			gcombo_output_mode.enabled = digital_output
+			gcombo_initial_output_level.enabled = digital_output
+			gcombo_driver_strength.enabled = output_or_hwcontrol
+			glabel_driver_strength.enabled = output_or_hwcontrol
+			glabel_output_mode.enabled = digital_output
+			glabel_initial_output_level.enabled = digital_output
+			
+			gcombo_hysteresis.enabled = input_or_hwcontrol
+			gcombo_hysteresis.visible = (daveEnv.project.selectedDevice.deviceId.family == "XMC1")
+			glabel_hysteresis.visible = (daveEnv.project.selectedDevice.deviceId.family == "XMC1")
+			
+			gcombo_input_mode.options = MF({
+				if(gcombo_io_function.value == 'Hardware Controlled')
+				{
+					["Tristate",
+					 "Inverted Tristate"]
+				}
+				else
+				{
+					["Tristate",
+					"Pull Up",
+					"Pull Down",
+					"Continuous Sampling Mode",
+					"Inverted Tristate",
+					"Inverted Pull Up",
+					"Inverted Pull Down",
+					"Inverted Continuous Sampling Mode"]
+				}
+			},List)
+	
+
+			
+	
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			/*---------------------------------	Hardware resource consumption block ------------------------------------------------------------------- */
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			int i;
+			for(i=0; i < TOTAL_NUMBER_PINS; i++)
+			{
+				int index = i;
+				/* Solver constraint for port range */
+				rarray_port_no[index] = SolverVariable();
+				addUriElementRangeConstraint(rarray_port_no[index], port_constraint)
+				
+				/* Consume the required number of bus pins */
+				rarray_hwres_port_pin[i] = MVirtualResourceGroup("pin_bus_"+index, ["port","p",rarray_port_no[index],"pad","*"], 
+					MF({((index+1) <= ginteger_io_pins.value)},Boolean))
+			
+			}
+	
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			/*                                 Virtual Signals Definitions                                                                               */
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+	
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			/*---------------------------------	DIGITAL IO Signals ------------------------------------------------------------------- */
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			
+			for(i=0; i < TOTAL_NUMBER_PINS; i++)
+			{
+				int index = i;
+				
+				rarray_vs_bus_io_channel_pin[index] = MVirtualSignal(rarray_hwres_port_pin[index],"pad_signal_bus_" + index, "pad",
+																MF({((index+1) <= ginteger_io_pins.value)}, Boolean),false)
+
+				rarray_hwres_bus_io_pin_pad[index] = MVirtualResourceGroup("pad_bus_" + index,["devicepackage", "0", "*"],
+																				MF({((index+1) <= ginteger_io_pins.value)}, Boolean));
+	
+				rarray_vs_bus_io_pin_pad_signal[index] = MVirtualSignal(rarray_hwres_bus_io_pin_pad[i],"bus_"+index +"_pin_signal", "pin",true,false);
+				
+				addConnectionConstraint(rarray_vs_bus_io_channel_pin[index],rarray_vs_bus_io_pin_pad_signal[index]);
+				addConnectionConstraint(rarray_vs_bus_io_pin_pad_signal[index] ,rarray_vs_bus_io_channel_pin[index]);
+					
+				
+				addRegisterBitFieldConstraint(rarray_hwres_port_pin[index], "iocr_oe",  iocr_oe_en, digital_output)
+				
+				this."vs_bus_io_channel_pin_${index}" = rarray_vs_bus_io_channel_pin[index]
+				this."vs_bus_io_pin_pad_signal_${index}" = rarray_vs_bus_io_pin_pad_signal[index]
+			}
+				
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			/*                                 Virtual Signals Connections                                                                               */
+			/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+			
+	
+			/* updating speed class based on driver strength selected */
+			if (daveEnv.project.selectedDevice.deviceId.family == "XMC4") {
+				speed_class = MF({
+					if (gcombo_driver_strength.value == "Weak Driver" || gcombo_driver_strength.value == "Medium Driver") {
+						['A1', 'A1+', 'A2']
+					}
+					else if (gcombo_driver_strength.value == "Strong Driver Slow Edge") {
+						['A1+']
+					}
+					else if (gcombo_driver_strength.value == "Strong Driver Soft Edge") {
+						['A1+', 'A2']
+					}
+					else if(gcombo_driver_strength.value == "Strong Driver Medium Edge" || gcombo_driver_strength.value == "Strong Driver Sharp Edge") {
+						['A2']
+					}
+					else {
+						['A1', 'A1+', 'A2']
+					}
+				}, List)
+	
+				for(i=0; i < TOTAL_NUMBER_PINS; i++)
+				{
+					int index = i;
+					addResourcePropertyConstraint(rarray_hwres_port_pin[index], "speed_class of rg_property", speed_class,output_or_hwcontrol)
+				}
+			}
+		}
+		/*----------------------------------------------- End : APP Constructor and Logic -----------------------------------------------------------*/
+	
+	
+		/*-------------------------------------------------Begin : Source Files Generation ----------------------------------------------------------*/
+	
+		/* File Generation */
+		def generateFiles(){
+	
+			copy("bus_io.c", "bus_io.c")
+			copy("bus_io.h", "bus_io.h")
+			generate("bus_io_confc.tmpl", "bus_io_conf.c")
+			generate("bus_io_confh.tmpl", "bus_io_conf.h")
+			generate("bus_io_externh.tmpl", "bus_io_extern.h")
+		}
+	
+		/*--------------------------------------------------- End : Source Files Generation -------------------------------------------------------*/
+	}
+

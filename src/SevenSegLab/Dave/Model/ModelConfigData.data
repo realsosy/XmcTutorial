@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ApplicationModel:ApplicationData xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ApplicationModel="www.infineon.com/dave/applicationmodel" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore">
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PortNode">
+    <resource xsi:type="ResourceModel:Port" href="HW_RESOURCES/Port5/Port5_5.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:DevicePackageNode">
+    <resource xsi:type="ResourceModel:DevicePackage" href="HW_RESOURCES/DEVICEPACKAGE/DEVICEPACKAGE_0.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PeripheralNode">
+    <resource xsi:type="ResourceModel:Peripheral" href="HW_RESOURCES/SCU/SCU_0.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PortNode">
+    <resource xsi:type="ResourceModel:Port" href="HW_RESOURCES/DEBUG/DEBUG_0.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PeripheralNode">
+    <resource xsi:type="ResourceModel:Peripheral" href="HW_RESOURCES/CPU/CPU_0.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PortNode">
+    <resource xsi:type="ResourceModel:Port" href="HW_RESOURCES/Port15/Port15_15.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PortNode">
+    <resource xsi:type="ResourceModel:Port" href="HW_RESOURCES/Port1/Port1_1.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PortNode">
+    <resource xsi:type="ResourceModel:Port" href="HW_RESOURCES/Port4/Port4_4.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#/"/>
+  </nodes>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.0"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.1"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.2"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.3"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.4"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.5"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.6"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.7"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.8"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.9"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.10"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.11"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.12"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.13"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.14"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.15"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.16"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.17"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.18"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.19"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.20"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.21"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.22"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.23"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.24"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.25"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.26"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.27"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.28"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.29"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.30"/>
+  <hwConnections href="APPS/BUS_IO/v4_0_2/BUS_IO_0.app#//@connections.31"/>
+  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_0.app#//@connections.0"/>
+  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_0.app#//@connections.1"/>
+  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.0"/>
+  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.1"/>
+</ApplicationModel:ApplicationData>
