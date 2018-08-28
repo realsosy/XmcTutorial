@@ -1,0 +1,75 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 600, 500">
+		<p1:GTab text="General Settings" widgetName="tab_configuration" visible="true" enabled="true" manifestObj="true">
+			<p1:GTab.control>
+				<p1:Tab toolTipText="">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2"/>
+					</p1:Tab.layout>
+					<p1:GLabel text="Number of pins:" visible="true" manifestObj="true" widgetName="glabel_io_pins">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="100"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GInteger x:Style="NONE" minValue="1" maxValue="16" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_io_pins" value="4" toolTipText="Controls a several port pins as one entity of digital input/output." description="Allows user to configure or control a several port pins as one entity of digital Input/Output.">
+						<p1:GInteger.layoutData>
+							<GridData widthHint="102"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+					<p1:GLabel text="Pin direction:" visible="true" manifestObj="true" widgetName="glabel_io_function">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="100"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_io_function" options="Input&#13;&#10;Input/Output" value="Input" description="Allows user to configure port pins direction as input/output." toolTipText="Select port pins direction as input/output."/>
+					<p1:GGroup text="Input Settings" manifestObj="true" widgetName="ggroup_input">
+						<p1:GGroup.layoutData>
+							<GridData horizontalSpan="2" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" manifestObj="true" widgetName="glabel_input_mode">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="98"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_input_mode" options="Tristate&#13;&#10;Pull Up&#13;&#10;Pull Down&#13;&#10;Continuous Sampling Mode&#13;&#10;Inverted Tristate&#13;&#10;Inverted Pull Up&#13;&#10;Inverted Pull Down&#13;&#10;Inverted Continuous Sampling Mode" value="Tristate" description="Selection of weak pull-up or pull-down device in the pad.&#13;&#10;Continuous Sampling Mode used in Pin power save mode. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt; Tristate : No internal pull device active&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Pull Up :Internal pull-up device active&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Pull Down :Internal pull-down device active&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Continuous Sampling Mode :No internal pull device active; Pn_OUTx continuously samples the input value&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Tristate :No internal pull device active,but input value will be inverted.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Pull Up :Internal pull-up device active,but input value will be inverted.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Pull Down :Internal pull-down device active,but input value will be inverted.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Inverted Continuous Sampling Mode :No internal pull device active; Pn_OUTx continuously samples the input value&lt;/LI&gt;&#13;&#10;&lt;/UL&gt;&#13;&#10;" toolTipText="Select pull-up/pull-down device in the pad. &#13;&#10;And continuous sampling mode used in pin power save mode. "/>
+						<p1:GLabel manifestObj="true" text="Hysteresis:" widgetName="glabel_hysteresis"/>
+						<p1:GCombo description="Provides optimized pad oscillation behaviour for touch-sensing applications.&lt;br&gt;&#13;&#10;&#13;&#10;NOTE: Available only for XMC1x family.&lt;BR&gt;" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Standard&#13;&#10;Large" toolTipText="Select pad hysteresis control." value="Standard" widgetName="gcombo_hysteresis">
+							<p1:GCombo.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="Output Settings" manifestObj="true" widgetName="ggroup_output">
+						<p1:GGroup.layoutData>
+							<GridData horizontalSpan="2" grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" manifestObj="true" widgetName="glabel_output_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_output_mode" options="Push Pull&#13;&#10;Open Drain" value="Push Pull" description="Select  push pull/open drain mode.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Push Pull: Can drive both low and high voltages. No external pull up is nedded.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Open Drain: Can drive only low voltage. Needs an external pull up resistor.&lt;/LI&gt;&#13;&#10;&lt;/UL&gt;" toolTipText="Select port pin mode as push pull/open drain.&#13;&#10;Push Pull: Can drive both low and high voltages. No external pull up is nedded.&#13;&#10;Open Drain: Can drive only low voltage. Needs an external pull up resistor.&#13;&#10;">
+							<p1:GCombo.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Initial output level:" visible="true" manifestObj="true" widgetName="glabel_initial_output_level"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_initial_output_level" options="Low&#13;&#10;High" value="Low" description="Select output initialization level for the port pin.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Low: Output level is Low&lt;/LI&gt;&#13;&#10;&lt;LI&gt;High: Output level is High&lt;/LI&gt;&#13;&#10;&lt;/UL&gt;" toolTipText="Select output initialization level for the port pin.">
+							<p1:GCombo.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Driver strength:" visible="true" manifestObj="true" widgetName="glabel_driver_strength"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_driver_strength" options="Don&apos;t Care&#13;&#10;Weak Driver&#13;&#10;Medium Driver&#13;&#10;Strong Driver Soft Edge&#13;&#10;Strong Driver Slow Edge&#13;&#10;Strong Driver Sharp Edge&#13;&#10;Strong Driver Medium Edge" value="Don&apos;t Care" description="Selecting the appropriate driver strength allows to optimize the outputs for the needed interface performance, can help to reduce power consumption, and limits noise, crosstalk and electromagnetic emissions. &lt;BR&gt;&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt; Don&apos;t Care: Allows user to allocate any pin in the manual pin allocator or open pin map perspective window&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Weak Driver: Provides Class A1 pads (low speed 3.3V LVTTL outputs)&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Medium Driver: Provides Class A1 pads (low speed 3.3V LVTTL outputs)&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Strong Driver Soft Edge: Provides Class A1+,A2 pads (low speed 3.3V LVTTL outputs)&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Strong Driver Slow Edge: Provides Class A1+,A2 pads (low speed 3.3V LVTTL outputs)&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Strong Driver Sharp Edge: Provides Class A2 pads (low speed 3.3V LVTTL outputs)&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Strong Driver Medium Edge: Provides Class A2 pads (low speed 3.3V LVTTL outputs)&lt;/LI&gt;&#13;&#10;&lt;/UL&gt;&#13;&#10;NOTE: Available only for XMC4x family&#13;&#10;" toolTipText="Select output pad driver strength.">
+							<p1:GCombo.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>
