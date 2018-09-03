@@ -56,8 +56,8 @@
 
 const DIGITAL_IO_t dhDI_DEC =
 {
-  .gpio_port = XMC_GPIO_PORT15,
-  .gpio_pin = 9U,
+  .gpio_port = XMC_GPIO_PORT1,
+  .gpio_pin = 15U,
   .gpio_config = {
     .mode = XMC_GPIO_MODE_INPUT_TRISTATE,
 
@@ -67,8 +67,8 @@ const DIGITAL_IO_t dhDI_DEC =
 		
 const DIGITAL_IO_t dhDI_INC =
 {
-  .gpio_port = XMC_GPIO_PORT15,
-  .gpio_pin = 2U,
+  .gpio_port = XMC_GPIO_PORT1,
+  .gpio_pin = 14U,
   .gpio_config = {
     .mode = XMC_GPIO_MODE_INPUT_TRISTATE,
 

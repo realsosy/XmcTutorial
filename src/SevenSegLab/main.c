@@ -8,7 +8,6 @@
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
 
 #include "Button.h"
-
 /**
 
  * @brief main() - Application entry point
@@ -22,12 +21,12 @@
 //void InitButton(void);
 //void CheckButton(void);
 void InitSeg(void);
-char ConvertSeg(char SegValue); // function prototype
+char ConvertSeg(int SegValue); // function prototype
 void DisplaySeg(void);
 
 static void delay(uint32_t cycles);
 
-//char Number;
+//int Number;
 char SegmentNum;
 
 int main(void) {
@@ -89,7 +88,7 @@ void InitSeg(void){
 	SegmentNum = 0;
 }
 
-char ConvertSeg(char SegValue) {
+char ConvertSeg(int SegValue) {
 	char SegByte=0x00;
 	switch (SegValue) { //DP G F E D C B A
 		case 0 : SegByte = 0x3F;break; // 0 0 1 1 1 1 1 1 binary

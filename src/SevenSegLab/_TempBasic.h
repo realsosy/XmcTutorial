@@ -1,8 +1,8 @@
 /******************************************************************************/
 /**
- * file         Button.h
+ * file         _TempBasic.h
  *
- * brief        Header file for Button
+ * brief        Header file for _TempBasic
  *
  * version      1.00
  * date         Feb/18/2010
@@ -18,8 +18,8 @@
  */
 /******************************************************************************/
 
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef TEMPBASIC_H
+#define TEMPBASIC_H
 
 /******************************************************************************/
 /* Include                                                                    */
@@ -40,7 +40,6 @@
 /* PUBLIC VARIABLES                                                           */
 /******************************************************************************/
 //extern int32_t MyCounter;
-extern int Number;
 
 /******************************************************************************/
 /* PUBLIC FUNCTIONS                                                           */
@@ -58,8 +57,6 @@ void Sche_InitTimer(const sScheTable_t * pParam,
                                eScheStatus_t * pState,
                                int32_t *pi32InBuf);
  */
-void InitButton(void);
-void CheckButton(void);
 
 
 #endif

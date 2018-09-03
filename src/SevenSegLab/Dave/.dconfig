@@ -3,21 +3,21 @@
     <ResourceReserve/>
     <Solver>
         <SolverBndMap>
-            <BindMap MUri="port/p/15/pad/9" Proxy="app/DIGITAL_IO/0/hwres_port_pin"/>
+            <BindMap MUri="port/p/1/pad/15" Proxy="app/DIGITAL_IO/0/hwres_port_pin"/>
             <BindMap MUri="port/p/1/pad/0" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#0"/>
             <BindMap MUri="port/p/1/pad/1" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#1"/>
-            <BindMap MUri="port/p/15/pad/2" Proxy="app/DIGITAL_IO/1/hwres_port_pin"/>
             <BindMap MUri="port/p/4/pad/0" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#2"/>
+            <BindMap MUri="port/p/1/pad/14" Proxy="app/DIGITAL_IO/1/hwres_port_pin"/>
             <BindMap MUri="devicepackage/0/79" Proxy="app/BUS_IO/0/rarray_hwres_bus_io_pin_pad#0"/>
             <BindMap MUri="port/p/4/pad/1" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#3"/>
             <BindMap MUri="port/p/5/pad/0" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#4"/>
-            <BindMap MUri="devicepackage/0/38" Proxy="app/DIGITAL_IO/0/__pin_hwres_port_pin"/>
             <BindMap MUri="port/p/5/pad/1" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#5"/>
+            <BindMap MUri="devicepackage/0/68" Proxy="app/DIGITAL_IO/0/__pin_hwres_port_pin"/>
             <BindMap MUri="port/p/5/pad/2" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#6"/>
             <BindMap MUri="port/p/5/pad/7" Proxy="app/BUS_IO/0/rarray_hwres_port_pin#7"/>
             <BindMap MUri="devicepackage/0/56" Proxy="app/BUS_IO/0/rarray_hwres_bus_io_pin_pad#6"/>
             <BindMap MUri="devicepackage/0/57" Proxy="app/BUS_IO/0/rarray_hwres_bus_io_pin_pad#5"/>
-            <BindMap MUri="devicepackage/0/19" Proxy="app/DIGITAL_IO/1/__pin_hwres_port_pin"/>
+            <BindMap MUri="devicepackage/0/69" Proxy="app/DIGITAL_IO/1/__pin_hwres_port_pin"/>
             <BindMap MUri="devicepackage/0/55" Proxy="app/BUS_IO/0/rarray_hwres_bus_io_pin_pad#7"/>
             <BindMap MUri="devicepackage/0/85" Proxy="app/BUS_IO/0/rarray_hwres_bus_io_pin_pad#2"/>
             <BindMap MUri="devicepackage/0/78" Proxy="app/BUS_IO/0/rarray_hwres_bus_io_pin_pad#1"/>
