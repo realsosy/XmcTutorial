@@ -11,26 +11,35 @@ date: 2017-09-01
 * 함수가 호출 및 복귀 과정
 
 ```c
+char SegConvert(char Number);      // Function Declaration
+
 int main(void){
 	...
-	Segment = SegConvert(Number);
+	Segment = SegConvert(Number);  // Function call
 	...
-}		
+}
+
+char SegConvert(char Number){
+    // Function Definition
+    return xxxx;
+}
+
 ```
 
-[함수 호출 및 복귀 그림]
 
-.
 
-.
+```mermaid
+sequenceDiagram
+	activate Main
+	Main ->> SegConvert: Function call
+	deactivate Main
+	activate SegConvert
+	SegConvert ->> Main: Return
+	deactivate SegConvert
+	activate Main
+	deactivate Main
 
-.
-
-.
-
-.
-
-.
+```
 
 * 함수를 사용함으로써 생기는 장점과 단점을 다음의 관점에서 설명해 보세요.
   *   메모리 측면:
@@ -48,7 +57,7 @@ int main(void){
 
 ## Program Design
 
-### [예제] SevenSeg
+#### [예제] SevenSeg
 
 Design a program to increment continuously the output of a seven-segment numerical light-emitting diode (LED) display through the numbers 0 to 9, then reset back to 0 to continue counting. This includes:
 
@@ -57,13 +66,29 @@ Design a program to increment continuously the output of a seven-segment numeric
 * If the count value is greater than 9, then reset to zero.
 * Delay for 500 ms to ensure that the LED output counts up at a rate that is easily visible.
 
-[참고]
+**[참고] Seven Segment 활용방법**
 
 ![ProgDesignFunction_SevenSeg](images/ProgDesignFunction_SevenSeg.png)
 
 * 만약 각 LED가 **DP g f e d c b a** 순서로 MSB 부터 LSB에 할당되어 있다면
 
 ![ProgDesignFunction_SevenSegTable](images/ProgDesignFunction_SevenSegTable.png)
+
+* XMC Board와 연결: 
+  * Common-Cathode 타입의 Seven-Seg 를 연결하고자 한다.  XMC Relax Lite 를 사용하므로 이 정보를 수정할 필요가 있다.  XMC chip 에서의 핀 mapping 정보와 Board에서의 외부 연결 정보를 정리하여야 한다.  다음의 정보를 완성하여 보자.
+  * /Reference/Board_Users_Manual_XMC4500__Relax_Kit_V1_R1.2_Release.pdf  참고
+
+  | Segment LED | XMC Pin | Board Pin |
+  | ----------- | ------- | --------- |
+  | A           | P0.0    | X1 36     |
+  | B           |         |           |
+  | C           |         |           |
+  | D           |         |           |
+  | E           |         |           |
+  | F           |         |           |
+  | G           |         |           |
+  | DP          |         |           |
+
 
 ### Using Flowcharts
 
@@ -73,14 +98,14 @@ Design a program to increment continuously the output of a seven-segment numeric
 
 
 
-[예제]
+#### [예제] SevenSeg
 
 ![ProgDesignFunction_SevenSegFlowchart](images/ProgDesignFunction_SevenSegFlowchart.png)
 
 
 ### Pseudocode
 
-[예제]
+#### [예제] SevenSeg
 
 ![ProgDesignFunction_Pseudocode](images/ProgDesignFunction_Pseudocode.png)
 
@@ -99,8 +124,6 @@ Design a program to increment continuously the output of a seven-segment numeric
 
 
 ### Implementing a Seven-Segment Display Counter
-
-**[Note] Example 6.1 Seven-segment display counter ** 
 
 *   **src/SevenSeg** 프로젝트 참고
 
@@ -160,22 +183,6 @@ static void delay(uint32_t cycles)
 
 ```
 
-* 하드웨어 연결 - Figure 3.10과 같이 Common-Cathode 타입의 Seven-Seg 를 연결하고자 한다.  XMC Relax Lite 를 사용하므로 이 정보를 수정할 필요가 있다.  XMC chip 에서의 핀 mapping 정보와 Board에서의 외부 연결 정보를 정리하여야 한다.  다음의 정보를 완성하여 보자.
-
-  *   참고: *SegValue* 는 DP G F E D C B A 순서로 MSB에서 LSB 로 되어 있다. (교재 p46 참고)
-  *   /Reference/Board_Users_Manual_XMC4500__Relax_Kit_V1_R1.2_Release.pdf  참고
-
-  | Segment LED | XMC Pin | Board Pin |
-  | ----------- | ------- | --------- |
-  | A           | P0.0    | X1 36     |
-  | B           |         |           |
-  | C           |         |           |
-  | D           |         |           |
-  | E           |         |           |
-  | F           |         |           |
-  | G           |         |           |
-  | DP          |         |           |
-
 
 #### [Exercise1]
 
@@ -193,7 +200,10 @@ static void delay(uint32_t cycles)
 
 ### Function Reuse
 
-2자리 숫자를 출력하는 프로그램으로 변경하여 보자.
+* 2자리 숫자를 출력하는 프로그램으로 변경하여 보자.
+* 무엇을 하여야 하는가?
+  * Seven Segment 연결
+  * 해당하는 Seven Segment 에 BUS_IO App 추가: BUS_IO_UPPER, BUS_IO_LOWER
 
 ```c
 int main(void){
@@ -217,16 +227,10 @@ int main(void){
 
 #### [Exercise2]
 
-위의 두자리 Seven-Seg 프로그램을 수정하여 1분짜리 Stop-Watch를 만들어 보자.  
+위의 두자리 SevenSeg 프로그램을 수정하여 1분짜리 Stop-Watch를 만들어 보자.  (Button 1을 사용하여 Start/Stop 한다.)
 
-*   Button 1은 Start/Stop 기능을 수행한다.
-*   위의 delay 함수를 사용하여 시간을 조정한다면 정확하게 시간 지연을 만들어 낼 수 있을까? 불가능하다면 어떤 기능을 사용하는 것이 좋을까?
-
-
-.
-
-.
-
-.
+1. 위의 기능을 수행하는 프로그램의 Flowchart를 그려보도록 하자.
+2. 위의 기능을 수행하는 프로그램의 Pseudocode를 작성해 보자.
+3. 위의 delay 함수를 사용하여 시간을 조정한다면 정확하게 시간 지연을 만들어 낼 수 있을까? 불가능하다면 어떤 기능을 사용하는 것이 좋을까?
 
 
