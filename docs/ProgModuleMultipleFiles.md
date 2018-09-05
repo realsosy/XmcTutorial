@@ -234,7 +234,7 @@ XMC-->|BUS_IO, P0.0-0.7|SevenSeg
 
 
 
-*   주어진 코드에서 Segment 와 관련된 기능은 SegDisplay.h/.c  모듈로 만든다.
+*   주어진 코드에서 Segment 와 관련된 기능은 Seg.h/.c  모듈로 만든다.
 *   주어진 코드에서 Button 과 관련된 기능은 Button.h/.c 모듈로 만든다.
 *   Main  함수에서는 위의 두 모듈의 기능을 사용하여 무한루프로 반복한다.
 
