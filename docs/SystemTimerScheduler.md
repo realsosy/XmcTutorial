@@ -174,9 +174,9 @@ sequenceDiagram
     *   초기화 함수 Scheduler_Init() 함수를 호출하고
     *   Scheduler_Loop() 함수를 무한루프에서 호출한다.
 *   Scheduler_Init() 함수는 TaskInit() 함수를 호출한다.
-    *   사용자는 TaskInit() 함수에 필요한 초기화 동작에 대한 프로그래밍을 한다.
+    *   사용자는 **TaskInit() 함수에 필요한 초기화 동작**에 대한 프로그래밍을 한다.
 *   Scheduler_Loop() 함수는 설정된 주기 정보에 따라 Task 들을 호출한다.
-    *   사용자는 실행주기에 맞는 Task에 해당 동작을 프로그래밍 한다.
+    *   사용자는 **실행주기에 맞는 Task에 해당 동작**을 프로그래밍 한다.
 
 ```mermaid
 sequenceDiagram

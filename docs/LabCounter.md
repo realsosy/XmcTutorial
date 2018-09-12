@@ -7,7 +7,7 @@ date: Jan. 10 2017
 # LabCounter
 
 ## 개요
-COUNTER APP을 사용하여 PPR 4인 엔코더 신호를 처리하는 카운터를 만든다.
+COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
 
 ### 목적
 * 카운터 관련설정 학습 후 DAVE COUNTER APP을 활용한 관련설정 실습
