@@ -1,0 +1,161 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 500, 600">
+		<p1:GTab text="General Settings" widgetName="tab_general" visible="true" enabled="true">
+			<p1:GTab.control>
+				<p1:Tab layout="{x:Null}">
+					<p1:GLabel text="Select timer module:" visible="true" widgetName="glabel_peripheral_selection" description="" bounds="5, 8, 109, 15"/>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_peripheral_selection" options="CCU4&#13;&#10;CCU8" value="CCU4" description="Select a valid CCU timer module for the counter:&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10; &lt;li&gt;CCU4 : One slice from CCU4 module is used.&lt;/li&gt;&#13;&#10;&lt;li&gt;CCU8 : One slice from CCU8 module is used.&lt;/li&gt;&#13;&#10;" bounds="162, 4, 106, 21" toolTipText="Select the timer module for count operation."/>
+					<p1:GGroup text="Counter Settings" manifestObj="true" widgetName="ggroup_counter_settings" bounds="5, 40, 471, 106">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel description="" text="Count match value:" widgetName="glabel_count_match_val"/>
+						<p1:GFloat description="The value to which the counter will count up to generate a count match event.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt; The counter will count to this value and then generates an count match event. &lt;/LI&gt;&#13;&#10;&lt;LI&gt; This configures the compare register in the CCUx.&lt;/LI&gt;&#13;&#10;&lt;LI&gt; Genereates a compare match event (count match event).&lt;/LI&gt;&#13;&#10;&#13;&#10;" format="*,0" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="65535" minValue="1" toolTipText="Set the value for count match event to occur." value="200" widgetName="gfloat_count_match_val" x:Style="BORDER">
+							<p1:GFloat.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GFloat.layoutData>
+						</p1:GFloat>
+						<p1:GLabel description="" text="Count edge:" widgetName="glabel_edge_selection"/>
+						<p1:GCombo description="Select the edge for which the counter should count." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Falling edge&#13;&#10;Rising edge&#13;&#10;Both the edges" toolTipText="Select the edge to increment the counter." value="Falling edge" widgetName="gcombo_edge_selection"/>
+						<p1:GCheck description="Enable the counter operation after initilization." manifestObj="true" text="Start after initialization" widgetName="gcheck_init_start"/>
+						<Label/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Advanced Settings" visible="true" enabled="true" widgetName="gtab_signal_events">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_4">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Signal Processing" widgetName="ggroup_signal_processing">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData heightHint="74" widthHint="465"/>
+						</p1:GGroup.layoutData>
+						<p1:GCheck text="Enable low pass filtering" manifestObj="true" widgetName="gcheck_enable_lowpass_filter" description="Enables Low pass filter for counter_input.">
+							<p1:GCheck.layoutData>
+								<GridData widthHint="177"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<Label/>
+						<p1:GLabel text="Low pass filter:" visible="true" widgetName="glabel_lowpass_filter" description=""/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_lowpass_filter" options="3 clock cycles&#13;&#10;5 clock cycles&#13;&#10;7 clock cycles" value="3 clock cycles" description="Select the Low pass filter clock cycles for counter_input.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Select the number of fCCU clock cycles the low pass filter is applied to the signal. &lt;/LI&gt;&#13;&#10;&lt;LI&gt; Any changes during the selected clock cycles will be discarded.&lt;/LI&gt;" toolTipText="Select the number of fCCU clock cycles the low pass filter is applied to the signal.">
+							<p1:GCombo.layoutData>
+								<GridData widthHint="104"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="Count Direction Settings" widgetName="ggroup_external_count_direction">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData widthHint="97" horizontalAlignment="FILL" heightHint="90"/>
+						</p1:GGroup.layoutData>
+						<p1:GCheck text="User count direction selection" manifestObj="true" widgetName="gcheck_enable_external_count" description="Enable user input (connected to Event 1) to determine the count direction.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;The counting direction of the counter can be controlled by an external signal. &#13;&#10;&lt;LI&gt; Enables the selection of active level for count up." toolTipText="Enable the user input to determine the count direction."/>
+						<Label/>
+						<p1:GLabel text="Count up level:" visible="true" widgetName="glabel_ext_cnt_active_lvl" description="" manifestObj="true"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_ext_cnt_active_lvl" options="High&#13;&#10;Low" value="Low" description="External Count direction set by either active high or active low. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;Select the level used for counting up; this uses the user input to CCU slice event 1.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This configures the External Event -1 level selection.&lt;/LI&gt;&#13;&#10;" toolTipText="Select the level used for counting up.">
+							<p1:GCombo.layoutData>
+								<GridData widthHint="104"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Edge level:" visible="true" manifestObj="true" widgetName="glabel_cdir_edge"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_cdir_edge" options="Falling edge&#13;&#10;Rising edge&#13;&#10;Both the edges" value="Rising edge">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="104"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="External Gating Settings" widgetName="ggroup_external_gating">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData horizontalAlignment="FILL" heightHint="88"/>
+						</p1:GGroup.layoutData>
+						<p1:GCheck text="Enable external gating" manifestObj="true" widgetName="gcheck_enable_gating" description="Enables the external gating control to the counter.">
+							<p1:GCheck.layoutData>
+								<GridData widthHint="177"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<Label/>
+						<p1:GLabel text="Gating level:" visible="true" widgetName="glabel_gating_level" description="" manifestObj="true"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_gating_level" options="Active low&#13;&#10;Active high" value="Active low" description="Select the gating level which would gate the counter_input to the CCU. &#13;&#10;This configures the External Event -1 or External Event -2 level selection.&#13;&#10;" toolTipText="Select the level to gate the counting.">
+							<p1:GCombo.layoutData>
+								<GridData widthHint="104"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel manifestObj="true" text="Edge level:" widgetName="glabel_gating_edge"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Falling edge&#13;&#10;Rising edge&#13;&#10;Both the edges" value="Rising edge" widgetName="gcombo_gating_edge">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="104"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Event Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_1">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_1">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Enable Event" widgetName="ggroup_event_config">
+						<p1:GGroup.layoutData>
+							<GridData heightHint="155" widthHint="467"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="4"/>
+						</p1:GGroup.layout>
+						<p1:GCheck description="Enables the Count match event. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;This has to be connected to a INTERRUPT APP to get the interrupts.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Select the count match event; this is the compare match event.&lt;/LI&gt;" manifestObj="true" text="Count match" toolTipText="Generates an event when the count match value is reached." widgetName="gcheck_enable_count_match">
+							<p1:GCheck.layoutData>
+								<GridData widthHint="165"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GLabel enabled="false" text="Enable Count Match" widgetName="glabel_enable_count_match">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="0"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<Label/>
+						<p1:GLabel enabled="false" text="Enable Edge Event" widgetName="glabel_enable_edge_event">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="0"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCheck description="Enables the Count rollover event. &#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;This has to be connected to a INTERRUPT APP to get the interrupts.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Select the count rollover event; this is the period match event, Default value set to 65535.&lt;/LI&gt;" manifestObj="true" text="Count rollover" toolTipText="Generate an event for each counter rollover." widgetName="gcheck_enable_count_rollover"/>
+						<p1:GLabel enabled="false" text="Enable Count Rollover Event" widgetName="glabel_enable_count_rollover">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="0"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<Label/>
+						<p1:GLabel enabled="false" text="Enable Gating Level Detection" widgetName="glabel_enable_gating_level_event">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="0"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCheck description="This enables the event edge detection.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;This has to be connected to a INTERRUPT APP to get the interrupts.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Generates an event for every increment of the counter.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Select the event edge detection; this is triggered on event 0 for the selected count edge&lt;/LI&gt;" manifestObj="true" text="Edge event detection" toolTipText="Generates an event for every increment of the counter." widgetName="gcheck_enable_edge_event"/>
+						<Label/>
+						<Label/>
+						<Label/>
+						<p1:GCheck manifestObj="true" text="Count direction detection" toolTipText="Generates an event when a change in count direction is detected." widgetName="gcheck_enable_count_direction_event" description="This enables the Gating level detection.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;This has to be connected to a INTERRUPT APP to get the interrupts.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Generates an event when a change in count direction is detected.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;This is triggered on External Event-1&lt;/LI&gt;"/>
+						<Label/>
+						<Label/>
+						<Label/>
+						<p1:GCheck description="Enables the Gating level detection.&#13;&#10;&lt;UL&gt;&#13;&#10;&lt;LI&gt;This has to be connected to a INTERRUPT APP to get the interrupts.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Generates an event when a change to gating level is detected.&lt;/LI&gt;&#13;&#10;&lt;LI&gt;Select the gating level detection; this is triggered on External Event-1 or External Event-2 (which ever it is mapped to)&lt;/LI&gt;" manifestObj="true" text="Gating level detection" toolTipText="Generates an event when a change to gating level is detected." widgetName="gcheck_enable_gating_level_event"/>
+						<Label/>
+						<Label/>
+						<Label/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>

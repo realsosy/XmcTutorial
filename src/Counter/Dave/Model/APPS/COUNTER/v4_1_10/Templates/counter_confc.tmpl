@@ -1,0 +1,399 @@
+package Model.APPS.COUNTER.v4_1_10.Templates;
+
+import Model.APPS.COUNTER.v4_1_10.COUNTER
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2015-2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-02-16:
+ *     - Initial version for DAVEv4.<BR>
+ *
+ * 2015-04-06:
+ *     - Modified the config structure of the COUNTER.<BR>
+ *     - Enables usage of external event-2 for gating.<BR>
+ *     - UI modified to support the edge selection for Count Direction and Gating.<BR>
+ *     - API name change COUNTER_AcknowledgeInterrupt to COUNTER_ClearEvent.<BR>
+ *
+ * 2015-07-09:
+ *     - Documentation updated.<BR>
+ *
+ * 2015-09-01:
+ *     - XMC14 device support added..<BR>
+ *
+ * 2015-10-08:
+ *     - Added support for XMC4700/XMC4800 devices.<BR>
+ *
+ * 2015-12-16:
+ *     - Added support for XMC4300 devices.<BR>
+ *
+ * 2016-07-08:
+ *     - Fixed incorrect case for an included header.<br>
+ *     - All event signals are made mandatory.<BR>
+ *
+ * @endcond
+ *
+ */
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+#include "counter.h"
+ 
+/**********************************************************************************************************************
+ * DATA STRUCTURES
+ **********************************************************************************************************************/
+""");
+List MappedUri       = null;
+int instnum          = 0;
+String appInst       = null;
+String appInstLabel  = null;
+int input_selection_index = 0;
+List input_selection_array = ["COUNTER_EXT_SIG_NONE","COUNTER_EXT_SIG_COUNT_DIR","COUNTER_EXT_SIG_GATING"];
+List SR_lines_ccu4 = ["XMC_CCU4_SLICE_SR_ID_0","XMC_CCU4_SLICE_SR_ID_1","XMC_CCU4_SLICE_SR_ID_2","XMC_CCU4_SLICE_SR_ID_3"]
+List SR_lines_ccu8 = ["XMC_CCU8_SLICE_SR_ID_0","XMC_CCU8_SLICE_SR_ID_1","XMC_CCU8_SLICE_SR_ID_2","XMC_CCU8_SLICE_SR_ID_3"]
+String ccu4_handle = null;
+String ccu8_handle = null;
+
+String device = daveEnv.project.selectedDevice.deviceId.family + daveEnv.project.selectedDevice.deviceId.series;
+
+List input_signals_ccu4 = ["XMC_CCU4_SLICE_INPUT_A","XMC_CCU4_SLICE_INPUT_B","XMC_CCU4_SLICE_INPUT_C",
+	"XMC_CCU4_SLICE_INPUT_D","XMC_CCU4_SLICE_INPUT_E","XMC_CCU4_SLICE_INPUT_F",
+	"XMC_CCU4_SLICE_INPUT_G","XMC_CCU4_SLICE_INPUT_H","XMC_CCU4_SLICE_INPUT_I",
+	"XMC_CCU4_SLICE_INPUT_J","XMC_CCU4_SLICE_INPUT_K","XMC_CCU4_SLICE_INPUT_L",
+	"XMC_CCU4_SLICE_INPUT_M","XMC_CCU4_SLICE_INPUT_N","XMC_CCU4_SLICE_INPUT_O",
+	"XMC_CCU4_SLICE_INPUT_P",];
+
+List input_signals_ccu8 = ["XMC_CCU8_SLICE_INPUT_A","XMC_CCU8_SLICE_INPUT_B","XMC_CCU8_SLICE_INPUT_C",
+	"XMC_CCU8_SLICE_INPUT_D","XMC_CCU8_SLICE_INPUT_E","XMC_CCU8_SLICE_INPUT_F",
+	"XMC_CCU8_SLICE_INPUT_G","XMC_CCU8_SLICE_INPUT_H","XMC_CCU8_SLICE_INPUT_I",
+	"XMC_CCU8_SLICE_INPUT_J","XMC_CCU8_SLICE_INPUT_K","XMC_CCU8_SLICE_INPUT_L",
+	"XMC_CCU8_SLICE_INPUT_M","XMC_CCU8_SLICE_INPUT_N","XMC_CCU8_SLICE_INPUT_O",
+	"XMC_CCU8_SLICE_INPUT_P",];
+
+
+List edge_selection_ccu4 = ["XMC_CCU4_SLICE_EVENT_EDGE_SENSITIVITY_FALLING_EDGE","XMC_CCU4_SLICE_EVENT_EDGE_SENSITIVITY_RISING_EDGE",
+	"XMC_CCU4_SLICE_EVENT_EDGE_SENSITIVITY_DUAL_EDGE"];
+
+List level_selection_ccu4 = ["XMC_CCU4_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_LOW","XMC_CCU4_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_HIGH"];
+
+List low_pass_filter_ccu4 = ["XMC_CCU4_SLICE_EVENT_FILTER_3_CYCLES","XMC_CCU4_SLICE_EVENT_FILTER_5_CYCLES",
+	   "XMC_CCU4_SLICE_EVENT_FILTER_7_CYCLES"];
+   
+
+   
+List edge_selection_ccu8 = ["XMC_CCU8_SLICE_EVENT_EDGE_SENSITIVITY_FALLING_EDGE","XMC_CCU8_SLICE_EVENT_EDGE_SENSITIVITY_RISING_EDGE",
+	   "XMC_CCU8_SLICE_EVENT_EDGE_SENSITIVITY_DUAL_EDGE"];
+   
+List level_selection_ccu8 = ["XMC_CCU8_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_LOW","XMC_CCU8_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_HIGH"];
+   
+List low_pass_filter_ccu8 = ["XMC_CCU8_SLICE_EVENT_FILTER_3_CYCLES","XMC_CCU8_SLICE_EVENT_FILTER_5_CYCLES",
+		  "XMC_CCU8_SLICE_EVENT_FILTER_7_CYCLES"];
+
+/*********************************************************************************************/
+  if( device == "XMC14")
+  {
+	  input_signals_ccu4 = [
+		  "XMC_CCU4_SLICE_INPUT_AA","XMC_CCU4_SLICE_INPUT_AB","XMC_CCU4_SLICE_INPUT_AC","XMC_CCU4_SLICE_INPUT_AD","XMC_CCU4_SLICE_INPUT_AE",
+	  "XMC_CCU4_SLICE_INPUT_AF","XMC_CCU4_SLICE_INPUT_AG", "XMC_CCU4_SLICE_INPUT_AH","XMC_CCU4_SLICE_INPUT_AI", "XMC_CCU4_SLICE_INPUT_AJ",
+	  "XMC_CCU4_SLICE_INPUT_AK", "XMC_CCU4_SLICE_INPUT_AL", "XMC_CCU4_SLICE_INPUT_AM", "XMC_CCU4_SLICE_INPUT_AN", "XMC_CCU4_SLICE_INPUT_AO",
+	  "XMC_CCU4_SLICE_INPUT_AP", "XMC_CCU4_SLICE_INPUT_AQ", "XMC_CCU4_SLICE_INPUT_AR", "XMC_CCU4_SLICE_INPUT_AS", "XMC_CCU4_SLICE_INPUT_AT",
+	  "XMC_CCU4_SLICE_INPUT_AU", "XMC_CCU4_SLICE_INPUT_AV", "XMC_CCU4_SLICE_INPUT_AW", "XMC_CCU4_SLICE_INPUT_AX", "XMC_CCU4_SLICE_INPUT_AY",
+	  "XMC_CCU4_SLICE_INPUT_AZ", "XMC_CCU4_SLICE_INPUT_BA", "XMC_CCU4_SLICE_INPUT_BB", "XMC_CCU4_SLICE_INPUT_BC", "XMC_CCU4_SLICE_INPUT_BD",
+	  "XMC_CCU4_SLICE_INPUT_BE", "XMC_CCU4_SLICE_INPUT_BF", "XMC_CCU4_SLICE_INPUT_BG", "XMC_CCU4_SLICE_INPUT_BH", "XMC_CCU4_SLICE_INPUT_BI",
+	  "XMC_CCU4_SLICE_INPUT_BJ", "XMC_CCU4_SLICE_INPUT_BK", "XMC_CCU4_SLICE_INPUT_BL", "XMC_CCU4_SLICE_INPUT_BM", "XMC_CCU4_SLICE_INPUT_BN",
+	  "XMC_CCU4_SLICE_INPUT_BO", "XMC_CCU4_SLICE_INPUT_BP", "XMC_CCU4_SLICE_INPUT_BQ", "XMC_CCU4_SLICE_INPUT_BR", "XMC_CCU4_SLICE_INPUT_BS",
+	  "XMC_CCU4_SLICE_INPUT_BT", "XMC_CCU4_SLICE_INPUT_BU", "XMC_CCU4_SLICE_INPUT_BV", ];
+  
+	  input_signals_ccu8 = [
+		  "XMC_CCU8_SLICE_INPUT_AA","XMC_CCU8_SLICE_INPUT_AB","XMC_CCU8_SLICE_INPUT_AC","XMC_CCU8_SLICE_INPUT_AD","XMC_CCU8_SLICE_INPUT_AE",
+	  "XMC_CCU8_SLICE_INPUT_AF","XMC_CCU8_SLICE_INPUT_AG", "XMC_CCU8_SLICE_INPUT_AH","XMC_CCU8_SLICE_INPUT_AI", "XMC_CCU8_SLICE_INPUT_AJ",
+	  "XMC_CCU8_SLICE_INPUT_AK", "XMC_CCU8_SLICE_INPUT_AL", "XMC_CCU8_SLICE_INPUT_AM", "XMC_CCU8_SLICE_INPUT_AN", "XMC_CCU8_SLICE_INPUT_AO",
+	  "XMC_CCU8_SLICE_INPUT_AP", "XMC_CCU8_SLICE_INPUT_AQ", "XMC_CCU8_SLICE_INPUT_AR", "XMC_CCU8_SLICE_INPUT_AS", "XMC_CCU8_SLICE_INPUT_AT",
+	  "XMC_CCU8_SLICE_INPUT_AU", "XMC_CCU8_SLICE_INPUT_AV", "XMC_CCU8_SLICE_INPUT_AW", "XMC_CCU8_SLICE_INPUT_AX", "XMC_CCU8_SLICE_INPUT_AY",
+	  "XMC_CCU8_SLICE_INPUT_AZ", "XMC_CCU8_SLICE_INPUT_BA", "XMC_CCU8_SLICE_INPUT_BB", "XMC_CCU8_SLICE_INPUT_BC", "XMC_CCU8_SLICE_INPUT_BD",
+	  "XMC_CCU8_SLICE_INPUT_BE", "XMC_CCU8_SLICE_INPUT_BF", "XMC_CCU8_SLICE_INPUT_BG", "XMC_CCU8_SLICE_INPUT_BH", "XMC_CCU8_SLICE_INPUT_BI",
+	  "XMC_CCU8_SLICE_INPUT_BJ", "XMC_CCU8_SLICE_INPUT_BK", "XMC_CCU8_SLICE_INPUT_BL", "XMC_CCU8_SLICE_INPUT_BM", "XMC_CCU8_SLICE_INPUT_BN",
+	  "XMC_CCU8_SLICE_INPUT_BO", "XMC_CCU8_SLICE_INPUT_BP", "XMC_CCU8_SLICE_INPUT_BQ", "XMC_CCU8_SLICE_INPUT_BR", "XMC_CCU8_SLICE_INPUT_BS",
+	  "XMC_CCU8_SLICE_INPUT_BT", "XMC_CCU8_SLICE_INPUT_BU", "XMC_CCU8_SLICE_INPUT_BV"];
+  }
+/*********************************************************************************************/
+ /* To find out which types of peripheral are consumed by the counter instances*/
+int CCU4_counter=0;
+int CCU8_counter=0;
+
+for (Object appIns : appInstancesList ) {
+  
+	if(appIns.gcombo_peripheral_selection.value == "CCU4")
+	{
+		CCU4_counter = 1;
+	}
+	if(appIns.gcombo_peripheral_selection.value == "CCU8")
+	{
+		CCU8_counter = 1;
+	}
+  }
+/*********************************************************************************************/
+
+for (Object appIns : appInstancesList ) {
+	appInst = appIns.getInstanceLabel()
+	if(appIns.gcombo_peripheral_selection.value == "CCU4")
+	{
+		MappedUri = appIns.hwres_ccu4_slice.getSolverUri()
+	}
+	else
+	{
+		MappedUri = appIns.hwres_ccu8_slice.getSolverUri()
+	}
+	input_selection_index = 0;
+	if(appIns.gcheck_enable_external_count.value)
+	{
+		input_selection_index = 1;
+	}
+	else if(appIns.gcheck_enable_gating.value)
+	{
+		input_selection_index = 2;
+	}
+	if(appIns.gcombo_peripheral_selection.value == "CCU4")
+	{
+		/********************************************************************************************************************/
+
+
+		/********************************************************************************************************************/
+		
+		ccu8_handle = ""
+		if(CCU8_counter == 1)
+		{
+			ccu8_handle = """,
+  .ccu8_handle  = (COUNTER_CCU8_CONFIG_t*) NULL"""
+		}
+String lfp_cycles = "XMC_CCU4_SLICE_EVENT_FILTER_DISABLED"
+String evt1_string = ""
+String count_dir_event_config = "NULL"
+String gating_event_config = "NULL"
+
+if (appIns.gcheck_enable_external_count.value)
+{
+	evt1_string = """
+/* Event configuration- external count direction for the instance ${appInst} */
+XMC_CCU4_SLICE_EVENT_CONFIG_t ${appInst}_event1_config = 
+{
+  .mapped_input = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","ins_ev1is"); if(temp !=null){ input_signals_ccu4[temp.toInteger()] } else { input_signals_ccu4[0]}},
+  .edge         = ${edge_selection_ccu4[appIns.gcombo_cdir_edge.options.indexOf(appIns.gcombo_cdir_edge.value)]},
+  .level 	    = ${level_selection_ccu4[appIns.gcombo_ext_cnt_active_lvl.options.indexOf(appIns.gcombo_ext_cnt_active_lvl.value)]},
+  .duration     = ${lfp_cycles}
+}; """
+	count_dir_event_config = "(XMC_CCU4_SLICE_EVENT_CONFIG_t*) &${appInst}_event1_config"
+}
+if(appIns.gcheck_enable_gating.value)
+{
+	evt1_string += """
+/* Event configuration- gating level direction for the instance ${appInst} */
+XMC_CCU4_SLICE_EVENT_CONFIG_t ${appInst}_event${appIns.gint_counter_ext_evt_gating.value}_config = 
+{
+  .mapped_input = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","ins_ev"+ appIns.gint_counter_ext_evt_gating.value+"is"); if(temp !=null){ input_signals_ccu4[temp.toInteger()]} else {input_signals_ccu4[0]} },
+  .edge         = ${edge_selection_ccu4[appIns.gcombo_gating_edge.options.indexOf(appIns.gcombo_gating_edge.value)]},
+  .level 	      = ${level_selection_ccu4[appIns.gcombo_gating_level.options.indexOf(appIns.gcombo_gating_level.value)]},
+  .duration     = ${lfp_cycles}
+}; """
+	if(appIns.gint_counter_ext_evt_gating.value == 1)
+		gating_event_config = "(XMC_CCU4_SLICE_EVENT_CONFIG_t*) &${appInst}_event1_config"
+	else
+		gating_event_config = "(XMC_CCU4_SLICE_EVENT_CONFIG_t*) &${appInst}_event2_config"
+}
+if(appIns.gcheck_enable_lowpass_filter.value)
+{
+	lfp_cycles = low_pass_filter_ccu4[appIns.gcombo_lowpass_filter.options.indexOf(appIns.gcombo_lowpass_filter.value)]
+}
+		out.print("""
+/************************************** ${appInst} *********************************************/
+/* Event configuration for counter instance ${appInst} */
+XMC_CCU4_SLICE_EVENT_CONFIG_t ${appInst}_event0_config = 
+{
+  .mapped_input = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","ins_ev0is"); if(temp !=null){ input_signals_ccu4[temp.toInteger()] } else { input_signals_ccu4[0]} },
+  .edge         = ${edge_selection_ccu4[appIns.gcombo_edge_selection.options.indexOf(appIns.gcombo_edge_selection.value)]},
+  .level 	      = XMC_CCU4_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_LOW,
+  .duration     = ${lfp_cycles}
+};
+
+${evt1_string}
+
+/*Configuration structure for CCU4 Counter for ${appInst} */
+COUNTER_CCU4_CONFIG_t  ${appInst}_ccu4_config =
+{
+  .global_handle          = (GLOBAL_CCU4_t*) &${appIns.appres_ccu4_global.getInstanceLabel()},
+  .kernel_ptr             = (XMC_CCU4_MODULE_t*) (void*) CCU4${MappedUri[4]}_BASE,
+  .slice_ptr              = (XMC_CCU4_SLICE_t*) (void*) CCU4${MappedUri[4]}_CC4${MappedUri[6]},
+  .event0_config          = (XMC_CCU4_SLICE_EVENT_CONFIG_t*) &${appInst}_event0_config,
+  .count_dir_event_config = ${count_dir_event_config},
+  .gating_event_config    = ${gating_event_config},
+  .shadow_mask            = (uint32_t)XMC_CCU4_SHADOW_TRANSFER_SLICE_${MappedUri[6]},
+  .count_match_value      = (uint16_t) ${appIns.gfloat_count_match_val.value.toInteger()},
+  .countdir_event         = ${if(appIns.gcheck_enable_external_count.value){ "XMC_CCU4_SLICE_EVENT_1"} else {"XMC_CCU4_SLICE_EVENT_NONE"} },
+  .gating_event           = ${if(appIns.gint_counter_ext_evt_gating.value == 0){ "XMC_CCU4_SLICE_EVENT_NONE"} else {"XMC_CCU4_SLICE_EVENT_"+ appIns.gint_counter_ext_evt_gating.value} },
+  .count_match_node_id    = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","srs_cmsr"); if(temp !=null){ SR_lines_ccu4[temp.toInteger()]} else {SR_lines_ccu4[0]} },
+  .count_rollover_node_id = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","srs_posr"); if(temp !=null){ SR_lines_ccu4[temp.toInteger()]} else {SR_lines_ccu4[0]} },
+  .event_edge_det_node_id = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","srs_e0sr"); if(temp !=null){ SR_lines_ccu4[temp.toInteger()]} else {SR_lines_ccu4[0]} },
+  .event1_node_id         = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","srs_e1sr"); if(temp !=null){ SR_lines_ccu4[temp.toInteger()]} else {SR_lines_ccu4[0]} },
+  .event2_node_id         = ${String temp = appIns.hwres_ccu4_slice.getRegValue("","srs_e2sr"); if(temp !=null){ SR_lines_ccu4[temp.toInteger()]} else {SR_lines_ccu4[0]} },
+  .state                  = COUNTER_STATUS_UNINITIALIZED,
+  .kernel_number          = (uint8_t) ${MappedUri[4]},
+  .slice_number           = (uint8_t) ${MappedUri[6]},
+  .intr_count_match       = (bool) ${appIns.gcheck_enable_count_match.value},
+  .intr_count_rollover    = (bool) ${appIns.gcheck_enable_count_rollover.value},
+  .intr_evt_edge_detect   = (bool) ${appIns.gcheck_enable_edge_event.value},
+  .intr_event1_detect     = (bool) ${ (appIns.gint_counter_ext_evt_gating.value == 1 && appIns.gcheck_enable_gating_level_event.value)|| (appIns.gcheck_enable_external_count.value && appIns.gcheck_enable_count_direction_event.value)},
+   .intr_event2_detect    = (bool) ${appIns.gint_counter_ext_evt_gating.value == 2 && appIns.gcheck_enable_gating_level_event.value },
+  .init_start             = (bool) ${appIns.gcheck_init_start.value}
+};
+
+/* App Handle for Instance ${appInst}*/
+COUNTER_t ${appInst} = 
+{
+  .counter_type = COUNTER_CCU4,
+  .ccu4_handle  = (COUNTER_CCU4_CONFIG_t*) &${appInst}_ccu4_config${ccu8_handle}
+};
+/*********************************************************************************************************************/
+""");	
+	}// end if(appIns.gcombo_peripheral_selection.value == "CCU4")
+	else if(appIns.gcombo_peripheral_selection.value == "CCU8")
+	{
+		/********************************************************************************************************************/
+		//Dummy Reads
+//		List all_reg_names = ["ins_ev1is","ins_ev2is","srs_e2sr","srs_e1sr",,"srs_cm2sr"]
+//		for(int index =0; index< all_reg_names.size; index++)
+//		{
+//			appIns.hwres_ccu8_slice.getRegValue("",all_reg_names[index]);
+//		}
+		
+		/********************************************************************************************************************/
+		ccu4_handle = ""
+		if(CCU4_counter == 1)
+		{
+			ccu4_handle = """
+  .ccu4_handle  = (COUNTER_CCU4_CONFIG_t*) NULL,"""
+		}
+	String lfp_cycles = "XMC_CCU8_SLICE_EVENT_FILTER_DISABLED"
+	String evt1_string = ""
+	String count_dir_event_config = "NULL"
+	String gating_event_config = "NULL"
+	
+	if (appIns.gcheck_enable_external_count.value)
+	{
+		evt1_string = """
+/* Event configuration- external count direction for the instance ${appInst} */
+XMC_CCU8_SLICE_EVENT_CONFIG_t ${appInst}_event1_config = 
+{
+  .mapped_input = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","ins_ev1is"); if(temp !=null){ input_signals_ccu8[temp.toInteger()]} else {input_signals_ccu8[0]} },
+  .edge         = ${edge_selection_ccu8[appIns.gcombo_cdir_edge.options.indexOf(appIns.gcombo_cdir_edge.value)]},
+  .level 	    = ${level_selection_ccu8[appIns.gcombo_ext_cnt_active_lvl.options.indexOf(appIns.gcombo_ext_cnt_active_lvl.value)]},
+  .duration     = ${lfp_cycles}
+}; """
+		count_dir_event_config = "(XMC_CCU8_SLICE_EVENT_CONFIG_t*) &${appInst}_event1_config"
+	}
+	if(appIns.gcheck_enable_gating.value)
+	{
+		evt1_string += """
+/* Event configuration- gating level direction for the instance ${appInst} */
+XMC_CCU8_SLICE_EVENT_CONFIG_t ${appInst}_event${appIns.gint_counter_ext_evt_gating.value}_config = 
+{
+  .mapped_input = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","ins_ev"+appIns.gint_counter_ext_evt_gating.value+"is"); if(temp !=null){ input_signals_ccu8[temp.toInteger()]} else {input_signals_ccu8[0]} },
+  .edge         = ${edge_selection_ccu8[appIns.gcombo_gating_edge.options.indexOf(appIns.gcombo_gating_edge.value)]},
+  .level 	    = ${level_selection_ccu8[appIns.gcombo_gating_level.options.indexOf(appIns.gcombo_gating_level.value)]},
+  .duration     = ${lfp_cycles}
+}; """
+		
+	if(appIns.gint_counter_ext_evt_gating.value == 1)
+		gating_event_config = "(XMC_CCU8_SLICE_EVENT_CONFIG_t*) &${appInst}_event1_config"
+	else
+		gating_event_config = "(XMC_CCU8_SLICE_EVENT_CONFIG_t*) &${appInst}_event2_config"
+	}
+	if(appIns.gcheck_enable_lowpass_filter.value)
+	{
+		lfp_cycles = low_pass_filter_ccu8[appIns.gcombo_lowpass_filter.options.indexOf(appIns.gcombo_lowpass_filter.value)]
+	}
+				out.print("""
+/************************************** ${appInst} *********************************************/
+/* Event configuration for counter instance ${appInst} */
+XMC_CCU8_SLICE_EVENT_CONFIG_t ${appInst}_event0_config = 
+{
+  .mapped_input = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","ins_ev0is"); if(temp !=null){ input_signals_ccu8[temp.toInteger()]} else {input_signals_ccu8[0]} },
+  .edge         = ${edge_selection_ccu8[appIns.gcombo_edge_selection.options.indexOf(appIns.gcombo_edge_selection.value)]},
+  .level 	    = XMC_CCU8_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_LOW,
+  .duration     = ${lfp_cycles}
+};
+
+${evt1_string}	
+	
+/*Configuration structure for CCU8 Counter for ${appInst} */
+COUNTER_CCU8_CONFIG_t  ${appInst}_ccu8_config =
+{
+  .global_handle          = (GLOBAL_CCU8_t*) &${appIns.appres_ccu8_global.getInstanceLabel()},
+  .kernel_ptr             = (XMC_CCU8_MODULE_t*) (void*) CCU8${MappedUri[4]}_BASE,
+  .slice_ptr              = (XMC_CCU8_SLICE_t*) (void*) CCU8${MappedUri[4]}_CC8${MappedUri[6]},
+  .event0_config          = (XMC_CCU8_SLICE_EVENT_CONFIG_t*) &${appInst}_event0_config,
+  .count_dir_event_config = ${count_dir_event_config},
+  .gating_event_config    = ${gating_event_config},
+  .shadow_mask            = (uint32_t)XMC_CCU8_SHADOW_TRANSFER_SLICE_${MappedUri[6]},
+  .count_match_value      = (uint16_t) ${appIns.gfloat_count_match_val.value.toInteger()},
+  .countdir_event         = ${if(appIns.gcheck_enable_external_count.value){ "XMC_CCU8_SLICE_EVENT_1" } else { "XMC_CCU8_SLICE_EVENT_NONE"} },
+  .gating_event           = ${if(appIns.gint_counter_ext_evt_gating.value == 0){ "XMC_CCU8_SLICE_EVENT_NONE"} else {"XMC_CCU8_SLICE_EVENT_"+ appIns.gint_counter_ext_evt_gating.value} },
+  .count_match_node_id    = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","srs_cm1sr"); if(temp !=null){ SR_lines_ccu8[temp.toInteger()]} else {SR_lines_ccu8[0]} },
+  .count_rollover_node_id = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","srs_posr"); if(temp !=null){ SR_lines_ccu8[temp.toInteger()]} else {SR_lines_ccu8[0]} },
+  .event_edge_det_node_id = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","srs_e0sr"); if(temp !=null){ SR_lines_ccu8[temp.toInteger()]} else {SR_lines_ccu8[0]} },
+  .event1_node_id         = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","srs_e1sr"); if(temp !=null){ SR_lines_ccu8[temp.toInteger()]} else {SR_lines_ccu8[0]} },
+  .event2_node_id         = ${String temp = appIns.hwres_ccu8_slice.getRegValue("","srs_e2sr"); if(temp !=null){ SR_lines_ccu8[temp.toInteger()]} else {SR_lines_ccu8[0]} },
+  .state                  = COUNTER_STATUS_UNINITIALIZED,
+  .kernel_number          = (uint8_t) ${MappedUri[4]},
+  .slice_number           = (uint8_t) ${MappedUri[6]},
+  .intr_count_match       = (bool) ${appIns.gcheck_enable_count_match.value},
+  .intr_count_rollover    = (bool) ${appIns.gcheck_enable_count_rollover.value},
+  .intr_evt_edge_detect   = (bool) ${appIns.gcheck_enable_edge_event.value},
+  .intr_event1_detect     = (bool) ${ (appIns.gint_counter_ext_evt_gating.value == 1 && appIns.gcheck_enable_gating_level_event.value)|| (appIns.gcheck_enable_external_count.value && appIns.gcheck_enable_count_direction_event.value)},
+  .intr_event2_detect     = (bool) ${appIns.gint_counter_ext_evt_gating.value == 2 && appIns.gcheck_enable_gating_level_event.value },
+  .init_start             = (bool) ${appIns.gcheck_init_start.value}
+};
+
+/* App Handle for Instance ${appInst}*/
+COUNTER_t ${appInst} = 
+{
+  .counter_type = COUNTER_CCU8,${ccu4_handle}
+  .ccu8_handle  = (COUNTER_CCU8_CONFIG_t*) &${appInst}_ccu8_config
+};
+
+/*********************************************************************************************************************/
+""");	
+	} //end else if(appIns.gcombo_peripheral_selection.value == "CCU8")
+	
+}

@@ -11,25 +11,21 @@ date: Sep 01 2016
 
 ## 참고자료
 
-* [XMC4500 Reference Manual v1.5 2014-04]
-    - xmc4500_rm_v1.5_2014_04.pdf
-* [XMC4500 Data Sheet v1.4 2016-01]
-    - Infineon-XMC4500-DS-v01.04-EN.pdf
 * [COUNTER] (DAVE APP on-line help)
 
 ## Counter와 Timer
 
-Counter 모듈 (혹은 Timer 모듈)은 대부분의 임베디드 시스템에서 중요한 구성 요소로서 많은 마이크로 컨트롤러에 기본적으로 포함되어 있다. 이 모듈을 이용하여 외부 사건의 발생 회수를 세거나, 경우에 따라 경과 시간을 측정할 수도 있다.(프로세서 사이클 또는 클럭 틱을 사용하여 계산). 일반적으로 발생회수를 세는 경우를 카운터라 부르고 경과 시간을 측정하는 경우에 타이머라고 이야기 한다. 하드웨어에 대해 이야기 할 때 카운터와 타이머라는 명칭을 혼용하여 많이 사용한다. 전문 용어상으로 주어진 응용 프로그램에서 하드웨어가 사용되는 방법에 따라 구분하고 있다.
+Counter 모듈 (혹은 Timer 모듈)은 대부분의 임베디드 시스템에서 중요한 구성 요소로서 많은 마이크로 컨트롤러에 기본적으로 포함되어 있다. 이 모듈을 이용하여 외부 사건의 **발생 회수**를 세거나, 경우에 따라 **경과 시간**을 측정할 수도 있다.(프로세서 사이클 또는 클럭 틱을 사용하여 계산). 일반적으로 발생회수를 세는 경우를 카운터라 부르고 경과 시간을 측정하는 경우에 타이머라고 이야기 한다. 하드웨어에 대해 이야기 할 때 카운터와 타이머라는 명칭을 혼용하여 많이 사용한다.  응용 프로그램에서 하드웨어가 사용되는 방법에 따라 구분하고 있다.
 
 ![CounterBasic](./images/Counter_CounterBasic.png)
 
-그림은 마이크로 컨트롤러 내부에 포함되는 것과 유사한 간단한 카운터를 보여주고 있다. 카운터는 로드 가능한 8 비트 카운트 레지스터, 입력 클럭 신호 및 출력 신호로 구성된다. 소프트웨어를 사용하여 카운트 레지스터를 0x00과 0xFF 사이의 초기 값으로 로드 한다. 입력 이벤트/클록 신호의 연속적인 천이에 따라 카운터 값은 계속 증가하게 된다.
+그림은 마이크로 컨트롤러 내부에 포함되는 카운터를 단순화한 것이다.  카운터의 비트수에 따라 처리할 수 있는 수의 범위가 달라지게 된다. 이 예에서는 8비트 카운터를 가정하고 설명하고자 한다.  
 
-8 비트 카운트가 오버플로되면 출력 신호(플래그)가 발생하게 된다. 이 출력 신호는 프로세서의 인터럽트를 발생하거나 프로세서가 확인할 수 있는 플래그 비트를 발생한다. 이 카운터를 다시 시작하기 위해 소프트웨어는 카운트 레지스터를 동일값 혹은 다른 값으로 다시 로드한다. 입력의 신호를 이벤트 신호로 구성하였을 경우에는 이벤트의 발생 회수를 알 수 있는 카운터로 사용하게 되고, 입력 신호가 주기적인 클럭 신호일 경우에는 경과 시간을 측정할 수 있는 타이머로 사용하게 되는 것이다.
+카운터는 사용자가 값을 로드할 수 있는 8 비트 카운트 레지스터, 입력 클럭 신호 및 출력 신호로 구성된다. 소프트웨어를 사용하여 카운트 레지스터를 0x00과 0xFF 사이의 초기 값으로 로드 한다. 입력 이벤트/클록 신호의 연속적인 천이에 따라 카운터 값은 계속 증가하게 된다.  8 비트 카운트가 오버플로되면 출력 신호(플래그)가 발생하게 된다. 이 출력 신호는 프로세서의 인터럽트를 발생하거나 프로세서가 확인할 수 있는 플래그 비트를 발생한다. 이 카운터를 다시 시작하기 위해 소프트웨어는 카운트 레지스터를 동일값 혹은 다른 값으로 다시 로드한다. 입력의 신호를 이벤트 신호로 구성하였을 경우에는 이벤트의 발생 회수를 알 수 있는 카운터로 사용하게 되고, 입력 신호가 주기적인 클럭 신호일 경우에는 경과 시간을 측정할 수 있는 타이머로 사용하게 되는 것이다.
 
 카운터를 증가 혹은 감소 시키는 여부를 결정할 수 있는 설정 정보를 가지고 있다. 업 카운터 인 경우 초기 값에서 0xFF까지 카운트를 증가하고 다운 카운터는 0x00을 향해 감소 시킨다.
 
-일반적으로 카운터는 콘트롤레지서트에 reload 관련 설정 비트를 가지고 있어서, 이에 따라 카운터가 시작할 때 초기값을 설정할 수 있도록 구성되어 있다. 또한 프로세서에서 카운터의 값을 데이터 버스를 통해서 언제든지 읽을 수 있도록 하는 방법을 가지고 있다.
+일반적으로 카운터는 콘트롤레지스터에 reload 관련 설정 비트를 가지고 있어서, 이에 따라 카운터가 시작할 때 초기값을 설정할 수 있도록 구성되어 있다. 또한 프로세서에서 카운터의 값을 데이터 버스를 통해서 언제든지 읽을 수 있도록 하는 방법을 가지고 있다.
 
 
 ## DAVE APP (COUNTER)
@@ -37,13 +33,15 @@ Counter 모듈 (혹은 Timer 모듈)은 대부분의 임베디드 시스템에�
 COUNTER APP은 CCU4 또는 CCU8 타이머 슬라이스를 사용하여 정확한 하드웨어 카운터를 제공한다. 그리고 이 APP은 다음의 특징을 가진다.
 
 * 사용할 타이머 모듈을 선택할 수 있다.(CCU4 또는 CCU8)
-* 카운트 일치 값(count match value)과 카운트 할 신호의 트리거 엣지(trigger edge)를 선택 할 수 있다.
-* 카운트 가능한 최대 값은 65535이다. 카운트 최대 값을 초과 시 0으로 되돌아간다(count rollover).
-* 다양한 이벤트 _(count match event, count rollover, event edge detection, count direction, gate level detection)_ 를 지원하며 이러한 이벤트로 인터럽트를 발생 시킬 수 있다.
-* 입력신호의 카운트 방향을 조정 할 수 있다. 기본 설정으로 카운터 값이 증가하는 방향으로 카운트한다.
-* External count direction 은 External Event-1 으로 매핑되고, External Gating 은 External Evnet-1 혹은 -2 으로 매핑된다.
 
-![COUNTER_Overview](./images/COUNTER_Overview.png)
+* 카운트 일치 값(count match value)과 카운트 할 신호의 트리거 엣지(trigger edge)를 선택 할 수 있다.
+
+* 카운트 가능한 최대 값은 65535이다. 카운트 최대 값을 초과 시 0으로 되돌아간다(count rollover).
+
+* 다양한 이벤트 _(count match event, count rollover, event edge detection, count direction, gate level detection)_ 를 지원하며 이러한 이벤트로 인터럽트를 발생 시킬 수 있다.
+
+* 입력신호의 카운트 방향을 조정 할 수 있다. 기본 설정으로 카운터 값이 증가하는 방향으로 카운트한다.![COUNTER_Overview](./images/COUNTER_Overview.png)
+
 
 위의 그림은 COUNTER APP의 개략적인 기능을 보여준다.  
 
@@ -144,29 +142,7 @@ typedef struct COUNTER_handle
 typedef struct COUNTER_CCU4_CONFIG
 {
   GLOBAL_CCU4_t *const global_handle; /**< Holds the global handle for GLOBAL_CCU4 APP */
-  XMC_CCU4_MODULE_t *const kernel_ptr; /**< Hold the base address of CCU4 kernel.*/
-  XMC_CCU4_SLICE_t *const slice_ptr; /**< Hold the address of CCU4 slice.*/
-  const XMC_CCU4_SLICE_EVENT_CONFIG_t *const event0_config; /**< Configure the event-0 for the count operation*/
-  const XMC_CCU4_SLICE_EVENT_CONFIG_t *const count_dir_event_config; /**<Configure the External event for count direction*/
-  const XMC_CCU4_SLICE_EVENT_CONFIG_t *const gating_event_config; /**<Configure the External event for gating signal*/
-  const uint32_t shadow_mask;       /**< Holds the shadow transfer mask of the consumed slice*/
-  const uint16_t count_match_value; /**< The number of edges to be counted to generate a count match interrupt*/
-  const XMC_CCU4_SLICE_EVENT_t countdir_event; /**<Configures the External count direction function of the CCU slice*/
-  const XMC_CCU4_SLICE_EVENT_t gating_event;   /**< Configures the External gating function of the CCU slice*/
-  const XMC_CCU4_SLICE_SR_ID_t count_match_node_id; /**< SR line for count match */
-  const XMC_CCU4_SLICE_SR_ID_t count_rollover_node_id; /**< SR line for count rollover event */
-  const XMC_CCU4_SLICE_SR_ID_t event_edge_det_node_id; /**< SR line for event edge detection*/
-  const XMC_CCU4_SLICE_SR_ID_t event1_node_id; /**< SR line for gating level detection/count direction detection */
-  const XMC_CCU4_SLICE_SR_ID_t event2_node_id; /**< SR line for gating level detection if count direction is used by event-1 */
-  COUNTER_STATUS_t state; /**< The current state of the APP*/
-  const uint8_t kernel_number; /**< The CCU4 kernel number in which the counter is configured*/
-  const uint8_t slice_number; /**< The CCU4 slice which is used a counter*/
-  const bool intr_count_match; /**< Enable/Disable the count match event */
-  const bool intr_count_rollover; /**<  Enable/Disable the count rollover event */
-  const bool intr_evt_edge_detect; /**<  Enable/Disable the event edge event */
-  const bool intr_event1_detect; /**<  Enable/Disable the count direction detection event or gating level event */
-  const bool intr_event2_detect; /**<  Enable/Disable the gating level event*/
-  const bool init_start; /**< Start the counter after initialization. */
+  /**중간생략 */
 }COUNTER_CCU4_CONFIG_t;
 ```
 

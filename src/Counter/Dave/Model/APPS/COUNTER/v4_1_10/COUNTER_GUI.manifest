@@ -1,0 +1,61 @@
+package Model.APPS.COUNTER.v4_1_10;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class COUNTER_GUI extends AppManifest {
+	// Begin : UI variable section
+	 public GTab gtab_1;
+	 public GCombo gcombo_peripheral_selection;
+	 public GCombo gcombo_edge_selection;
+	 public GCombo gcombo_lowpass_filter;
+	 public GCombo gcombo_ext_cnt_active_lvl;
+	 public GCombo gcombo_cdir_edge;
+	 public GCombo gcombo_gating_level;
+	 public GCombo gcombo_gating_edge;
+	 public GFloat gfloat_count_match_val;
+	 public GCheck gcheck_init_start;
+	 public GCheck gcheck_enable_lowpass_filter;
+	 public GCheck gcheck_enable_external_count;
+	 public GCheck gcheck_enable_gating;
+	 public GCheck gcheck_enable_count_match;
+	 public GCheck gcheck_enable_count_rollover;
+	 public GCheck gcheck_enable_edge_event;
+	 public GCheck gcheck_enable_count_direction_event;
+	 public GCheck gcheck_enable_gating_level_event;
+	 public GLabel glabel_ext_cnt_active_lvl;
+	 public GLabel glabel_cdir_edge;
+	 public GLabel glabel_gating_level;
+	 public GLabel glabel_gating_edge;
+	 public GGroup ggroup_counter_settings;
+
+	 public COUNTER_GUI(DaveEnv daveEnv){
+
+	 gtab_1 = GTab(widgetName:"gtab_1", text:"Event Settings", enabled:true, visible:true)
+	 gcombo_peripheral_selection = GCombo(widgetName:"gcombo_peripheral_selection", options:["CCU4","CCU8"], value:"CCU4", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_edge_selection = GCombo(widgetName:"gcombo_edge_selection", options:["Falling edge","Rising edge","Both the edges"], value:"Falling edge", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_lowpass_filter = GCombo(widgetName:"gcombo_lowpass_filter", options:["3 clock cycles","5 clock cycles","7 clock cycles"], value:"3 clock cycles", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_ext_cnt_active_lvl = GCombo(widgetName:"gcombo_ext_cnt_active_lvl", options:["High","Low"], value:"Low", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_cdir_edge = GCombo(widgetName:"gcombo_cdir_edge", options:["Falling edge","Rising edge","Both the edges"], value:"Rising edge", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_gating_level = GCombo(widgetName:"gcombo_gating_level", options:["Active low","Active high"], value:"Active low", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_gating_edge = GCombo(widgetName:"gcombo_gating_edge", options:["Falling edge","Rising edge","Both the edges"], value:"Rising edge", enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_count_match_val = GFloat(widgetName:"gfloat_count_match_val", value:200, minValue:1, maxValue:65535, enabled:true, visible:true, isMandatoryValue:false)
+	 gcheck_init_start = GCheck(widgetName:"gcheck_init_start", value:false, enabled:true, visible:true)
+	 gcheck_enable_lowpass_filter = GCheck(widgetName:"gcheck_enable_lowpass_filter", value:false, enabled:true, visible:true)
+	 gcheck_enable_external_count = GCheck(widgetName:"gcheck_enable_external_count", value:false, enabled:true, visible:true)
+	 gcheck_enable_gating = GCheck(widgetName:"gcheck_enable_gating", value:false, enabled:true, visible:true)
+	 gcheck_enable_count_match = GCheck(widgetName:"gcheck_enable_count_match", value:false, enabled:true, visible:true)
+	 gcheck_enable_count_rollover = GCheck(widgetName:"gcheck_enable_count_rollover", value:false, enabled:true, visible:true)
+	 gcheck_enable_edge_event = GCheck(widgetName:"gcheck_enable_edge_event", value:false, enabled:true, visible:true)
+	 gcheck_enable_count_direction_event = GCheck(widgetName:"gcheck_enable_count_direction_event", value:false, enabled:true, visible:true)
+	 gcheck_enable_gating_level_event = GCheck(widgetName:"gcheck_enable_gating_level_event", value:false, enabled:true, visible:true)
+	 glabel_ext_cnt_active_lvl = GLabel(widgetName:"glabel_ext_cnt_active_lvl", text:"Count up level:", enabled:true, visible:true)
+	 glabel_cdir_edge = GLabel(widgetName:"glabel_cdir_edge", text:"Edge level:", enabled:true, visible:true)
+	 glabel_gating_level = GLabel(widgetName:"glabel_gating_level", text:"Gating level:", enabled:true, visible:true)
+	 glabel_gating_edge = GLabel(widgetName:"glabel_gating_edge", text:"Edge level:", enabled:true, visible:true)
+	 ggroup_counter_settings = GGroup(widgetName:"ggroup_counter_settings", text:"Counter Settings", enabled:true, visible:true)
+
+
+	 }
+	// End : UI variable section
+}
