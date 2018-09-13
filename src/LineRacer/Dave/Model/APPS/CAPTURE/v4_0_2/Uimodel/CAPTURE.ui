@@ -1,0 +1,142 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e">
+	<p1:Tab.layout>
+		<GridLayout verticalSpacing="10" horizontalSpacing="10"/>
+	</p1:Tab.layout>
+	<p1:TabFolder>
+		<p1:TabFolder.layoutData>
+			<GridData heightHint="411"/>
+		</p1:TabFolder.layoutData>
+		<p1:GTab text="General Settings" widgetName="tab_general_settings" visible="true" enabled="true" manifestObj="true" description="General">
+			<p1:GTab.control>
+				<p1:Tab>
+					<p1:Tab.layout>
+						<GridLayout horizontalSpacing="10" verticalSpacing="10"/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Timer Settings" manifestObj="true" widgetName="ggroup_timer_settings" layout="{x:Null}">
+						<p1:GGroup.layoutData>
+							<GridData horizontalAlignment="FILL" heightHint="259"/>
+						</p1:GGroup.layoutData>
+						<p1:GLabel text="Select Timer Module:" visible="true" manifestObj="true" widgetName="glabel_select_timer" bounds="8, 23, 112, 15"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_select_timer" toolTipText="Select capture timer module." value="CCU4" options="CCU4&#13;&#10;CCU8" bounds="188, 20, 244, 21" description="&lt;Select Timer Module&gt;&#13;&#10;Select a CCU timer module to perform capture operation.&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10; &lt;li&gt;CCU4 : One slice from CCU4 module is used.&lt;/li&gt;&#13;&#10;&lt;li&gt;CCU8 : One slice from CCU8 module is used.&lt;/li&gt;&#13;&#10;"/>
+						<p1:GLabel text="Timer Resolution Configuration:" visible="true" manifestObj="true" widgetName="glabel_resolution_config" bounds="8, 54, 170, 15"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_resolution_config" options="Direct&#13;&#10;Calculated from Max Capture Frequency" value="Direct" bounds="188, 51, 244, 21" toolTipText="Decides the resolution of the timer whether it has entered by user or calculated by using the maximum frequency." description="&lt;Timer Resolution Configuration&gt;&#13;&#10;Decides the resolution of the timer.&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10; &lt;li&gt;Direct : Calculated by using the Desired Timer Resolution.&lt;/li&gt;&#13;&#10;&lt;li&gt;Calculated from Max Capture Frequency : Calculated by using the Max Frequency entered.&lt;/li&gt;&#13;&#10;"/>
+						<p1:GLabel text="Desired Timer Resolution [nsec]:" visible="true" manifestObj="true" widgetName="glabel_desired_resolution" bounds="8, 85, 170, 15" toolTipText="Select timer resolution." description=""/>
+						<p1:GFloat x:Style="BORDER" minValue="1" maxValue="POSITIVE_INFINITY" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,2" manifestObj="true" widgetName="gfloat_desired_resolution" toolTipText="Select timer resolution." value="20.0" bounds="188, 82, 244, 21" description="&lt;Desired Timer Resolution [nsec]&gt;&#13;&#10;Select timer resolution:&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;If Timer Resolution Configuration is selected as &quot;Direct mode&quot;, this field is enabled for the user to enter the value. Based on the value entered Actual Timer Resolution is calculated.&lt;/li&gt;&#13;&#10;&lt;li&gt;If Timer Resolution Configuration is selected as Calculated from Max Frequency, this is disabled.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;&#13;&#10;&lt;br&gt;&#13;&#10;Range:&lt;br&gt;&#13;&#10; Min Value: ceil(1/fccu)&lt;br&gt;&#13;&#10; Max Value: ceil((1/fccu)*(2^prescaler))&lt;br&gt;"/>
+						<p1:GLabel manifestObj="true" text="Actual Timer Resolution [nsec]:" widgetName="glabel_actual_resolution" bounds="8, 116, 165, 15" toolTipText="Display the actual resolution of the timer." description=""/>
+						<p1:GFloat x:Style="BORDER" minValue="1" maxValue="POSITIVE_INFINITY" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,2" manifestObj="true" widgetName="gfloat_actual_resolution" toolTipText="Actual timer resolution" value="20.0" enabled="false" bounds="188, 113, 244, 21" description="&lt;Actual Timer Resolution [nsec]&gt;&#13;&#10;Display the actual resolution of the timer.&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;If Timer Resolution Configuration is selected as &quot;Direct mode&quot;, this fieled is calculated based on the &quot;Desired Timer Rersolution&quot; entered.&lt;/li&gt;&#13;&#10;&lt;li&gt;If Timer Resolution Configuration is selected as &quot;Calculated from Max Capture Frequency&quot;, then this value is calculated from the maximum frequency entered.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;"/>
+						<p1:GLabel manifestObj="true" text="Min Frequency [Hz]:" widgetName="glabel_input_min_freq" bounds="8, 147, 107, 15"/>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="1" toolTipText="Enter minimum frequency that needs to be captured." value="2000" widgetName="ginteger_input_min_freq" bounds="188, 144, 244, 23" description="&lt;Min Frequency&gt;&#13;&#10;Enter minimum frequency that needs to be captured. This minimum frequency decides the prescaler mode.&lt;br&gt;&#13;&#10;&#13;&#10;If the frequency cannot be captured with resolution entered, APP automatically switches to floating mode prescaler.&lt;br&gt;&#13;&#10;&lt;br&gt;&#13;&#10;Range:&lt;br&gt;&#13;&#10;Min Value: 1Hz&lt;br&gt;&#13;&#10;Max Value: Max Frequency [Hz]&lt;br&gt;"/>
+						<p1:GLabel foreground="COLOR_DARK_BLUE" manifestObj="true" text="Note: Floating prescaler mode is enabled. If frequency is configured higher than 915Hz, normal&#13;&#10;           prescaler mode is enabled." widgetName="glabel_float_mode_frequency_message" bounds="8, 175, 537, 31"/>
+						<p1:GLabel manifestObj="true" text="Max Frequency [Hz]:" widgetName="glabel_input_max_freq" bounds="8, 215, 108, 15" description="" toolTipText="Enter maximum frequency that needs to be captured."/>
+						<p1:GInteger enabled="false" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="MIN_VALUE" toolTipText="Select timer resolution" value="30000000" widgetName="ginteger_direct_max_freq" bounds="188, 212, 244, 23" description=""/>
+						<p1:GCheck text="Start after initialization" manifestObj="true" widgetName="gcheck_start_after_init" bounds="8, 243, 139, 16" toolTipText="Start capture timer immediately after initialization. " description="&lt;Start after initialization&gt;&#13;&#10;Start capture timer immediately after initialization. If this is not enabled, a seperate API is provided to start the timer when needed."/>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="MIN_VALUE" toolTipText="Enter maximum frequency that needs to be captured." value="30000000" widgetName="ginteger_input_max_freq" bounds="188, 212, 244, 23" description="&lt;Max Frequency [Hz]&gt;&#13;&#10;Enter maximum frequency that needs to be captured.&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;If Timer Resolution Configuration is selected as &quot;Direct mode&quot;, this indicates the maximum frequency that can be measured with the current actual resolution.&lt;/li&gt;&#13;&#10;&lt;li&gt;If Timer Resolution Configuration is selected as &quot;Calculated from Max Capture Frequency&quot;, based on the value entered &quot;Actual Timer Resolution&quot; is calculated.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;&#13;&#10;&lt;br&gt;&#13;&#10;Range:&lt;br&gt;&#13;&#10; Min Value: Min Frequency [Hz]&lt;br&gt;&#13;&#10; Max Value: fccu/2&lt;br&gt;"/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_desired_resolution_na" bounds="188, 82, 244, 21" value="N.A." enabled="false" toolTipText="" description=""/>
+					</p1:GGroup>
+					<p1:GGroup manifestObj="true" text="Capture Settings" widgetName="ggroup_capture_settings">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2" horizontalSpacing="10" verticalSpacing="10"/>
+						</p1:GGroup.layout>
+						<p1:GLabel manifestObj="true" text="Capture edge:" widgetName="glabel_capture_edge"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Rise-to-Rise&#13;&#10;Rise-to-Fall&#13;&#10;Fall-to-Rise&#13;&#10;Fall-to-Fall" toolTipText="Select for which edges the capturing has to be done." value="Rise-to-Rise" widgetName="gcombo_capture_edge" description="&lt;Capture edge&gt;&#13;&#10;Select for which edges the capturing has to be done.&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Rise-to-Rise,Fall-to-Fall : In this modes both period and duty cycle of the input signals can be measured.&lt;/li&gt;&#13;&#10;&lt;li&gt;Rise-to-Fall,Fall-to-Rise :  In this modes only the captured timer values between the specified edges is captured. Period and Duty are not available for this modes.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;"/>
+						<p1:GCheck manifestObj="true" text="Overwrite Capture Value" widgetName="gcheck_overwrite_capture" description="&lt;Overwrite Capture Value&gt;&#13;&#10;If this is enabled, for each time when a new capture event has occured the existing capture values in the hardware are overwritten. \nOtherwise, until the existing values are read, new values are not captured.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GLabel foreground="COLOR_RED" manifestObj="true" text="Note : Period length and duty cycle will only be available with capture edge configuration Rise-to-Rise&#13;&#10;            or Fall-to-Fall." widgetName="glabel_capture_config_message" description="test">
+							<p1:GLabel.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Advanced Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_advanced_settings" description="Advanced">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_3">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2" horizontalSpacing="10" verticalSpacing="10"/>
+					</p1:Tab.layout>
+					<p1:GLabel text="Input source:" visible="true" manifestObj="true" widgetName="glabel_input_source"/>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_input_source" options="GPIO&#13;&#10;Internal Signal" value="GPIO" toolTipText="Decide how the input is feed to the timer." description="&lt;Input source&gt;&#13;&#10;Decide how the input is fed to the timer.&lt;BR&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;GPIO : If this is selected, APP provides an option to select the pin and configure  the pin properties.&lt;/li&gt;&#13;&#10;&lt;li&gt;Internal Signal :  If this is selected, APP provides a peripheral signal, which can be connected to other peripherals based on the availability.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;"/>
+					<p1:GGroup text="Signal Processing" manifestObj="true" widgetName="ggroup_signal_processing">
+						<p1:GGroup.layoutData>
+							<GridData horizontalSpan="2" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2" horizontalSpacing="10" verticalSpacing="10"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Low pass filter configuraton:" visible="true" manifestObj="true" widgetName="glabel_filter_config"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Disabled&#13;&#10;3 Clock Cycles&#13;&#10;5 Clock Cycles&#13;&#10;7 Clock Cycles&#13;&#10;" toolTipText="Configures the filter to avaoid the noise in the input signal. " value="Disabled" widgetName="gcombo_filter_config" description="&lt;Low pass filter configuraton&gt;&#13;&#10;Configures the Low Pass Filter to filter the noise of the input signal. The maximum frequency of the input signal needs to be remain stable for the specified number of (fCCU) counts, so that a level/transition is accepted.&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Disabled : Filter disabled. &lt;/li&gt;&#13;&#10;&lt;li&gt;3 Clock Cycles : For 3 clock cycles of fCCU, input has to be stable.&lt;/li&gt;&#13;&#10;&lt;li&gt;5 Clock Cycles : For 5 clock cycles of fCCU, input has to be stable.&lt;/li&gt;&#13;&#10;&lt;li&gt;7 Clock Cycles : For 7 clock cycles of fCCU, input has to be stable.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;&#13;&#10;&lt;/ul&gt;"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_interrupt_settings" description="Int">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_11">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2" verticalSpacing="10" horizontalSpacing="10"/>
+					</p1:Tab.layout>
+					<p1:GCheck manifestObj="true" text="Enable capture event" widgetName="gcheck_capture_event" toolTipText="This enables the execution of the user callback, to indicate the capture event." description="&lt;Enable capture event&gt;&#13;&#10;This enables the execution of the user callback, to indicate the capture event. After enabling this option interrupt callback has to be implemented and provide the name in &quot;Capture interrupt callback&quot;.">
+						<p1:GCheck.layoutData>
+							<GridData horizontalSpan="2"/>
+						</p1:GCheck.layoutData>
+					</p1:GCheck>
+					<p1:GGroup text="Interrupt Settings" manifestObj="true" widgetName="ggroup_interrupt_settings">
+						<p1:GGroup.layout>
+							<GridLayout horizontalSpacing="10" verticalSpacing="10" numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData horizontalSpan="2" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GLabel text="Capture interrupt callback:" visible="true" manifestObj="true" widgetName="glabel_capture_callback" description=""/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_capture_callback" value="CaptureIRQHandler" enabled="false" description="&lt;Capture interrupt callback&gt;&#13;&#10;User defined callback to indicate the capture interrupt. Function names with C coding standards are allowed.&lt;br&gt;&#13;&#10;eg. CaptureIRQHandler.">
+							<p1:GString.layoutData>
+								<GridData widthHint="264" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name for-&quot;Capture interrupt callback&quot;." visible="true" manifestObj="true" isError="false" widgetName="gmessage_capture_callback_empty">
+							<p1:GMessage.layoutData>
+								<GridData horizontalSpan="2" widthHint="405" horizontalAlignment="FILL"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<p1:GInterruptPrio text="Capture IRQ" x:Style="NONE" minPriority="MIN_VALUE" maxPriority="MAX_VALUE" minSubPriority="MIN_VALUE" maxSubPriority="MAX_VALUE" priorityValue="63" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="true" manifestObj="true" widgetName="ginterruptprio_capture" description="&lt;Capture IRQ&gt;&#13;&#10;Defines the pre priority of the capture interrupt and sub priority. Higher number means lower priority. Sub priority is applicable for XMC4000 devices only.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalSpan="2" horizontalAlignment="FILL" widthHint="536"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Pin Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_pin_settings" description="Pin">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_19">
+					<p1:Tab.layout>
+						<GridLayout horizontalSpacing="10" verticalSpacing="10"/>
+					</p1:Tab.layout>
+					<p1:GCheck text="Enable advanced pin configuration" manifestObj="true" widgetName="gcheck_enable_adv_pin_config" toolTipText="Enables the advanced settings for the capture input pin." description="&lt;Enable advanced pin configuration&gt;&#13;&#10;Enables the advanced settings for the capture input pin."/>
+					<p1:GGroup text="Input Pin" manifestObj="true" widgetName="ggroup_input_pin" description="Provides optimized pad oscillation behaviour for touch-sensing applications.&lt;br&gt;&#13;&#10; NOTE: Available only for XMC1000 family.">
+						<p1:GGroup.layoutData>
+							<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2" horizontalSpacing="10" verticalSpacing="10"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" manifestObj="true" widgetName="glabel_pin_mode"/>
+						<p1:GCombo description="&lt;Mode&gt;&#13;&#10;Selection of pull-up or pull-down device in the pad. Continuous Sampling Mode used in Pin power save mode. &lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Tristate : No internal pull device active.&lt;/li&gt;&#13;&#10;&lt;li&gt;Pull Up :Internal pull-up device active.&lt;/li&gt;&#13;&#10;&lt;li&gt;Pull Down :Internal pull-down device active.&lt;/li&gt;&#13;&#10;&lt;li&gt;Continuous Sampling Mode :No internal pull device active; Pn_OUTx continuously samples the input value.&lt;/li&gt;&#13;&#10;&lt;li&gt;Inverted Tristate :No internal pull device active,but input value will be inverted.&lt;/li&gt;&#13;&#10;&lt;li&gt;Inverted Pull Up :Internal pull-up device active,but input value will be inverted.&lt;/li&gt;&#13;&#10;&lt;li&gt;Inverted Pull Down :Internal pull-down device active,but input value will be inverted.&lt;/li&gt;&#13;&#10;&lt;li&gt;Inverted Continuous Sampling Mode :No internal pull device active; Pn_OUTx continuously samples the input value.&lt;/li&gt;&#13;&#10;&lt;/ul&gt;&#13;&#10;" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Tristate&#13;&#10;Pull Up&#13;&#10;Pull Down&#13;&#10;Continuous Sampling Mode&#13;&#10;Inverted Tristate&#13;&#10;Inverted Pull Up&#13;&#10;Inverted Pull Down&#13;&#10;Inverted Continuous Sampling Mode" value="Tristate" widgetName="gcombo_pin_mode" toolTipText="Select Pull Up/ Pull Down device."/>
+						<p1:GLabel text="Hysteresis:" visible="true" manifestObj="true" widgetName="glabel_pin_hysteresis"/>
+						<p1:GCombo description="&lt;Hysteresis&gt;&#13;&#10;Provides optimized pad oscillation behaviour for touch-sensing applications.&lt;br&gt;&#13;&#10;NOTE: Available only for XMC1000 family." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Standard&#13;&#10;Large" toolTipText="Select pad hysteresis control." value="Standard" widgetName="gcombo_pin_hysteresis">
+							<p1:GCombo.layoutData>
+								<GridData horizontalAlignment="FILL"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>
