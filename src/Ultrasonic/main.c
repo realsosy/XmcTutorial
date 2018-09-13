@@ -23,16 +23,16 @@
  */
 
 uint32_t u32CapturedTick;
-float f32CapturedTime;
-float f32Distance;
+float fltCapturedTime;
+float fltDistance;
 uint32_t u32SwTimer_60ms;
 
 
 void CB_dhSYSTIMER_0_u32SwTimer_60ms(void)
 {
 			CAPTURE_GetCapturedTime(&dhCAPTURE_0, &u32CapturedTick);
-			f32CapturedTime = (float)u32CapturedTick * 533.33 / 1000.0;
-			f32Distance = f32CapturedTime / 58.0;
+			fltCapturedTime = (float)u32CapturedTick * 533.33 / 1000.0;
+			fltDistance = fltCapturedTime / 58.0;
 }
 
 int main(void)
