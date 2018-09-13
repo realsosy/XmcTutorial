@@ -1,7 +1,7 @@
 site_name: XMC Tutorial
 
 pages:
-- Home: 'README.md'
+- Home: 'index.md'
 
 - Intermediate:
     - Counter: Counter.md
