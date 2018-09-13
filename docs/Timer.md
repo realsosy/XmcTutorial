@@ -101,22 +101,7 @@ typedef struct TIMER
   uint32_t time_interval_value_us;  /**< Timer interval value for which event is being generated */
   const uint32_t timer_max_value_us;	/**< Maximum timer value in micro seconds for the available clock */
   const uint32_t timer_min_value_us;  /**< Minimum timer value in micro seconds for the available clock */
-  const uint32_t shadow_mask;  /**< shadow transfer mask for the selected timer */
-  GLOBAL_CCU4_t* const global_ccu4_handler; /**< Reference to CCU4GLOBAL APP handler */
-  XMC_CCU4_SLICE_t* const ccu4_slice_ptr;  /**< Reference to CCU4-CC4 slice identifier data handler */
-  const uint8_t ccu4_slice_number;  /* Timer being used */
-  XMC_CCU4_SLICE_COMPARE_CONFIG_t* const ccu4_slice_config_ptr; /**< Reference to initialization data structure of the core timer functionality */
-  XMC_CCU4_SLICE_SR_ID_t  const ccu4_period_match_node; /**< Service Request Id for period match event */
-  GLOBAL_CCU8_t* const global_ccu8_handler; /**< Reference to CCU8GLOBAL APP handler */
-  XMC_CCU8_SLICE_t* const ccu8_slice_ptr; /**< Reference to CCU8-CC8 slice identifier data handler */
-  const uint8_t ccu8_slice_number;  /* Timer being used */
-  XMC_CCU8_SLICE_COMPARE_CONFIG_t* const ccu8_slice_config_ptr; /**< Reference to initialization data structure of the core timer functionality */
-  XMC_CCU8_SLICE_SR_ID_t const ccu8_period_match_node; /**< Service Request Id for period match event */
-  TIMER_MODULE_t const timer_module; /**< Indicate which timer module is being used from CCU4 and CCU8 */
-  uint16_t period_value; /**< Period value to be loaded into timer for the corresponding time tick */
-  bool const start_control; /**< Indicate whether to start the APP during initialization itself */
-  bool const period_match_enable; /**< Indicate the generation of period match event */
-  bool initialized;  /* flag to indicate the initialization state of the APP instance */
+  /* 중간 생략 */
 } TIMER_t;
 ```
 TIMER 관련 동작을 프로그래밍 하기 위한 열거형 자료형들은 다음과 같다.
