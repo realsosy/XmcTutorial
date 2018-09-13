@@ -129,6 +129,8 @@ sequenceDiagram
 	end
 ```
 
+![ProgSystemTimerScheduler_Delay](images/ProgSystemTimerScheduler_Delay.png)
+
 ### Interrupt 활용한 주기적 실행
 
 
@@ -162,6 +164,10 @@ sequenceDiagram
 		deactivate Task
 	end
 ```
+
+![ProgSystemTimerScheduler_SysTimerTask](images/ProgSystemTimerScheduler_SysTimerTask.png)
+
+
 
 ### 간단한 Scheduler 활용하기
 
@@ -203,6 +209,8 @@ sequenceDiagram
     end
 ```
 
+![ProgSystemTimerScheduler_SchedulerTask](images/ProgSystemTimerScheduler_SchedulerTask.png)
+
 #### Scheduler 구현
 
 *   SystemTimer 를 사용하여 가장 기본이 되는 주기신호를 발생시킨다.  일반적으로 이것을 Tick 이라 부른다.
@@ -230,7 +238,7 @@ sequenceDiagram
 	end
 ```
 
-
+![ProgSystemTimerScheduler_SchedulerMain](images/ProgSystemTimerScheduler_SchedulerMain.png)
 
 ```c
 static uint32_t TickCounter = 0;
@@ -324,7 +332,7 @@ sequenceDiagram
     end
 ```
 
-
+![ProgSystemTimerScheduler_SevenSegLab](images/ProgSystemTimerScheduler_SevenSegLab.png)
 
 ### Homework
 

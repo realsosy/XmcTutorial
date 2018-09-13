@@ -5,7 +5,7 @@ pages:
 
 - Intermediate:
     - Counter: Counter.md
-#    - Timer: Timer.md
+    - Timer: Timer.md
 #    - Real-time Clock: Rtc.md
 #    - Compare & Capture: Ccu8SliceConfig.md
 #    - DAC LUT: DacLut.md
@@ -17,7 +17,7 @@ pages:
 
 - LabIntermediate:
     - Counter: LabCounter.md
-#    - Timer: LabTimer.md
+    - Timer: LabTimer.md
 
 - Basic:
     - Getting Started: GettingStartedXmc.md

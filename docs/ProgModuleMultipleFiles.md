@@ -232,6 +232,8 @@ Button2-->|DIGITAL_IO, P1.15 |XMC
 XMC-->|BUS_IO, P0.0-0.7|SevenSeg
 ```
 
+![ProgModuleMultipleFiles_SystemDiagram](images/ProgModuleMultipleFiles_SystemDiagram.png)
+
 
 
 *   주어진 코드에서 Segment 와 관련된 기능은 Seg.h/.c  모듈로 만든다.
@@ -248,6 +250,8 @@ graph LR;
 	Main -->|SegmentNum| DS
 	
 ```
+
+![ProgModuleMultipleFiles_SoftwareDiagram](images/ProgModuleMultipleFiles_SoftwareDiagram.png)
 
 
 
@@ -273,6 +277,8 @@ sequenceDiagram
         deactivate Main
     end
 ```
+
+![ProgModuleMultipleFiles_Sequence](images/ProgModuleMultipleFiles_Sequence.png)
 
 *   SevenSegLab 프로젝트는 
 
