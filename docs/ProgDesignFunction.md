@@ -41,6 +41,9 @@ sequenceDiagram
 
 ```
 
+https://mermaidjs.github.io/mermaid-live-editor/#/view/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG5cdGFjdGl2YXRlIE1haW5cblx0TWFpbiAtPj4gU2VnQ29udmVydDogRnVuY3Rpb24gY2FsbFxuXHRkZWFjdGl2YXRlIE1haW5cblx0YWN0aXZhdGUgU2VnQ29udmVydFxuXHRTZWdDb252ZXJ0IC0-PiBNYWluOiBSZXR1cm5cblx0ZGVhY3RpdmF0ZSBTZWdDb252ZXJ0XG5cdGFjdGl2YXRlIE1haW5cblx0ZGVhY3RpdmF0ZSBNYWluXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiZGVmYXVsdCJ9fQ
+
+
 * 함수를 사용함으로써 생기는 장점과 단점을 다음의 관점에서 설명해 보세요.
   *   메모리 측면:
   *   모듈화 측면:
