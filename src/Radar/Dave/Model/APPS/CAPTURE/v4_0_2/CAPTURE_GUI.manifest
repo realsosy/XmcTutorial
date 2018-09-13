@@ -1,0 +1,106 @@
+package Model.APPS.CAPTURE.v4_0_2;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class CAPTURE_GUI extends AppManifest {
+
+    /* IMPORTANT NOTE: This is an auto generated file, please do not edit manually. */
+    /* User modifications in the GUI editor will be updated here automatically.     */
+    /* Manually editing the contents of this file will corrupt the APP SDK project. */
+
+	/* Begin : UI variable section */
+	 public GTab tab_general_settings;
+	 public GTab gtab_advanced_settings;
+	 public GTab gtab_interrupt_settings;
+	 public GTab gtab_pin_settings;
+	 public GInteger ginteger_input_min_freq;
+	 public GInteger ginteger_direct_max_freq;
+	 public GInteger ginteger_input_max_freq;
+	 public GCombo gcombo_select_timer;
+	 public GCombo gcombo_resolution_config;
+	 public GCombo gcombo_capture_edge;
+	 public GCombo gcombo_input_source;
+	 public GCombo gcombo_filter_config;
+	 public GCombo gcombo_pin_mode;
+	 public GCombo gcombo_pin_hysteresis;
+	 public GFloat gfloat_desired_resolution;
+	 public GFloat gfloat_actual_resolution;
+	 public GString gstring_desired_resolution_na;
+	 public GString gstring_capture_callback;
+	 public GCheck gcheck_start_after_init;
+	 public GCheck gcheck_overwrite_capture;
+	 public GCheck gcheck_capture_event;
+	 public GCheck gcheck_enable_adv_pin_config;
+	 public GLabel glabel_select_timer;
+	 public GLabel glabel_resolution_config;
+	 public GLabel glabel_desired_resolution;
+	 public GLabel glabel_actual_resolution;
+	 public GLabel glabel_input_min_freq;
+	 public GLabel glabel_float_mode_frequency_message;
+	 public GLabel glabel_input_max_freq;
+	 public GLabel glabel_capture_edge;
+	 public GLabel glabel_capture_config_message;
+	 public GLabel glabel_input_source;
+	 public GLabel glabel_filter_config;
+	 public GLabel glabel_capture_callback;
+	 public GLabel glabel_pin_mode;
+	 public GLabel glabel_pin_hysteresis;
+	 public GGroup ggroup_timer_settings;
+	 public GGroup ggroup_capture_settings;
+	 public GGroup ggroup_signal_processing;
+	 public GGroup ggroup_interrupt_settings;
+	 public GGroup ggroup_input_pin;
+	 public GInterruptPrio ginterruptprio_capture;
+	 public GMessage gmessage_capture_callback_empty;
+
+	 public CAPTURE_GUI(DaveEnv daveEnv){
+
+	 tab_general_settings = GTab(widgetName:"tab_general_settings", text:"General Settings", enabled:true, visible:true)
+	 gtab_advanced_settings = GTab(widgetName:"gtab_advanced_settings", text:"Advanced Settings", enabled:true, visible:true)
+	 gtab_interrupt_settings = GTab(widgetName:"gtab_interrupt_settings", text:"Interrupt Settings", enabled:true, visible:true)
+	 gtab_pin_settings = GTab(widgetName:"gtab_pin_settings", text:"Pin Settings", enabled:true, visible:true)
+	 ginteger_input_min_freq = GInteger(widgetName:"ginteger_input_min_freq", value:2000, minValue:1, maxValue:Long.MAX_VALUE, enabled:true, visible:true, isMandatoryValue:false)
+	 ginteger_direct_max_freq = GInteger(widgetName:"ginteger_direct_max_freq", value:30000000, minValue:Long.MIN_VALUE, maxValue:Long.MAX_VALUE, enabled:false, visible:true, isMandatoryValue:false)
+	 ginteger_input_max_freq = GInteger(widgetName:"ginteger_input_max_freq", value:30000000, minValue:Long.MIN_VALUE, maxValue:Long.MAX_VALUE, enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_select_timer = GCombo(widgetName:"gcombo_select_timer", options:["CCU4","CCU8"], value:"CCU4", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_resolution_config = GCombo(widgetName:"gcombo_resolution_config", options:["Direct","Calculated from Max Capture Frequency"], value:"Direct", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_capture_edge = GCombo(widgetName:"gcombo_capture_edge", options:["Rise-to-Rise","Rise-to-Fall","Fall-to-Rise","Fall-to-Fall"], value:"Rise-to-Rise", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_input_source = GCombo(widgetName:"gcombo_input_source", options:["GPIO","Internal Signal"], value:"GPIO", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_filter_config = GCombo(widgetName:"gcombo_filter_config", options:["Disabled","3 Clock Cycles","5 Clock Cycles","7 Clock Cycles"], value:"Disabled", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_pin_mode = GCombo(widgetName:"gcombo_pin_mode", options:["Tristate","Pull Up","Pull Down","Continuous Sampling Mode","Inverted Tristate","Inverted Pull Up","Inverted Pull Down","Inverted Continuous Sampling Mode"], value:"Tristate", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_pin_hysteresis = GCombo(widgetName:"gcombo_pin_hysteresis", options:["Standard","Large"], value:"Standard", enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_desired_resolution = GFloat(widgetName:"gfloat_desired_resolution", value:20.0, minValue:1, maxValue:Double.POSITIVE_INFINITY, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_resolution = GFloat(widgetName:"gfloat_actual_resolution", value:20.0, minValue:1, maxValue:Double.POSITIVE_INFINITY, enabled:false, visible:true, isMandatoryValue:false)
+	 gstring_desired_resolution_na = GString(widgetName:"gstring_desired_resolution_na", value:"N.A.", enabled:false, visible:true, isMandatoryValue:false)
+	 gstring_capture_callback = GString(widgetName:"gstring_capture_callback", value:"CaptureIRQHandler", enabled:false, visible:true, isMandatoryValue:false)
+	 gcheck_start_after_init = GCheck(widgetName:"gcheck_start_after_init", value:false, enabled:true, visible:true)
+	 gcheck_overwrite_capture = GCheck(widgetName:"gcheck_overwrite_capture", value:false, enabled:true, visible:true)
+	 gcheck_capture_event = GCheck(widgetName:"gcheck_capture_event", value:false, enabled:true, visible:true)
+	 gcheck_enable_adv_pin_config = GCheck(widgetName:"gcheck_enable_adv_pin_config", value:false, enabled:true, visible:true)
+	 glabel_select_timer = GLabel(widgetName:"glabel_select_timer", text:"Select Timer Module:", enabled:true, visible:true)
+	 glabel_resolution_config = GLabel(widgetName:"glabel_resolution_config", text:"Timer Resolution Configuration:", enabled:true, visible:true)
+	 glabel_desired_resolution = GLabel(widgetName:"glabel_desired_resolution", text:"Desired Timer Resolution [nsec]:", enabled:true, visible:true)
+	 glabel_actual_resolution = GLabel(widgetName:"glabel_actual_resolution", text:"Actual Timer Resolution [nsec]:", enabled:true, visible:true)
+	 glabel_input_min_freq = GLabel(widgetName:"glabel_input_min_freq", text:"Min Frequency [Hz]:", enabled:true, visible:true)
+	 glabel_float_mode_frequency_message = GLabel(widgetName:"glabel_float_mode_frequency_message", text:"Note: Floating prescaler mode is enabled. If frequency is configured higher than 915Hz, normal\r\n           prescaler mode is enabled.", enabled:true, visible:true)
+	 glabel_input_max_freq = GLabel(widgetName:"glabel_input_max_freq", text:"Max Frequency [Hz]:", enabled:true, visible:true)
+	 glabel_capture_edge = GLabel(widgetName:"glabel_capture_edge", text:"Capture edge:", enabled:true, visible:true)
+	 glabel_capture_config_message = GLabel(widgetName:"glabel_capture_config_message", text:"Note : Period length and duty cycle will only be available with capture edge configuration Rise-to-Rise\r\n            or Fall-to-Fall.", enabled:true, visible:true)
+	 glabel_input_source = GLabel(widgetName:"glabel_input_source", text:"Input source:", enabled:true, visible:true)
+	 glabel_filter_config = GLabel(widgetName:"glabel_filter_config", text:"Low pass filter configuraton:", enabled:true, visible:true)
+	 glabel_capture_callback = GLabel(widgetName:"glabel_capture_callback", text:"Capture interrupt callback:", enabled:true, visible:true)
+	 glabel_pin_mode = GLabel(widgetName:"glabel_pin_mode", text:"Mode:", enabled:true, visible:true)
+	 glabel_pin_hysteresis = GLabel(widgetName:"glabel_pin_hysteresis", text:"Hysteresis:", enabled:true, visible:true)
+	 ggroup_timer_settings = GGroup(widgetName:"ggroup_timer_settings", text:"Timer Settings", enabled:true, visible:true)
+	 ggroup_capture_settings = GGroup(widgetName:"ggroup_capture_settings", text:"Capture Settings", enabled:true, visible:true)
+	 ggroup_signal_processing = GGroup(widgetName:"ggroup_signal_processing", text:"Signal Processing", enabled:true, visible:true)
+	 ggroup_interrupt_settings = GGroup(widgetName:"ggroup_interrupt_settings", text:"Interrupt Settings", enabled:true, visible:true)
+	 ggroup_input_pin = GGroup(widgetName:"ggroup_input_pin", text:"Input Pin", enabled:true, visible:true)
+	 ginterruptprio_capture = GInterruptPrio(widgetName:"ginterruptprio_capture", priorityValue:63, minPriority:Long.MIN_VALUE, maxPriority:Long.MAX_VALUE, subPriorityValue:0, minSubPriority:Long.MIN_VALUE, maxSubPriority:Long.MAX_VALUE, subPriorityVisible:true, enabled:true, visible:true)
+	 gmessage_capture_callback_empty = GMessage(widgetName:"gmessage_capture_callback_empty", text:"Invalid function name for-\"Capture interrupt callback\".", isError:false, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}

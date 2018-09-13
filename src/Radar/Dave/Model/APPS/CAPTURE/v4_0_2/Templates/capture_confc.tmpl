@@ -1,0 +1,312 @@
+package Model.APPS.CAPTURE.v4_0_2.Templates;
+
+import Model.APPS.CAPTURE.v4_0_2.CAPTURE
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2016-07-01:
+ *     - Initial version<br>
+ *
+ * @endcond
+ *
+ */
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+/* Included to access CAPTURE app data structure, functions & enumerations */
+#include "capture.h"
+
+/***********************************************************************************************************************
+* DATA STRUCTURES
+***********************************************************************************************************************/
+""");
+List MappedUri = null
+String appInst  = null
+String ccu_device = null
+String kernelno = null
+String sliceno = null
+
+Map ccu_module = [
+    'CCU4' : 'CAPTURE_MODULE_CCU4',
+    'CCU8' : 'CAPTURE_MODULE_CCU8'
+    ]
+
+List Input_array = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P'];
+    
+List Input_array14 = ['AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM',
+                      'AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ',
+                      'BA','BB','BC','BD','BE','BF','BG','BH','BI','BJ','BK','BL','BM',
+                      'BN','BO','BP','BQ','BR','BS','BT','BU','BV'];
+
+List event_filter_array = ['DISABLED', '3_CYCLES','5_CYCLES','7_CYCLES'];
+
+List capture_edge = [ 
+    'CAPTURE_EDGE_RISE_TO_RISE',
+    'CAPTURE_EDGE_RISE_TO_FALL',
+    'CAPTURE_EDGE_FALL_TO_RISE',
+    'CAPTURE_EDGE_FALL_TO_FALL'
+]
+
+Map gpio_input_hysteresis = [
+    'Standard' : 'XMC_GPIO_INPUT_HYSTERESIS_STANDARD',
+    'Large'    : 'XMC_GPIO_INPUT_HYSTERESIS_LARGE',
+]
+
+Map input_logic = [
+    'Tristate'                          : 'XMC_GPIO_MODE_INPUT_TRISTATE',
+    'Pull Down'                         : 'XMC_GPIO_MODE_INPUT_PULL_DOWN',
+    'Pull Up'                           : 'XMC_GPIO_MODE_INPUT_PULL_UP',
+    'Continuous Sampling Mode'          : 'XMC_GPIO_MODE_INPUT_SAMPLING',
+    'Inverted Tristate'                 : 'XMC_GPIO_MODE_INPUT_INVERTED_TRISTATE',
+    'Inverted Pull Down'                : 'XMC_GPIO_MODE_INPUT_INVERTED_PULL_DOWN',
+    'Inverted Pull Up'                  : 'XMC_GPIO_MODE_INPUT_INVERTED_PULL_UP',
+    'Inverted Continuous Sampling Mode' : 'XMC_GPIO_MODE_INPUT_INVERTED_SAMPLING'
+    ]
+
+for (Object appIns : appInstancesList ) {
+  ccu_device  = appIns.gcombo_select_timer.value
+  appInst = appIns.getInstanceLabel()
+  
+  String ccu_resource
+  Integer ccu_timer
+  String global_ccu_instance_label
+  if(ccu_device == 'CCU4')
+  {
+    MappedUri = appIns.hwres_ccu4_cc4.getSolverUri()
+    global_ccu_instance_label = appIns.app_global_ccu4.getInstanceLabel()
+    ccu_resource = 'hwres_ccu4_cc4'
+    ccu_timer = 4
+  } 
+  else
+  {
+    MappedUri = appIns.hwres_ccu8_cc8.getSolverUri()
+    global_ccu_instance_label = appIns.app_global_ccu8.getInstanceLabel()
+    ccu_resource = 'hwres_ccu8_cc8'
+    ccu_timer = 8
+  }
+
+  kernelno  = MappedUri[4]
+  sliceno   = MappedUri[6]
+  String series = (appIns.daveEnv.project.selectedDevice.deviceId.family + appIns.daveEnv.project.selectedDevice.deviceId.series)
+  String family = appIns.daveEnv.project.selectedDevice.deviceId.family
+/* This is the GUI configurations made for CAPTURE app Instance */
+  if (MappedUri != null) 
+  {
+    String e0_ev1_mapped_input = null
+  
+    if (series != 'XMC14')
+    {
+      e0_ev1_mapped_input = Input_array[(int)appIns."${ccu_resource}".getRegValue("ins","ins_ev0is")]
+    }
+    else
+    {
+      e0_ev1_mapped_input = Input_array14[(int)appIns."${ccu_resource}".getRegValue("ins","ins_ev0is")]
+    }
+  
+    String e0_ev1_filter = event_filter_array[appIns.gcombo_filter_config.options.indexOf(appIns.gcombo_filter_config.value)]
+  
+    String e0_edge = null
+    String e1_edge = null
+  
+    if ((appIns.gcombo_capture_edge.value == 'Rise-to-Rise') || (appIns.gcombo_capture_edge.value == 'Rise-to-Fall')  || (appIns.gcombo_capture_edge.value == 'Fall-to-Fall'))
+    {
+      e0_edge = 'RISING_EDGE'
+      e1_edge = 'FALLING_EDGE'
+    }
+  
+    if ((appIns.gcombo_capture_edge.value == 'Fall-to-Rise'))
+    {
+      e0_edge = 'FALLING_EDGE'
+      e1_edge = 'RISING_EDGE'
+    }
+
+    Integer overewrite_enable = 0
+    if (appIns.gcheck_overwrite_capture.value == true)
+    {
+      overewrite_enable = 1
+    }
+  
+    Integer min_frequency = appIns.ginteger_input_min_freq.value
+    Integer max_frequency
+    if (appIns.gcombo_resolution_config.value == 'Direct')
+    {
+      max_frequency = appIns.ginteger_direct_max_freq.value
+    }
+    else
+    {
+      max_frequency = appIns.ginteger_input_max_freq.value
+    }
+  
+    String prescaler_mode = 'NORMAL'
+    if (appIns.gcheck_floating_prescaler_mode.value == true)
+    {
+      prescaler_mode = 'FLOAT'
+    }
+    
+    String capture_edge_cofig = capture_edge[appIns.gcombo_capture_edge.options.indexOf(appIns.gcombo_capture_edge.value)]
+  
+    Integer event_sr_id = 0
+    
+    if (appIns.gcheck_capture_event.value)
+    {
+      if (appIns.hwres_cpu_nvic_interrupt_event_0.getSolverUri() != null)
+      {
+        List cap_interrupt_Uri = appIns.hwres_cpu_nvic_interrupt_event_0.getSolverUri()
+        capture_node = cap_interrupt_Uri[-1]
+        event_sr_id = appIns."${ccu_resource}".getRegValue("srs","srs_e0sr")
+      }
+    }
+    
+    
+    if (appIns.gcombo_input_source.value == "GPIO")
+    {
+      List cap_pinuri = appIns.hwres_port_pad_capture_in.getSolverUri()
+      String cap_portno = cap_pinuri[4]
+      String cap_pinNo  = cap_pinuri[6]
+      
+      out.print("""
+const CAPTURE_GPIO_t ${appInst}_input =
+{
+  .port = (XMC_GPIO_PORT_t *)PORT${cap_portno}_BASE,
+  .pin  = (uint8_t)${cap_pinNo}
+};
+
+const XMC_GPIO_CONFIG_t ${appInst}_input_pin_config =
+{\n""")
+  if(appIns.gcheck_enable_adv_pin_config.value == false) {
+    out.print("""  .mode = XMC_GPIO_MODE_INPUT_TRISTATE,\n""")
+  } else {
+    out.print("""  .mode = ${input_logic[appIns.gcombo_pin_mode.value]},\n""")
+  }
+  if(family == 'XMC1') {
+    out.print("""  .input_hysteresis = ${gpio_input_hysteresis[appIns.gcombo_pin_hysteresis.value]}""")
+  }
+    out.print("""
+};
+""")
+    }
+    
+            out.print("""
+const XMC_CCU${ccu_timer}_SLICE_EVENT_CONFIG_t ${appInst}_event0_config =
+{
+  .mapped_input        = XMC_CCU${ccu_timer}_SLICE_INPUT_${e0_ev1_mapped_input},
+  .edge                = XMC_CCU${ccu_timer}_SLICE_EVENT_EDGE_SENSITIVITY_${e0_edge},
+  .level               = XMC_CCU${ccu_timer}_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_HIGH,
+  .duration            = XMC_CCU${ccu_timer}_SLICE_EVENT_FILTER_${e0_ev1_filter}
+};
+
+const XMC_CCU${ccu_timer}_SLICE_EVENT_CONFIG_t ${appInst}_event1_config =
+{
+  .mapped_input        = XMC_CCU${ccu_timer}_SLICE_INPUT_${e0_ev1_mapped_input},
+  .edge                = XMC_CCU${ccu_timer}_SLICE_EVENT_EDGE_SENSITIVITY_${e1_edge},
+  .level               = XMC_CCU${ccu_timer}_SLICE_EVENT_LEVEL_SENSITIVITY_ACTIVE_HIGH,
+  .duration            = XMC_CCU${ccu_timer}_SLICE_EVENT_FILTER_${e0_ev1_filter}
+};
+
+const XMC_CCU${ccu_timer}_SLICE_CAPTURE_CONFIG_t ${appInst}_config =
+{
+  .fifo_enable         = 0U,
+  .timer_clear_mode    = (uint32_t)XMC_CCU${ccu_timer}_SLICE_TIMER_CLEAR_MODE_ALWAYS,
+  .same_event          = 0U,
+  .ignore_full_flag    = ${overewrite_enable}U,
+  .prescaler_mode      = (uint32_t)XMC_CCU${ccu_timer}_SLICE_PRESCALER_MODE_${prescaler_mode},
+  .prescaler_initval   = ${appIns.ginteger_prescaler.value}U,
+  .float_limit         = 15U,
+  .timer_concatenation = 0U
+};
+
+CAPTURE_t ${appInst} = 
+{
+  .min_frequency           = ${min_frequency}U,
+  .max_frequency           = ${max_frequency}U,
+  .ccu${ccu_timer}_slice_ptr          = (XMC_CCU${ccu_timer}_SLICE_t*) CCU${ccu_timer}${kernelno}_CC${ccu_timer}${sliceno},
+  .ccu_slice_number        = ${sliceno}U,
+  .global_ccu${ccu_timer}_handler     = (GLOBAL_CCU${ccu_timer}_t*)&${global_ccu_instance_label}, 
+  .ccu${ccu_timer}_slice_config_ptr   = (XMC_CCU${ccu_timer}_SLICE_CAPTURE_CONFIG_t*)&${appInst}_config,
+  .ccu${ccu_timer}_event0_ptr         = &${appInst}_event0_config,
+  .ccu${ccu_timer}_event1_ptr         = &${appInst}_event1_config,
+  .shadow_mask             = (uint32_t)((uint32_t)XMC_CCU${ccu_timer}_SHADOW_TRANSFER_SLICE_${sliceno} | 
+                                        (uint32_t)XMC_CCU${ccu_timer}_SHADOW_TRANSFER_PRESCALER_SLICE_${sliceno}),
+  .ccu${ccu_timer}_capture_event_node = (XMC_CCU${ccu_timer}_SLICE_SR_ID_t)${event_sr_id},
+  .capture_edge_config     = ${capture_edge_cofig},
+  .capture_module          = ${ccu_module[appIns.gcombo_select_timer.value]},
+                      """)
+  if (appIns.gcombo_input_source.value == "GPIO")
+            out.print("""
+  .input                  = &${appInst}_input,
+  .input_pin_config       = &${appInst}_input_pin_config,
+                      """)
+  if (appIns.gcheck_capture_event.value){
+            out.print("""
+  .irq_handler            = ${if((appIns.gstring_capture_callback.value != null) && (appIns.gcheck_capture_event.value)) '&'+appIns.gstring_capture_callback.value else 'NULL'},
+  .interrupt_node         = ${capture_node}U,
+  .interrupt_priority     = ${appIns.ginterruptprio_capture.priorityValue}U,
+                      """)
+    if (family == 'XMC4'){
+            out.print("""
+  .interrupt_sub_priority = ${appIns.ginterruptprio_capture.subPriorityValue}U,
+                      """)
+            }
+    if (series == 'XMC14'){
+        out.print("""
+  .interrupt_request_source = XMC_SCU_IRQCTRL_CCU${ccu_timer}${kernelno}_SR${event_sr_id}_IRQ${capture_node},
+                      """)
+        }
+    }
+            out.print("""
+  .start_control          = ${appIns.gcheck_start_after_init.value},
+  .capture_event_enable   = ${appIns.gcheck_capture_event.value},
+  .initialized            = false
+};
+""")
+if (appIns.gcheck_capture_event.value)
+{
+            out.print("""
+void ${appInst}_IRQHandler(void)
+{
+  XMC_CCU${ccu_timer}_SLICE_ClearEvent((XMC_CCU${ccu_timer}_SLICE_t*) CCU${ccu_timer}${kernelno}_CC${ccu_timer}${sliceno}, XMC_CCU${ccu_timer}_SLICE_IRQ_ID_EVENT0);
+  (${appInst}.irq_handler)();
+}
+                      """)
+}
+  } else {
+           out.print("""
+  /* CAPTURE RESOURCE NOT MAPPED */
+           """);
+  }
+}/* End of for loop */
+

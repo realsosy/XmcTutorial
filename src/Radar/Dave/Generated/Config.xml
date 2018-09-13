@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project MotherSystem_Version="" Name="CollisionAvoidance" Path="D:\workspaces_XmcTutorial\CollisionAvoidance">
+    <COMPILER>
+        <Name>ARM_GCC_HOME</Name>
+        <Version/>
+        <Memory_Model/>
+    </COMPILER>
+    <DEVICE>
+        <Sales_Code>XMC4500-F100x1024</Sales_Code>
+        <Description/>
+    </DEVICE>
+    <Generated_Files>
+        <Source_Files>
+            <Source_File>
+                <File_Name>capture.c</File_Name>
+                <Path>\Dave\Generated\CAPTURE\capture.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>capture_conf.c</File_Name>
+                <Path>\Dave\Generated\CAPTURE\capture_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>clock_xmc4.c</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC4\clock_xmc4.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>clock_xmc4_conf.c</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC4\clock_xmc4_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>cpu_ctrl_xmc4.c</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC4\cpu_ctrl_xmc4.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>cpu_ctrl_xmc4_conf.c</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC4\cpu_ctrl_xmc4_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>DAVE.c</File_Name>
+                <Path>\Dave\Generated\DAVE.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>digital_io.c</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>digital_io_conf.c</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_ccu4.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_ccu4_conf.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_ccu8.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU8\global_ccu8.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_ccu8_conf.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU8\global_ccu8_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>interrupt.c</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>interrupt_conf.c</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>pwm.c</File_Name>
+                <Path>\Dave\Generated\PWM\pwm.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>pwm_conf.c</File_Name>
+                <Path>\Dave\Generated\PWM\pwm_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>systimer.c</File_Name>
+                <Path>\Dave\Generated\SYSTIMER\systimer.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>systimer_conf.c</File_Name>
+                <Path>\Dave\Generated\SYSTIMER\systimer_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>timer.c</File_Name>
+                <Path>\Dave\Generated\TIMER\timer.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>timer_conf.c</File_Name>
+                <Path>\Dave\Generated\TIMER\timer_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+        </Source_Files>
+        <Header_Files>
+            <Header_File>
+                <File_Name>capture.h</File_Name>
+                <Path>\Dave\Generated\CAPTURE\capture.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>capture_conf.h</File_Name>
+                <Path>\Dave\Generated\CAPTURE\capture_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>capture_extern.h</File_Name>
+                <Path>\Dave\Generated\CAPTURE\capture_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>clock_xmc4.h</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC4\clock_xmc4.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>clock_xmc4_conf.h</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC4\clock_xmc4_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>clock_xmc4_extern.h</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC4\clock_xmc4_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>cpu_ctrl_xmc4.h</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC4\cpu_ctrl_xmc4.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>cpu_ctrl_xmc4_conf.h</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC4\cpu_ctrl_xmc4_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>cpu_ctrl_xmc4_extern.h</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC4\cpu_ctrl_xmc4_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DAVE.h</File_Name>
+                <Path>\Dave\Generated\DAVE.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DAVE_Common.h</File_Name>
+                <Path>\Dave\Generated\DAVE_Common.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>digital_io.h</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>digital_io_conf.h</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>digital_io_extern.h</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu4.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu4_conf.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu4_extern.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu8.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU8\global_ccu8.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu8_conf.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU8\global_ccu8_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu8_extern.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU8\global_ccu8_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>interrupt.h</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>interrupt_conf.h</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>interrupt_extern.h</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>pwm.h</File_Name>
+                <Path>\Dave\Generated\PWM\pwm.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>pwm_conf.h</File_Name>
+                <Path>\Dave\Generated\PWM\pwm_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>pwm_extern.h</File_Name>
+                <Path>\Dave\Generated\PWM\pwm_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>systimer.h</File_Name>
+                <Path>\Dave\Generated\SYSTIMER\systimer.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>systimer_conf.h</File_Name>
+                <Path>\Dave\Generated\SYSTIMER\systimer_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>systimer_extern.h</File_Name>
+                <Path>\Dave\Generated\SYSTIMER\systimer_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>timer.h</File_Name>
+                <Path>\Dave\Generated\TIMER\timer.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>timer_conf.h</File_Name>
+                <Path>\Dave\Generated\TIMER\timer_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>timer_extern.h</File_Name>
+                <Path>\Dave\Generated\TIMER\timer_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+        </Header_Files>
+        <Library_Files/>
+        <Assembly_Files/>
+    </Generated_Files>
+    <Include_Path>
+        <Path>\Libraries\XMCLib\inc</Path>
+        <Path>\Libraries\CMSIS\Include</Path>
+        <Path>\Libraries\CMSIS\Infineon\XMC4500_series\Include</Path>
+        <Path/>
+        <Path>\Dave\Generated</Path>
+        <Path>\Libraries</Path>
+        <Path>\uC-Probe</Path>
+    </Include_Path>
+    <Preprocessor_Symbols>
+        <Assembler_Symbol>XMC4500_F100x1024=</Assembler_Symbol>
+        <Compiler_Symbol>XMC4500_F100x1024=</Compiler_Symbol>
+    </Preprocessor_Symbols>
+</Project>
