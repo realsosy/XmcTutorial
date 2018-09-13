@@ -1,7 +1,24 @@
 site_name: XMC Tutorial
 
 pages:
-- Home: 'index.md'
+- Home: 'README.md'
+
+- Intermediate:
+    - Counter: Counter.md
+#    - Timer: Timer.md
+#    - Real-time Clock: Rtc.md
+#    - Compare & Capture: Ccu8SliceConfig.md
+#    - DAC LUT: DacLut.md
+#    - Watchdog: Watchdog.md
+#    - DMA: DmaCh.md
+#    - Event: Eru.md
+#    - UART: Uart.md
+#    - USB: UsbdVcom.md
+
+- LabIntermediate:
+    - Counter: LabCounter.md
+#    - Timer: LabTimer.md
+
 - Basic:
     - Getting Started: GettingStartedXmc.md
     - Development Environment: DevelopmentEnvironment.md
@@ -24,23 +41,16 @@ pages:
     - DAC Basic: LabDacBasic.md
     - Interrupt: LabNVIC.md
     - System Timer: LabSystemTimer.md
+
+- Examples & Mini projects:
     - Final SignalGeneratorMonitor: LabSigGenMon.md
 
-#- Intermediate:
-#    - Counter: Counter.md
-#    - Timer: Timer.md
-#    - Real-time Clock: Rtc.md
-#    - Compare & Capture: Ccu8SliceConfig.md
-#    - DAC LUT: DacLut.md
-#    - Watchdog: Watchdog.md
-#    - DMA: DmaCh.md
-#    - Event: Eru.md
-#    - UART: Uart.md
-#    - USB: UsbdVcom.md
+- Programming Background:
+    - Functions & Program Design: ProgDesignFunction.md
+    - Module Design & Multiple files: ProgModuleMultipleFiles.md
+    - System Timer & Scheduler: ProgSystemTimerScheduler.md
+#    - Statemachine
 
-#- LabIntermediate:
-#    - Counter: LabCounter.md
-#    - Timer: LabTimer.md
     
 #- Advanced:
 #    - Project Template: ProjectTemplate.md
