@@ -30,15 +30,11 @@ date: 2017-09-01
 
 ## Architecture Design
 
-![02_Timer_IC_Lab_Figure_SysDiagram](images/02_Timer_IC_Lab_Figure_SysDiagram.png)
+![LabTimerCapture_SysDiagram](images/LabTimerCapture_SysDiagram.png)
 
 
 
-
-
-
-
-![02_Timer_IC_Lab_Figure_SwArchitecture](images/02_Timer_IC_Lab_Figure_SwArchitecture.png)
+![LabTimerCapture_SwArchitecture](images/LabTimerCapture_SwArchitecture.png)
 
 
 
