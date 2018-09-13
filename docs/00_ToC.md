@@ -25,20 +25,21 @@ date: Sep 01 2016
     - 프로젝트: Signal generator & monitor
 
 1. Getting Started XMC
-    - Follow-up example (DIO, PWM, ADC)  
 1. Development Environment
-    - How to Set Up the Board & Dev Environment
 1. CPU Subsystem
-    - CORTEX-M4 특징
-1. Digital IOs: LEDs and Buttons
-    - 2 Leds & 2 Buttons  
+1. Digital IOs
+    * Example: Lane Detector (Digital Type) : MK
 1. PWM Basic
+    * Example: Servo Motor : MK
+    * Example: DC Motor Driver : MK
 1. ADC Basic
+    * Example: Lane Detector (Analog Type) : MK
 1. DAC Basic
 1. Interrupt
 1. System Timer & Foreground/Background Scheduler
 1. uC-Probe
-1. Signal Generator & Monitor
+
+* [MiniProject] Signal Generator & Monitor
 
 *   [Programing 관련 필요 지식]
     *   Pointer
@@ -48,32 +49,41 @@ date: Sep 01 2016
 ## 중급
 * [Note]
     - 대상: emb 경험자
-    - 내용: 중급 interface(기본 interface 다시, GPDMA, CCU4/8, USIC or USB, FCE), XMC lib
-    - 프로젝트: raidar & dc motor speed control
+    - 내용: 중급 interface(기본 interface 다시, GPDMA, CCU4/8, USIC or USB, FCE)
+    - 프로젝트: radar
 
-1. DAC LUT
 1. Counter, Timer
+   * Counter
+   * Timer-OC
+   * Timer-IC
+   * Example: Ultrasonic Sensor : MK
 1. CCU8 Slice Config
 1. Real-time Clock
 1. Watchdog
-1. DMA
-1. ERU
+1. I2C & SPI
+   * ADXL345
 1. UART
 1. USB(USBD_VCOM)
-1. I2C & SPI
+
+* [MiniProject] Radar : MK
 
 *   [Programing 관련 필요 지식]
-    *   모듈화
-    *   Library
+    *   Module & Multiple files
+    *   Scheduler & Real-time design
+    *   State-machine
 
 ## 고급
 *   개요
     *   대상: XMC 성능을 최대한 활용하고자 하는 개발자
+    *   XMC lib
     *   내용: 고급 interface(MultiCAN, SDMMC, ETH), FreeRTOS, CMSIS, XMC Toolbox
     *   제외 interface 모듈(HRPWM, POSIF, DSD, EBU, LEDTS)
     *   프로젝트: COMM emulator/analyzer
 
 1. Project Template
+1. DMA
+1. ERU
+1. DAC LUT
 1. FreeRTOS
 1. CMSIS_DSP
 1. Single PWM with dead time output monitoring
@@ -86,10 +96,5 @@ date: Sep 01 2016
 *   [Programing 관련 필요 지식]
     *   Real-Time OS
 
-## Examples
-* Servo with PWM
-* DC Motor with PWM
-* Sensing Light Intensity with ADC
-* Ultra-sonic Sensor with Capture and Compare
-* ADXL Sensor with IIC and SPI
+
 
