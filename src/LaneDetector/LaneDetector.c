@@ -11,9 +11,9 @@ uint32_t LeftSensor;
 uint32_t RightSensor;
 uint32_t CenterSensor;
 
-float f32LeftVol;
-float f32CenterVol;
-float f32RightVol;
+float fltLeftVol;
+float fltCenterVol;
+float fltRightVol;
 
 LANE_TYPE_t eLaneType;
 int32_t i32LaneOffset;
@@ -81,8 +81,8 @@ void Sense_LaneDetector(void)
 	center_adc_result = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_ChCenter_handle);
 	right_adc_result = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_ChRight_handle);
 
-	f32LeftVol = (float)((left_adc_result/4095.0)*3.3);
-	f32CenterVol = (float)((center_adc_result/4095.0)*3.3);
-	f32RightVol = (float)((right_adc_result/4095.0)*3.3);
+	fltLeftVol = (float)((left_adc_result/4095.0)*3.3);
+	fltCenterVol = (float)((center_adc_result/4095.0)*3.3);
+	fltRightVol = (float)((right_adc_result/4095.0)*3.3);
 
 }

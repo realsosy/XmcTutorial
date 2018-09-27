@@ -10,9 +10,9 @@
 #define kNominalVol 7.4
 
 bool bEnableMotorR;
-float f32MotorRVol;
+float fltMotorRVol;
 bool bEnableMotorL;
-float f32MotorLVol;
+float fltMotorLVol;
 
 void Actuate_MotorDriver(void)
 {
@@ -22,8 +22,8 @@ void Actuate_MotorDriver(void)
 	uint32_t m1_duty;
 	uint32_t m2_duty;
 
-	m1_input_vol = f32MotorRVol;
-	m2_input_vol = f32MotorLVol;
+	m1_input_vol = fltMotorRVol;
+	m2_input_vol = fltMotorLVol;
 
 	if (m1_input_vol > kNominalVol)
 	{
@@ -48,23 +48,23 @@ void Actuate_MotorDriver(void)
 	if (m1_input_vol > 0.0)
 	{
 		DIGITAL_IO_SetOutputHigh(&dhDO_MOTOR_R_DIR);
-		m1_input_vol = f32MotorRVol;
+		m1_input_vol = fltMotorRVol;
 	}
 	else
 	{
 		DIGITAL_IO_SetOutputLow(&dhDO_MOTOR_R_DIR);
-		m1_input_vol = f32MotorRVol * (-1.0);
+		m1_input_vol = fltMotorRVol * (-1.0);
 	}
 
 	if (m2_input_vol > 0.0)
 	{
 		DIGITAL_IO_SetOutputHigh(&dhDO_MOTOR_L_DIR);
-		m2_input_vol = f32MotorLVol;
+		m2_input_vol = fltMotorLVol;
 	}
 	else
 	{
 		DIGITAL_IO_SetOutputLow(&dhDO_MOTOR_L_DIR);
-		m2_input_vol = f32MotorLVol * (-1.0);
+		m2_input_vol = fltMotorLVol * (-1.0);
 	}
 
 	if (bEnableMotorR == 0)

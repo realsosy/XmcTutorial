@@ -99,39 +99,3 @@ const DIGITAL_IO_t dhDI_LANE_R =
   .hwctrl = XMC_GPIO_HWCTRL_DISABLED
 };
 		
-const DIGITAL_IO_t dhDO_MOTOR_R_DIR =
-{
-  .gpio_port = XMC_GPIO_PORT0,
-  .gpio_pin = 9U,
-  .gpio_config = {
-    .mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL,
-    .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
-
-  },
-  .hwctrl = XMC_GPIO_HWCTRL_DISABLED
-};
-		
-const DIGITAL_IO_t dhDO_MOTOR_L_DIR =
-{
-  .gpio_port = XMC_GPIO_PORT0,
-  .gpio_pin = 10U,
-  .gpio_config = {
-    .mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL,
-    .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
-
-  },
-  .hwctrl = XMC_GPIO_HWCTRL_DISABLED
-};
-		
-const DIGITAL_IO_t TEST_DO =
-{
-  .gpio_port = XMC_GPIO_PORT0,
-  .gpio_pin = 5U,
-  .gpio_config = {
-    .mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL,
-    .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
-
-  },
-  .hwctrl = XMC_GPIO_HWCTRL_DISABLED
-};
-		

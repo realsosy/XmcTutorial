@@ -9,8 +9,9 @@
 
 
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
+#include "Ultrasonic.h"
 
-#define UR_RES 60000
+//#define UR_RES 60000
 
 /**
 
@@ -22,18 +23,18 @@
  * code.
  */
 
-uint32_t u32CapturedTick;
-float fltCapturedTime;
-float fltDistance;
-uint32_t u32SwTimer_60ms;
+//uint32_t u32CapturedTick;
+//float fltCapturedTime;
+//float fltDistance;
+//uint32_t u32SwTimer_60ms;
 
 
-void CB_dhSYSTIMER_0_u32SwTimer_60ms(void)
-{
-			CAPTURE_GetCapturedTime(&dhCAPTURE_0, &u32CapturedTick);
-			fltCapturedTime = (float)u32CapturedTick * 533.33 / 1000.0;
-			fltDistance = fltCapturedTime / 58.0;
-}
+//void CB_dhSYSTIMER_0_u32SwTimer_60ms(void)
+//{
+//		CAPTURE_GetCapturedTime(&dhCAPTURE_0, &u32CapturedTick);
+//		fltCapturedTime = (float)u32CapturedTick * 533.33 / 1000.0;
+//		fltDistance = fltCapturedTime / 58.0;
+//}
 
 int main(void)
 {
@@ -52,9 +53,9 @@ int main(void)
     }
   }
 
-  u32SwTimer_60ms = SYSTIMER_CreateTimer(UR_RES, SYSTIMER_MODE_PERIODIC, (void*)CB_dhSYSTIMER_0_u32SwTimer_60ms, NULL);
-  SYSTIMER_StartTimer(u32SwTimer_60ms);
-
+//  u32SwTimer_60ms = SYSTIMER_CreateTimer(UR_RES, SYSTIMER_MODE_PERIODIC, (void*)CB_dhSYSTIMER_0_u32SwTimer_60ms, NULL);
+//  SYSTIMER_StartTimer(u32SwTimer_60ms);
+  Ultrasonic_Init();
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {

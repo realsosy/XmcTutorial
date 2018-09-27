@@ -2,7 +2,7 @@
 <workspace>
   <symbolbrowser>
     <symbolfiles>
-      <symbolfile Filepath="E:\taekwang\MyWork\NewSonicRadar\src\MotorDriver\Debug\MotorDriver.elf" />
+      <symbolfile Filepath="C:\Users\ROCKET\Documents\XmcTutorial\src\DcMotor\Debug\MotorDriver.elf" />
     </symbolfiles>
   </symbolbrowser>
   <screens SelectedScreenId="DataScreen1">
@@ -48,7 +48,7 @@
     <node ScreenId="DataScreen1" OffsetX="40" OffsetY="180" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
-          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="f32MotorRVol" />
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="fltMotorRVol" />
         </content>
       </innercontent>
       <symbols />
@@ -70,7 +70,7 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32MotorRVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltMotorRVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
     <node ScreenId="DataScreen1" OffsetX="360" OffsetY="240" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
@@ -82,7 +82,7 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32MotorLVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltMotorLVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
   </nodes>
@@ -108,7 +108,7 @@
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>231.778793367616</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredWidthInDockedMode>193.52077980747097</PreviousDesiredWidthInDockedMode>
           <PreviousDesiredHeightInDockedMode>826</PreviousDesiredHeightInDockedMode>
           <Name>workspaceExplorerMainView</Name>
           <State>Dock</State>
@@ -117,8 +117,8 @@
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
-          <DesiredWidthInDockedMode>193.52077980747097</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>826</DesiredHeightInDockedMode>
+          <DesiredWidthInDockedMode>206.62533655033909</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>584</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>165</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
@@ -164,8 +164,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>1278</Width>
-            <Height>826</Height>
+            <Width>1364</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -181,10 +181,10 @@
           <ZorderInFloatMode>0</ZorderInFloatMode>
           <TabOrderIndex>-1</TabOrderIndex>
           <PreviousContainerDesiredSize>
-            <Width>1042.2212066323841</Width>
+            <Width>870.18944964255968</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>1042.2212066323841</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredWidthInDockedMode>870.18944964255968</PreviousDesiredWidthInDockedMode>
           <PreviousDesiredHeightInDockedMode>210.17474078140057</PreviousDesiredHeightInDockedMode>
           <Name>usrSymbolBrowser</Name>
           <State>Dock</State>
@@ -193,7 +193,7 @@
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
-          <DesiredWidthInDockedMode>870.18944964255968</DesiredWidthInDockedMode>
+          <DesiredWidthInDockedMode>929.11566434276449</DesiredWidthInDockedMode>
           <DesiredHeightInDockedMode>210.17474078140057</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>200</DesiredHeightInFloatingMode>
@@ -240,8 +240,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>870.18944964255968</Width>
-            <Height>826</Height>
+            <Width>929.11566434276449</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -260,8 +260,8 @@
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>247.07214465404095</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>611.8252592185994</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredWidthInDockedMode>206.2897705499694</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>826</PreviousDesiredHeightInDockedMode>
           <Name>toolboxMainView</Name>
           <State>Dock</State>
           <NoHeader>false</NoHeader>
@@ -269,8 +269,8 @@
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
-          <DesiredWidthInDockedMode>206.2897705499694</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>826</DesiredHeightInDockedMode>
+          <DesiredWidthInDockedMode>220.25899910689648</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>584</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>175</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
@@ -316,8 +316,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>1278</Width>
-            <Height>826</Height>
+            <Width>1364</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>

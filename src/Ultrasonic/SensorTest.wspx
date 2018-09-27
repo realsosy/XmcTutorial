@@ -2,7 +2,7 @@
 <workspace>
   <symbolbrowser>
     <symbolfiles>
-      <symbolfile Filepath="E:\taekwang\MyWork\NewSonicRadar\src\UltrasonicSensor_Test\Debug\UltrasonicSensor_Test.elf" />
+      <symbolfile Filepath="C:\Users\ROCKET\Documents\XmcTutorial\src\Ultrasonic\Debug\Ultrasonic.elf" />
     </symbolfiles>
   </symbolbrowser>
   <screens SelectedScreenId="DataScreen1">
@@ -24,7 +24,7 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f16Distance" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltCapturedTime" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
     <node ScreenId="DataScreen1" OffsetX="160" OffsetY="120" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="false" IsInRuntimeMode="true" Width="140" Height="50" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
@@ -42,7 +42,7 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f16CapturedTime" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltCapturedTime" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
     <node ScreenId="DataScreen1" OffsetX="200" OffsetY="240" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="false" IsInRuntimeMode="true" Width="300" Height="60" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
@@ -52,7 +52,7 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f16Angle" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="u32CapturedTick" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
   </nodes>
@@ -78,22 +78,22 @@
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredWidthInDockedMode>165</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>652</PreviousDesiredHeightInDockedMode>
           <Name>workspaceExplorerMainView</Name>
-          <State>Hidden</State>
+          <State>Dock</State>
           <NoHeader>false</NoHeader>
           <SideDocked>Right</SideDocked>
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
           <DesiredWidthInDockedMode>165</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>652</DesiredHeightInDockedMode>
+          <DesiredHeightInDockedMode>380</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>165</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
           <CanDock>true</CanDock>
-          <CanClose>true</CanClose>
+          <CanClose>false</CanClose>
           <IsSelectedTab>true</IsSelectedTab>
           <IsActiveWindow>false</IsActiveWindow>
           <WindowRect />
@@ -134,8 +134,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>0</Width>
-            <Height>0</Height>
+            <Width>1185</Width>
+            <Height>380</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -154,22 +154,22 @@
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredWidthInDockedMode>1099</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>200</PreviousDesiredHeightInDockedMode>
           <Name>usrSymbolBrowser</Name>
-          <State>Hidden</State>
+          <State>Dock</State>
           <NoHeader>false</NoHeader>
           <SideDocked>Bottom</SideDocked>
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
-          <DesiredWidthInDockedMode>1099</DesiredWidthInDockedMode>
+          <DesiredWidthInDockedMode>1185</DesiredWidthInDockedMode>
           <DesiredHeightInDockedMode>200</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>200</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
           <CanDock>true</CanDock>
-          <CanClose>true</CanClose>
+          <CanClose>false</CanClose>
           <IsSelectedTab>true</IsSelectedTab>
           <IsActiveWindow>false</IsActiveWindow>
           <WindowRect />
@@ -210,8 +210,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>0</Width>
-            <Height>0</Height>
+            <Width>1185</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -230,22 +230,22 @@
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredWidthInDockedMode>175</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>856</PreviousDesiredHeightInDockedMode>
           <Name>toolboxMainView</Name>
-          <State>Hidden</State>
+          <State>Dock</State>
           <NoHeader>false</NoHeader>
           <SideDocked>Left</SideDocked>
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
           <DesiredWidthInDockedMode>175</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>856</DesiredHeightInDockedMode>
+          <DesiredHeightInDockedMode>584</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>175</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
           <CanDock>true</CanDock>
-          <CanClose>true</CanClose>
+          <CanClose>false</CanClose>
           <IsSelectedTab>true</IsSelectedTab>
           <IsActiveWindow>false</IsActiveWindow>
           <WindowRect />
@@ -286,8 +286,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>0</Width>
-            <Height>0</Height>
+            <Width>1364</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>

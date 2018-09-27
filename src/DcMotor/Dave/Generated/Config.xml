@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="MotorDriver" Path="D:\workspaces_XmcTutorial\MotorDriver">
+<Project MotherSystem_Version="" Name="MotorDriver" Path="C:\Users\ROCKET\Documents\XmcTutorial\src\DcMotor">
     <COMPILER>
         <Name>ARM_GCC_HOME</Name>
         <Version/>

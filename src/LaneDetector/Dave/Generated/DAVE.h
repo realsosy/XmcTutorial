@@ -52,15 +52,6 @@
 #include "CLOCK_XMC4/clock_xmc4.h"
   
 
-#include "GLOBAL_CCU4/global_ccu4.h"
-  
-
-#include "PWM/pwm.h"
-  
-
-#include "CAPTURE/capture.h"
-  
-
 #include "CPU_CTRL_XMC4/cpu_ctrl_xmc4.h"
   
 
@@ -68,15 +59,6 @@
   
 
 #include "DIGITAL_IO/digital_io.h"
-  
-
-#include "GLOBAL_CCU8/global_ccu8.h"
-  
-
-#include "TIMER/timer.h"
-  
-
-#include "INTERRUPT/interrupt.h"
   
 
 #include "GLOBAL_ADC/global_adc.h"

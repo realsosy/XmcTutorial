@@ -68,21 +68,6 @@ DAVE_STATUS_t DAVE_Init(void)
 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of PWM APP instance dhPWM_SERVO */
-	 init_status = (DAVE_STATUS_t)PWM_Init(&dhPWM_SERVO); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of PWM APP instance dhPWM_US */
-	 init_status = (DAVE_STATUS_t)PWM_Init(&dhPWM_US); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of CAPTURE APP instance dhCAPTURE_0 */
-	 init_status = (DAVE_STATUS_t)CAPTURE_Init(&dhCAPTURE_0); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
 	 /**  Initialization of SYSTIMER APP instance dhSYSTIMER */
 	 init_status = (DAVE_STATUS_t)SYSTIMER_Init(&dhSYSTIMER); 
    } 
@@ -108,43 +93,8 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of DIGITAL_IO APP instance dhDO_MOTOR_R_DIR */
-	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&dhDO_MOTOR_R_DIR); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of PWM APP instance dhPWM_MOTOR_R */
-	 init_status = (DAVE_STATUS_t)PWM_Init(&dhPWM_MOTOR_R); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of PWM APP instance dhPWM_MOTOR_L */
-	 init_status = (DAVE_STATUS_t)PWM_Init(&dhPWM_MOTOR_L); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of DIGITAL_IO APP instance dhDO_MOTOR_L_DIR */
-	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&dhDO_MOTOR_L_DIR); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of TIMER APP instance dhOC_CA */
-	 init_status = (DAVE_STATUS_t)TIMER_Init(&dhOC_CA); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of INTERRUPT APP instance INTERRUPT_0 */
-	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_0); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
 	 /**  Initialization of ADC_MEASUREMENT APP instance dhADC_MEASUREMENT_0 */
 	 init_status = (DAVE_STATUS_t)ADC_MEASUREMENT_Init(&dhADC_MEASUREMENT_0); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of DIGITAL_IO APP instance TEST_DO */
-	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&TEST_DO); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

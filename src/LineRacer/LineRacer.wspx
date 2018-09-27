@@ -2,10 +2,14 @@
 <workspace>
   <symbolbrowser>
     <symbolfiles>
-      <symbolfile Filepath="D:\workspaces_XmcTutorial\LineRacer\Debug\LineRacer.elf" />
+      <symbolfile Filepath="C:\Users\ROCKET\Documents\XmcTutorial\src\LineRacer\Debug\LineRacer.elf" />
     </symbolfiles>
   </symbolbrowser>
-  <screens SelectedScreenId="DataScreen4">
+  <screens SelectedScreenId="DataScreen1">
+    <screen RegisteredName="DataScreen1" ScreenHeader="Algorithm" ScreenType="DataScreen" />
+    <screen RegisteredName="DataScreen2" ScreenHeader="CollisionAvoidance" ScreenType="DataScreen" />
+    <screen RegisteredName="DataScreen3" ScreenHeader="LaneDetector" ScreenType="DataScreen" />
+    <screen RegisteredName="DataScreen4" ScreenHeader="MotorDrive" ScreenType="DataScreen" />
     <screen RegisteredName="Oscilloscope_Screen1" ScreenHeader="Oscilloscope" ScreenType="Oscilloscope_Screen">
       <configuration>
         <properties mode="CONTINUOUS" slope="POS" timeScale="us" trigHoldOff="0" clkDiv="1" trigDispPos="0" />
@@ -24,13 +28,9 @@
         </channels>
       </configuration>
     </screen>
-    <screen RegisteredName="DataScreen1" ScreenHeader="MotorDrive" ScreenType="DataScreen" />
-    <screen RegisteredName="DataScreen2" ScreenHeader="LaneDetector" ScreenType="DataScreen" />
-    <screen RegisteredName="DataScreen3" ScreenHeader="CollisionAvoidance" ScreenType="DataScreen" />
-    <screen RegisteredName="DataScreen4" ScreenHeader="Algorithm" ScreenType="DataScreen" />
   </screens>
   <nodes>
-    <node ScreenId="DataScreen2" OffsetX="60" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="60" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TLEDsControl" Type="TLEDsControl">
           <definitions Width="40" Height="40" DefaultColor="#FFD3D3D3" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
@@ -45,7 +45,7 @@
         <symbol path="LeftSensor" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="180" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="180" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TLEDsControl" Type="TLEDsControl">
           <definitions Width="40" Height="40" DefaultColor="#FFD3D3D3" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
@@ -60,7 +60,7 @@
         <symbol path="CenterSensor" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="300" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="8" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="300" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="8" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TLEDsControl" Type="TLEDsControl">
           <definitions Width="40" Height="40" DefaultColor="#FFD3D3D3" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
@@ -75,7 +75,7 @@
         <symbol path="RightSensor" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="41" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="9" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="41" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="9" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="L_Sensor" />
@@ -83,7 +83,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen2" OffsetX="160" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="10" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="160" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="10" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="M_Sensor" />
@@ -91,7 +91,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen2" OffsetX="280" OffsetY="59" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="11" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="280" OffsetY="59" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="11" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="R_Sensor" />
@@ -99,7 +99,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen2" OffsetX="40" OffsetY="200" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="40" ZIndex="12" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="40" OffsetY="200" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="40" ZIndex="12" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="eLaneType" />
@@ -107,7 +107,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen2" OffsetX="38" OffsetY="242" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="13" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="38" OffsetY="242" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="13" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="i32LaneOffset" />
@@ -115,7 +115,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen2" OffsetX="178" OffsetY="202" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="178" OffsetY="202" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="Numeric" Type="Numeric1">
           <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="15" NumericForegroundValue="#FFFFFFFF" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" />
@@ -125,7 +125,7 @@
         <symbol path="eLaneType" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="178" OffsetY="242" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="178" OffsetY="242" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="Numeric" Type="Numeric1">
           <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="15" NumericForegroundValue="#FFFFFFFF" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="1" Width="NaN" Height="NaN" />
@@ -135,7 +135,7 @@
         <symbol path="i32LaneOffset" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen1" OffsetX="179" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="179" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
           <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="false" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
@@ -145,7 +145,7 @@
         <symbol path="bEnableMotorR" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen1" OffsetX="499.00000000000045" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="499.00000000000045" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
           <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="false" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
@@ -155,7 +155,7 @@
         <symbol path="bEnableMotorL" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen1" OffsetX="20" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="50" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="20" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="50" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="bEnableMotorR" />
@@ -163,7 +163,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen1" OffsetX="339" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="50" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="339" OffsetY="40" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="50" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="bEnableMotorL" />
@@ -171,15 +171,15 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen1" OffsetX="19" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="19" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
-          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="f32MotorRVol" />
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="fltMotorRVol" />
         </content>
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen1" OffsetX="339" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="339" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="f32MotorLVol" />
@@ -187,7 +187,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen1" OffsetX="19" OffsetY="160" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="19" OffsetY="160" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="HSlider" Type="HSlider">
           <definitions Width="200" Height="50" RangeMax="7.4" RangeMin="-7.4" RangeIsLogarithmic="false" RangeIsReversed="false" NumberOfRanges="0" MappingMode="Absolute" Transition="Solid" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="2" SliderValue="5" ShowImages="false" NumberOfDecimals="2" FontFamily="Arial" FontColor="#FF808080" FontSize="10" ShowLabel="true" UseDiscreteValues="false" TickFrequency="1.48" StepValue="1.48" />
@@ -196,10 +196,10 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32MotorRVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltMotorRVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen1" OffsetX="340" OffsetY="160" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen4" OffsetX="340" OffsetY="160" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="HSlider" Type="HSlider">
           <definitions Width="200" Height="50" RangeMax="7.4" RangeMin="-7.4" RangeIsLogarithmic="false" RangeIsReversed="false" NumberOfRanges="0" MappingMode="Absolute" Transition="Solid" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="2" SliderValue="5" ShowImages="false" NumberOfDecimals="2" FontFamily="Arial" FontColor="#FF808080" FontSize="10" ShowLabel="true" UseDiscreteValues="false" TickFrequency="1.48" StepValue="1.48" />
@@ -208,40 +208,40 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32MotorLVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltMotorLVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="40" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="40" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="Numeric" Type="Numeric1">
           <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="15" NumericForegroundValue="#FFFFFFFF" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="1" Width="NaN" Height="NaN" />
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32LeftVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltLeftVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="160" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="160" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="Numeric" Type="Numeric1">
           <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="15" NumericForegroundValue="#FFFFFFFF" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="1" Width="NaN" Height="NaN" />
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32CenterVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltCenterVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen2" OffsetX="280" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen3" OffsetX="280" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="Numeric" Type="Numeric1">
           <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="15" NumericForegroundValue="#FFFFFFFF" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="1" Width="NaN" Height="NaN" />
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32RightVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltRightVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen3" OffsetX="580" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="580" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="-40" />
@@ -249,7 +249,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen3" OffsetX="680" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="680" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="-20" />
@@ -257,7 +257,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen3" OffsetX="800" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="800" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="0" />
@@ -265,7 +265,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen3" OffsetX="900" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="900" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="20" />
@@ -273,7 +273,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen3" OffsetX="1020" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="1020" OffsetY="500" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="40" />
@@ -281,7 +281,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen3" OffsetX="40" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="480" Height="440" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="40" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="480" Height="440" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TreeView" Type="TreeViewControl">
           <definitions DecimalPlacesForScientificNotation="1" DecimalPlacesForNumericNotation="1" DecimalPlacesForEngineeringNotation="1" EngineeringOptionChecked="false" NumericOptionChecked="true" ScientificOptionChecked="false" />
@@ -289,16 +289,15 @@
       </innercontent>
       <symbols>
         <symbol path="bObstacleBeing" IsAnArrayElement="false" ElementIndex="-1" />
-        <symbol path="f32ObstacleDistanceArr" IsAnArrayElement="false" ElementIndex="-1" />
         <symbol path="bObstacleBeing" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen3" OffsetX="540" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="600" Height="350" ZIndex="2" IsLocked="false" UpdateWhenVisible="false" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen2" OffsetX="540" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="600" Height="350" ZIndex="2" IsLocked="false" UpdateWhenVisible="false" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="XYGraph" Type="Graph3">
           <definitions Width="600" Height="350" TypeOfXAxisValues="SampleNumber" TypeOfUpdateStyle="Burst" MaxNumSamples="5" IsLegendVisible="true" ChartType="LineChart" EraseTrace="false" XAxisFrom="0" XAxisTo="200" XAxisStep="20" PrimaryYAxisFrom="0" PrimaryYAxisTo="400" PrimaryYAxisStep="10" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" DecimalPlaces="0" LeadingZeroes="0" LegendPosition="InsideTopRight" />
           <symbolseries>
-            <serie YAxisFrom="0" YAxisStep="20" YAxisTo="200" Path="f32RawDistanceArr">
+            <serie YAxisFrom="0" YAxisStep="20" YAxisTo="200" Path="fltObstacleDistanceArr">
               <seriesmodel EraseTrace="false" MaxNumSamples="5" TypeOfUpdateStyle="Burst" TypeOfXAxisValues="SampleNumber" XAxisOffset="0" />
               <seriesview ShowArea="false" ShowLine="true" ShowPoints="false" AreaFill="#FFFF0000" PointStroke="#FFFF0000" PointStrokeThickness="1" PointFill="#FFFF0000" PointSize="5" LineStroke="#FFFF0000" LineStrokeThickness="1" HighlightingEnabled="false" PointShape="Ellipse" />
             </serie>
@@ -306,24 +305,24 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32RawDistanceArr" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltObstacleDistanceArr" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="20" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="500" Height="420" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="20" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="500" Height="420" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TreeView" Type="TreeViewControl">
           <definitions DecimalPlacesForScientificNotation="1" DecimalPlacesForNumericNotation="1" DecimalPlacesForEngineeringNotation="1" EngineeringOptionChecked="false" NumericOptionChecked="true" ScientificOptionChecked="false" />
         </content>
       </innercontent>
       <symbols>
-        <symbol path="eControlState" IsAnArrayElement="false" ElementIndex="-1" />
-        <symbol path="kRampVol" IsAnArrayElement="false" ElementIndex="-1" />
-        <symbol path="kHighVol" IsAnArrayElement="false" ElementIndex="-1" />
-        <symbol path="kMiddleVol" IsAnArrayElement="false" ElementIndex="-1" />
         <symbol path="kLowVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="kMiddleVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="kHighVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="kRampVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="eControlState" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="560" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="560" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TLEDsControl" Type="TLEDsControl">
           <definitions Width="40" Height="40" DefaultColor="#FFD3D3D3" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
@@ -338,7 +337,7 @@
         <symbol path="LeftSensor" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="680" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="680" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TLEDsControl" Type="TLEDsControl">
           <definitions Width="40" Height="40" DefaultColor="#FFD3D3D3" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
@@ -353,7 +352,7 @@
         <symbol path="CenterSensor" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="800" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="800" OffsetY="60" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TLEDsControl" Type="TLEDsControl">
           <definitions Width="40" Height="40" DefaultColor="#FFD3D3D3" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
@@ -368,7 +367,7 @@
         <symbol path="RightSensor" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="541" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="541" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="L_Sensor" />
@@ -376,7 +375,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="660" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="660" OffsetY="100" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="M_Sensor" />
@@ -384,7 +383,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="780" OffsetY="99" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="780" OffsetY="99" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="R_Sensor" />
@@ -392,23 +391,16 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="540" OffsetY="140" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="380" Height="160" ZIndex="8" IsLocked="false" UpdateWhenVisible="false" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="540" OffsetY="140" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="380" Height="160" ZIndex="8" IsLocked="false" UpdateWhenVisible="false" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="XYGraph" Type="Graph3">
           <definitions Width="380" Height="160" TypeOfXAxisValues="SampleNumber" TypeOfUpdateStyle="Burst" MaxNumSamples="5" IsLegendVisible="true" ChartType="LineChart" EraseTrace="false" XAxisFrom="0" XAxisTo="200" XAxisStep="20" PrimaryYAxisFrom="0" PrimaryYAxisTo="400" PrimaryYAxisStep="10" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" DecimalPlaces="0" LeadingZeroes="0" LegendPosition="InsideTopRight" />
-          <symbolseries>
-            <serie YAxisFrom="0" YAxisStep="20" YAxisTo="200" Path="f32ObstacleDistanceArr">
-              <seriesmodel EraseTrace="false" MaxNumSamples="5" TypeOfUpdateStyle="Burst" TypeOfXAxisValues="SampleNumber" XAxisOffset="0" />
-              <seriesview ShowArea="false" ShowLine="true" ShowPoints="false" AreaFill="#FF0000FF" PointStroke="#FF0000FF" PointStrokeThickness="1" PointFill="#FF0000FF" PointSize="5" LineStroke="#FF0000FF" LineStrokeThickness="1" HighlightingEnabled="false" PointShape="Ellipse" />
-            </serie>
-          </symbolseries>
+          <symbolseries />
         </content>
       </innercontent>
-      <symbols>
-        <symbol path="f32ObstacleDistanceArr" IsAnArrayElement="false" ElementIndex="-1" />
-      </symbols>
+      <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="640" OffsetY="340" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="9" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="640" OffsetY="340" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="9" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
           <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="false" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
@@ -418,7 +410,7 @@
         <symbol path="bEnableMotorR" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="800" OffsetY="340" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="10" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="800" OffsetY="340" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="10" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
           <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="false" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
@@ -428,7 +420,7 @@
         <symbol path="bEnableMotorL" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="560" OffsetY="300" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="11" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="560" OffsetY="300" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="40" ZIndex="11" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="bEnableMotorR" />
@@ -436,7 +428,7 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="760" OffsetY="300" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="50" ZIndex="12" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="760" OffsetY="300" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="50" ZIndex="12" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="bEnableMotorL" />
@@ -444,23 +436,23 @@
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="560" OffsetY="360" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="13" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="560" OffsetY="360" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="13" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
-          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="f32MotorRVol" />
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="fltMotorRVol" />
         </content>
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="760" OffsetY="360" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="14" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="760" OffsetY="360" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="14" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
-          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="f32MotorLVol" />
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="fltMotorLVol" />
         </content>
       </innercontent>
       <symbols />
     </node>
-    <node ScreenId="DataScreen4" OffsetX="560" OffsetY="400" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="15" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="560" OffsetY="400" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="15" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="HSlider" Type="HSlider">
           <definitions Width="200" Height="50" RangeMax="7.4" RangeMin="-7.4" RangeIsLogarithmic="false" RangeIsReversed="false" NumberOfRanges="0" MappingMode="Absolute" Transition="Solid" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="2" SliderValue="5" ShowImages="false" NumberOfDecimals="2" FontFamily="Arial" FontColor="#FF808080" FontSize="10" ShowLabel="true" UseDiscreteValues="false" TickFrequency="1.48" StepValue="1.48" />
@@ -469,10 +461,10 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32MotorRVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltMotorRVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="760" OffsetY="400" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="16" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="760" OffsetY="400" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="200" Height="50" ZIndex="16" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="HSlider" Type="HSlider">
           <definitions Width="200" Height="50" RangeMax="7.4" RangeMin="-7.4" RangeIsLogarithmic="false" RangeIsReversed="false" NumberOfRanges="0" MappingMode="Absolute" Transition="Solid" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="2" SliderValue="5" ShowImages="false" NumberOfDecimals="2" FontFamily="Arial" FontColor="#FF808080" FontSize="10" ShowLabel="true" UseDiscreteValues="false" TickFrequency="1.48" StepValue="1.48" />
@@ -481,10 +473,10 @@
         </content>
       </innercontent>
       <symbols>
-        <symbol path="f32MotorLVol" IsAnArrayElement="false" ElementIndex="-1" />
+        <symbol path="fltMotorLVol" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="200" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="200" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
           <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="true" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
@@ -494,7 +486,7 @@
         <symbol path="bSubSystemTest" IsAnArrayElement="false" ElementIndex="-1" />
       </symbols>
     </node>
-    <node ScreenId="DataScreen4" OffsetX="40" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="40" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+    <node ScreenId="DataScreen1" OffsetX="40" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="160" Height="40" ZIndex="0" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
       <innercontent>
         <content ControlType="TextTool" Type="TextTool">
           <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="15" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="bSubSystemTest" />
@@ -507,10 +499,10 @@
     <content>
       <nodes>
         <node IsEnable="true" Name="LineRacer" NodeType="Project" ScreenType="None" UniqueID="Project2">
-          <node IsEnable="true" Name="CollisionAvoidance" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen3" />
-          <node IsEnable="true" Name="LaneDetector" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen2" />
-          <node IsEnable="true" Name="MotorDrive" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen1" />
-          <node IsEnable="true" Name="Algorithm" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen4" />
+          <node IsEnable="true" Name="CollisionAvoidance" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen2" />
+          <node IsEnable="true" Name="LaneDetector" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen3" />
+          <node IsEnable="true" Name="MotorDrive" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen4" />
+          <node IsEnable="true" Name="Algorithm" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen1" />
           <node IsEnable="true" Name="Oscilloscope" NodeType="Screen" ScreenType="Oscilloscope_Screen" UniqueID="Oscilloscope_Screen1" />
         </node>
       </nodes>
@@ -529,8 +521,8 @@
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>276.53356822509909</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>779.2</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredWidthInDockedMode>206.96354421899522</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>683.8</PreviousDesiredHeightInDockedMode>
           <Name>workspaceExplorerMainView</Name>
           <State>Dock</State>
           <NoHeader>false</NoHeader>
@@ -538,8 +530,8 @@
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
-          <DesiredWidthInDockedMode>206.96354421899522</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>683.8</DesiredHeightInDockedMode>
+          <DesiredWidthInDockedMode>247.42477156982554</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>584</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>165</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
@@ -585,8 +577,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>1141.6</Width>
-            <Height>683.8</Height>
+            <Width>1364</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -602,11 +594,11 @@
           <ZorderInFloatMode>0</ZorderInFloatMode>
           <TabOrderIndex>-1</TabOrderIndex>
           <PreviousContainerDesiredSize>
-            <Width>1243.4664317749007</Width>
+            <Width>930.63645578100466</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>1243.4664317749007</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>240.64654386099969</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredWidthInDockedMode>930.63645578100466</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>211.03137321556704</PreviousDesiredHeightInDockedMode>
           <Name>usrSymbolBrowser</Name>
           <State>Dock</State>
           <NoHeader>false</NoHeader>
@@ -614,8 +606,8 @@
           <SideFloating>Left</SideFloating>
           <TargetDocked />
           <TargetFloating />
-          <DesiredWidthInDockedMode>930.63645578100466</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>211.03137321556704</DesiredHeightInDockedMode>
+          <DesiredWidthInDockedMode>1112.5752284301746</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>180.05030371437024</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>200</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
@@ -661,8 +653,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>930.63645578100466</Width>
-            <Height>683.8</Height>
+            <Width>1112.5752284301746</Width>
+            <Height>584</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -679,10 +671,10 @@
           <TabOrderIndex>-1</TabOrderIndex>
           <PreviousContainerDesiredSize>
             <Width>0</Width>
-            <Height>534.55345613900033</Height>
+            <Height>468.76862678443291</Height>
           </PreviousContainerDesiredSize>
           <PreviousDesiredWidthInDockedMode>247.07214465404095</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>534.55345613900033</PreviousDesiredHeightInDockedMode>
+          <PreviousDesiredHeightInDockedMode>468.76862678443291</PreviousDesiredHeightInDockedMode>
           <Name>toolboxMainView</Name>
           <State>Dock</State>
           <NoHeader>false</NoHeader>
@@ -691,14 +683,14 @@
           <TargetDocked />
           <TargetFloating />
           <DesiredWidthInDockedMode>247.07214465404095</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>468.76862678443291</DesiredHeightInDockedMode>
+          <DesiredHeightInDockedMode>399.94969628562978</DesiredHeightInDockedMode>
           <DesiredWidthInFloatingMode>175</DesiredWidthInFloatingMode>
           <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
           <NoDock>false</NoDock>
           <CanDock>true</CanDock>
           <CanClose>false</CanClose>
           <IsSelectedTab>true</IsSelectedTab>
-          <IsActiveWindow>true</IsActiveWindow>
+          <IsActiveWindow>false</IsActiveWindow>
           <WindowRect />
           <TabGroupName />
           <IsTabGroupOwner>false</IsTabGroupOwner>
@@ -737,8 +729,8 @@
           <FixedHeight>0</FixedHeight>
           <FixedWidth>0</FixedWidth>
           <ContainerSize>
-            <Width>930.63645578100466</Width>
-            <Height>468.76862678443291</Height>
+            <Width>1112.5752284301746</Width>
+            <Height>399.94969628562978</Height>
           </ContainerSize>
           <PreviousHostWidth>90</PreviousHostWidth>
           <PreviousHostHeight>90</PreviousHostHeight>
@@ -759,7 +751,7 @@
           </PreviousContainerDesiredSize>
           <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
           <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
-          <Name>Oscilloscope_Screen1</Name>
+          <Name>DataScreen1</Name>
           <State>Document</State>
           <NoHeader>false</NoHeader>
           <SideDocked>Left</SideDocked>
@@ -774,18 +766,18 @@
           <CanDock>false</CanDock>
           <CanClose>false</CanClose>
           <IsSelectedTab>false</IsSelectedTab>
-          <IsActiveWindow>false</IsActiveWindow>
+          <IsActiveWindow>true</IsActiveWindow>
           <WindowRect />
           <TabGroupName />
           <IsTabGroupOwner>false</IsTabGroupOwner>
           <SideTabOrder>0</SideTabOrder>
-          <IndexInDockMode>0</IndexInDockMode>
-          <IndexInFloatMode>0</IndexInFloatMode>
+          <IndexInDockMode>4</IndexInDockMode>
+          <IndexInFloatMode>4</IndexInFloatMode>
           <TabOrderInDockMode>0</TabOrderInDockMode>
           <TabOrderInFloatMode>0</TabOrderInFloatMode>
-          <MDIBounds>0,0,124,50</MDIBounds>
+          <MDIBounds>0,0,100,50</MDIBounds>
           <TDIIndex>4</TDIIndex>
-          <IsSelected>false</IsSelected>
+          <IsSelected>true</IsSelected>
           <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
           <MDIWindowState>Normal</MDIWindowState>
           <AllowMDIResize>true</AllowMDIResize>
@@ -828,14 +820,14 @@
           <PreviousFloatingWindowRect />
           <FloatWindowState>Normal</FloatWindowState>
           <ZorderInFloatMode>0</ZorderInFloatMode>
-          <TabOrderIndex>3</TabOrderIndex>
+          <TabOrderIndex>2</TabOrderIndex>
           <PreviousContainerDesiredSize>
             <Width>0</Width>
             <Height>0</Height>
           </PreviousContainerDesiredSize>
           <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
           <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
-          <Name>DataScreen1</Name>
+          <Name>DataScreen2</Name>
           <State>Document</State>
           <NoHeader>false</NoHeader>
           <SideDocked>Left</SideDocked>
@@ -905,82 +897,6 @@
           <FloatWindowState>Normal</FloatWindowState>
           <ZorderInFloatMode>0</ZorderInFloatMode>
           <TabOrderIndex>1</TabOrderIndex>
-          <PreviousContainerDesiredSize>
-            <Width>0</Width>
-            <Height>0</Height>
-          </PreviousContainerDesiredSize>
-          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
-          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
-          <Name>DataScreen2</Name>
-          <State>Document</State>
-          <NoHeader>false</NoHeader>
-          <SideDocked>Left</SideDocked>
-          <SideFloating>Left</SideFloating>
-          <TargetDocked />
-          <TargetFloating />
-          <DesiredWidthInDockedMode>90</DesiredWidthInDockedMode>
-          <DesiredHeightInDockedMode>90</DesiredHeightInDockedMode>
-          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
-          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
-          <NoDock>false</NoDock>
-          <CanDock>false</CanDock>
-          <CanClose>false</CanClose>
-          <IsSelectedTab>false</IsSelectedTab>
-          <IsActiveWindow>false</IsActiveWindow>
-          <WindowRect />
-          <TabGroupName />
-          <IsTabGroupOwner>false</IsTabGroupOwner>
-          <SideTabOrder>0</SideTabOrder>
-          <IndexInDockMode>2</IndexInDockMode>
-          <IndexInFloatMode>2</IndexInFloatMode>
-          <TabOrderInDockMode>0</TabOrderInDockMode>
-          <TabOrderInFloatMode>0</TabOrderInFloatMode>
-          <MDIBounds>0,0,100,50</MDIBounds>
-          <TDIIndex>1</TDIIndex>
-          <IsSelected>false</IsSelected>
-          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
-          <MDIWindowState>Normal</MDIWindowState>
-          <AllowMDIResize>true</AllowMDIResize>
-          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
-          <WayOfTDIGroup />
-          <DockForSide>Left</DockForSide>
-          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
-          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
-          <DoShift>false</DoShift>
-          <SideRelativetoContainer>Left</SideRelativetoContainer>
-          <TabParent />
-          <DockWindowState>Normal</DockWindowState>
-          <CanMaximize>true</CanMaximize>
-          <CanMinimize>true</CanMinimize>
-          <CanResizeInDockedState>true</CanResizeInDockedState>
-          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
-          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
-          <CanResizeInFloatState>true</CanResizeInFloatState>
-          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
-          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
-          <CanFloatMaximize>true</CanFloatMaximize>
-          <IsFixedSize>false</IsFixedSize>
-          <IsFixedHeight>false</IsFixedHeight>
-          <IsFixedWidth>false</IsFixedWidth>
-          <FixedHeight>0</FixedHeight>
-          <FixedWidth>0</FixedWidth>
-          <ContainerSize>
-            <Width>0</Width>
-            <Height>0</Height>
-          </ContainerSize>
-          <PreviousHostWidth>90</PreviousHostWidth>
-          <PreviousHostHeight>90</PreviousHostHeight>
-          <PreviousContainerHeight>90</PreviousContainerHeight>
-          <PreviousContainerWidth>90</PreviousContainerWidth>
-          <TargetAutoHide />
-          <SplitPanelOffset>0</SplitPanelOffset>
-          <IsSwapped>false</IsSwapped>
-        </DockingParams>
-        <DockingParams>
-          <PreviousFloatingWindowRect />
-          <FloatWindowState>Normal</FloatWindowState>
-          <ZorderInFloatMode>0</ZorderInFloatMode>
-          <TabOrderIndex>2</TabOrderIndex>
           <PreviousContainerDesiredSize>
             <Width>0</Width>
             <Height>0</Height>
@@ -1089,7 +1005,83 @@
           <TabOrderInFloatMode>0</TabOrderInFloatMode>
           <MDIBounds>0,0,124,50</MDIBounds>
           <TDIIndex>0</TDIIndex>
-          <IsSelected>true</IsSelected>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>true</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>3</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <Name>Oscilloscope_Screen1</Name>
+          <State>Document</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Left</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>90</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>90</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>false</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>false</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>0</IndexInDockMode>
+          <IndexInFloatMode>0</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>4</TDIIndex>
+          <IsSelected>false</IsSelected>
           <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
           <MDIWindowState>Normal</MDIWindowState>
           <AllowMDIResize>true</AllowMDIResize>

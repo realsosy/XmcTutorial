@@ -19,11 +19,11 @@ extern LANE_TYPE_t eLaneType;
 
 extern bool bEnableMotorR;
 extern bool bEnableMotorL;
-extern float f32MotorRVol;
-extern float f32MotorLVol;
+extern float fltMotorRVol;
+extern float fltMotorLVol;
 
 extern bool bScanComplete;
-extern float f32ObstacleDistanceArr[OBST_IDX_MAX];
+extern float fltObstacleDistanceArr[OBST_IDX_MAX];
 
 bool bObstacleBeing;
 
@@ -107,8 +107,8 @@ void ControlLineRacer(void)
 		motor_l_ref = kLowVol;
 	}
 
-	f32MotorRVol = fltRamp(f32MotorRVol, motor_r_ref, kRampVol);
-	f32MotorLVol = fltRamp(f32MotorLVol, motor_l_ref, kRampVol);
+	fltMotorRVol = fltRamp(fltMotorRVol, motor_r_ref, kRampVol);
+	fltMotorLVol = fltRamp(fltMotorLVol, motor_l_ref, kRampVol);
 
 }
 
@@ -121,9 +121,9 @@ void DetectObstacle(void)
 	}
 
 	if( (i32LaneOffset < -15) ){
-		if( (f32ObstacleDistanceArr[0] < STOP_DISTANCE)
-			|| (f32ObstacleDistanceArr[1] < STOP_DISTANCE)
-			|| (f32ObstacleDistanceArr[2] < STOP_DISTANCE) )
+		if( (fltObstacleDistanceArr[0] < STOP_DISTANCE)
+			|| (fltObstacleDistanceArr[1] < STOP_DISTANCE)
+			|| (fltObstacleDistanceArr[2] < STOP_DISTANCE) )
 		{
 			bObstacleBeing = true;
 		}
@@ -131,9 +131,9 @@ void DetectObstacle(void)
 			bObstacleBeing = false;
 		}
 	} else	if( (i32LaneOffset > -15) && (i32LaneOffset < 15) ){
-		if( (f32ObstacleDistanceArr[1] < STOP_DISTANCE)
-			|| (f32ObstacleDistanceArr[2] < STOP_DISTANCE)
-			|| (f32ObstacleDistanceArr[3] < STOP_DISTANCE) )
+		if( (fltObstacleDistanceArr[1] < STOP_DISTANCE)
+			|| (fltObstacleDistanceArr[2] < STOP_DISTANCE)
+			|| (fltObstacleDistanceArr[3] < STOP_DISTANCE) )
 		{
 			bObstacleBeing = true;
 		}
@@ -141,9 +141,9 @@ void DetectObstacle(void)
 			bObstacleBeing = false;
 		}
 	} else if( (i32LaneOffset < 15) ){
-		if( (f32ObstacleDistanceArr[2] < STOP_DISTANCE)
-			|| (f32ObstacleDistanceArr[3] < STOP_DISTANCE)
-			|| (f32ObstacleDistanceArr[4] < STOP_DISTANCE) )
+		if( (fltObstacleDistanceArr[2] < STOP_DISTANCE)
+			|| (fltObstacleDistanceArr[3] < STOP_DISTANCE)
+			|| (fltObstacleDistanceArr[4] < STOP_DISTANCE) )
 		{
 			bObstacleBeing = true;
 		}

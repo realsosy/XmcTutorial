@@ -9,6 +9,7 @@
 
 
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
+#include "Servo.h"
 
 /**
 
@@ -20,8 +21,8 @@
  * code.
  */
 
-float my_angle = 0;
-uint32_t my_duty = 0;
+//float my_angle = 0;
+//uint32_t my_duty = 0;
 
 int main(void)
 {
@@ -43,8 +44,9 @@ int main(void)
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {
-	  my_duty = (uint32_t)(750.0 - 5*my_angle);
-
-	  PWM_SetDutyCycle(&PWM_0, my_duty);
+//	  my_duty = (uint32_t)(750.0 - 5*my_angle);
+//
+//	  PWM_SetDutyCycle(&PWM_0, my_duty);
+	  SetServoAngle(my_angle);
   }
 }

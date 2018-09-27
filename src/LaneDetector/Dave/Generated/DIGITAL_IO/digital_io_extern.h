@@ -73,12 +73,6 @@ extern const DIGITAL_IO_t dhDI_LANE_C;
 	
 extern const DIGITAL_IO_t dhDI_LANE_R; 
 	
-extern const DIGITAL_IO_t dhDO_MOTOR_R_DIR; 
-	
-extern const DIGITAL_IO_t dhDO_MOTOR_L_DIR; 
-	
-extern const DIGITAL_IO_t TEST_DO; 
-	
  
 #endif  /* DIGITAL_IO_EXTERN_H */
 

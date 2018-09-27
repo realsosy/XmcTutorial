@@ -23,9 +23,9 @@ CaState_t eCaState;
 int16_t i16CaArrIdx = 0;
 int32_t i32CaDelayMs = 170;
 
-float f32ServoAngleArr[OBST_IDX_MAX] = { -40.0, -20.0, 0.0, 20.0, 40.0 } ;
-float f32RawDistanceArr[OBST_IDX_MAX] = { 0.0 };
-float f32ObstacleDistanceArr[OBST_IDX_MAX] = { 0.0 };
+float fltServoAngleArr[OBST_IDX_MAX] = { -40.0, -20.0, 0.0, 20.0, 40.0 } ;
+float fltRawDistanceArr[OBST_IDX_MAX] = { 0.0 };
+float fltObstacleDistanceArr[OBST_IDX_MAX] = { 0.0 };
 bool bScanComplete = false;
 
 void Sense_CollisionAvoidance(void)
@@ -36,15 +36,15 @@ void Sense_CollisionAvoidance(void)
 
 	CAPTURE_GetCapturedTime(&dhIC_US, &captured_tick);
 	captured_time = (float)captured_tick * IC_TICK_PERIOD_NS / 1000.0;
-	f32RawDistanceArr[i16CaArrIdx] = captured_time / 58.0;
+	fltRawDistanceArr[i16CaArrIdx] = captured_time / 58.0;
 
-	if (f32RawDistanceArr[i16CaArrIdx] < DIST_THRESHOLD && f32RawDistanceArr[i16CaArrIdx] > 0.3)
+	if (fltRawDistanceArr[i16CaArrIdx] < DIST_THRESHOLD && fltRawDistanceArr[i16CaArrIdx] > 0.3)
 	{
-		f32ObstacleDistanceArr[i16CaArrIdx] = f32RawDistanceArr[i16CaArrIdx];
+		fltObstacleDistanceArr[i16CaArrIdx] = fltRawDistanceArr[i16CaArrIdx];
 	}
 	else
 	{
-		f32ObstacleDistanceArr[i16CaArrIdx] = 300.0;
+		fltObstacleDistanceArr[i16CaArrIdx] = 300.0;
 	}
 
 	switch (eCaState)
@@ -68,7 +68,7 @@ void Sense_CollisionAvoidance(void)
 			break;
 	}
 
-	servo_duty = (uint32_t)(CENTER_DUTY - 5.0*f32ServoAngleArr[i16CaArrIdx]);
+	servo_duty = (uint32_t)(CENTER_DUTY - 5.0*fltServoAngleArr[i16CaArrIdx]);
 	PWM_SetDutyCycle(&dhPWM_SERVO, servo_duty);
     TIMER_Stop(&dhOC_CA);
     TIMER_SetTimeInterval(&dhOC_CA, i32CaDelayMs*100000);
