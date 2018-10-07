@@ -44,19 +44,22 @@ pages:
     - Interrupt: LabNVIC.md
     - System Timer: LabSystemTimer.md
 
-- Examples & Mini projects:
-    - Final SignalGeneratorMonitor: LabSigGenMon.md
-
 - Programming Background:
     - Functions & Program Design: ProgDesignFunction.md
     - Module Design & Multiple files: ProgModuleMultipleFiles.md
     - System Timer & Scheduler: ProgSystemTimerScheduler.md
 #    - Statemachine
 
-    
+- Circuit Background:
+    - Digital Signal Interfacing: DigitalIos.md
+#    - Analog Signal Interfacing
+
 #- Advanced:
 #    - Project Template: ProjectTemplate.md
 
+- Examples & Mini projects:
+    - Final SignalGeneratorMonitor: LabSigGenMon.md
+    - Ultrasonic Sensor: UltrasonicSensor.md
 
 - References: 'References.md'
 

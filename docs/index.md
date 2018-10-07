@@ -98,6 +98,11 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 * System Timer & Scheduler
 * Statemachine
 
+## Circuit 배경 지식
+
+* Digital Signal Interfacing 
+* Analog Signal Interfacing
+
 ## Examples & Mini projects
 
 * Servo with PWM
