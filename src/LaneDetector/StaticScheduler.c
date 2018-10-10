@@ -66,6 +66,7 @@
 /******************************************************************************/
 static uint32_t TaskId1ms=0;
 static uint32_t TickCounter = 0;
+static bool TickFlag1ms = false;
 static bool Task1msFlag = false;
 static bool Task10msFlag = false;
 static bool Task100msFlag = false;
@@ -102,10 +103,16 @@ static void Task1ms(void){
 }
 
 uint32_t Ticks10ms = 0;
+uint32_t TickCA200ms = 0;
 static void Task10ms(void){
 	Ticks10ms++;
 	if(Ticks10ms%100 == 0){
 		Ticks10ms = 0;
+	}
+
+	TickCA200ms++;
+	if (TickCA200ms%16 == 0){
+		TickCA200ms = 0;
 	}
 
 	Sense_LaneDetector();
@@ -125,21 +132,10 @@ void TaskIdle(){
 }
 
 void CallBack1ms(){
+	TickFlag1ms = true;
 	TickCounter++;
-	if(TickCounter == 1000){
+	if(TickCounter == 10000){
 		TickCounter = 0;
-	}
-	if(TickCounter%1 == 0){
-		Task1msFlag = true;
-	}
-	if(TickCounter%10 == 1){
-		Task10msFlag = true;
-	}
-	if(TickCounter%100 == 2){
-		Task100msFlag = true;
-	}
-	if(TickCounter%1000 == 3){
-		Task1000msFlag = true;
 	}
 }
 
@@ -157,6 +153,21 @@ void StaticScheduler_Init(void){
 }
 
 void StaticScheduler_Loop(void){
+	if(TickFlag1ms == true){
+		if(TickCounter%1 == 0){
+			Task1msFlag = true;
+		}
+		if(TickCounter%10 == 1){
+			Task10msFlag = true;
+		}
+		if(TickCounter%100 == 2){
+			Task100msFlag = true;
+		}
+		if(TickCounter%1000 == 3){
+			Task1000msFlag = true;
+		}
+		TickFlag1ms = false;
+	}
 
 	if(Task1msFlag == true){
 		Task1ms();

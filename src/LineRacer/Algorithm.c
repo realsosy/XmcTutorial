@@ -1,19 +1,47 @@
-/*
- * Control.c
+/******************************************************************************/
+/**
+ * file         Algorithm.c
  *
- *  Created on: Sep 2, 2017
- *      Author: ARCLab
+ * brief        C file for Algorithm
+ *
+ * version      1.00
+ * date         Sep/02/2017
+ * warning
+ * note
+ * ---------------------------------------------------------------------------
+ *               R E V I S I O N   H I S T O R Y
+ * ---------------------------------------------------------------------------
+ *   Date        Version  Author  Description
+ *  ----------   -------  ------  --------------------------------------------
+ *  2017-09-02   1.00     ARCLab  - Creation Release
+ *
  */
+/******************************************************************************/
 
+/******************************************************************************/
+/* HEADER FILES                                                               */
+/******************************************************************************/
 #include "Algorithm.h"
 
+/******************************************************************************/
+/* PRIVATE DEFINITIONS AND MACROS (scope: file)                               */
+/******************************************************************************/
 #define OBST_IDX_MAX 5
 #define DIST_THRESHOLD 150.0
 #define STOP_DISTANCE 45.0
 #define NO_LANE_COUNTER_MAX 100
 
-float fltRamp(float state, float input, float delta);
+/******************************************************************************/
+/* PRIVATE TYPEDEFS AND STRUCTURES (scope: file)                              */
+/******************************************************************************/
+typedef enum {
+	STOP,
+	RUN
+} eControlState_t;
 
+/******************************************************************************/
+/* PUBLIC VARIABLES                                                           */
+/******************************************************************************/
 extern int32_t i32LaneOffset;
 extern LANE_TYPE_t eLaneType;
 
@@ -25,21 +53,26 @@ extern float fltMotorLVol;
 extern bool bScanComplete;
 extern float fltObstacleDistanceArr[OBST_IDX_MAX];
 
+/******************************************************************************/
+/* PRIVATE VARIABLES                                                          */
+/******************************************************************************/
 bool bObstacleBeing;
 
 bool bSubSystemTest = false;
-
-typedef enum {
-	STOP,
-	RUN
-} eControlState_t;
 
 eControlState_t eControlState = STOP;
 float kRampVol = 1.0;
 float kLowVol = -5.0;
 float kMiddleVol = -0.5;
 float kHighVol = 5.0;
+/******************************************************************************/
+/* PRIVATE Function Prototype (scope: file)                                   */
+/******************************************************************************/
+float fltRamp(float state, float input, float delta);
 
+/******************************************************************************/
+/* PRIVATE Function Implementation (scope: file)                              */
+/******************************************************************************/
 void ControlLineRacer(void)
 {
 	float motor_r_ref;
@@ -176,3 +209,14 @@ float fltRamp(float state, float input, float delta){
 	}
 	return(state);
 }
+
+/******************************************************************************/
+/* PUBLIC Function Implementation                                             */
+/******************************************************************************/
+
+/******************************************************************************/
+/*                                                                            */
+/*                            EOF                                             */
+/*                                                                            */
+/******************************************************************************/
+

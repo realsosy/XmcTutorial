@@ -103,16 +103,10 @@ static void Task1ms(void){
 }
 
 uint32_t Ticks10ms = 0;
-uint32_t TickCA200ms = 0;
 static void Task10ms(void){
 	Ticks10ms++;
 	if(Ticks10ms%100 == 0){
 		Ticks10ms = 0;
-	}
-
-	TickCA200ms++;
-	if (TickCA200ms%16 == 0){
-		TickCA200ms = 0;
 	}
 
 	Actuate_MotorDrive();
@@ -134,7 +128,7 @@ void TaskIdle(){
 void CallBack1ms(){
 	TickFlag1ms = true;
 	TickCounter++;
-	if(TickCounter == 10000){
+	if(TickCounter == 1000){
 		TickCounter = 0;
 	}
 }
