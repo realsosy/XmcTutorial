@@ -48,7 +48,8 @@ pages:
     - Functions & Program Design: ProgDesignFunction.md
     - Module Design & Multiple files: ProgModuleMultipleFiles.md
     - System Timer & Scheduler: ProgSystemTimerScheduler.md
-#    - Statemachine
+    - Statemachine: ProgFasmBasic.md
+    - Statemachine Example (Stop Light): ProgFsmStopLight.md
 
 - Circuit Background:
     - Digital Signal Interfacing: DigitalIos.md
