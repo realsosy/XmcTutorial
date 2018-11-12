@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/0.1.28/peripheral/dlr/0" description="DMA Line Request Device Description" baseAddress="0x50004900">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://resources/0.1.28/peripheral/dlr/0/ch/2">
+    <resourcesList name="ovrstat_ln" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/ovrstat/ln2"/>
+    <resourcesList name="ovrclr_ln" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/ovrclr/ln2"/>
+    <resourcesList name="lnen_ln" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/lnen/ln2"/>
+    <resourcesList name="srsel_rs" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs2"/>
+    <resourcesList name="in" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/in2"/>
+    <resourcesList name="out" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/out2"/>
+    <resourcesList name="int" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/int2"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="SRSEL0" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0" value="00000000" toolTipHelpDescription="GPDMA Service Request Selection 0" defaultValue="00000000" accessPermission="rw" addressOffset="0x08" resetValue="00000000" resetMask="0xFFFFFFFF">
+    <bitFields name="RS0" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs0" value="0" toolTipHelpDescription="GPDMA Request Source for Line 0" defaultValue="0" startPos="0" stopPos="3" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS1" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs1" value="0" toolTipHelpDescription="GPDMA Request Source for Line 1" defaultValue="0" startPos="4" stopPos="7" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS2" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs2" value="0" toolTipHelpDescription="GPDMA Request Source for Line 2" defaultValue="0" startPos="8" stopPos="11" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS3" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs3" value="0" toolTipHelpDescription="GPDMA Request Source for Line 3" defaultValue="0" startPos="12" stopPos="15" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS4" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs4" value="0" toolTipHelpDescription="GPDMA Request Source for Line 4" defaultValue="0" startPos="16" stopPos="19" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS5" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs5" value="0" toolTipHelpDescription="GPDMA Request Source for Line 5" defaultValue="0" startPos="20" stopPos="23" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS6" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs6" value="0" toolTipHelpDescription="GPDMA Request Source for Line 6" defaultValue="0" startPos="24" stopPos="27" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="RS7" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs7" value="0" toolTipHelpDescription="GPDMA Request Source for Line 7" defaultValue="0" startPos="28" stopPos="31" accessPermission="rw" maxValue="15" minValue="0"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RS2" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs2" value="0" toolTipHelpDescription="GPDMA Request Source for Line 2" defaultValue="0" startPos="8" stopPos="11" accessPermission="rw" maxValue="15" minValue="0"/>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="5" URI="http://resources/0.1.28/peripheral/dlr/0/ch/5">
+    <resourcesList name="ovrstat_ln" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/ovrstat/ln5"/>
+    <resourcesList name="ovrclr_ln" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/ovrclr/ln5"/>
+    <resourcesList name="lnen_ln" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/lnen/ln5"/>
+    <resourcesList name="srsel_rs" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs5"/>
+    <resourcesList name="in" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/in5"/>
+    <resourcesList name="out" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/out5"/>
+    <resourcesList name="int" requiredResourceUri="http://resources/0.1.28/peripheral/dlr/0/int5"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="RS5" URI="http://resources/0.1.28/peripheral/dlr/0/srsel0/rs5" value="0" toolTipHelpDescription="GPDMA Request Source for Line 5" defaultValue="0" startPos="20" stopPos="23" accessPermission="rw" maxValue="15" minValue="0"/>
+  <addressBlock offset="0x0" size="0x4000" usage="registers"/>
+</ResourceModel:Peripheral>

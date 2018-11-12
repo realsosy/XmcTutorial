@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/0.1.28/peripheral/dma8/0" description="GPDMA0 Device Description" baseAddress="0x50014000">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="5" URI="http://resources/0.1.28/peripheral/dma8/0/ch/5">
+    <resourcesList name="sar" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sar5"/>
+    <resourcesList name="dar" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/dar5"/>
+    <resourcesList name="ctlh" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/ctlh5"/>
+    <resourcesList name="ctll" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/ctll5"/>
+    <resourcesList name="cfgh" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgh5"/>
+    <resourcesList name="cfgh_src_per" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgh5/src_per"/>
+    <resourcesList name="cfgh_dest_per" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgh5/dest_per"/>
+    <resourcesList name="cfgl" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgl5"/>
+    <resourcesList name="cfgl_hs_sel_src" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgl5/hs_sel_src"/>
+    <resourcesList name="cfgl_hs_sel_dst" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgl5/hs_sel_dst"/>
+    <resourcesList name="rawblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawblock/ch5"/>
+    <resourcesList name="rawdsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawdsttran/ch5"/>
+    <resourcesList name="rawsrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawsrctran/ch5"/>
+    <resourcesList name="rawerr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawerr/ch5"/>
+    <resourcesList name="rawtfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawtfr/ch5"/>
+    <resourcesList name="statusblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statusblock/ch5"/>
+    <resourcesList name="statusdsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statusdsttran/ch5"/>
+    <resourcesList name="statussrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statussrctran/ch5"/>
+    <resourcesList name="statuserr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statuserr/ch5"/>
+    <resourcesList name="statustfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statustfr/ch5"/>
+    <resourcesList name="maskblock_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskblock/we_ch5"/>
+    <resourcesList name="maskblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskblock/ch5"/>
+    <resourcesList name="maskdsttran_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskdsttran/we_ch5"/>
+    <resourcesList name="maskdsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskdsttran/ch5"/>
+    <resourcesList name="masksrctran_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masksrctran/we_ch5"/>
+    <resourcesList name="masksrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masksrctran/ch5"/>
+    <resourcesList name="maskerr_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskerr/we_ch5"/>
+    <resourcesList name="maskerr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskerr/ch5"/>
+    <resourcesList name="masktfr_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masktfr/we_ch5"/>
+    <resourcesList name="masktfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masktfr/ch5"/>
+    <resourcesList name="clearblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/clearblock/ch5"/>
+    <resourcesList name="cleardsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cleardsttran/ch5"/>
+    <resourcesList name="clearsrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/clearsrctran/ch5"/>
+    <resourcesList name="clearerr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/clearerr/ch5"/>
+    <resourcesList name="cleartfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cleartfr/ch5"/>
+    <resourcesList name="chenreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/chenreg/we_chx"/>
+    <resourcesList name="chenreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/chenreg/chx"/>
+    <resourcesList name="reqsrcreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqsrcreg/we_ch5"/>
+    <resourcesList name="reqsrcreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqsrcreg/ch5"/>
+    <resourcesList name="reqdstreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqdstreg/we_ch5"/>
+    <resourcesList name="reqdstreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqdstreg/ch5"/>
+    <resourcesList name="sglreqsrcreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqsrcreg/we_ch5"/>
+    <resourcesList name="sglreqsrcreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqsrcreg/ch5"/>
+    <resourcesList name="sglreqdstreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqdstreg/we_ch5"/>
+    <resourcesList name="sglreqdstreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqdstreg/ch5"/>
+    <resourcesList name="lstsrcreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstsrcreg/we_ch5"/>
+    <resourcesList name="lstsrcreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstsrcreg/ch5"/>
+    <resourcesList name="lstdstreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstdstreg/we_ch5"/>
+    <resourcesList name="lstdstreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstdstreg/ch5"/>
+    <resourcesList name="dma_int" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/dma_int5"/>
+    <resourcesList name="src_req" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/src_req5"/>
+    <resourcesList name="dest_req" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/dest_req5"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/global_signal5"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CFGH5" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5" value="00000004" toolTipHelpDescription="Configuration Register High for Channel 5" defaultValue="00000004" accessPermission="rw" addressOffset="0x01FC" resetValue="00000004" resetMask="0xFFFFFFFF">
+    <bitFields name="DEST_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/dest_per" value="0" toolTipHelpDescription="Destination Peripheral" defaultValue="0" startPos="11" stopPos="14" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="SRC_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/src_per" value="0" toolTipHelpDescription="Source Peripheral" defaultValue="0" startPos="7" stopPos="10" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="PROTCTL" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/protctl" value="1" toolTipHelpDescription="Protection Control" defaultValue="1" startPos="2" stopPos="4" accessPermission="rw" maxValue="7" minValue="0"/>
+    <bitFields name="FIFO_MODE" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/fifo_mode" value="0" toolTipHelpDescription="FIFO Mode Select" defaultValue="0" startPos="1" stopPos="1" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Space/data available for single AHB transfer of the specified transfer width."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Data available is greater than or equal to half the FIFO depth for destination transfers and space available is greater than half the fifo depth for source transfers. The exceptions are at the end of a burst transaction request or at the end of a block transfer."/>
+    </bitFields>
+    <bitFields name="FCMODE" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/fcmode" value="0" toolTipHelpDescription="Flow Control Mode" defaultValue="0" startPos="0" stopPos="0" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Source transaction requests are serviced when they occur. Data pre-fetching is enabled."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Source transaction requests are not serviced until a destination transaction request occurs. In this mode, the amount of data transferred from the source is limited so that it is guaranteed to be transferred to the destination prior to block termination by the destination. Data pre-fetching is disabled."/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DEST_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/dest_per" value="0" toolTipHelpDescription="Destination Peripheral" defaultValue="0" startPos="11" stopPos="14" accessPermission="rw" maxValue="15" minValue="0"/>
+  <provided xsi:type="ResourceModel:BitField" name="SRC_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh5/src_per" value="0" toolTipHelpDescription="Source Peripheral" defaultValue="0" startPos="7" stopPos="10" accessPermission="rw" maxValue="15" minValue="0"/>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="4" URI="http://resources/0.1.28/peripheral/dma8/0/ch/4">
+    <resourcesList name="sar" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sar4"/>
+    <resourcesList name="dar" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/dar4"/>
+    <resourcesList name="ctlh" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/ctlh4"/>
+    <resourcesList name="ctll" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/ctll4"/>
+    <resourcesList name="cfgh" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgh4"/>
+    <resourcesList name="cfgh_src_per" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgh4/src_per"/>
+    <resourcesList name="cfgh_dest_per" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgh4/dest_per"/>
+    <resourcesList name="cfgl" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgl4"/>
+    <resourcesList name="cfgl_hs_sel_src" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgl4/hs_sel_src"/>
+    <resourcesList name="cfgl_hs_sel_dst" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cfgl4/hs_sel_dst"/>
+    <resourcesList name="rawblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawblock/ch4"/>
+    <resourcesList name="rawdsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawdsttran/ch4"/>
+    <resourcesList name="rawsrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawsrctran/ch4"/>
+    <resourcesList name="rawerr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawerr/ch4"/>
+    <resourcesList name="rawtfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/rawtfr/ch4"/>
+    <resourcesList name="statusblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statusblock/ch4"/>
+    <resourcesList name="statusdsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statusdsttran/ch4"/>
+    <resourcesList name="statussrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statussrctran/ch4"/>
+    <resourcesList name="statuserr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statuserr/ch4"/>
+    <resourcesList name="statustfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/statustfr/ch4"/>
+    <resourcesList name="maskblock_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskblock/we_ch4"/>
+    <resourcesList name="maskblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskblock/ch4"/>
+    <resourcesList name="maskdsttran_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskdsttran/we_ch4"/>
+    <resourcesList name="maskdsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskdsttran/ch4"/>
+    <resourcesList name="masksrctran_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masksrctran/we_ch4"/>
+    <resourcesList name="masksrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masksrctran/ch4"/>
+    <resourcesList name="maskerr_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskerr/we_ch4"/>
+    <resourcesList name="maskerr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/maskerr/ch4"/>
+    <resourcesList name="masktfr_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masktfr/we_ch4"/>
+    <resourcesList name="masktfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/masktfr/ch4"/>
+    <resourcesList name="clearblock_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/clearblock/ch4"/>
+    <resourcesList name="cleardsttran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cleardsttran/ch4"/>
+    <resourcesList name="clearsrctran_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/clearsrctran/ch4"/>
+    <resourcesList name="clearerr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/clearerr/ch4"/>
+    <resourcesList name="cleartfr_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/cleartfr/ch4"/>
+    <resourcesList name="chenreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/chenreg/we_chx"/>
+    <resourcesList name="chenreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/chenreg/chx"/>
+    <resourcesList name="reqsrcreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqsrcreg/we_ch4"/>
+    <resourcesList name="reqsrcreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqsrcreg/ch4"/>
+    <resourcesList name="reqdstreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqdstreg/we_ch4"/>
+    <resourcesList name="reqdstreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/reqdstreg/ch4"/>
+    <resourcesList name="sglreqsrcreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqsrcreg/we_ch4"/>
+    <resourcesList name="sglreqsrcreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqsrcreg/ch4"/>
+    <resourcesList name="sglreqdstreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqdstreg/we_ch4"/>
+    <resourcesList name="sglreqdstreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/sglreqdstreg/ch4"/>
+    <resourcesList name="lstsrcreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstsrcreg/we_ch4"/>
+    <resourcesList name="lstsrcreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstsrcreg/ch4"/>
+    <resourcesList name="lstdstreg_we_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstdstreg/we_ch4"/>
+    <resourcesList name="lstdstreg_ch" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/lstdstreg/ch4"/>
+    <resourcesList name="dma_int" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/dma_int4"/>
+    <resourcesList name="src_req" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/src_req4"/>
+    <resourcesList name="dest_req" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/dest_req4"/>
+    <resourcesList name="global_signal" requiredResourceUri="http://resources/0.1.28/peripheral/dma8/0/global_signal4"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="CFGH4" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4" value="00000004" toolTipHelpDescription="Configuration Register High for Channel 4" defaultValue="00000004" accessPermission="rw" addressOffset="0x01A4" resetValue="00000004" resetMask="0xFFFFFFFF">
+    <bitFields name="DEST_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/dest_per" value="0" toolTipHelpDescription="Destination Peripheral" defaultValue="0" startPos="11" stopPos="14" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="SRC_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/src_per" value="0" toolTipHelpDescription="Source Peripheral" defaultValue="0" startPos="7" stopPos="10" accessPermission="rw" maxValue="15" minValue="0"/>
+    <bitFields name="PROTCTL" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/protctl" value="1" toolTipHelpDescription="Protection Control" defaultValue="1" startPos="2" stopPos="4" accessPermission="rw" maxValue="7" minValue="0"/>
+    <bitFields name="FIFO_MODE" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/fifo_mode" value="0" toolTipHelpDescription="FIFO Mode Select" defaultValue="0" startPos="1" stopPos="1" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Space/data available for single AHB transfer of the specified transfer width."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Data available is greater than or equal to half the FIFO depth for destination transfers and space available is greater than half the fifo depth for source transfers. The exceptions are at the end of a burst transaction request or at the end of a block transfer."/>
+    </bitFields>
+    <bitFields name="FCMODE" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/fcmode" value="0" toolTipHelpDescription="Flow Control Mode" defaultValue="0" startPos="0" stopPos="0" accessPermission="rw" maxValue="1" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b0" description="Source transaction requests are serviced when they occur. Data pre-fetching is enabled."/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b1" description="Source transaction requests are not serviced until a destination transaction request occurs. In this mode, the amount of data transferred from the source is limited so that it is guaranteed to be transferred to the destination prior to block termination by the destination. Data pre-fetching is disabled."/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="DEST_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/dest_per" value="0" toolTipHelpDescription="Destination Peripheral" defaultValue="0" startPos="11" stopPos="14" accessPermission="rw" maxValue="15" minValue="0"/>
+  <provided xsi:type="ResourceModel:BitField" name="SRC_PER" URI="http://resources/0.1.28/peripheral/dma8/0/cfgh4/src_per" value="0" toolTipHelpDescription="Source Peripheral" defaultValue="0" startPos="7" stopPos="10" accessPermission="rw" maxValue="15" minValue="0"/>
+  <addressBlock offset="0x0" size="0x4000" usage="registers"/>
+</ResourceModel:Peripheral>

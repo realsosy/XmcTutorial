@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ResourceModel:DevicePackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/LQFP144.0.0/devicepackage/0">
+  <provided xsi:type="ResourceModel:ResourceGroup" name="59" URI="http://resources/lqfp144.0.0/devicepackage/0/59">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin59"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="58" URI="http://resources/lqfp144.0.0/devicepackage/0/58">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin58"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="134" URI="http://resources/lqfp144.0.0/devicepackage/0/134">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin134"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="60" URI="http://resources/lqfp144.0.0/devicepackage/0/60">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin60"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="137" URI="http://resources/lqfp144.0.0/devicepackage/0/137">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin137"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="57" URI="http://resources/lqfp144.0.0/devicepackage/0/57">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin57"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="130" URI="http://resources/lqfp144.0.0/devicepackage/0/130">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin130"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="122" URI="http://resources/lqfp144.0.0/devicepackage/0/122">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin122"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="77" URI="http://resources/lqfp144.0.0/devicepackage/0/77">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin77"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="78" URI="http://resources/lqfp144.0.0/devicepackage/0/78">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin78"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="4" URI="http://resources/lqfp144.0.0/devicepackage/0/4">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/SPI_MASTER/v4_3_20/SPI_MASTER_0.app#//@hwResources.26"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin4"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="3" URI="http://resources/lqfp144.0.0/devicepackage/0/3">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/SPI_MASTER/v4_3_20/SPI_MASTER_0.app#//@hwResources.25"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin3"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://resources/lqfp144.0.0/devicepackage/0/2">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/SPI_MASTER/v4_3_20/SPI_MASTER_0.app#//@hwResources.22"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin2"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://resources/lqfp144.0.0/devicepackage/0/1">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/SPI_MASTER/v4_3_20/SPI_MASTER_0.app#//@hwResources.21"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin1"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="139" URI="http://resources/lqfp144.0.0/devicepackage/0/139">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin139"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="111" URI="http://resources/lqfp144.0.0/devicepackage/0/111">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/PWM/v4_1_10/PWM_1.app#//@hwResources.3"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin111"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="112" URI="http://resources/lqfp144.0.0/devicepackage/0/112">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/PWM/v4_1_10/PWM_0.app#//@hwResources.3"/>
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin112"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="142" URI="http://resources/lqfp144.0.0/devicepackage/0/142">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin142"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="140" URI="http://resources/lqfp144.0.0/devicepackage/0/140">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin140"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="141" URI="http://resources/lqfp144.0.0/devicepackage/0/141">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin141"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="121" URI="http://resources/lqfp144.0.0/devicepackage/0/121">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin121"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="120" URI="http://resources/lqfp144.0.0/devicepackage/0/120">
+    <resourcesList name="pin" requiredResourceUri="http://resources/LQFP144.0.0/devicepackage/0/pin120"/>
+  </provided>
+</ResourceModel:DevicePackage>
