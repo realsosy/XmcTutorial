@@ -1,0 +1,111 @@
+package Model.APPS.SPI_SLAVE.v4_0_8.Templates;
+
+import Model.APPS.SPI_SLAVE.v4_0_8.SPI_SLAVE
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2015-2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-08-10:
+ *     - Initial version for DAVEv4
+ *
+ * @endcond
+ *
+ */
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+ 
+/**********************************************************************************************************************
+ * MACROS
+ **********************************************************************************************************************/
+
+/***********************************************************************************************************************
+ * EXTERN DECLARATIONS
+***********************************************************************************************************************/
+#ifndef SPI_SLAVE_EXTERN_H
+#define SPI_SLAVE_EXTERN_H
+
+""")
+/*******************************************************************************
+** @Defines
+*******************************************************************************/
+out.print("""
+#ifdef __cplusplus
+extern "C" {
+#endif
+  
+/*Extern declaration for callback functions and SPI_SLAVE APP instance handles*/
+""");
+for (SPI_SLAVE spi_slave_inst : appInstancesList ) {
+  /*Write extern declaration for callback functions*/
+  List handler_defs =
+  [
+    spi_slave_inst.gstring_tx_callback.value,
+    spi_slave_inst.gstring_rx_callback.value,
+    spi_slave_inst.gstring_parity_callback.value,
+    spi_slave_inst.gstring_cs_callback.value
+  ]
+  /*List for callback function checkboxes*/
+  List handler_checks =
+  [
+    spi_slave_inst.gcheck_tx_callback,
+    spi_slave_inst.gcheck_rx_callback,
+    spi_slave_inst.gcheck_parity_callback,
+    spi_slave_inst.gcheck_cs_callback
+  ]
+  
+  /*Generate function extern declaration if the callback is enabled
+   * and the function name is not empty.*/
+  for(Integer indexer = 0; indexer < 4; indexer++)
+  {
+    if((handler_checks[indexer].enabled && handler_checks[indexer].value) && (handler_defs[indexer] != null) && (handler_defs[indexer] != ""))
+    {
+      out.print("  extern void "+handler_defs[indexer]+"(void);")
+      out.print("\n")
+    }
+  }
+out.print("""
+  extern SPI_SLAVE_t ${spi_slave_inst.getInstanceLabel()}; 
+""")
+}
+out.print("""                    
+#ifdef __cplusplus
+}
+#endif
+
+#endif  /* ifndef SPI_SLAVE_EXTERN_H */
+
+/*CODE_BLOCK_END*/
+""")

@@ -1,0 +1,285 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 500, 629">
+		<p1:GTab text="General Settings" widgetName="gtab_general_settings" visible="true" enabled="true">
+			<p1:GTab.control>
+				<p1:Tab layout="{x:Null}">
+					<p1:GLabel text="Operation mode:" visible="true" widgetName="glabel_operation_mode" bounds="2, 21, 94, 15"/>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_operation_mode" bounds="103, 18, 92, 21" options="Full Duplex&#13;&#10;Half Duplex&#13;&#10;Dual SPI&#13;&#10;Quad SPI" value="Full Duplex" toolTipText="Configures the number of lines used for transmission and/or reception" description="Mode of operation of the SPI slave peripheral. The USIC channel will be configured to use  port pins based on the operation mode selected. &lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Full Duplex: 2 pins will be used to establish full duplex communication. One pin for reception(MOSI) and another pin for transmission(MISO). Parallel transmission and reception are possible in this mode.&lt;br&gt;&#13;&#10;SPI_SLAVE_Transmit(), SPI_SLAVE_Receive(), SPI_SLAVE_Transfer() APIs can be used in this operation mode.&#13;&#10;&lt;li&gt;Half Duplex: Single pin will be used for communicating data in half duplex mode. Data can either be transmitted or received at any point of time. Only MISO pin will be available for manual pin selection. By default the pin will be configured in open drain mode.&lt;br&gt;&#13;&#10;SPI_SLAVE_Transfer() API cannot be used in this mode of operation.&#13;&#10;&lt;li&gt;Dual SPI: 2 pins will be used to establish half duplex communication. 2 bits of data will be either transmitted or received for each period of shift clock(SCLK). A word of 8bits will be transmitted or received using 4 clock cycles.&lt;br&gt;&#13;&#10;SPI_SLAVE_Transfer() API cannot be used in this mode of operation.&#13;&#10;&lt;li&gt;Quad SPI: 4 pins will be used to establish half duplex communication. For each period of serial clock(SCLK) 4 bits of data will be transmitted or received.&lt;br&gt;&#13;&#10;SPI_SLAVE_Transfer() API cannot be used in this mode of operation.&#13;&#10;&lt;/ul&gt;"/>
+					<p1:GLabel text="Parity selection:" visible="true" widgetName="glabel_parity" bounds="2, 58, 91, 15"/>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_parity" bounds="103, 55, 92, 21" options="None&#13;&#10;Even&#13;&#10;Odd" value="None" toolTipText="Parity mode selection. Master and the slave should have same parity configuration." description="Parity configuration for the SPI slave channel. The configuration should match the configuration of SPI master channel. When parity is selected, an extra bit will be added at the end of each frame. Parity configuration is possible only when the frame length is configured to a value less than 64. Parity selection field will be visible only when the configuration is possible.&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;None: No parity bit will be added at the end of frame.&#13;&#10;&lt;li&gt;Even: An extra parity bit will be added at the end of the frame. The parity bit will have value 1 if the count of 1s in the data frame is even.  The value of the parity bit will be 0 if the count of 1s in the data frame is odd.&#13;&#10;&lt;li&gt;Odd: An extra parity bit will be added at the end of data frame. The value of parity bit will be 1 if the count of 1s in the data frame is odd. The value of parity bit will be 0 if the count of 1s in the data frame is even.&#13;&#10;&lt;/ul&gt;&lt;br&gt;&#13;&#10;A callback can be registered in the &apos;Interrupt Settings&apos; tab to notify if the parity bit mismatched."/>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Advanced Settings" visible="true" enabled="true" widgetName="gtab_advanced_settings">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_3">
+					<p1:GGroup text="Protocol Handling" widgetName="ggroup_protocol_handling" bounds="5, 7, 482, 89">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Transmit mode:" visible="true" widgetName="glabel_transmit_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_transmit_mode" options="Interrupt&#13;&#10;DMA&#13;&#10;Direct" value="Interrupt" toolTipText="Mechanism to be used for transmitting data" description="Data transmission can be accomplished using 3 different mechanisms,&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Interrupt - A dedicated NVIC node will be used to transmit data. Reduces CPU load by using CPU only when transmit buffer is ready to accept new data. This mechanism has better CPU utilization compared to Direct(Polling) mechanism. &lt;br&gt;&#13;&#10;SPI_SLAVE_Transmit(), SPI_SLAVE_StartTransmitIRQ() APIs can be used to trigger the transmission of data.&#13;&#10;&lt;li&gt;DMA- A DMA channel will be dedicated for data transmission. Ideal mechanism for offloading the CPU. CPU will be used only to configure the buffer address and size.&lt;br&gt;&#13;&#10;SPI_SLAVE_Transmit(), SPI_SLAVE_StartTransmitDMA() APIs can be used to trigger data transmission.&lt;br&gt;&#13;&#10;Note: DMA is not available for XMC1 family of microcontrollers.&#13;&#10;&lt;li&gt;Direct- This mechanism allows custom implementation of the software for data transaction. Signals related to SPI channel events will be available for connection with external APPs. Additionally, APIs implemented using polling mechanism will be available. But the APIs are CPU blocking implementations.&lt;br&gt;&#13;&#10;SPI_SLAVE_Transmit() API implements blocking mechanism for transmission of data.&#13;&#10;&lt;/ul&gt;&lt;br&gt;&#13;&#10;In &apos;Interrupt&apos; and &apos;DMA&apos; mechanisms, a callback function can be registered in the &apos;Interrupt Settings&apos; tab. This callback function will be executed when the transmission of requested count is finished.&lt;br&gt;&#13;&#10;Additionally SPI_SLAVE_Transfer() API can be used in &apos;Full Duplex&apos; operation mode to transmit and receive data at the same time.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="80"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Receive mode:" visible="true" widgetName="glabel_receive_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_receive_mode" options="Interrupt&#13;&#10;DMA&#13;&#10;Direct" value="Interrupt" toolTipText="Mechanism to be used for receiving data" description="Data reception can be accomplished using 3 different mechanisms,&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Interrupt - A dedicated NVIC node will be used to receive data. Reduces CPU load by using CPU only when receive buffer has new data. This mechanism has better CPU utilization compared to Direct(Polling) mechanism. &lt;br&gt;&#13;&#10;SPI_SLAVE_Receive(), SPI_SLAVE_StartReceiveIRQ() APIs can be used to start the reception of data.&#13;&#10;&lt;li&gt;DMA- A DMA channel will be dedicated for data reception. Ideal mechanism for offloading the CPU. CPU will be used only to configure the buffer address and size.&lt;br&gt;&#13;&#10;SPI_SLAVE_Receive(), SPI_SLAVE_StartReceiveDMA() APIs can be used to start data reception.&lt;br&gt;&#13;&#10;Note: DMA is not available for XMC1 family of microcontrollers.&#13;&#10;&lt;li&gt;Direct- This mechanism allows custom implementation of the software for data transaction. Signals related to SPI channel receive events will be available for connection with external APPs. Additionally, APIs implemented using polling mechanism will be available. But the APIs are CPU blocking implementations.&lt;br&gt;&#13;&#10;SPI_SLAVE_Receive() API implements blocking mechanism for reception of data.&#13;&#10;&lt;/ul&gt;&lt;br&gt;&#13;&#10;In &apos;Interrupt&apos; and &apos;DMA&apos; mechanisms, a callback function can be registered in the &apos;Interrupt Settings&apos; tab. This callback function will be executed when data of requested count is received.&lt;br&gt;&#13;&#10;In &apos;Full Duplex&apos; mode, SPI_SLAVE_Transfer() API can be used to transmit and receive data at the same time. The end of receive callback function, configured in the &apos;Interrupt Settings&apos; tab, will be executed after completion of the transfer.&#13;&#10;">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="80"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="Frame and Word Length" widgetName="ggroup_frame_word" bounds="5, 99, 482, 84">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Word length:" visible="true" widgetName="glabel_word_length"/>
+						<p1:GInteger x:Style="NONE" minValue="1" maxValue="16" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_word_length" value="8" toolTipText="Data granularity in bits for each transaction" description="Number of bits to be transmitted or received in each transaction as one word. This value will be considered as the count of bits to be either received or transmitted in the bit order selected. Data from the user buffer will be indexed based on the value provided in this field. If the value is less than or equal to 8, user buffer will be accessed one byte(8bits) at a time. This means that any data should be accessed in array of bytes(uint8_t). If the value is greater than 8, then the user buffer will be indexed with 2 bytes(16bits). User buffer should be created as an array of 16bit data type(uint16_t). Each word data should be accessed in each index of the 16bit type(uint16_t) array. APIs implemented in the APP are capable of indexing the user buffer based on the word length provided in this field.">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="25"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+						<p1:GLabel text="Frame length:" visible="true" widgetName="glabel_frame_length"/>
+						<p1:GInteger x:Style="NONE" minValue="1" maxValue="64" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_frame_length" value="64" toolTipText="Number of bits in a frame" description="Number of bits to represent a frame. If the value is 64, the frame length can be unlimited. Frame length configuration can be helpful in the slave device when slave select input pin is not used. Based on frame length end of frame can be detected by the slave device. Parity selection will be enabled based on the frame length configured. ">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="25"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+					</p1:GGroup>
+					<p1:GGroup text="Slave Select Input Setting" manifestObj="true" widgetName="ggroup_slave_select" bounds="5, 185, 482, 69">
+						<p1:GGroup.layout>
+							<GridLayout/>
+						</p1:GGroup.layout>
+						<p1:GCheck text="Slave select input line is used" manifestObj="true" widgetName="gcheck_chipselect_used" value="true" toolTipText="Unselect to avoid using a separate pin for slave select input" description="SPI slave device can transact data without using slave select input pin. In such cases, this checkbox should be unchecked. After unselecting, slave select pin selection will not be available."/>
+						<p1:GLabel text="Note: When unselected, APP uses 3-line SPI mode i.e, without slave select input." visible="true" widgetName="glabel_chipselect_note"/>
+					</p1:GGroup>
+					<p1:GGroup text="Control" widgetName="ggroup_control" bounds="5, 256, 482, 105">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Bit order:" visible="true" widgetName="glabel_bit_order">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_bit_order" options="Transmit/Receive MSB first&#13;&#10;Transmit/Receive LSB first" value="Transmit/Receive MSB first" toolTipText="Order of data transaction. Word length is the reference size." description="Order of bits transmitted or received depends on this configuration. Data can be shifted in MSB first order or LSB first order. Order configured here should match with the order configured in the SPI master device. Otherwise the data received may have inverted bit order. The order is applicable for each frame.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GCheck text="Enable inverted clock input" manifestObj="true" widgetName="gcheck_clock_inversion" description="Polarity of the serial clock input(SCLK) can be inverted using this checkbox. ">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GCheck text="Enable immediate transmission of first bit" manifestObj="true" widgetName="gcheck_firstbit" enabled="false" toolTipText="Use when master has enabled serial clock delay" description="When enabled, the SPI slave device will place the first bit of data on the data bus even before the first clock pulse is provided. First bit of receive data will be sampled before the first serial clock pulse. This configuration is useful when the SPI master is configured to generate serial clock with a phase delay. This option is not available in XMC4500 device series.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+					</p1:GGroup>
+					<p1:GGroup text="FIFO Settings" widgetName="ggroup_fifo_settings" bounds="5, 363, 482, 119">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GCheck text="Enable transmit FIFO" manifestObj="true" widgetName="gcheck_enabletxfifo" value="true" toolTipText="Use FIFO during transmission of data" description="Enables usage of FIFO during data transmission. By enabling FIFO, the CPU can put data in the FIFO when the SPI channel is busy transmitting data. Data from the FIFO will be transmitting one after the other. Transmit FIFO will be configured to generate events when the FIFO gets empty. CPU gets enough time to execute other functions till the FIFO gets empty. "/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_txfifosize" options="2&#13;&#10;4&#13;&#10;8&#13;&#10;16&#13;&#10;32&#13;&#10;64" value="16" toolTipText="Number of words to be used for transmit FIFO" description="Number of words in FIFO to be used for data transmission for this USIC channel. As described in the overview, each USIC module has 2 channels. Each USIC module has 64 words of FIFO. The same FIFO buffer should be used by 2 channels. Each channel again has to share its allocation of FIFO between transmission and reception paths. Selection done in this field will be allocation for transmission of data for the USIC channel used in this instance.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="40"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GCheck text="Enable receive FIFO" manifestObj="true" widgetName="gcheck_enablerxfifo" value="true" toolTipText="Use FIFO during reception of data" description="Enables usage of FIFO for reception of data. The FIFO will be configured to generate FIFO full event when the receive FIFO is filled to the configured size. CPU can execute other functions till the receive FIFO is full. APP API SPI_SLAVE_SetRXFIFOTriggerLimit() can be used at runtime to change the event generation behavior. Using this API the receive FIFO filling level to generate events can be configured."/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_rxfifosize" options="2&#13;&#10;4&#13;&#10;8&#13;&#10;16&#13;&#10;32&#13;&#10;64" value="16" toolTipText="Number of words to be used for receive FIFO" description="Number of FIFO words to be used for data reception. Requested FIFO size may not be granted by Dave if other channels of the USIC module are already using the FIFO.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="40"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="A total of 64 FIFO entries are available to be configured as transmit and receive buffers.&#13;&#10;These 64 entries are additionally shared between the two channels of a USIC module." visible="true" manifestObj="true" widgetName="glabel_fifo_note">
+							<p1:GLabel.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<Label/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_interrupt">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_5">
+					<p1:GGroup text="Transmit" manifestObj="true" widgetName="ggroup_tx_callback" bounds="1, 3, 486, 147">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="0" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" subPriorityVisible="false" manifestObj="true" widgetName="ginterruptprio_tx_interrupt" toolTipText="Priority of the interrupt used for transmitting data" description="Priority for the transmit interrupt. This field will be enabled when &apos;Interrupt&apos; mechanism is used for transmitting data.&lt;br&gt; Lower the value, higher the priority.&lt;br&gt;&#13;&#10;Range of priority levels depends on the product family. For XMC4x devices, the range is 0 to 63. For XMC1x devices, the range is 0 to 3.&#13;&#10;For XMC4x microcontrollers, priority groups can be configured using the CPU APP.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalSpan="2" horizontalAlignment="FILL"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+						<p1:GCheck text="End of transmit callback:" manifestObj="true" widgetName="gcheck_tx_callback" toolTipText="Enable execution of a function after the transmission of requested count of words" description="Enable execution of callback function when the transmission of requested count of words is completed. This feature will not be available if the transmit mechanism is &apos;Direct&apos;(Polling)."/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_tx_callback" toolTipText="Function to be executed after transmitting requested count of words using the APP API.&#13;&#10;Function prototype: void foo(void)" description="Name of the function to be executed when the transmission of requested count of words is completed. The function prototype should be&lt;br&gt;&#13;&#10;void foo(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the transmit mechanism is &apos;Direct&apos;(Polling).">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name for- &quot;End of transmit callback&quot;." visible="true" manifestObj="true" isError="false" widgetName="gmessage_tx_callback">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<Label/>
+					</p1:GGroup>
+					<p1:GGroup text="Receive/Transfer" widgetName="ggroup_rx_callback" bounds="1, 152, 486, 197">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="0" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" subPriorityVisible="false" manifestObj="true" widgetName="ginterruptprio_rx_interrupt" toolTipText="Priority of the interrupt used for receiving data" description="Priority for the receive interrupt. This field will be enabled when &apos;Interrupt&apos; mechanism is used for receiving data.&lt;br&gt; Lower the value, higher the priority.&lt;br&gt;&#13;&#10;Range of priority levels depends on the product family. For XMC4x devices, the range is 0 to 63. For XMC1x devices, the range is 0 to 3.&#13;&#10;For XMC4x microcontrollers, priority groups can be configured using the CPU APP.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+						<p1:GCheck text="End of receive/transfer callback:" manifestObj="true" widgetName="gcheck_rx_callback" toolTipText="Enable execution of a function after the reception of requested count of words" description="Enable execution of callback function when the reception of requested count of words is completed. This feature will not be available when the receive mechanism is &apos;Direct&apos;(Polling)."/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_rx_callback" toolTipText="Function to be executed after receiving requested count of words using the APP API.&#13;&#10;Function prototype: void foo(void)" description="Name of the function to be executed when the reception of requested count of words is completed. The function prototype should be&lt;br&gt;&#13;&#10;void foo(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the receive mechanism is &apos;Direct&apos;(Polling).">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name for- &quot;End of receive/transfer callback&quot;." visible="true" manifestObj="true" isError="false" widgetName="gmessage_rx_callback">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<p1:GMessage text="In order to avoid receive FIFO data overwriting, it is recommended to configure higher pre-emption priority for the receive interrupt." visible="true" manifestObj="true" isError="false" widgetName="gmessage_rx_priority">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<Label/>
+					</p1:GGroup>
+					<p1:GGroup text="Error and Protocol Handling" widgetName="ggroup_err_callback" bounds="1, 351, 486, 236">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="0" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" subPriorityVisible="false" manifestObj="true" widgetName="ginterruptprio_error" toolTipText="Priority for protocol interrupts. Effective only if any of the callback functions are enabled" description="Priority for the protocol interrupt. This field will be used by the APP if any of the protocol related callback functions(&apos;Parity error callback&apos; or &apos;Slave select input event callback&apos;) are enabled&lt;br&gt;&#13;&#10;Range of priority levels depends on the product family. For XMC4x devices, the range is 0 to 63. For XMC1x devices, the range is 0 to 3.&#13;&#10;For XMC4x microcontrollers, priority groups can be configured using the CPU APP.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalSpan="2" horizontalAlignment="FILL"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+						<p1:GCheck text="Parity error callback:" manifestObj="true" widgetName="gcheck_parity_callback" toolTipText="Enable execution of a function when the parity error is detected" description="Enable execution of callback function when parity mismatch/error is detected in the received data. This checkbox will be available for selection only when the &apos;Parity selection&apos; field in the &apos;General Settings&apos; tab is configured to any value other than &apos;None&apos;.&lt;br&gt;&#13;&#10; If &apos;Parity error callback&apos; and &apos;Slave select input event callback&apos; checkboxes are not selected, the protocol event signal will be available  for connection with external APPs."/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_parity_callback" toolTipText="Name of the function to be executed when parity error is detected.&#13;&#10;Function prototype: void foo(void)" description="Name of the function to be executed when parity mismatch is detected. The function prototype should be&lt;br&gt;&#13;&#10;void foo(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the protocol event signal is connected to an external APP.">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name for- &quot;Parity error callback&quot;." visible="true" manifestObj="true" isError="false" widgetName="gmessage_parity_callback">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<p1:GCheck text="Slave select input event callback:" manifestObj="true" widgetName="gcheck_cs_callback" toolTipText="Enable execution of a function when the slave select input event is detected. Edge of the input to be detected has to be configured" description="Enable execution of a function when slave select input edge event is detected. This feature will be available only when the slave select input is enabled in the &apos;Advanced Settings&apos; tab. The edge transition can be selected in the combo box below the function name field. The edge can be configured as falling edge, rising edge or both edges. When the event is detected, the function provided in the textbox will be executed. &lt;br&gt;&#13;&#10;If &apos;Parity error callback&apos; and &apos;Slave select input event callback&apos; checkboxes are not selected, the protocol event signal will be available  for connection with external APPs.">
+							<p1:GCheck.layoutData>
+								<GridData verticalAlignment="TOP" verticalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_cs_callback" toolTipText="Name of the function to be executed when the slave select edge is detected.&#13;&#10;Function prototype: void foo(void)" description="Name of the function to be executed when slave select input event is detected. The function prototype should be&lt;br&gt;&#13;&#10;void foo(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the protocol event signal is connected to an external APP.">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_cs_event_options" options="Falling Edge&#13;&#10;Rising Edge&#13;&#10;Both Edges" value="Falling Edge" toolTipText="Configure the edge of slave select input to generate interrupt" description="Select edge of the slave select input signal to generate the event. The slave select input event can be generated for falling edge or the slave select pin, rising edge or for both edges of the slave select input pin.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="165"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GMessage text="Invalid function name for- &quot;Slave select input event callback&quot;." visible="true" manifestObj="true" isError="false" widgetName="gmessage_cs_callback">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<Label/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Pin Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_pin_settings">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_6">
+					<p1:GCheck text="Enable advanced pin configurations" manifestObj="true" widgetName="gcheck_enablepinconfig" bounds="3, 17, 218, 16" toolTipText="Enable to make advanced pin configuration options visible" description="Select this checkbox to make advanced pin configuration options visible. The options available will also depend on the &apos;Operation mode&apos; selected in the &apos;General Settings&apos; tab.&#13;&#10;Irrespective of the changes made to the pin configuration options, when this checkbox is unselected, the configurations made in this tab will be ignored during the subsequent file generation."/>
+					<p1:GGroup text="MISO" widgetName="ggroup_miso" bounds="3, 37, 485, 86" manifestObj="true">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" widgetName="glabel_miso_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_miso_mode" options="Push Pull&#13;&#10;Open Drain" value="Push Pull" toolTipText="Out put pin mode selection. In half duplex modes, the same configuration is applied to all data pins. e.g, in quad mode, if mode is selected as Open Drain, the same configuration is applied to all 4 data pins." description="SPI slave output pin mode configuration. In full duplex mode, MISO pin will be configured with this mode. In half duplex mode, the common MOSI pin will be configured with this mode. This mode will be used for all data pins in dual and quad SPI modes.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Drive strength:" visible="true" manifestObj="true" widgetName="glabel_miso_strength"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_miso_strength" options="Don&apos;t Care&#13;&#10;Weak Driver&#13;&#10;Medium Driver&#13;&#10;Strong Driver Soft Edge&#13;&#10;Strong Driver Slow Edge&#13;&#10;Strong Driver Sharp Edge&#13;&#10;Strong Driver Medium Edge" value="Don&apos;t Care" toolTipText="Pin strength selection. Configure this before selecting the pins" description="Pad strength selection for output pins. It is recommended to make this configuration before selecting the pins manually. The strength selected will be configured for MISO pin in full duplex mode. In half duplex operation mode, the strength will be configured for the common MOSI/MISO pin. This selection will be configured for all the data pins in dual and quad operation modes.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="SCLK" widgetName="ggroup_sclk" bounds="3, 123, 485, 82" manifestObj="true">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" widgetName="glabel_sclk_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_sclk_mode" options="Tristate&#13;&#10;Pull Down&#13;&#10;Pull Up&#13;&#10;Continuous Sampling Mode&#13;&#10;Inverted Tristate&#13;&#10;Inverted Pull Down&#13;&#10;Inverted Pull Up&#13;&#10;Inverted Continuous Sampling Mode" value="Tristate" toolTipText="Serial clock input mode." description="Input mode for serial clock pin. ">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="225"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Hysteresis:" visible="true" widgetName="glabel_sclk_hysteresis" manifestObj="true"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_sclk_hysteresis" options="Standard&#13;&#10;Large" value="Standard" toolTipText="Serial clock pin input hysteresis" description="Input hysteresis configuration for serial clock input pin.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="225"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="Slave Select" widgetName="ggroup_cs" bounds="3, 207, 485, 88" manifestObj="true">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" widgetName="glabel_cs_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_cs_mode" options="Tristate&#13;&#10;Pull Down&#13;&#10;Pull Up&#13;&#10;Continuous Sampling Mode&#13;&#10;Inverted Tristate&#13;&#10;Inverted Pull Down&#13;&#10;Inverted Pull Up&#13;&#10;Inverted Continuous Sampling Mode" value="Tristate" toolTipText="Slave select input pin mode" description="Input mode configuration for slave select input pin.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="225"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Hysteresis:" visible="true" manifestObj="true" widgetName="glabel_cs_hysteresis"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_cs_hysteresis" options="Standard&#13;&#10;Large" value="Standard" toolTipText="Slave select pin input hysteresis" description="Input hysteresis configuration for slave select input pin.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="225"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup bounds="3, 295, 485, 82" manifestObj="true" text="MOSI" widgetName="ggroup_mosi">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" widgetName="glabel_mosi_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Tristate&#13;&#10;Pull Down&#13;&#10;Pull Up&#13;&#10;Continuous Sampling Mode&#13;&#10;Inverted Tristate&#13;&#10;Inverted Pull Down&#13;&#10;Inverted Pull Up&#13;&#10;Inverted Continuous Sampling Mode" value="Tristate" widgetName="gcombo_mosi_mode" toolTipText="Data input pin(MOSI) mode selection for full duplex operation mode " description="This field is applicable in full duplex operation mode. It configures the input mode for the data input pin from master.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="225"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel manifestObj="true" text="Hysteresis:" widgetName="glabel_mosi_hysteresis">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Standard&#13;&#10;Large" value="Standard" widgetName="gcombo_mosi_hysteresis" toolTipText="Input hysteresis selection for data input pin in full duplex operation mode." description="Input hysteresis configuration for data input pin from master.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="225"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>

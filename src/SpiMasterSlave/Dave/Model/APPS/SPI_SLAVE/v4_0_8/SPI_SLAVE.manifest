@@ -1,0 +1,654 @@
+package Model.APPS.SPI_SLAVE.v4_0_8;
+
+/*
+ Copyright (c) 2015, Infineon Technologies AG
+ All rights reserved.
+                      
+ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+ following conditions are met:
+                                       
+ Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+ disclaimer.
+  
+ Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+ disclaimer in the documentation and/or other materials provided with the distribution.
+  
+ Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ products derived from this software without specific prior written permission.
+                                       
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                                       
+ To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with
+ Infineon Technologies AG: dave@infineon.com. */
+/*************** Revision History **********************************************
+ Version        Date          Description
+ 
+   4.0.2       09-Oct-2015   Initial version for DAVEv4<br>
+   4.0.4       27-Oct-2015   Disabled dual and quad modes for XMC1400.<br>
+   4.0.6       17-Dec-2015   Added support for XMC4300 device series.<br>
+   4.0.8       04-Jul-2016   Pad signals are exposed to user for external connection with other APPs.<br>
+ *******************************************************************************/
+//Import statements
+import ifx.davex.app.manifest.*
+import java.util.regex.Matcher
+
+class  SPI_SLAVE extends SPI_SLAVE_GUI {
+
+	 /* Note  : Following APP properties are mandatory and important */
+	 
+	 /* Begin : APP property section */
+	
+	/**
+	 * APP version
+	 * Format: a string with three digit separated by a dot.
+	 */
+	def version            = '4.0.8'
+	
+	/**
+	 * APP categories declaration. 
+	 * It is list of strings. Subcategories are separated by slash.
+	 * No limits on number of categories and subcategories depth.
+	 */
+	def categoriesDescription = ["Communication/General Purpose"] 
+
+	/** 
+	 * Minimum DAVE version required for this APP.
+	 * 
+	 * It is string with three digit separated by a dot.
+	 */
+	def minDaveVersion           = '4.1.2'
+	
+	/** 
+	 * Keywords used by search feature in APPs selection view
+	 * 
+	 * It is a list of string.
+	 */
+	def keywords      = ["SPI", "USIC",
+		"SPI Slave", "ALL"]
+	
+	/** 
+	 * softwareIDs is used to declare which devices are compatible with this APP.
+	 * It is a map with key a string containing a pattern that shall match the SW id of
+	 * the device and as value the minimal version of the APP.
+	 */
+	
+    /**
+     * Any step of XMC4500F144 and XMC4400F144
+	 * Any step of XMC4400F100 and XMC4400F64
+	 * Any step, any variant and any packages of XMC1300
+	 */
+	def softwareIDs       = [
+		"XMC4.1.*.*.*":"1.0.0",
+		"XMC4.2.*.*.*":"1.0.0",
+		"XMC4.3.*.*.*":"1.0.0",
+		"XMC4.4.*.*.*":"1.0.0",
+		"XMC4.5.*.*.*":"1.0.0",
+		"XMC4.7.*.*.*":"1.0.0",
+		"XMC4.8.*.*.*":"1.0.0",
+		"XMC1.1.*.*.*":"1.0.0",
+		"XMC1.2.*.*.*":"1.0.0",
+		"XMC1.3.*.*.*":"1.0.0",
+		"XMC1.4.*.*.*":"1.0.0"
+		]
+	
+	/**
+	 * Singleton property:
+	 * When it is true the app can be instantiated only once. 
+	 */
+	def singleton     = false
+
+
+	/**
+	 * initProvider property
+	 * It shall be true to add a call to <AppName>_Init() 
+	 */
+	def initProvider  = true
+	
+	/**
+	 * Deprecated APP
+	 * Set it to true to indicate that the app shall be not used for new projects.
+	 */
+	def deprecated    = false
+	
+	/**
+	 * Sharable property.
+	 * It shall be true to allows multiple APPs to require the same instance of this APP.
+	 */
+	def sharable      = false
+
+	/**
+	 *  APP function description.
+	 */
+	def description = "Configures a USIC channel to implement SPI slave functionality"
+	
+	/* End   : APP property section */
+	
+	/* Begin : User APP property section */
+	MVirtualResourceGroup hwres_usic_ch            /*USIC channel hardware resource*/
+	MVirtualResourceGroup hwres_port_pad_spi_mosi_0  /*MOSI pin pad resource*/
+	MVirtualResourceGroup hwres_port_pad_spi_miso_mosi_1  /*MISO pin pad resource*/
+	MVirtualResourceGroup hwres_port_pad_spi_mosi_2  /*MOSI pin pad resource*/
+	MVirtualResourceGroup hwres_port_pad_spi_mosi_3  /*MOSI pin pad resource*/
+	MVirtualResourceGroup hwres_port_pad_spi_sclk  /*SCLK pin pad resource*/
+	MVirtualResourceGroup hwres_port_pad_spi_sel   /*Slave select pin pad resource*/
+	MVirtualResourceGroup hwres_nvic_node_tx     /*Transmit interrupt NVIC node*/
+	MVirtualResourceGroup hwres_nvic_node_rx     /*Receive interrupt NVIC node*/
+	MVirtualResourceGroup hwres_nvic_node_error    /*SPI protocol interrupt NVIC node*/
+	MVirtualResourceGroup hwres_dma_ch_tx        /*DMA channel resource used for DMA transmit mode*/
+	MVirtualResourceGroup hwres_dma_ch_rx        /*DMA channel resource used for DMA receive mode*/
+	MVirtualResourceGroup hwres_dlr_ch_tx        /*DLR line used for transmit source transfer trigger.*/
+	MVirtualResourceGroup hwres_dlr_ch_rx        /*DLR line used for receive destination transfer trigger.*/
+	
+	MVirtualSignal vs_spi_sl_dx0ins                /*USIC input stage DX0 input selection DX0INS*/
+	MVirtualSignal vs_spi_sl_dx1ins                /*USIC input stage DX1 input selection DX1INS*/
+	MVirtualSignal vs_spi_sl_dx2ins                /*USIC input stage DX2 input selection DX2INS*/
+	MVirtualSignal vs_spi_sl_dx3ins                /*USIC input stage DX3 input selection DX2INS*/
+	MVirtualSignal vs_spi_sl_dx4ins                /*USIC input stage DX4 input selection DX2INS*/
+	MVirtualSignal vs_spi_sl_dx5ins                /*USIC input stage DX5 input selection DX2INS*/
+	MVirtualSignal vs_spi_sl_dout0                 /*USIC output DOUT0 signal*/
+	MVirtualSignal vs_spi_sl_dout1                 /*USIC output DOUT1 signal*/
+	MVirtualSignal vs_spi_sl_dout2                 /*USIC output DOUT2 signal*/
+	MVirtualSignal vs_spi_sl_dout3                 /*USIC output DOUT3 signal*/
+	MVirtualSignal vs_spi_sl_miso_mosi1            /*Signal representing the receive pad*/
+	MVirtualSignal vs_spi_sl_mosi0                 /*Signal representing the transmit pad*/
+	MVirtualSignal vs_spi_sl_mosi2                 /*Signal representing the transmit pad*/
+	MVirtualSignal vs_spi_sl_mosi3                 /*Signal representing the transmit pad*/
+	MVirtualSignal vs_spi_sl_sclk                  /*Signal representing the slave clock input*/
+	MVirtualSignal vs_spi_sl_select                /*Signal representing the slave select input*/
+	/* To connnect the signals with HW control functionality */
+	MVirtualSignal vs_spi_sl_mosi_0_hw_o
+	MVirtualSignal vs_spi_sl_mosi_1_hw_o
+	MVirtualSignal vs_spi_sl_mosi_2_hw_o
+	MVirtualSignal vs_spi_sl_mosi_3_hw_o
+	
+	MVirtualSignal vs_spi_sl_std_tx_int            /*Signal representing the standard buffer transmit interrupt*/
+    MVirtualSignal vs_spi_sl_rec_start_int
+	MVirtualSignal vs_spi_sl_std_rx_int            /*Signal representing the standard buffer receive interrupt*/
+	MVirtualSignal vs_spi_sl_tx_shift_int          /*Signal representing the transmit shift interrupt*/
+	MVirtualSignal vs_spi_sl_alt_rx_int            /*Signal representing the standard buffer alternative receive interrupt*/
+	MVirtualSignal vs_spi_sl_proto_specfic_int     /*Signal representing the SPI slave protocol specific event interrupt*/
+	MVirtualSignal vs_spi_sl_fifo_tx_int           /*Signal representing the FIFO transmit buffer interrupt*/
+	MVirtualSignal vs_spi_sl_fifo_tx_err_int       /*Signal representing the transmit FIFO buffer error interrupt*/
+	MVirtualSignal vs_spi_sl_fifo_rx_int           /*Signal representing the FIFO standard receive buffer interrupt*/
+	MVirtualSignal vs_spi_sl_fifo_rx_err_int       /*Signal representing the receive FIFO buffer error interrupt*/
+	MVirtualSignal vs_spi_sl_fifo_alt_rx_int       /*Signal representing the FIFO alternative receive buffer interrupt*/
+	MVirtualSignal vs_interrupt_spi_sl_tx          /*Signal representing the transmit interrupt NVIC input*/
+	MVirtualSignal vs_interrupt_spi_sl_rx          /*Signal representing the receive interrupt NVIC input*/
+	MVirtualSignal vs_interrupt_spi_sl_error       /*Signal representing the protocol interrupt NVIC input*/
+	MVirtualSignal vs_src_trigger_dlr_rx_in        /*Signal representing DLR connection for DMA receive trigger*/
+	MVirtualSignal vs_dst_trigger_dlr_tx_in        /*Signal representing DLR connection for DMA transmit trigger*/
+	MVirtualSignal vs_src_trigger_dlr_rx_out       /*Signal output from the DLR to be connected to the DMA channel*/
+	MVirtualSignal vs_dst_trigger_dlr_tx_out       /*Signal output from the DLR to be connected to the DMA channel*/
+	MVirtualSignal vs_dma_interrupt_tx             /*Signal representing the DMA transfer complete interrupt*/
+	MVirtualSignal vs_dma_interrupt_rx             /*Signal representing the DMA reception complete interrupt*/
+	MVirtualSignal vs_dma_ch_dst_req_tx            /*Signal representing DMA channel destination peripheral request (tx)*/
+	MVirtualSignal vs_dma_ch_src_req_rx            /*Signal representing DMA channel source peripheral request (rx)*/
+	MVirtualSignalRA vsra_gpdma_interrupt          /*Virtual signal from the GLOBAL_DMA APP*/
+	MRequiredApp appres_cpu                        /*Consumed CPU APP*/
+	MRequiredApp appres_global_dma                 /*GLOBAL_DMA APP consumed if DMA mode is used*/
+	SolverVariable sv_dma_modules = SolverVariable()  /*Solver variable with the list of DMA modules DMA0 and DMA1*/
+	/* End   : User APP property section */
+
+	/* APP Constructor */
+	public SPI_SLAVE(DaveEnv daveEnv) {
+		
+	    boolean isfamily_4x      = false /* Identify if target family is XMC4000 */
+		boolean is_xmc45_device  = false /* Used to identify XMC45 device */
+		boolean is_xmc48_device  = false
+		boolean is_xmc47_device  = false
+		
+		/*MF variable for operation mode-> Full duplex*/
+		MF is_mode_FullDuplex         = MF({gcombo_operation_mode.value == "Full Duplex"}, Boolean)
+		/*MF variable for operation mode-> Half duplex*/
+		MF is_mode_HalfDuplex         = MF({gcombo_operation_mode.value == "Half Duplex"}, Boolean)
+		MF is_mode_FULL_r_HalfDuplex  = MF({(gcombo_operation_mode.value == "Full Duplex")||(gcombo_operation_mode.value == "Half Duplex")}, Boolean)
+		MF is_mode_not_HalfDuplex     = MF({gcombo_operation_mode.value != "Half Duplex"}, Boolean)
+		MF is_mode_Quad               = MF({gcombo_operation_mode.value == "Quad SPI"}, Boolean)
+		MF is_mode_Dual_r_Quad        = MF({(gcombo_operation_mode.value == "Dual SPI") || (gcombo_operation_mode.value == "Quad SPI")}, Boolean)
+		MF is_txFIFO_enabled          = MF({((gcheck_enabletxfifo.value) && (gcombo_transmit_mode.value != "DMA"))}, Boolean)
+		MF is_txFIFO_disabled         = MF({((gcheck_enabletxfifo.value == false) || (gcombo_transmit_mode.value == "DMA"))}, Boolean)
+		MF is_rxFIFO_enabled          = MF({((gcheck_enablerxfifo.value) && (gcombo_receive_mode.value != "DMA"))}, Boolean)
+		MF is_rxFIFO_disabled         = MF({((gcheck_enablerxfifo.value == false) || (gcombo_receive_mode.value == "DMA"))}, Boolean)
+		MF is_pinconfig_enabled       = MF({(gcheck_enablepinconfig.value)}, Boolean)
+		MF is_DMA_used                = MF({(gcombo_transmit_mode.value == "DMA") || (gcombo_receive_mode.value == "DMA")}, Boolean)
+		MF is_tx_mode_DMA             = MF({(gcombo_transmit_mode.value == "DMA")}, Boolean)
+		MF is_rx_mode_DMA             = MF({(gcombo_receive_mode.value == "DMA")}, Boolean)
+		MF is_tx_mode_direct          = MF({(gcombo_transmit_mode.value == "Direct")}, Boolean)
+		MF is_rx_mode_direct          = MF({(gcombo_receive_mode.value == "Direct")}, Boolean)
+		/*Check if any interrupt is used*/
+		MF is_irq_used                = MF({(gcombo_transmit_mode.value == "Interrupt") || (gcombo_receive_mode.value == "Interrupt") ||
+											((gcheck_parity_callback.value && gcheck_parity_callback.enabled)||
+											(gcheck_cs_callback.value && gcheck_cs_callback.enabled))},Boolean)
+		
+		MF is_error_check_enabled     = MF({(gcheck_parity_callback.value && gcheck_parity_callback.enabled)||(gcheck_cs_callback.value && gcheck_cs_callback.enabled)}, Boolean)
+		MF are_errors_disabled		  = MF({((gcheck_parity_callback.value == false) || (gcheck_parity_callback.enabled == false))&&((gcheck_cs_callback.value == false)||(gcheck_cs_callback.enabled == false))},Boolean)
+		MF is_parity_enabled = MF({gcombo_parity.enabled && (gcombo_parity.value != "None")},Boolean)
+		MF is_chipselect_used = MF({gcheck_chipselect_used.value},Boolean)
+		MF is_adv_pinconf_enabled = MF({gcheck_enablepinconfig.value}, Boolean)
+		/*Get the list of pad driver speed classes based on UI selection*/
+		MF speed_class = MF({ if (gcombo_miso_strength.value == "Weak Driver" || gcombo_miso_strength.value == "Medium Driver" ||
+								  gcombo_miso_strength.value == "Don't Care") {
+								 ['A1', 'A1+', 'A2']
+							  }
+							  else if (gcombo_miso_strength.value == "Strong Driver Slow Edge") {
+								 ['A1+']
+							  }
+							  else if (gcombo_miso_strength.value == "Strong Driver Soft Edge") {
+								 ['A1+', 'A2']
+							  }
+							  else {
+								 ['A2']
+							  }
+							}, List)
+		
+		/* -------------------------------------------------------------- */
+		/* ---------- Target Specific User Variable Initialization ------ */
+		/* -------------------------------------------------------------- */
+		if (daveEnv.project.selectedDevice.deviceId.family == "XMC4")
+		{
+			isfamily_4x = true
+			if(daveEnv.project.selectedDevice.deviceId.series == "5")
+			{
+			  is_xmc45_device = true
+			}
+			if(daveEnv.project.selectedDevice.deviceId.series == "8")
+			{
+			  is_xmc48_device = true
+			}
+			if(daveEnv.project.selectedDevice.deviceId.series == "7")
+			{
+			  is_xmc47_device = true
+			}
+			
+		}
+		
+		/* -------------------------------------------------------------- */
+		/* ------------ APP consumption Block --------------------------- */
+		/* -------------------------------------------------------------- */
+		if(isfamily_4x)
+		{
+		  appres_cpu = MRequiredApp("CPU_CTRL_XMC4", "CPU APP", RSHARABLE, "4.0.2", is_irq_used)
+		  appres_global_dma = MRequiredApp("GLOBAL_DMA", "GLOBAL_DMA APP", RSHARABLE, "4.0.2", is_DMA_used)
+		}
+		else
+		{
+		  appres_cpu = MRequiredApp("CPU_CTRL_XMC1", "CPU APP", RSHARABLE, "4.0.2", is_irq_used)
+		}
+		
+		
+		if(is_xmc45_device)
+		{
+			gcheck_firstbit.enabled = false
+		}
+	    else
+	    {
+	      gcheck_firstbit.enabled = true
+	    }
+		gmessage_tx_callback.visible = false
+		gmessage_rx_callback.visible = false
+		gmessage_rx_priority.visible = false
+		gmessage_parity_callback.visible = false
+		gmessage_cs_callback.visible = false
+		if(isfamily_4x)
+		{
+		  /*DMA mode is available in XMC4x devices*/
+		  gcombo_transmit_mode.options = ["Interrupt","DMA","Direct"]
+		  gcombo_receive_mode.options = ["Interrupt","DMA","Direct"]
+		  /*Make pad strength configuration visible*/
+		  gcombo_miso_strength.visible = true
+		  glabel_miso_strength.visible = true
+		  /*Hide pin hysteresis configuration*/
+		  glabel_mosi_hysteresis.visible = false
+		  gcombo_mosi_hysteresis.visible = false
+		  
+		  glabel_sclk_hysteresis.visible = false
+		  gcombo_sclk_hysteresis.visible = false
+		  
+		  glabel_cs_hysteresis.visible = false
+		  gcombo_cs_hysteresis.visible = false
+		  
+		  /*Make interrupt subpriority configuration visible*/
+		  ginterruptprio_tx_interrupt.subPriorityVisible = true
+		  ginterruptprio_rx_interrupt.subPriorityVisible = true
+		  ginterruptprio_error.subPriorityVisible = true
+		  /*Set the default priority value to least priority*/
+		  ginterruptprio_tx_interrupt.priorityValue = 63
+		  ginterruptprio_rx_interrupt.priorityValue = 62
+		  ginterruptprio_error.priorityValue = 63
+		  /*Read maximum value of subpriority from the CPU APP*/
+		  MF max_subpriority = MF({
+			if((gcheck_parity_callback.value && gcheck_parity_callback.enabled) || (gcheck_cs_callback.value && gcheck_cs_callback.enabled) ||
+			 (gcombo_transmit_mode.value == "Interrupt") || (gcombo_receive_mode.value == "Interrupt"))
+			{
+			  return appres_cpu.getVal(["gint_maxInterruptSubPriority", "value"])
+			}
+			else
+			{
+			  return 0
+			}
+		  }, Integer)
+		  ginterruptprio_tx_interrupt.maxSubPriority = max_subpriority
+		  ginterruptprio_rx_interrupt.maxSubPriority = max_subpriority
+		  ginterruptprio_error.maxSubPriority = max_subpriority
+		  
+		  /*Read maximum value of pre-emption priority from the CPU APP*/
+		  MF max_priority = MF({
+			if((gcheck_parity_callback.value && gcheck_parity_callback.enabled) || (gcheck_cs_callback.value && gcheck_cs_callback.enabled) ||
+			(gcombo_transmit_mode.value == "Interrupt") || (gcombo_receive_mode.value == "Interrupt"))
+			{
+			  return appres_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"])
+			}
+			else
+			{
+			  return 63
+			}
+		  }, Integer)
+		  ginterruptprio_tx_interrupt.maxPriority = max_priority
+		  ginterruptprio_rx_interrupt.maxPriority = max_priority
+		  ginterruptprio_error.maxPriority = max_priority
+		  
+		}
+		else
+		{
+		  /*Disable Dual SPI and Quad SPI for XMC1400 device*/
+	      if(daveEnv.project.selectedDevice.deviceId.series == "4")
+	      {
+	        gcombo_operation_mode.options = ["Full Duplex", "Half Duplex"]
+	      }
+	      else
+	      {
+	        gcombo_operation_mode.options = ["Full Duplex", "Half Duplex", "Dual SPI", "Quad SPI"]
+	      }
+		  /*DMA mode is not available in XMC1x devices*/
+		  gcombo_transmit_mode.options = ["Interrupt","Direct"]
+		  gcombo_receive_mode.options = ["Interrupt","Direct"]
+		  /*Make pin hysteresis configuration visible*/
+		  glabel_mosi_hysteresis.visible = true
+		  gcombo_mosi_hysteresis.visible = true
+		  
+		  glabel_sclk_hysteresis.visible = true
+		  gcombo_sclk_hysteresis.visible = true
+		  
+		  glabel_cs_hysteresis.visible = true
+		  gcombo_cs_hysteresis.visible = true
+		  /*Hide pad strength configuration*/
+		  gcombo_miso_strength.visible = false
+		  glabel_miso_strength.visible = false
+		  /*Hide interrupt subpriority configuration*/
+		  ginterruptprio_tx_interrupt.subPriorityVisible = false
+		  ginterruptprio_rx_interrupt.subPriorityVisible = false
+		  ginterruptprio_error.subPriorityVisible = false
+		  /*Set the default priority and max priority value possible*/
+		  ginterruptprio_tx_interrupt.priorityValue = 3
+		  ginterruptprio_tx_interrupt.maxPriority = 3
+		  ginterruptprio_rx_interrupt.priorityValue = 2
+		  ginterruptprio_rx_interrupt.maxPriority = 3
+		  ginterruptprio_error.priorityValue = 3
+		  ginterruptprio_error.maxPriority = 3
+		}
+		
+		/* -------------------------------------------------------------- */
+		/* ------------ Hardware resource consumption block ------------- */
+		/* -------------------------------------------------------------- */
+		hwres_usic_ch = MVirtualResourceGroup("Channel", ["peripheral", "usic", "*", "channel", "*"])
+		hwres_port_pad_spi_miso_mosi_1 = MVirtualResourceGroup(MF({if(gcombo_operation_mode.value == "Full Duplex") "MISO pin" else "MOSI\\MISO_1 pin"}, String), ["port", "p", "*", "pad", "*"], is_mode_not_HalfDuplex)
+		hwres_port_pad_spi_mosi_0 = MVirtualResourceGroup(MF({if(gcombo_operation_mode.value == "Full Duplex") "MOSI pin" else "MOSI\\MISO_0 pin"}, String), ["port", "p", "*", "pad", "*"])
+		hwres_port_pad_spi_mosi_2 = MVirtualResourceGroup("MOSI\\MISO_2 pin", ["port", "p", "*", "pad", "*"], is_mode_Quad)
+		hwres_port_pad_spi_mosi_3 = MVirtualResourceGroup("MOSI\\MISO_3 pin", ["port", "p", "*", "pad", "*"], is_mode_Quad)
+		hwres_port_pad_spi_sclk = MVirtualResourceGroup("SCLK pin", ["port", "p", "*", "pad", "*"])
+		/*Use chipselect pin only if the use chipselect checkbox is enabled.*/
+		hwres_port_pad_spi_sel = MVirtualResourceGroup("Slave select pin", ["port", "p", "*", "pad", "*"], 
+														is_chipselect_used)
+		hwres_nvic_node_tx = MVirtualResourceGroup("NVIC Node Tx", ["peripheral", "cpu", "0", "nvic", "interrupt", "*"], MF({(gcombo_transmit_mode.value == "Interrupt")}, Boolean))
+	    hwres_nvic_node_rx = MVirtualResourceGroup("NVIC Node Rx", ["peripheral", "cpu", "0", "nvic", "interrupt", "*"], MF({(gcombo_receive_mode.value == "Interrupt")}, Boolean))
+	    hwres_nvic_node_error = MVirtualResourceGroup("NVIC Node Error", ["peripheral", "cpu", "0", "nvic", "interrupt", "*"], is_error_check_enabled)
+	    hwres_dma_ch_tx = MVirtualResourceGroup("DMA channel Tx", ["peripheral", sv_dma_modules, "0", "ch", "*"], is_tx_mode_DMA)
+	    hwres_dma_ch_rx = MVirtualResourceGroup("DMA channel Rx", ["peripheral", sv_dma_modules, "0", "ch", "*"], is_rx_mode_DMA)
+	    hwres_dlr_ch_tx = MVirtualResourceGroup("DLR channel Tx", ["peripheral", "dlr", "0", "ch", "*"], is_tx_mode_DMA)
+	    hwres_dlr_ch_rx = MVirtualResourceGroup("DLR channel Rx", ["peripheral", "dlr", "0", "ch", "*"], is_rx_mode_DMA)
+	    
+	    /*
+	     * Hardware control mode selection.
+	     * XMC4000 devices support HWO0 and HWO1 modes,
+	     * XMC1000 devices support HWO1 mode only for SPI communication
+	     */
+	    addRegisterBitFieldConstraint( hwres_port_pad_spi_mosi_0, "iocr_oe", MF({[1]}, List),is_mode_Dual_r_Quad)
+	    addRegisterBitFieldConstraint( hwres_port_pad_spi_miso_mosi_1, "iocr_oe", MF({[1]}, List),is_mode_Dual_r_Quad)
+	    addRegisterBitFieldConstraint( hwres_port_pad_spi_mosi_2, "iocr_oe", MF({[1]}, List),is_mode_Quad)
+	    addRegisterBitFieldConstraint( hwres_port_pad_spi_mosi_3, "iocr_oe", MF({[1]}, List),is_mode_Quad)
+			
+		if(is_xmc45_device || is_xmc48_device || is_xmc47_device)
+		{
+		  addUriElementRangeConstraint(sv_dma_modules, ["dma8", "dma4"])
+		}
+		else
+		{
+		  addUriElementRangeConstraint(sv_dma_modules, ["dma8"])
+		}
+		
+		/*Set CCR_HPCEN bitfield to 0 for avoiding any pin hw functionality like HWO and HWI*/
+		addRegisterBitFieldConstraint(hwres_usic_ch, "ccr_hpcen", [0], 
+									  MF({(gcombo_operation_mode.value == "Full Duplex") || (gcombo_operation_mode.value == "Half Duplex")},Boolean));
+		/*Set transmit FIFO size to 0 if FIFO not enabled on UI*/
+		addRegisterBitFieldConstraint( hwres_usic_ch, "tbctr_size", [0], is_txFIFO_disabled)
+		/*Set receive FIFO size to 0 if FIFO not enabled on UI*/
+		addRegisterBitFieldConstraint( hwres_usic_ch, "rbctr_size", [0], is_rxFIFO_disabled)
+		/*When FIFO is enabled, set the size based on UI selection. Refer USIC->TBCTR/RBCTR->SIZE bitfield in reference manual*/
+		addRegisterBitFieldConstraint( hwres_usic_ch, "tbctr_size", MF({[gcombo_txfifosize.options.indexOf(gcombo_txfifosize.value) + 1]}, List), is_txFIFO_enabled)
+		addRegisterBitFieldConstraint( hwres_usic_ch, "rbctr_size", MF({[gcombo_rxfifosize.options.indexOf(gcombo_rxfifosize.value) + 1]}, List), is_rxFIFO_enabled)
+	    /*Add constraint for the pad class based on the pad strength selected*/
+	    if(isfamily_4x)
+	    {
+	      addResourcePropertyConstraint(hwres_port_pad_spi_miso_mosi_1, "speed_class of rg_property", speed_class, MF({(gcheck_enablepinconfig.value && 
+	                                                                                                                  (gcombo_operation_mode.value != "Half Duplex"))},Boolean))
+	      addResourcePropertyConstraint(hwres_port_pad_spi_mosi_0, "speed_class of rg_property", speed_class, MF({(gcheck_enablepinconfig.value && 
+	                                                                                                              gcombo_operation_mode.value != "Full Duplex")}, Boolean))
+	      addResourcePropertyConstraint(hwres_port_pad_spi_mosi_2, "speed_class of rg_property", speed_class, MF({(gcheck_enablepinconfig.value && 
+	                                                                                                              gcombo_operation_mode.value == "Quad SPI")}, Boolean))
+	      addResourcePropertyConstraint(hwres_port_pad_spi_mosi_3, "speed_class of rg_property", speed_class, MF({(gcheck_enablepinconfig.value && 
+	                                                                                                            gcombo_operation_mode.value == "Quad SPI")}, Boolean))
+	    }
+		
+		/* -------------------------------------------------------------- */
+		/* -------------- APP IO Signals -------------------------------- */
+		/* -------------------------------------------------------------- */
+		vs_spi_sl_dx0ins          =  MVirtualSignal( hwres_usic_ch, "dx0_input_stage", "dx0ins", true, false)
+		vs_spi_sl_dx1ins          =  MVirtualSignal( hwres_usic_ch, "dx1_input_stage", "dx1ins", true, false)
+		vs_spi_sl_dx2ins          =  MVirtualSignal( hwres_usic_ch, "dx2_input_stage", "dx2ins", true, false)
+		vs_spi_sl_dx3ins          =  MVirtualSignal( hwres_usic_ch, "dx3_input_stage", "dx3ins", true, false)
+		vs_spi_sl_dx4ins          =  MVirtualSignal( hwres_usic_ch, "dx4_input_stage", "dx4ins", true, false)
+		vs_spi_sl_dx5ins          =  MVirtualSignal( hwres_usic_ch, "dx5_input_stage", "dx5ins", true, false)
+		vs_spi_sl_dout0           =  MVirtualSignal( hwres_usic_ch, "dout0_output","dout0",  true, false)
+		vs_spi_sl_dout1           =  MVirtualSignal( hwres_usic_ch, "dout1_output","dout1",  is_mode_not_HalfDuplex, false)
+		vs_spi_sl_dout2           =  MVirtualSignal( hwres_usic_ch, "dout2_output","dout2",  is_mode_Quad, false)
+		vs_spi_sl_dout3           =  MVirtualSignal( hwres_usic_ch, "dout3_output","dout3",  is_mode_Quad, false)
+		@AddPin
+		vs_spi_sl_mosi0           =  MVirtualSignal( hwres_port_pad_spi_mosi_0, MF({
+			if((gcombo_operation_mode.value == "Full Duplex"))
+			{
+				"mosi_pin"
+			}
+			else if((gcombo_operation_mode.value == "Half Duplex"))
+			{
+				"mosi/miso_pin"
+			}
+			else
+			{
+				"mosi/miso[0]_pin"
+			}
+		},String),  "pad", true, true)
+		vs_spi_sl_mosi_0_hw_o     =  MVirtualSignal( hwres_port_pad_spi_mosi_0,"mosi_0_hw_o", "hw_o",is_mode_Dual_r_Quad,false)
+		@AddPin
+		vs_spi_sl_miso_mosi1      =  MVirtualSignal( hwres_port_pad_spi_miso_mosi_1, MF({
+			if((gcombo_operation_mode.value == "Full Duplex"))
+			{
+				"miso_pin"
+			}
+			else
+			{
+				"mosi/miso[1]_pin"
+			}
+		},String), "pad", is_mode_not_HalfDuplex,is_mode_not_HalfDuplex)
+		vs_spi_sl_mosi_1_hw_o     =  MVirtualSignal( hwres_port_pad_spi_miso_mosi_1,"mosi_1_hw_o", "hw_o",is_mode_Dual_r_Quad,false)
+		@AddPin
+		vs_spi_sl_mosi2           =  MVirtualSignal( hwres_port_pad_spi_mosi_2, "mosi/miso[2]_pin",  "pad", is_mode_Quad, is_mode_Quad)
+		vs_spi_sl_mosi_2_hw_o     =  MVirtualSignal( hwres_port_pad_spi_mosi_2,"mosi_2_hw_o", "hw_o",is_mode_Quad,false)
+		@AddPin
+		vs_spi_sl_mosi3           =  MVirtualSignal( hwres_port_pad_spi_mosi_3, "mosi/miso[3]_pin",  "pad", is_mode_Quad, is_mode_Quad)
+		vs_spi_sl_mosi_3_hw_o     =  MVirtualSignal( hwres_port_pad_spi_mosi_3,"mosi_3_hw_o", "hw_o",is_mode_Quad,false)
+		@AddPin
+		vs_spi_sl_sclk            =  MVirtualSignal( hwres_port_pad_spi_sclk, "sclk_in_pin","pad",  true, true)
+		@AddPin
+		vs_spi_sl_select          =  MVirtualSignal( hwres_port_pad_spi_sel, "slave_select_pin","pad",  is_chipselect_used, is_chipselect_used)
+		
+		vs_spi_sl_std_tx_int      =  MVirtualSignal( hwres_usic_ch, "event_transmit_buffer","transmit_buffer_int", is_txFIFO_disabled, MF({((gcombo_transmit_mode.value == "Direct") && (gcheck_enabletxfifo.value == false))}, Boolean))
+        vs_spi_sl_rec_start_int   =  MVirtualSignal( hwres_usic_ch, "event_receive_start","receive_start_int", MF({((gcombo_transmit_mode.value == "Direct") || (gcombo_transmit_mode.value == "DMA"))},Boolean), MF({((gcombo_transmit_mode.value == "Direct") && (gcheck_enabletxfifo.value == false))}, Boolean))
+		vs_spi_sl_std_rx_int      =  MVirtualSignal( hwres_usic_ch, "event_std_receive", "standard_receive_int", is_rxFIFO_disabled, MF({((gcombo_receive_mode.value == "Direct") && (gcheck_enablerxfifo.value == false))}, Boolean))
+		vs_spi_sl_alt_rx_int      =  MVirtualSignal( hwres_usic_ch, "event_alt_receive",  "alternate_receive_int", is_rxFIFO_disabled, MF({((gcombo_receive_mode.value == "Direct") && (gcheck_enablerxfifo.value == false))}, Boolean))
+		vs_spi_sl_proto_specfic_int =  MVirtualSignal( hwres_usic_ch, "event_protocol", "protocol_specific_int", true, are_errors_disabled)
+		vs_spi_sl_fifo_tx_int     =  MVirtualSignal( hwres_usic_ch, "event_fifo_transmit","standard_transmit_buffer_int", is_txFIFO_enabled, MF({((gcombo_transmit_mode.value == "Direct") && (gcheck_enabletxfifo.value))}, Boolean))
+		vs_spi_sl_fifo_rx_int     =  MVirtualSignal( hwres_usic_ch, "event_fifo_std_receive", "standard_receive_buffer_int", is_rxFIFO_enabled,MF({((gcombo_receive_mode.value == "Direct") && (gcheck_enablerxfifo.value))}, Boolean))
+		vs_spi_sl_fifo_alt_rx_int =  MVirtualSignal( hwres_usic_ch, "event_fifo_alt_receive", "alternate_receive_buffer_int", is_rxFIFO_enabled, MF({((gcombo_receive_mode.value == "Direct") && (gcheck_enablerxfifo.value))}, Boolean))
+		vs_interrupt_spi_sl_tx    =  MVirtualSignal( hwres_nvic_node_tx, "sr_transmit", "signal_in", MF({(gcombo_transmit_mode.value == "Interrupt")}, Boolean), false)
+		vs_interrupt_spi_sl_rx    =  MVirtualSignal( hwres_nvic_node_rx, "sr_receive", "signal_in", MF({(gcombo_receive_mode.value == "Interrupt")}, Boolean), false)
+		vs_interrupt_spi_sl_error =  MVirtualSignal( hwres_nvic_node_error, "sr_protocol_events", "signal_in", is_error_check_enabled, false)
+		
+		if(isfamily_4x == true)
+		{
+			vs_dma_interrupt_tx       =  MVirtualSignal( hwres_dma_ch_tx, "DMA Transfer complete event", "dma_int", is_tx_mode_DMA, is_tx_mode_DMA)
+			vs_dma_interrupt_rx       =  MVirtualSignal( hwres_dma_ch_rx, "DMA Transfer complete event", "dma_int", is_rx_mode_DMA, is_rx_mode_DMA)
+			vs_src_trigger_dlr_rx_in  =  MVirtualSignal( hwres_dlr_ch_rx, "source_trigger","in", is_rx_mode_DMA, false)
+			vs_dst_trigger_dlr_tx_in  =  MVirtualSignal( hwres_dlr_ch_tx, "destination_trigger","in", is_tx_mode_DMA, false)
+			vs_src_trigger_dlr_rx_out =  MVirtualSignal( hwres_dlr_ch_rx, "dlr_out", "out", is_rx_mode_DMA, false)
+			vs_dst_trigger_dlr_tx_out =  MVirtualSignal( hwres_dlr_ch_tx, "dlr_out", "out", is_tx_mode_DMA, false)
+			vs_dma_ch_dst_req_tx      =  MVirtualSignal( hwres_dma_ch_tx, "Destination request", "dest_req", is_tx_mode_DMA, false)
+			vs_dma_ch_src_req_rx      =  MVirtualSignal( hwres_dma_ch_rx, "Source request", "src_req", is_rx_mode_DMA, false)
+			vsra_gpdma_interrupt      =  MVirtualSignalRA( appres_global_dma, "interrupt_dma")
+		}
+		
+		addConnectionConstraint(vs_spi_sl_dout0, vs_spi_sl_mosi0, is_mode_HalfDuplex);
+		addConnectionConstraint(vs_spi_sl_dout0, vs_spi_sl_miso_mosi1, is_mode_FullDuplex);
+		addConnectionConstraint(vs_spi_sl_mosi0, vs_spi_sl_dx0ins, is_mode_FULL_r_HalfDuplex);
+		/* Half Duplex with Dual SPI */
+		addConnectionConstraint(vs_spi_sl_dout0, vs_spi_sl_mosi_0_hw_o, is_mode_Dual_r_Quad)
+		addConnectionConstraint(vs_spi_sl_dout1, vs_spi_sl_mosi_1_hw_o, is_mode_Dual_r_Quad)
+		/* Half Duplex with Quad SPI */
+		addConnectionConstraint(vs_spi_sl_dout2, vs_spi_sl_mosi_2_hw_o, is_mode_Quad)
+		addConnectionConstraint(vs_spi_sl_dout3, vs_spi_sl_mosi_3_hw_o, is_mode_Quad)
+		addConnectionConstraint(vs_spi_sl_sclk, vs_spi_sl_dx1ins)
+		addConnectionConstraint(vs_spi_sl_select, vs_spi_sl_dx2ins, is_chipselect_used)
+		
+		addConnectionConstraint(vs_spi_sl_std_tx_int, vs_interrupt_spi_sl_tx, MF({(gcombo_transmit_mode.value == "Interrupt") && (gcheck_enabletxfifo.value == false)}, Boolean));
+		addConnectionConstraint(vs_spi_sl_std_rx_int, vs_interrupt_spi_sl_rx, MF({(gcombo_receive_mode.value == "Interrupt") && (gcheck_enablerxfifo.value == false)}, Boolean));
+		addConnectionConstraint(vs_spi_sl_alt_rx_int, vs_interrupt_spi_sl_rx, MF({(gcombo_receive_mode.value == "Interrupt") && (gcheck_enablerxfifo.value == false)}, Boolean));
+		addConnectionConstraint(vs_spi_sl_fifo_tx_int, vs_interrupt_spi_sl_tx, MF({(gcombo_transmit_mode.value == "Interrupt") && (gcheck_enabletxfifo.value)}, Boolean));
+		addConnectionConstraint(vs_spi_sl_fifo_rx_int, vs_interrupt_spi_sl_rx, MF({(gcombo_receive_mode.value == "Interrupt") && (gcheck_enablerxfifo.value)}, Boolean));
+		addConnectionConstraint(vs_spi_sl_fifo_alt_rx_int, vs_interrupt_spi_sl_rx, MF({(gcombo_receive_mode.value == "Interrupt") && (gcheck_enablerxfifo.value)}, Boolean));
+		addConnectionConstraint(vs_spi_sl_proto_specfic_int, vs_interrupt_spi_sl_error, is_error_check_enabled);
+		
+		if(isfamily_4x == true)
+		{
+			addConnectionConstraint(vs_spi_sl_rec_start_int, vs_dst_trigger_dlr_tx_in, is_tx_mode_DMA)
+			addConnectionConstraint(vs_spi_sl_std_rx_int, vs_src_trigger_dlr_rx_in, is_rx_mode_DMA)
+			addConnectionConstraint(vs_spi_sl_alt_rx_int, vs_src_trigger_dlr_rx_in, is_rx_mode_DMA)
+			addConnectionConstraint(vs_dma_interrupt_tx, vsra_gpdma_interrupt, is_tx_mode_DMA)
+			addConnectionConstraint(vs_dma_interrupt_rx, vsra_gpdma_interrupt, is_rx_mode_DMA)
+			addConnectionConstraint(vs_dst_trigger_dlr_tx_out, vs_dma_ch_dst_req_tx, is_tx_mode_DMA)
+			addConnectionConstraint(vs_src_trigger_dlr_rx_out, vs_dma_ch_src_req_rx, is_rx_mode_DMA)
+		}
+		
+		
+		gcombo_parity.enabled = MF({
+			if(ginteger_frame_length.value < 64)
+			{
+				return true
+			}
+			else 
+			{
+				return false
+			}
+			},Boolean)
+	    ginteger_frame_length.minValue = MF({ginteger_word_length.value}, Integer)
+	    gcombo_txfifosize.enabled = is_txFIFO_enabled
+	    gcombo_rxfifosize.enabled = is_rxFIFO_enabled
+	    gcheck_enabletxfifo.enabled = MF({(gcombo_transmit_mode.value != "DMA")},Boolean)
+	    gcheck_enablerxfifo.enabled = MF({(gcombo_receive_mode.value != "DMA")},Boolean)
+	    glabel_fifo_note.enabled = MF({(gcombo_transmit_mode.value != "DMA") || (gcombo_receive_mode.value != "DMA")},Boolean)
+    
+		gstring_tx_callback.enabled = MF({((gcheck_tx_callback.enabled && gcheck_tx_callback.value) && (gcombo_transmit_mode.value != "Direct"))},Boolean)
+		gstring_rx_callback.enabled = MF({(gcheck_rx_callback.enabled && gcheck_rx_callback.value) && (gcombo_receive_mode.value != "Direct")},Boolean)
+		gcheck_parity_callback.enabled = is_parity_enabled
+		gstring_parity_callback.enabled = MF({((gcheck_parity_callback.enabled)&&(gcheck_parity_callback.value))},Boolean)
+		
+		gcheck_cs_callback.enabled = is_chipselect_used
+		gstring_cs_callback.enabled = MF({((gcheck_cs_callback.enabled)&&(gcheck_cs_callback.value))},Boolean)
+		gcombo_cs_event_options.enabled = MF({((gcheck_cs_callback.enabled)&&(gcheck_cs_callback.value))},Boolean)
+		
+		/*String for validating the string entered as callback function name*/
+		String fn_regexp = ~/^[^\d\W]\w*\Z/
+		gmessage_tx_callback.visible = MF({
+			Matcher matcher_tx = (gstring_tx_callback.value =~ fn_regexp)
+			Boolean ExpressionMatch_tx = !matcher_tx.matches()
+			if(gcheck_tx_callback.value && gcheck_tx_callback.enabled){ return ExpressionMatch_tx} else{ return false}},Boolean)
+		gmessage_rx_callback.visible = MF({
+			Matcher matcher_rx = (gstring_rx_callback.value =~ fn_regexp)
+			Boolean ExpressionMatch_rx = !matcher_rx.matches()
+			if(gcheck_rx_callback.value && gcheck_rx_callback.enabled){ return ExpressionMatch_rx} else{ return false}},Boolean)
+		gmessage_parity_callback.visible = MF({
+			Matcher matcher_rx = (gstring_parity_callback.value =~ fn_regexp)
+			Boolean ExpressionMatch_rx = !matcher_rx.matches()
+			if(gcheck_parity_callback.value && gcheck_parity_callback.enabled){ return ExpressionMatch_rx} else{ return false}},Boolean)
+		gmessage_cs_callback.visible = MF({
+			Matcher matcher_rx = (gstring_cs_callback.value =~ fn_regexp)
+			Boolean ExpressionMatch_rx = !matcher_rx.matches()
+			if(gcheck_cs_callback.value && gcheck_cs_callback.enabled){ return ExpressionMatch_rx} else{ return false}},Boolean)
+		
+		gmessage_rx_priority.visible = MF({(ginterruptprio_rx_interrupt.priorityValue >= ginterruptprio_tx_interrupt.priorityValue)},Boolean)
+		
+		ginterruptprio_tx_interrupt.enabled = MF({gcombo_transmit_mode.value == "Interrupt"}, Boolean)
+		ginterruptprio_rx_interrupt.enabled = MF({gcombo_receive_mode.value == "Interrupt"},Boolean)
+		gcheck_tx_callback.enabled = MF({gcombo_transmit_mode.value != "Direct"},Boolean)
+		gcheck_rx_callback.enabled = MF({gcombo_receive_mode.value != "Direct"},Boolean)
+		
+		ggroup_mosi.visible = MF({
+			if((gcheck_enablepinconfig.value)&&(gcombo_operation_mode.value == "Full Duplex"))
+			{
+			  return true
+			}
+			else
+			{
+		      return false
+			}
+		},Boolean)
+		
+		ggroup_miso.visible = MF({gcheck_enablepinconfig.value}, Boolean)
+        ggroup_miso.text = MF({if(gcombo_operation_mode.value != "Full Duplex") return "MOSI" else return "MISO"}, String)
+		ggroup_sclk.visible = MF({gcheck_enablepinconfig.value}, Boolean)
+		ggroup_cs.visible = MF({(gcheck_enablepinconfig.value && gcheck_chipselect_used.value)}, Boolean)
+
+	}
+	
+	// File Generation
+	def generateFiles(){
+		copy("spi_slave.c", "spi_slave.c")
+		copy("spi_slave.h", "spi_slave.h")
+		generate("spi_slave_confc.tmpl", "spi_slave_conf.c", false)
+		generate("spi_slave_confh.tmpl", "spi_slave_conf.h", false)
+		generate("spi_slave_externh.tmpl", "spi_slave_extern.h", false)
+	}
+	
+	/**
+	 * Add main code here
+	 */
+	public static  main(args){
+		SPI_SLAVE slave = new SPI_SLAVE()
+		println slave.toString()
+	}
+}
+
