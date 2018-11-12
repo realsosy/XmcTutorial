@@ -1,0 +1,128 @@
+package Model.APPS.GLOBAL_DMA.v4_0_8;
+
+
+/*
+Copyright (c) 2015, Infineon Technologies AG
+All rights reserved.                       
+                                           
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+following conditions are met:  
+                                                                            
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+disclaimer.                       
+ 
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+disclaimer in the documentation and/or other materials provided with the distribution.                      
+ 
+Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+products derived from this software without specific prior written permission.                                          
+                                                                            
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                                 
+                                                                            
+To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with 
+Infineon Technologies AG: dave@infineon.com. */
+
+/*************** Revision History **********************************************
+ Version      Date          Description
+
+  4.0.0       16-Feb-2015   Initial version for DAVEv4 <br>
+  4.0.2       20-May-2015   Restrict the number of possible APP instances to 2 <br> 
+  4.0.4       19-Jun-2015   Removed the individual LLD version check in header file. <br>
+  4.0.6       09-Oct-2015   Remove CPU_CTRL_XMC4_Init invocation <br>
+  4.0.8       15-Dec-2015   Support added for XMC4300
+*******************************************************************************/
+
+// Import statements
+import ifx.davex.app.manifest.*
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+class  GLOBAL_DMA extends GLOBAL_DMA_GUI {
+	def version = '4.0.8'
+
+	def categoriesDescription = [
+		"System/~Global Reg Control"
+	]
+
+	// Minimum DAVE version required for the App
+	def minDaveVersion = '4.0.0'
+	
+	// Keywords to search in Apps selection view
+	def keywords = [
+		"all"
+	]
+	
+	// Software IDs and its required min version
+	//
+	// The DMA module is available on the Infineon
+	// XMC4000 series of microcontrollers.
+	def softwareIDs = [	                     
+		                 "XMC4.8.*.*.*":"1.0.0",
+		                 "XMC4.7.*.*.*":"1.0.0",
+		                 "XMC4.5.*.*.*":"1.0.0",
+		                 "XMC4.4.*.*.*":"1.0.0",
+						 "XMC4.3.*.*.*":"1.0.0",
+		                 "XMC4.2.*.*.*":"1.0.0",
+		                 "XMC4.1.*.*.*":"1.0.0"
+					  ]
+	
+	def singleton    = false
+	def initProvider = false
+	def deprecated   = false
+	def sharable     = true
+	def ioApp        = false
+
+	// App short description
+	def description = "The GLOBAL_DMA APP initializes the DMA module,\n sets channel priorities and reserves a DMA\n interrupt node for handling GPDMA events."
+	
+	MRequiredApp ra_cpu
+	MVirtualResourceGroup rg_nvicnodedma
+	MVirtualSignal interrupt_dma
+	
+	GInteger gint_local_dma_instance = GInteger(widgetName : "gint_local_dma_instance")
+	
+	// Solver variable
+	SolverVariable interrupt_nodes = SolverVariable()
+
+	// DMA Constructor
+	public GLOBAL_DMA(DaveEnv daveEnv) {
+		String fn_regexp = ~/^[^\d\W]\w*\Z/
+
+		ra_cpu = MRequiredApp("CPU_CTRL_XMC4", "CPU_CTRL_XMC4", RSHARABLE, "4.0.2", true)
+		
+		ginterruptprio_dma.maxPriority = MF({
+			Integer Priority = ra_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"]) as Integer
+			return Priority
+		}, Integer)
+
+		ginterruptprio_dma.subPriorityValue = 0
+		ginterruptprio_dma.maxSubPriority =  MF({
+			Integer SubPriority = ra_cpu.getVal(["gint_maxInterruptSubPriority", "value"]) as Integer
+			return SubPriority
+		}, Integer)
+		
+		// Restrict the number of DMA interrupt nodes to 2
+		addUriElementRangeConstraint(interrupt_nodes, [105, 110])
+		
+		// Assign the virtual resource group for nvic node
+		rg_nvicnodedma = MVirtualResourceGroup("NVIC DMA Node", ["peripheral", "cpu", "0", "nvic", "interrupt", interrupt_nodes])
+
+		// Assign the virtual resource group to virtual signal along with the signal
+	    interrupt_dma =  MVirtualSignal(rg_nvicnodedma, "Interrupt signal", "signal_in", true, false)
+	}
+	
+	// File Generation
+	def generateFiles() {
+		copy("global_dma.c", "global_dma.c")
+		copy("global_dma.h", "global_dma.h")
+		generate("global_dma_externh.tmpl", "global_dma_extern.h")
+		generate("global_dma_confh.tmpl", "global_dma_conf.h")
+		generate("global_dma_confc.tmpl", "global_dma_conf.c")
+	}
+}

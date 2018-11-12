@@ -1,0 +1,111 @@
+package Model.APPS.I2C_SLAVE.v4_0_14;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class I2C_SLAVE_GUI extends AppManifest {
+	/* Begin : UI variable section */
+	 public GTab tab_general_settings;
+	 public GTab gtab_advanced_settings;
+	 public GTab gtab_interrupt_settings;
+	 public GTab gtab_pin_settings;
+	 public GInteger ginteger_address;
+	 public GInteger ginteger_desired_speed;
+	 public GCombo gcombo_address_mode;
+	 public GCombo gcombo_transmit_mode;
+	 public GCombo gcombo_receive_mode;
+	 public GCombo gcombo_txfifo_size;
+	 public GCombo gcombo_rxfifo_size;
+	 public GCombo gcombo_sda_mode;
+	 public GCombo gcombo_sda_strength;
+	 public GCombo gcombo_scl_mode;
+	 public GCombo gcombo_scl_strength;
+	 public GString gstring_tx_callback;
+	 public GString gstring_rx_callback;
+	 public GString gstring_read_request;
+	 public GString gstring_error_callback;
+	 public GCheck gcheck_enable_0_sensitivity;
+	 public GCheck gcheck_enable_txfifo;
+	 public GCheck gcheck_enable_rxfifo;
+	 public GCheck gcheck_tx_callback;
+	 public GCheck gcheck_rx_callback;
+	 public GCheck gcheck_read_request;
+	 public GCheck gcheck_error_callback;
+	 public GCheck gcheck_enable_advanced_config;
+	 public GLabel glabel_desired_speed;
+	 public GLabel glabel_txfifo_size;
+	 public GLabel glabel_rxfifo_size;
+	 public GLabel glabel_fifo_note;
+	 public GLabel glabel_sda_strength;
+	 public GLabel glabel_scl_mode;
+	 public GLabel glabel_scl_strength;
+	 public GGroup ggroup_fifo_setting;
+	 public GGroup ggroup_transmit;
+	 public GGroup ggroup_receive;
+	 public GGroup ggroup_protocol_interrupt;
+	 public GGroup ggroup_callback;
+	 public GGroup ggroup_sda;
+	 public GGroup ggroup_scl;
+	 public GInterruptPrio ginterruptprio_tx_interrupt;
+	 public GInterruptPrio ginterruptprio_rx_interrupt;
+	 public GInterruptPrio ginterruptprio_protocol;
+	 public GMessage gmessage_end_tx;
+	 public GMessage gmessage_end_rx;
+	 public GMessage gmessage_read_request;
+	 public GMessage gmessage_error_detected;
+
+	 public I2C_SLAVE_GUI(DaveEnv daveEnv){
+
+	 tab_general_settings = GTab(widgetName:"tab_general_settings", text:"General Settings", enabled:true, visible:true)
+	 gtab_advanced_settings = GTab(widgetName:"gtab_advanced_settings", text:"Advanced Settings", enabled:true, visible:true)
+	 gtab_interrupt_settings = GTab(widgetName:"gtab_interrupt_settings", text:"Interrupt Settings", enabled:true, visible:true)
+	 gtab_pin_settings = GTab(widgetName:"gtab_pin_settings", text:"Pin Settings", enabled:true, visible:true)
+	 ginteger_address = GInteger(widgetName:"ginteger_address", value:1, minValue:1, maxValue:1023, enabled:true, visible:true, isMandatoryValue:false)
+	 ginteger_desired_speed = GInteger(widgetName:"ginteger_desired_speed", value:100, minValue:100, maxValue:400, enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_address_mode = GCombo(widgetName:"gcombo_address_mode", options:["7","10"], value:"7", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_transmit_mode = GCombo(widgetName:"gcombo_transmit_mode", options:["Interrupt","DMA","Direct"], value:"Interrupt", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_receive_mode = GCombo(widgetName:"gcombo_receive_mode", options:["Interrupt","DMA","Direct"], value:"Interrupt", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_txfifo_size = GCombo(widgetName:"gcombo_txfifo_size", options:["2","4","8","16","32","64"], value:"16", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_rxfifo_size = GCombo(widgetName:"gcombo_rxfifo_size", options:["2","4","8","16","32","64"], value:"16", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_sda_mode = GCombo(widgetName:"gcombo_sda_mode", options:["Push Pull","Open Drain"], value:"Open Drain", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_sda_strength = GCombo(widgetName:"gcombo_sda_strength", options:["Don't Care","Weak Driver","Medium Driver","Strong Driver Soft Edge","Strong Driver Slow Edge","Strong Driver Sharp Edge","Strong Driver Medium Edge"], value:"Don't Care", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_scl_mode = GCombo(widgetName:"gcombo_scl_mode", options:["Push Pull","Open Drain"], value:"Open Drain", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_scl_strength = GCombo(widgetName:"gcombo_scl_strength", options:["Don't Care","Weak Driver","Medium Driver","Strong Driver Soft Edge","Strong Driver Slow Edge","Strong Driver Sharp Edge","Strong Driver Medium Edge"], value:"Don't Care", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_tx_callback = GString(widgetName:"gstring_tx_callback", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_rx_callback = GString(widgetName:"gstring_rx_callback", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_read_request = GString(widgetName:"gstring_read_request", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_error_callback = GString(widgetName:"gstring_error_callback", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gcheck_enable_0_sensitivity = GCheck(widgetName:"gcheck_enable_0_sensitivity", value:false, enabled:true, visible:true)
+	 gcheck_enable_txfifo = GCheck(widgetName:"gcheck_enable_txfifo", value:false, enabled:true, visible:true)
+	 gcheck_enable_rxfifo = GCheck(widgetName:"gcheck_enable_rxfifo", value:false, enabled:true, visible:true)
+	 gcheck_tx_callback = GCheck(widgetName:"gcheck_tx_callback", value:false, enabled:true, visible:true)
+	 gcheck_rx_callback = GCheck(widgetName:"gcheck_rx_callback", value:false, enabled:true, visible:true)
+	 gcheck_read_request = GCheck(widgetName:"gcheck_read_request", value:false, enabled:true, visible:true)
+	 gcheck_error_callback = GCheck(widgetName:"gcheck_error_callback", value:false, enabled:true, visible:true)
+	 gcheck_enable_advanced_config = GCheck(widgetName:"gcheck_enable_advanced_config", value:false, enabled:true, visible:true)
+	 glabel_desired_speed = GLabel(widgetName:"glabel_desired_speed", text:"Desired bus speed[KHz]:", enabled:true, visible:true)
+	 glabel_txfifo_size = GLabel(widgetName:"glabel_txfifo_size", text:"Size:", enabled:true, visible:true)
+	 glabel_rxfifo_size = GLabel(widgetName:"glabel_rxfifo_size", text:"Size:", enabled:true, visible:true)
+	 glabel_fifo_note = GLabel(widgetName:"glabel_fifo_note", text:"A total of 64 FIFO entries are available to be configured as transmit and receive buffers. \r\nThese 64 entries are additionally shared between the two channels of a USIC module.", enabled:true, visible:true)
+	 glabel_sda_strength = GLabel(widgetName:"glabel_sda_strength", text:"Drive strength:", enabled:true, visible:true)
+	 glabel_scl_mode = GLabel(widgetName:"glabel_scl_mode", text:"Mode:", enabled:true, visible:true)
+	 glabel_scl_strength = GLabel(widgetName:"glabel_scl_strength", text:"Drive strength:", enabled:true, visible:true)
+	 ggroup_fifo_setting = GGroup(widgetName:"ggroup_fifo_setting", text:"FIFO Settings", enabled:true, visible:true)
+	 ggroup_transmit = GGroup(widgetName:"ggroup_transmit", text:"Transmit", enabled:true, visible:true)
+	 ggroup_receive = GGroup(widgetName:"ggroup_receive", text:"Receive", enabled:true, visible:true)
+	 ggroup_protocol_interrupt = GGroup(widgetName:"ggroup_protocol_interrupt", text:"Protocol Handling", enabled:true, visible:true)
+	 ggroup_callback = GGroup(widgetName:"ggroup_callback", text:"Callback Functions", enabled:true, visible:true)
+	 ggroup_sda = GGroup(widgetName:"ggroup_sda", text:"SDA", enabled:true, visible:true)
+	 ggroup_scl = GGroup(widgetName:"ggroup_scl", text:"SCL", enabled:true, visible:true)
+	 ginterruptprio_tx_interrupt = GInterruptPrio(widgetName:"ginterruptprio_tx_interrupt", priorityValue:0, minPriority:0, maxPriority:63, subPriorityValue:0, minSubPriority:0, maxSubPriority:63, subPriorityVisible:false, enabled:true, visible:true)
+	 ginterruptprio_rx_interrupt = GInterruptPrio(widgetName:"ginterruptprio_rx_interrupt", priorityValue:0, minPriority:0, maxPriority:63, subPriorityValue:0, minSubPriority:0, maxSubPriority:63, subPriorityVisible:false, enabled:true, visible:true)
+	 ginterruptprio_protocol = GInterruptPrio(widgetName:"ginterruptprio_protocol", priorityValue:0, minPriority:0, maxPriority:63, subPriorityValue:0, minSubPriority:0, maxSubPriority:63, subPriorityVisible:false, enabled:true, visible:true)
+	 gmessage_end_tx = GMessage(widgetName:"gmessage_end_tx", text:"Invalid function name for \"End of transmit callback\"", isError:false, visible:true)
+	 gmessage_end_rx = GMessage(widgetName:"gmessage_end_rx", text:"Invalid function name for \"End of receive callback\"", isError:false, visible:true)
+	 gmessage_read_request = GMessage(widgetName:"gmessage_read_request", text:"Invalid function name for \"Read request received callback\"", isError:false, visible:true)
+	 gmessage_error_detected = GMessage(widgetName:"gmessage_error_detected", text:"Invalid function name for \"Error detected callback\"", isError:false, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}

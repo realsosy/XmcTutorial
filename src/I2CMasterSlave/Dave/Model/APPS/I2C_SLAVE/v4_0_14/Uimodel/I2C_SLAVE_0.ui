@@ -1,0 +1,226 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 500, 600">
+		<p1:GTab text="General Settings" widgetName="tab_general_settings" visible="true" enabled="true" manifestObj="true">
+			<p1:GTab.control>
+				<p1:Tab layout="{x:Null}">
+					<p1:GGroup text="Address Settings" widgetName="ggroup_address_settings" bounds="4, 53, 483, 106">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode [bits]:" visible="true" widgetName="glabel_address_mode">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_address_mode" options="7&#13;&#10;10" value="7" toolTipText="Number of bits to represent the I2C slave address" description="Number of bits to be used for the slave address. As defined in the I2C standard, I2C supports 7 bit address or 10 bit address. When 10 bit address is used, the APP takes care of combining the 10 bit address identifier to the actual address.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="40"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Address:" visible="true" widgetName="glabel_address"/>
+						<p1:GInteger x:Style="NONE" minValue="1" maxValue="1023" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_address" value="1" toolTipText="I2C slave address. &#13;&#10;In 7 bit mode, address should be shifted left by 1 bit.&#13;&#10;In 10 bit mode, 10 bit address identifier will be appended internally&#13;&#10;" description="Value of the slave address. Range of the address value depends on the &apos;Mode[bits]&apos; selected. If 7 bits mode is selected, the address value should be shifted left by 1 bit position. The address range will be 1 to 255. Please note that the value at the least significant bit has no significance. This means, value 15 is same as 14 where the effective address is 7. The value of the address will be stored as PCR.SLAD bitfield. Master should address the slave by this value.&lt;br&gt;If 10 bits mode is selected, the address range will be 1 to 1023. In 10bits address mode, MSB of the address will be stored after shifting it left by 1 bit. LSB is stored as is. Master should address with the MSB shifted left by 1 and RD/WR bit added to it. Followed by the LSB value.&lt;br&gt;&#13;&#10;Note: Reserved addresses should be considered while deciding the slave address.">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="50"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+						<p1:GCheck text="Enable slave sensitivity to 00 address" manifestObj="true" widgetName="gcheck_enable_0_sensitivity" toolTipText="Responds to I2C master communication with address 0" description="Slave address 0 is treated as a general call in some systems. By enabling this checkbox, the slave will respond with ACK when the master tries to access the slave with address 0.">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<Label/>
+						<Label/>
+					</p1:GGroup>
+					<p1:GLabel text="Desired bus speed[KHz]:" visible="true" manifestObj="true" widgetName="glabel_desired_speed" bounds="12, 15, 132, 15"/>
+					<p1:GInteger x:Style="NONE" minValue="100" maxValue="400" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_desired_speed" bounds="145, 11, 48, 23" value="100" toolTipText="Desired speed for the I2C bus. Based on the entered value, I2C bus speed mode will be determined.&#13;&#10;Desired bus speed = 100KHz -&gt; Standard mode.&#13;&#10;Desired bus speed &gt;100KHz -&gt; Fast mode." description="Value entered will be used to derive the speed mode to be used for the I2C slave.&#13;&#10;If the value is 100KHz, I2C slave will be configured to work in standard speed mode.&#13;&#10;If the value is greater than 100KHz, I2C slave will be configured to work in fast mode.&#13;&#10;High speed mode is not supported.&#13;&#10;Oversampling value will be affected in different speed modes. For standard speed mode, the oversampling will be configured as 10. Whereas for fast mode, oversampling will be configured as 25. "/>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Advanced Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_advanced_settings">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_1">
+					<p1:GGroup text="Protocol Handling" widgetName="ggroup_protocol_handling" bounds="5, 3, 482, 82">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Transmit mode:" visible="true" widgetName="glabel_transmit_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_transmit_mode" options="Interrupt&#13;&#10;DMA&#13;&#10;Direct" value="Interrupt" toolTipText="Mechanism to be used for transmitting data" description="Data transmission can be accomplished using 3 different mechanisms,&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Interrupt - A dedicated NVIC node will be used to transmit data. Reduces CPU load by using CPU only when transmit buffer is ready to accept new data. This mechanism has better CPU utilization compared to Direct(Polling) mechanism. &lt;br&gt;&#13;&#10;I2C_SLAVE_Transmit(), I2C_SLAVE_StartTransmitIRQ() APIs can be used to trigger the transmission of data.&#13;&#10;&lt;li&gt;DMA- A DMA channel will be dedicated for data transmission. Ideal mechanism for offloading the CPU. CPU will be used only to configure the buffer address and size.&lt;br&gt;&#13;&#10;I2C_SLAVE_Transmit(), I2C_SLAVE_StartTransmitDMA() APIs can be used to trigger data transmission.&lt;br&gt;&#13;&#10;Note: DMA is not available for XMC1 family of microcontrollers.&#13;&#10;&lt;li&gt;Direct- This mechanism allows custom implementation of the software for data transaction. Signals related to I2C channel events will be available for connection with external APPs. Additionally, APIs implemented using polling mechanism will be available. But the APIs are CPU blocking implementations.&lt;br&gt;&#13;&#10;I2C_SLAVE_Transmit() API implements blocking mechanism for transmission of data.&#13;&#10;&lt;/ul&gt;&lt;br&gt;&#13;&#10;In &apos;Interrupt&apos; and &apos;DMA&apos; mechanisms, a callback function can be registered in the &apos;Interrupt Settings&apos; tab. This callback function will be executed when the transmission of requested count is finished.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="75"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Receive mode:" visible="true" widgetName="glabel_receive_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_receive_mode" options="Interrupt&#13;&#10;DMA&#13;&#10;Direct" value="Interrupt" toolTipText="Mechanism to be used for receiving data" description="Data reception can be accomplished using 3 different mechanisms,&lt;br&gt;&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Interrupt - A dedicated NVIC node will be used to receive data. Reduces CPU load by using CPU only when receive buffer has new data. This mechanism has better CPU utilization compared to Direct(Polling) mechanism. &lt;br&gt;&#13;&#10;I2C_SLAVE_Receive(), I2C_SLAVE_StartReceiveIRQ() APIs can be used to start the reception of data.&#13;&#10;&lt;li&gt;DMA- A DMA channel will be dedicated for data reception. Ideal mechanism for offloading the CPU. CPU will be used only to configure the buffer address and size.&lt;br&gt;&#13;&#10;I2C_SLAVE_Receive(), I2C_SLAVE_StartReceiveDMA() APIs can be used to start data reception.&lt;br&gt;&#13;&#10;Note: DMA is not available for XMC1 family of microcontrollers.&#13;&#10;&lt;li&gt;Direct- This mechanism allows custom implementation of the software for data transaction. Signals related to I2C channel receive events will be available for connection with external APPs. Additionally, APIs implemented using polling mechanism will be available. But the APIs are CPU blocking implementations.&lt;br&gt;&#13;&#10;I2C_SLAVE_Receive() API implements blocking mechanism for reception of data.&#13;&#10;&lt;/ul&gt;&lt;br&gt;&#13;&#10;In &apos;Interrupt&apos; and &apos;DMA&apos; mechanisms, a callback function can be registered in the &apos;Interrupt Settings&apos; tab. This callback function will be executed when data of requested count is received.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="75"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="FIFO Settings" manifestObj="true" widgetName="ggroup_fifo_setting" bounds="5, 89, 482, 124">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="3"/>
+						</p1:GGroup.layout>
+						<p1:GCheck text="Enable transmit FIFO" manifestObj="true" widgetName="gcheck_enable_txfifo" toolTipText="Use FIFO for transmit data. Accumulates data in the FIFO if TBUF is busy." description="Enables usage of FIFO for data transmission. Using FIFO helps in improving CPU utilization.  FIFO can be used in &apos;Interrupt&apos; and &apos;Direct&apos; modes. In &apos;DMA&apos; mode FIFO is not helpful. "/>
+						<p1:GLabel text="Size:" visible="true" widgetName="glabel_txfifo_size" manifestObj="true">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_txfifo_size" options="2&#13;&#10;4&#13;&#10;8&#13;&#10;16&#13;&#10;32&#13;&#10;64" value="16" toolTipText="Size of FIFO for data to be transmitted" description="Size of FIFO dedicated for transmit data. The FIFO is common for 2 channels of a USIC module. FIFO can have maximum size of 64. This size has to be shared between 2 channels of the USIC module(e.g:USIC0_CH0 and USIC0_CH1). For each USIC channel the FIFO size can be shared for transmission and recption. If FIFO has to be shared uniformly between 2 USIC channels and uniformly for transmit data and receive data, it can be divided as 16 bytes. Hence a default size of 16 is selected in the UI.&lt;br&gt;&#13;&#10;The FIFO trigger limit for generating transmit event will be configured to value 1. This means that the event will be generated when the transmit FIFO is empty.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="40"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GCheck text="Enable receive FIFO" manifestObj="true" widgetName="gcheck_enable_rxfifo" toolTipText="Use FIFO for received data. Puts received data in the FIFO and uses the RBUF for receiving next data." description="Enables usage of FIFO for data reception. Using FIFO helps in improving CPU utilization.  FIFO can be used in &apos;Interrupt&apos; and &apos;Direct&apos; modes. In &apos;DMA&apos; mode FIFO is not helpful. &#13;&#10;For I2C slave using &apos;Interrupt&apos; mechanism of receive may create following problem,&lt;br&gt; I2C slave may not be able to copy data from receive FIFO to the user buffer, if the master does not provide clock for the count expected by I2C slave. This is mainly due to the software focus on CPU load when FIFO is enabled for data reception. "/>
+						<p1:GLabel text="Size:" visible="true" manifestObj="true" widgetName="glabel_rxfifo_size">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_rxfifo_size" options="2&#13;&#10;4&#13;&#10;8&#13;&#10;16&#13;&#10;32&#13;&#10;64" value="16" toolTipText="Size of FIFO for received data" description="Size of FIFO to be dedicated for data reception. The trigger limit for generating receive events will be configured to a value of size-1. This means that the events will be generated when the FIFO is full.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="40"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="A total of 64 FIFO entries are available to be configured as transmit and receive buffers. &#13;&#10;These 64 entries are additionally shared between the two channels of a USIC module." visible="true" widgetName="glabel_fifo_note" manifestObj="true">
+							<p1:GLabel.layoutData>
+								<GridData horizontalSpan="3"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<Label/>
+						<Label/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_interrupt_settings">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_3">
+					<p1:GGroup text="Transmit" manifestObj="true" widgetName="ggroup_transmit" bounds="2, 4, 486, 141">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="0" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" subPriorityVisible="false" manifestObj="true" widgetName="ginterruptprio_tx_interrupt" toolTipText="Interrupt priority for data transmit event." description="Priority for the transmit interrupt. This field will be enabled when &apos;Interrupt&apos; mechanism is used for transmitting data.&lt;br&gt; Lower the value, higher the priority.&lt;br&gt;&#13;&#10;Range of priority levels depends on the product family. For XMC4x devices, the range is 0 to 63. For XMC1x devices, the range is 0 to 3.&#13;&#10;For XMC4x microcontrollers, priority groups can be configured using the CPU APP.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="470" horizontalSpan="2"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+						<p1:GCheck text="End of transmit callback:" manifestObj="true" widgetName="gcheck_tx_callback" toolTipText="Callback function will be executed after transmitting the requested number of bytes using the APP APIs" description="Enable execution of callback function when the transmission of requested count of bytes is completed. This feature will not be available if the transmit mechanism is &apos;Direct&apos;(Polling)."/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_tx_callback" toolTipText="Name of the function to be executed after transmitting the requested number of bytes using the APP APIs&#13;&#10;Prototype: void function(void)" description="Name of the function to be executed when the transmission of requested count of bytes is completed. The function prototype should be&lt;br&gt;&#13;&#10;void function(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the transmit mechanism is &apos;Direct&apos;(Polling).">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name for &quot;End of transmit callback&quot;" visible="true" manifestObj="true" isError="false" widgetName="gmessage_end_tx">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<Label/>
+					</p1:GGroup>
+					<p1:GGroup text="Receive" manifestObj="true" widgetName="ggroup_receive" bounds="2, 146, 486, 140">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="0" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" subPriorityVisible="false" manifestObj="true" widgetName="ginterruptprio_rx_interrupt" toolTipText="Interrupt priority for data receive events." description="Priority for the receive interrupt. This field will be enabled when &apos;Interrupt&apos; mechanism is used for receiving data.&lt;br&gt; Lower the value, higher the priority.&lt;br&gt;&#13;&#10;Range of priority levels depends on the product family. For XMC4x devices, the range is 0 to 63. For XMC1x devices, the range is 0 to 3.&#13;&#10;For XMC4x microcontrollers, priority groups can be configured using the CPU APP.">
+							<p1:GInterruptPrio.layoutData>
+								<GridData horizontalSpan="2" horizontalAlignment="FILL"/>
+							</p1:GInterruptPrio.layoutData>
+						</p1:GInterruptPrio>
+						<p1:GCheck text="End of receive callback:" manifestObj="true" widgetName="gcheck_rx_callback" toolTipText="Callback function will be executed after receiving the requested number of bytes using the APP APIs" description="Enable execution of callback function when the reception of requested count of bytes is completed. This feature will not be available when the receive mechanism is &apos;Direct&apos;(Polling)."/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_rx_callback" toolTipText="Name of the function to be executed after receiving the requested number of bytes using the APP APIs&#13;&#10;Prototype: void function(void)" description="Name of the function to be executed when the reception of requested count of bytes is completed. The function prototype should be&lt;br&gt;&#13;&#10;void function(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the receive mechanism is &apos;Direct&apos;(Polling).">
+							<p1:GString.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GMessage text="Invalid function name for &quot;End of receive callback&quot;" visible="true" manifestObj="true" isError="false" widgetName="gmessage_end_rx">
+							<p1:GMessage.layoutData>
+								<GridData grabExcessHorizontalSpace="true" horizontalSpan="2"/>
+							</p1:GMessage.layoutData>
+						</p1:GMessage>
+						<Label/>
+					</p1:GGroup>
+					<p1:GGroup text="Protocol Handling" manifestObj="true" widgetName="ggroup_protocol_interrupt" bounds="2, 288, 486, 242" layout="{x:Null}">
+						<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="0" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" subPriorityVisible="false" manifestObj="true" widgetName="ginterruptprio_protocol" bounds="8, 20, 470, 59" toolTipText="Interrupt priority for protocol specific events like slave read request, error interrupt etc." description="Priority for the protocol interrupt. This field will be used by the APP if any of the protocol related callback functions(&apos;Read request received&apos; or &apos;Error detected&apos;) are enabled&lt;br&gt;&#13;&#10;Range of priority levels depends on the product family. For XMC4x devices, the range is 0 to 63. For XMC1x devices, the range is 0 to 3.&#13;&#10;For XMC4x microcontrollers, priority groups can be configured using the CPU APP."/>
+						<p1:GGroup text="Callback Functions" widgetName="ggroup_callback" manifestObj="true" bounds="8, 89, 470, 130">
+							<p1:GGroup.layout>
+								<GridLayout numColumns="2"/>
+							</p1:GGroup.layout>
+							<p1:GCheck text="Read request received:" manifestObj="true" widgetName="gcheck_read_request" toolTipText="Callback function will be executed when the I2C master sends a read request to this slave address" description="Enable execution of callback function when the master sends a read request to this slave.&#13;&#10;When this checkbox is enabled, protocol interrupt node will be configured to generate interrupt on receiving read request from master. To connect protocol interrupt signal to an external APP, this checkbox and the &apos;Error detected&apos; checkbox should be unselected."/>
+							<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_read_request" toolTipText="Name of the function to be executed when the I2C master sends a read request to this slave address&#13;&#10;Prototype: void function(void)" description="Name of the function to be executed when a read request is received from master. The function prototype should be&lt;br&gt;&#13;&#10;void function(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the protocol event signal is connected to an external APP.">
+								<p1:GString.layoutData>
+									<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+								</p1:GString.layoutData>
+							</p1:GString>
+							<p1:GMessage text="Invalid function name for &quot;Read request received callback&quot;" visible="true" manifestObj="true" isError="false" widgetName="gmessage_read_request">
+								<p1:GMessage.layoutData>
+									<GridData grabExcessHorizontalSpace="true" horizontalSpan="2"/>
+								</p1:GMessage.layoutData>
+							</p1:GMessage>
+							<p1:GCheck text="Error detected:" manifestObj="true" widgetName="gcheck_error_callback" toolTipText="Callback function will be executed when any of the protocol releated events except slave read request event occurs" description="Enable execution of callback function when error like wrong TDF code is detected.&#13;&#10;When this checkbox is enabled, protocol interrupt node will be configured to generate interrupt on detecting wrong TDF code or error in the frame format. To connect protocol interrupt signal to an external APP, this checkbox and the &apos;Read request received&apos; checkbox should be unselected."/>
+							<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_error_callback" toolTipText="Name of the function to be executed when any of the protocol releated events except slave read request event occur&#13;&#10;Prototype: void function(void)" description="Name of the function to be executed when an error in the frame format or wrong TDF code is detected. The function prototype should be&lt;br&gt;&#13;&#10;void function(void);&lt;br&gt;&#13;&#10;It will be executed only when the checkbox before this text box is enabled. This feature will not be available when the protocol event signal is connected to an external APP.">
+								<p1:GString.layoutData>
+									<GridData widthHint="285" horizontalAlignment="FILL"/>
+								</p1:GString.layoutData>
+							</p1:GString>
+							<p1:GMessage text="Invalid function name for &quot;Error detected callback&quot;" visible="true" manifestObj="true" isError="false" widgetName="gmessage_error_detected">
+								<p1:GMessage.layoutData>
+									<GridData horizontalSpan="2"/>
+								</p1:GMessage.layoutData>
+							</p1:GMessage>
+						</p1:GGroup>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Pin Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_pin_settings">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_4">
+					<p1:GCheck text="Enable advanced pin configurations" manifestObj="true" widgetName="gcheck_enable_advanced_config" bounds="4, 7, 214, 16" toolTipText="Advanced pin configurations lik push pull, open drain, pin drive strength selection, input hysteresis can be made by enabling this" description="On selecting this checkbox, options for configuring the IO pins will be visible. Options for configuring output characteristics for SDA pin and input characteristics for SCL pin will be visible."/>
+					<p1:GGroup text="SDA" widgetName="ggroup_sda" bounds="4, 28, 485, 82" manifestObj="true">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" widgetName="glabel_sda_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_sda_mode" options="Push Pull&#13;&#10;Open Drain" value="Open Drain" toolTipText="SDA pin ouput mode" description="SDA pin output mode configuration. By default SDA pin mode is configured as &apos;Open Drain&apos;. It can be configured as &apos;Push Pull&apos; mode.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Drive strength:" visible="true" manifestObj="true" widgetName="glabel_sda_strength">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_sda_strength" options="Don&apos;t Care&#13;&#10;Weak Driver&#13;&#10;Medium Driver&#13;&#10;Strong Driver Soft Edge&#13;&#10;Strong Driver Slow Edge&#13;&#10;Strong Driver Sharp Edge&#13;&#10;Strong Driver Medium Edge" value="Don&apos;t Care" toolTipText="SDA pad drive strength" description="SDA pin pad strength configuration. Based on the pad strength, rise time and fall time of the pin signal will be influenced. &lt;br&gt;&#13;&#10;Pad strengh should be configured before selecting the pin using manual pin selection window. By doing so, Dave will be able to list only those pins that support the selected pad strength during manual pin selection.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+					<p1:GGroup text="SCL" widgetName="ggroup_scl" bounds="4, 113, 485, 82" manifestObj="true">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GLabel text="Mode:" visible="true" manifestObj="true" widgetName="glabel_scl_mode"/>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_scl_mode" options="Push Pull&#13;&#10;Open Drain" value="Open Drain" toolTipText="SCL pin input mode" description="SCL pin will be configured with bidirectional mode. Input for clock input from I2C master and output direction for clock stretching. This field allows selection of output modes. Open drain is recommended for I2C.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="Drive strength:" visible="true" manifestObj="true" widgetName="glabel_scl_strength">
+							<p1:GLabel.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_scl_strength" options="Don&apos;t Care&#13;&#10;Weak Driver&#13;&#10;Medium Driver&#13;&#10;Strong Driver Soft Edge&#13;&#10;Strong Driver Slow Edge&#13;&#10;Strong Driver Sharp Edge&#13;&#10;Strong Driver Medium Edge" value="Don&apos;t Care" toolTipText="SCL pin input hysteresis" description="This field will be available only in XMC4x family of microcontrollers. SCL pin can stretch the clock line when it does not have data to reply for I2C master read requests. This field configures the drive strength for the clock line.">
+							<p1:GCombo.layoutData>
+								<GridData grabExcessHorizontalSpace="true" widthHint="175"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>
