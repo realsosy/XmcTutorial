@@ -1,0 +1,18 @@
+package Model.APPS.GLOBAL_DMA.v4_0_8;
+
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class GLOBAL_DMA_GUI extends AppManifest {
+	// Begin : UI variable section
+	 public GInterruptPrio ginterruptprio_dma;
+
+	 public GLOBAL_DMA_GUI(DaveEnv daveEnv){
+
+	 ginterruptprio_dma = GInterruptPrio(widgetName:"ginterruptprio_dma", priorityValue:63, minPriority:0, maxPriority:63, subPriorityValue:0, minSubPriority:0, maxSubPriority:3, subPriorityVisible:true, enabled:true, visible:true)
+
+
+	 }
+	// End : UI variable section
+}
