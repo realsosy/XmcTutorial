@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="MySpiADXL345" Path="D:\workspaces_XmcTutorial\MySpiADXL345">
+<Project MotherSystem_Version="" Name="SpiADXL345" Path="D:\GitRepo\XmcTutorial\src\SpiADXL345">
     <COMPILER>
         <Name>ARM_GCC_HOME</Name>
         <Version/>

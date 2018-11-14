@@ -33,8 +33,8 @@ uint8_t MasterTxEnable = false;
 uint8_t MasterRxEnable = false;
 uint8_t MasterTransEnable = false;
 
-uint32_t SysTimer100mId;
-bool SysTimer100mFlag=false;
+uint32_t SysTimer10mId;
+bool SysTimer10mFlag=false;
 
 bool bXyzComplete = false;
 int16_t AccelX;
@@ -83,9 +83,9 @@ bool ADXL345_Begin(void){
 		return false;
 	}
 
+	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
 	ADXL345_WriteRegister(ADXL345_BW_RATE, 0x0D); /* Set Conversion Rate 800Hz */
 
-	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
 
 	return(true);
 }
@@ -125,10 +125,10 @@ void ADXL345_GetXYZ_Polling(void){
 void TestAdxl345(){
 
 	// Get XYZ using ISR
-	ADXL345_GetXYZ();
+//	ADXL345_GetXYZ();
 
 	// Get XYZ using Polling
-	//ADXL345_GetXYZ_Polling();
+	ADXL345_GetXYZ_Polling();
 
 	if(AccelX >= 0){
 		PWM_SetDutyCycle(&dhPWM_XPlus, AccelX<<4);
@@ -140,8 +140,8 @@ void TestAdxl345(){
 	}
 }
 
-void SysTimer100m(){
-	SysTimer100mFlag = true;
+void SysTimer10m(){
+	SysTimer10mFlag = true;
 }
 
 int main(void)
@@ -168,9 +168,9 @@ int main(void)
 
 	ADXL345_Begin();
 
-	SysTimer100mId = SYSTIMER_CreateTimer(100000, SYSTIMER_MODE_PERIODIC, SysTimer100m, NULL);
+	SysTimer10mId = SYSTIMER_CreateTimer(10000, SYSTIMER_MODE_PERIODIC, SysTimer10m, NULL);
 
-	SYSTIMER_StartTimer(SysTimer100mId);
+	SYSTIMER_StartTimer(SysTimer10mId);
 
 	while(1U)
 	{
@@ -192,11 +192,11 @@ int main(void)
 			MasterTransEnable = false;
 		}
 
-		if(SysTimer100mFlag == true){
+		if(SysTimer10mFlag == true){
 			if (AccelScanEnable == true){
 				TestAdxl345();
 			}
-			SysTimer100mFlag = false;
+			SysTimer10mFlag = false;
 		}
 
 	}
