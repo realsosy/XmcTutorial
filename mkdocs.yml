@@ -59,7 +59,7 @@ pages:
 
 - Circuit Background:
     - Digital Signal Interfacing: DigitalInterface.md
-#    - Analog Signal Interfacing
+    - Analog Signal Interfacing: AnalogInterface.md
 
 #- Advanced:
 #    - Project Template: ProjectTemplate.md
