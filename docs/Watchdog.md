@@ -139,7 +139,7 @@ WATCHDOG APP은 시스템이 정지 또는 교착상태라서 시스템이 응�
 ### 자료구조
 WATCHDOG APP관련 설정 정보를 관리하기 위하여 WATCHDOG 구조체를 활용하여 WATCHDOG_t 자료형을 사용하고 있다. WATCHDOG_t 자료형은 와치독의 윈도우 상한 범위, 하한 범위 등의 설정정보를 관리하기 위해 XMC_WDT_CONFIG_t 자료형을 포함하고 있다.
 
-```
+```c
 typedef struct WATCHDOG
 {
   const XMC_WDT_CONFIG_t* const config; /**< Configuration of WDT */
@@ -178,7 +178,7 @@ typedef struct XMC_WDT_CONFIG
 ```
 와치독 관련 동작을 프로그래밍 하기 위한 열거형 자료형들은 다음과 같다.
 
-```
+```c
 typedef enum WATCHDOG_EVENT_MODE
 {
     WATCHDOG_EVENT_MODE_INTERRUPT   = 0U, /**< Regular Interrupt */
