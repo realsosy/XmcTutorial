@@ -3,24 +3,6 @@ site_name: XMC Tutorial
 pages:
 - Home: 'index.md'
 
-- Intermediate:
-    - Counter: Counter.md
-    - Timer: Timer.md
-    - Real-time Clock: Rtc.md
-    - Capture: TimerCapture.md
-#    - Compare & Capture: Ccu8SliceConfig.md
-#    - DAC LUT: DacLut.md
-#    - Watchdog: Watchdog.md
-#    - DMA: DmaCh.md
-#    - Event: Eru.md
-#    - UART: Uart.md
-#    - USB: UsbdVcom.md
-
-- LabIntermediate:
-    - Counter: LabCounter.md
-    - Timer: LabTimer.md
-    - Capture: LabTimerCapture.md
-
 - Basic:
     - Getting Started: GettingStartedXmc.md
     - Development Environment: DevelopmentEnvironment.md
@@ -44,11 +26,35 @@ pages:
     - Interrupt: LabNVIC.md
     - System Timer: LabSystemTimer.md
 
+- Intermediate:
+    - Counter: Counter.md
+    - Timer: Timer.md
+    - Capture: TimerCapture.md
+    - Real-time Clock: Rtc.md
+    - Watchdog(Optional): Watchdog.md
+    - ADXL345 with SPI: ADXL345Spi.md
+    - ADXL345 with I2C(Optional): ADXL345I2c.md
+#    - Compare & Capture: Ccu8SliceConfig.md
+#    - DAC LUT: DacLut.md
+#    - DMA: DmaCh.md
+#    - Event: Eru.md
+#    - UART: Uart.md
+#    - USB: UsbdVcom.md
+
+- LabIntermediate:
+    - Counter: LabCounter.md
+    - Timer: LabTimer.md
+    - Capture: LabTimerCapture.md
+    - SPI: LabSpiMasterSlave.md
+    - IIC(Optional): LabI2CMasterSlave.md
+    - ADXL345 with SPI: LabADXL345Spi.md
+    - ADXL345 with I2C(Optional): LabADXL345I2c.md
+
 - Programming Background:
     - Functions & Program Design: ProgDesignFunction.md
     - Module Design & Multiple files: ProgModuleMultipleFiles.md
     - System Timer & Scheduler: ProgSystemTimerScheduler.md
-    - Statemachine: ProgFasmBasic.md
+    - Statemachine: ProgFsmBasic.md
     - Statemachine Example (Stop Light): ProgFsmStopLight.md
 
 - Circuit Background:
