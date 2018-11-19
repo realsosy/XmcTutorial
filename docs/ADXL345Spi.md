@@ -154,7 +154,7 @@ ADXL345는 단순한 센서가 아닙니다.  MEMS(Microelectromechanical system
     | MasterDataTx[0] | 0xAC = 0x80(Read) + 0x2C(BW_RATE) |
     | MasterDataTx[1] | XX                                |
     | MasterDataRx[0] | ?                                 |
-    | MasterDataTx[1] | ?                                 |
+    | MasterDataRx[1] | ?                                 |
 
     ​
 
@@ -169,7 +169,7 @@ ADXL345는 단순한 센서가 아닙니다.  MEMS(Microelectromechanical system
     | MasterDataTx[0] | 0x2C = 0x00(Write) + 0x2C(BW_RATE) |
     | MasterDataTx[1] | ?                                  |
     | MasterDataRx[0] | XX                                 |
-    | MasterDataTx[1] | XX                                 |
+    | MasterDataRx[1] | XX                                 |
 
 
 
@@ -182,7 +182,7 @@ ADXL345는 단순한 센서가 아닙니다.  MEMS(Microelectromechanical system
     | MasterDataTx[0] | 0x2D = 0x00(Write) + 0x2D(POWER_CTL) |
     | MasterDataTx[1] | 0x08                                 |
     | MasterDataRx[0] | XX                                   |
-    | MasterDataTx[1] | XX                                   |
+    | MasterDataRx[1] | XX                                   |
 
     ​
 
@@ -195,7 +195,7 @@ ADXL345는 단순한 센서가 아닙니다.  MEMS(Microelectromechanical system
     | MasterDataTx[0] | 0xB2 = 0x80(Read) + 0x32(DATAX0) |
     | MasterDataTx[1] | XX                               |
     | MasterDataRx[0] | ?                                |
-    | MasterDataTx[1] | ?                                |
+    | MasterDataRx[1] | ?                                |
 
     ​
 
@@ -208,7 +208,7 @@ ADXL345는 단순한 센서가 아닙니다.  MEMS(Microelectromechanical system
     | MasterDataTx[0] | 0xB3 = 0x80(Read) + 0x33(DATAX1) |
     | MasterDataTx[1] | XX                               |
     | MasterDataRx[0] | ?                                |
-    | MasterDataTx[1] | ?                                |
+    | MasterDataRx[1] | ?                                |
 
     ​
 
