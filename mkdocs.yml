@@ -67,6 +67,10 @@ pages:
 - Examples & Mini projects:
     - Final SignalGeneratorMonitor: LabSigGenMon.md
     - Ultrasonic Sensor: UltrasonicSensor.md
+- Demo Projects: Signal Generator & Monitor
+    - Requirement Specification: ./SigGenMon/SigGenMon_0ReqSpec.md
+    - Design:./SigGenMon/ SigGenMon_1Design.md
+    - Test: ./SigGenMon/SigGenMon_3TestReport.md
 
 - References: 'References.md'
 

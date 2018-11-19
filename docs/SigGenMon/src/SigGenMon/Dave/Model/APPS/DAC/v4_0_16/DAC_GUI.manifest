@@ -1,0 +1,230 @@
+package Model.APPS.DAC.v4_0_16;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+
+abstract class DAC_GUI extends AppManifest {
+	/* Begin : UI variable section */
+	 public GTab gtab_waveform_sel;
+	 public GTab gtab_pattern;
+	 public GTab gtab_pattern_expert;
+	 public GTab gtab_custom_pattern;
+	 public GTab gtab_single_value;
+	 public GTab gtab_singleval_expert;
+	 public GTab gtab_noise;
+	 public GTab gtab_ramp;
+	 public GTab gtab_interrupt_conf;
+	 public GImage gimage_waveform_selection;
+	 public GImage gimage_pattern_sine;
+	 public GImage gimage_pattern_rectangle;
+	 public GImage gimage_pattern_triangle;
+	 public GImage gimage_pattern_custom;
+	 public GImage image_pattern_offset;
+	 public GImage gimage_signed_output;
+	 public GImage gimage_pattern_start_mode;
+	 public GImage gimage_custom_pattern;
+	 public GImage gimage_singleval_sign_sel;
+	 public GImage image_noise_pattern;
+	 public GImage image_noise_half_amp;
+	 public GImage gimage_ramp_pos;
+	 public GImage gimage_ramp_neg;
+	 public GInteger gint_desired_clk_pattern;
+	 public GInteger gint_pattern_0;
+	 public GInteger gint_pattern_1;
+	 public GInteger gint_pattern_2;
+	 public GInteger gint_pattern_3;
+	 public GInteger gint_pattern_4;
+	 public GInteger gint_pattern_5;
+	 public GInteger gint_pattern_6;
+	 public GInteger gint_pattern_7;
+	 public GInteger gint_pattern_8;
+	 public GInteger gint_desired_clk_singleval;
+	 public GInteger gint_shift_bits_singleval;
+	 public GInteger gint_ext_clk_ramp;
+	 public GInteger gint_desired_clk_ramp;
+	 public GInteger gint_actual_clk_ramp;
+	 public GCombo gcombo_waveform_type;
+	 public GCombo gcombo_clock_selection_pattern;
+	 public GCombo gcombo_amplitude_enum_pattern;
+	 public GCombo gcombo_pattern_type;
+	 public GCombo gcombo_start_mode;
+	 public GCombo gcombo_singleval_sign;
+	 public GCombo gcombo_clock;
+	 public GCombo gcombo_amplitude_enum_noise;
+	 public GFloat gfloat_actual_clk_pattern;
+	 public GFloat gfloat_resolution_pattern;
+	 public GFloat gfloat_desired_offset;
+	 public GFloat gfloat_actual_offset;
+	 public GFloat gfloat_singleval_default_vtg;
+	 public GFloat gfloat_actual_clk_singleval;
+	 public GFloat gfloat_desired_offset_singleval;
+	 public GFloat gfloat_actual_offset_singleval;
+	 public GFloat gfloat_desired_period_noise;
+	 public GFloat gfloat_actual_period_noise;
+	 public GFloat gfloat_resolution_ramp;
+	 public GFloat gfloat_ramp_desired_start;
+	 public GFloat gfloat_ramp_actual_start;
+	 public GFloat gfloat_ramp_desired_stop;
+	 public GFloat gfloat_ramp_actual_stop;
+	 public GString gstring_api_sel;
+	 public GCheck gcheck_expose_pin;
+	 public GCheck gcheck_start_after_init;
+	 public GCheck gcheck_sign_mode;
+	 public GCheck gcheck_sync_singleval;
+	 public GCheck gcheck_couple_dac_singleval;
+	 public GCheck gcheck_offset_singleval;
+	 public GCheck gcheck_invert_singleval;
+	 public GCheck gcheck_shift_singleval;
+	 public GCheck gcheck_use_ext_clock_noise;
+	 public GCheck gcheck_use_half_amp_offset;
+	 public GCheck gcheck_use_ext_clock_ramp;
+	 public GCheck gcheck_enable_sr_singleval;
+	 public GLabel glabel_desired_clk_pattern;
+	 public GLabel glabel_actual_clk_pattern;
+	 public GLabel glabel_start_mode;
+	 public GLabel glabel_desired_clk_singleval;
+	 public GLabel glabel_actual_clk_singleval;
+	 public GLabel glabel_desired_period_noise;
+	 public GLabel glabel_actual_period_noise;
+	 public GLabel glabel_ext_clk_ramp;
+	 public GLabel glabel_desired_clk_ramp;
+	 public GLabel glabel_actual_clk_ramp;
+	 public GLabel glabel_resolution_ramp;
+	 public GGroup group_waveform_sel;
+	 public GGroup ggroup_pattern_info;
+	 public GGroup ggroup_singleval_info;
+	 public GGroup ggroup_ramp_info;
+	 public GGroup ggroup_noise_info;
+	 public GGroup group_pattern;
+	 public GGroup group_clock_config_pattern;
+	 public GGroup ggroup_offset_config;
+	 public GGroup group_pattern_expert;
+	 public GGroup group_custom_pattern;
+	 public GGroup group32;
+	 public GGroup group_singleval;
+	 public GGroup group_singleval_expert;
+	 public GGroup group_clk_conf;
+	 public GGroup group_offset_singleval;
+	 public GGroup ggroup_shift_config;
+	 public GGroup group_noise_conf;
+	 public GGroup group_clock_config;
+	 public GGroup group_ramp;
+	 public GGroup group_clock_config_ramp;
+	 public GGroup group_interrupt_configuration;
+	 public GMessage gmessage_error_msg_ramp;
+
+	 public DAC_GUI(DaveEnv daveEnv){
+
+	 gtab_waveform_sel = GTab(widgetName:"gtab_waveform_sel", text:"Waveform Selection", enabled:true, visible:true)
+	 gtab_pattern = GTab(widgetName:"gtab_pattern", text:"Pattern", enabled:true, visible:true)
+	 gtab_pattern_expert = GTab(widgetName:"gtab_pattern_expert", text:"Pattern Expert", enabled:true, visible:true)
+	 gtab_custom_pattern = GTab(widgetName:"gtab_custom_pattern", text:"Custom Pattern", enabled:true, visible:true)
+	 gtab_single_value = GTab(widgetName:"gtab_single_value", text:"SingleValue", enabled:true, visible:true)
+	 gtab_singleval_expert = GTab(widgetName:"gtab_singleval_expert", text:"SingleValue Expert", enabled:true, visible:true)
+	 gtab_noise = GTab(widgetName:"gtab_noise", text:"Noise", enabled:true, visible:true)
+	 gtab_ramp = GTab(widgetName:"gtab_ramp", text:"Ramp", enabled:true, visible:true)
+	 gtab_interrupt_conf = GTab(widgetName:"gtab_interrupt_conf", text:"Event Settings", enabled:true, visible:true)
+	 gimage_waveform_selection = GImage(widgetName:"gimage_waveform_selection", path: "Uimodel/waveform_selection.png", enabled:true, visible:true)
+	 gimage_pattern_sine = GImage(widgetName:"gimage_pattern_sine", path: "Uimodel/pattern_sin.png", enabled:true, visible:true)
+	 gimage_pattern_rectangle = GImage(widgetName:"gimage_pattern_rectangle", path: "Uimodel/pattern_rectangle.png", enabled:true, visible:false)
+	 gimage_pattern_triangle = GImage(widgetName:"gimage_pattern_triangle", path: "Uimodel/pattern_triangle.png", enabled:true, visible:false)
+	 gimage_pattern_custom = GImage(widgetName:"gimage_pattern_custom", path: "Uimodel/pattern_custom.png", enabled:true, visible:false)
+	 image_pattern_offset = GImage(widgetName:"image_pattern_offset", path: "Uimodel/Offset.PNG", enabled:true, visible:true)
+	 gimage_signed_output = GImage(widgetName:"gimage_signed_output", path: "Uimodel/pattern_sign_output.png", enabled:true, visible:true)
+	 gimage_pattern_start_mode = GImage(widgetName:"gimage_pattern_start_mode", path: "Uimodel/pattern_start_mode.PNG", enabled:true, visible:true)
+	 gimage_custom_pattern = GImage(widgetName:"gimage_custom_pattern", path: "Uimodel/custom_pattern.PNG", enabled:true, visible:true)
+	 gimage_singleval_sign_sel = GImage(widgetName:"gimage_singleval_sign_sel", path: "Uimodel/SingleVal_SignSelection.PNG", enabled:true, visible:true)
+	 image_noise_pattern = GImage(widgetName:"image_noise_pattern", path: "Uimodel/Noiseconf.png", enabled:true, visible:true)
+	 image_noise_half_amp = GImage(widgetName:"image_noise_half_amp", path: "Uimodel/NoiseHalfAmp.png", enabled:true, visible:true)
+	 gimage_ramp_pos = GImage(widgetName:"gimage_ramp_pos", path: "Uimodel/positive_ramp.PNG", enabled:true, visible:true)
+	 gimage_ramp_neg = GImage(widgetName:"gimage_ramp_neg", path: "Uimodel/negative_ramp.PNG", enabled:true, visible:true)
+	 gint_desired_clk_pattern = GInteger(widgetName:"gint_desired_clk_pattern", value:2000, minValue:4, maxValue:234375, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_0 = GInteger(widgetName:"gint_pattern_0", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_1 = GInteger(widgetName:"gint_pattern_1", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_2 = GInteger(widgetName:"gint_pattern_2", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_3 = GInteger(widgetName:"gint_pattern_3", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_4 = GInteger(widgetName:"gint_pattern_4", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_5 = GInteger(widgetName:"gint_pattern_5", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_6 = GInteger(widgetName:"gint_pattern_6", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_7 = GInteger(widgetName:"gint_pattern_7", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_pattern_8 = GInteger(widgetName:"gint_pattern_8", value:0, minValue:0, maxValue:31, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_desired_clk_singleval = GInteger(widgetName:"gint_desired_clk_singleval", value:2000, minValue:1, maxValue:5000000, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_shift_bits_singleval = GInteger(widgetName:"gint_shift_bits_singleval", value:0, minValue:-7, maxValue:7, enabled:false, visible:true, isMandatoryValue:false)
+	 gint_ext_clk_ramp = GInteger(widgetName:"gint_ext_clk_ramp", value:20000, minValue:1, maxValue:5000000, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_desired_clk_ramp = GInteger(widgetName:"gint_desired_clk_ramp", value:2000, minValue:1, maxValue:5000000, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_actual_clk_ramp = GInteger(widgetName:"gint_actual_clk_ramp", value:2000, minValue:0, maxValue:5000000, enabled:false, visible:true, isMandatoryValue:false)
+	 gcombo_waveform_type = GCombo(widgetName:"gcombo_waveform_type", options:["Pattern Generator","SingleValue","Ramp","Noise"], value:"Pattern Generator", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_clock_selection_pattern = GCombo(widgetName:"gcombo_clock_selection_pattern", options:["Internal Clock","External Trigger"], value:"Internal Clock", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_amplitude_enum_pattern = GCombo(widgetName:"gcombo_amplitude_enum_pattern", options:["0.004","0.009","0.017","0.034","0.069","0.138","0.275","0.55","1.1","2.2"], value:"1.1", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_pattern_type = GCombo(widgetName:"gcombo_pattern_type", options:["Sine","Rectangle","Triangle","Custom"], value:"Sine", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_start_mode = GCombo(widgetName:"gcombo_start_mode", options:["Start With Positive Half","Start With Negative Half"], value:"Start With Positive Half", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_singleval_sign = GCombo(widgetName:"gcombo_singleval_sign", options:["SignedValue","UnsignedValue"], value:"SignedValue", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_clock = GCombo(widgetName:"gcombo_clock", options:["Internal Clock","External Trigger"], value:"Internal Clock", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_amplitude_enum_noise = GCombo(widgetName:"gcombo_amplitude_enum_noise", options:["0.017","0.034","0.069","0.138","0.275","0.55","1.1","2.2"], value:"1.1", enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_clk_pattern = GFloat(widgetName:"gfloat_actual_clk_pattern", value:2000.0, minValue:1, maxValue:5000000, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_resolution_pattern = GFloat(widgetName:"gfloat_resolution_pattern", value:1.0, minValue:0.0, maxValue:Double.POSITIVE_INFINITY, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_desired_offset = GFloat(widgetName:"gfloat_desired_offset", value:1.4, minValue:0, maxValue:2.5, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_offset = GFloat(widgetName:"gfloat_actual_offset", value:1.4, minValue:-3.132, maxValue:5.9056, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_singleval_default_vtg = GFloat(widgetName:"gfloat_singleval_default_vtg", value:1.4, minValue:0.3, maxValue:2.5, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_actual_clk_singleval = GFloat(widgetName:"gfloat_actual_clk_singleval", value:2000.0, minValue:1.0, maxValue:7500000.0, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_desired_offset_singleval = GFloat(widgetName:"gfloat_desired_offset_singleval", value:0.0, minValue:-68.8, maxValue:68.3, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_offset_singleval = GFloat(widgetName:"gfloat_actual_offset_singleval", value:0.0, minValue:-68.8, maxValue:136.99, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_desired_period_noise = GFloat(widgetName:"gfloat_desired_period_noise", value:500, minValue:0, maxValue:1000000, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_period_noise = GFloat(widgetName:"gfloat_actual_period_noise", value:500, minValue:0, maxValue:1000000, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_resolution_ramp = GFloat(widgetName:"gfloat_resolution_ramp", value:1.0, minValue:0.0, maxValue:Double.POSITIVE_INFINITY, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_ramp_desired_start = GFloat(widgetName:"gfloat_ramp_desired_start", value:0.3, minValue:0.3, maxValue:2.5, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_ramp_actual_start = GFloat(widgetName:"gfloat_ramp_actual_start", value:0.3, minValue:0, maxValue:2.5, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_ramp_desired_stop = GFloat(widgetName:"gfloat_ramp_desired_stop", value:2.2, minValue:0.3, maxValue:2.5, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_ramp_actual_stop = GFloat(widgetName:"gfloat_ramp_actual_stop", value:2.2, minValue:0, maxValue:2.5, enabled:false, visible:true, isMandatoryValue:false)
+	 gstring_api_sel = GString(widgetName:"gstring_api_sel", value:"DAC_SingleValue_SetValue_s16( )", enabled:false, visible:true, isMandatoryValue:false)
+	 gcheck_expose_pin = GCheck(widgetName:"gcheck_expose_pin", value:false, enabled:true, visible:true)
+	 gcheck_start_after_init = GCheck(widgetName:"gcheck_start_after_init", value:true, enabled:true, visible:true)
+	 gcheck_sign_mode = GCheck(widgetName:"gcheck_sign_mode", value:false, enabled:true, visible:true)
+	 gcheck_sync_singleval = GCheck(widgetName:"gcheck_sync_singleval", value:false, enabled:true, visible:true)
+	 gcheck_couple_dac_singleval = GCheck(widgetName:"gcheck_couple_dac_singleval", value:false, enabled:true, visible:true)
+	 gcheck_offset_singleval = GCheck(widgetName:"gcheck_offset_singleval", value:false, enabled:true, visible:true)
+	 gcheck_invert_singleval = GCheck(widgetName:"gcheck_invert_singleval", value:false, enabled:true, visible:true)
+	 gcheck_shift_singleval = GCheck(widgetName:"gcheck_shift_singleval", value:false, enabled:true, visible:true)
+	 gcheck_use_ext_clock_noise = GCheck(widgetName:"gcheck_use_ext_clock_noise", value:false, enabled:true, visible:true)
+	 gcheck_use_half_amp_offset = GCheck(widgetName:"gcheck_use_half_amp_offset", value:true, enabled:true, visible:true)
+	 gcheck_use_ext_clock_ramp = GCheck(widgetName:"gcheck_use_ext_clock_ramp", value:false, enabled:true, visible:true)
+	 gcheck_enable_sr_singleval = GCheck(widgetName:"gcheck_enable_sr_singleval", value:false, enabled:true, visible:true)
+	 glabel_desired_clk_pattern = GLabel(widgetName:"glabel_desired_clk_pattern", text:"Desired frequency [Hz]:", enabled:true, visible:true)
+	 glabel_actual_clk_pattern = GLabel(widgetName:"glabel_actual_clk_pattern", text:"Actual frequency [Hz]:", enabled:true, visible:true)
+	 glabel_start_mode = GLabel(widgetName:"glabel_start_mode", text:"Start mode:", enabled:true, visible:true)
+	 glabel_desired_clk_singleval = GLabel(widgetName:"glabel_desired_clk_singleval", text:"Desired frequency [Hz]:    ", enabled:true, visible:true)
+	 glabel_actual_clk_singleval = GLabel(widgetName:"glabel_actual_clk_singleval", text:"Actual frequency [Hz]:", enabled:true, visible:true)
+	 glabel_desired_period_noise = GLabel(widgetName:"glabel_desired_period_noise", text:"Desired period [us]:", enabled:true, visible:true)
+	 glabel_actual_period_noise = GLabel(widgetName:"glabel_actual_period_noise", text:"Actual period [us]:", enabled:true, visible:true)
+	 glabel_ext_clk_ramp = GLabel(widgetName:"glabel_ext_clk_ramp", text:"External trigger frequency [Hz]:", enabled:true, visible:true)
+	 glabel_desired_clk_ramp = GLabel(widgetName:"glabel_desired_clk_ramp", text:"Desired ramp frequency [Hz]:", enabled:true, visible:true)
+	 glabel_actual_clk_ramp = GLabel(widgetName:"glabel_actual_clk_ramp", text:"Actual ramp frequency [Hz]:", enabled:true, visible:true)
+	 glabel_resolution_ramp = GLabel(widgetName:"glabel_resolution_ramp", text:"Resolution [mV/step]:", enabled:true, visible:true)
+	 group_waveform_sel = GGroup(widgetName:"group_waveform_sel", text:"Waveform Selection", enabled:true, visible:true)
+	 ggroup_pattern_info = GGroup(widgetName:"ggroup_pattern_info", text:"Pattern", enabled:true, visible:true)
+	 ggroup_singleval_info = GGroup(widgetName:"ggroup_singleval_info", text:"Single value", enabled:true, visible:true)
+	 ggroup_ramp_info = GGroup(widgetName:"ggroup_ramp_info", text:"Ramp", enabled:true, visible:true)
+	 ggroup_noise_info = GGroup(widgetName:"ggroup_noise_info", text:"Noise", enabled:true, visible:true)
+	 group_pattern = GGroup(widgetName:"group_pattern", text:"Pattern Generator Configuration", enabled:true, visible:true)
+	 group_clock_config_pattern = GGroup(widgetName:"group_clock_config_pattern", text:"Clock Configuration", enabled:true, visible:true)
+	 ggroup_offset_config = GGroup(widgetName:"ggroup_offset_config", text:"Offset Configuration", enabled:true, visible:true)
+	 group_pattern_expert = GGroup(widgetName:"group_pattern_expert", text:"Pattern Expert", enabled:true, visible:true)
+	 group_custom_pattern = GGroup(widgetName:"group_custom_pattern", text:"Custom Pattern", enabled:true, visible:true)
+	 group32 = GGroup(widgetName:"group32", text:"", enabled:true, visible:true)
+	 group_singleval = GGroup(widgetName:"group_singleval", text:"Single Value Configuration", enabled:true, visible:true)
+	 group_singleval_expert = GGroup(widgetName:"group_singleval_expert", text:"Single Value Expert", enabled:true, visible:true)
+	 group_clk_conf = GGroup(widgetName:"group_clk_conf", text:"Synchronization", enabled:true, visible:true)
+	 group_offset_singleval = GGroup(widgetName:"group_offset_singleval", text:"Offset Configuration", enabled:true, visible:true)
+	 ggroup_shift_config = GGroup(widgetName:"ggroup_shift_config", text:"Shift Configuration", enabled:true, visible:true)
+	 group_noise_conf = GGroup(widgetName:"group_noise_conf", text:"Noise Configuration", enabled:true, visible:true)
+	 group_clock_config = GGroup(widgetName:"group_clock_config", text:"Clock Configuration", enabled:true, visible:true)
+	 group_ramp = GGroup(widgetName:"group_ramp", text:"Ramp", enabled:true, visible:true)
+	 group_clock_config_ramp = GGroup(widgetName:"group_clock_config_ramp", text:"Clock Configuration", enabled:true, visible:true)
+	 group_interrupt_configuration = GGroup(widgetName:"group_interrupt_configuration", text:"Event Settings", enabled:true, visible:true)
+	 gmessage_error_msg_ramp = GMessage(widgetName:"gmessage_error_msg_ramp", text:"Above configuration is not possible. Change start,stop or frequency parameters.", isError:true, visible:false)
+
+
+	 }
+	/* End : UI variable section */
+}

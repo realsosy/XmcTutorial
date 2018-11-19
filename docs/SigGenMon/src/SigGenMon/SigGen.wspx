@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<workspace>
+  <symbolbrowser>
+    <symbolfiles>
+      <symbolfile Filepath="E:\taekwang\MyCode\SigGen\Debug\SigGen.elf" />
+    </symbolfiles>
+  </symbolbrowser>
+  <screens SelectedScreenId="DataScreen1">
+    <screen RegisteredName="DataScreen1" ScreenHeader="DataScreen1" ScreenType="DataScreen" />
+    <screen RegisteredName="Oscilloscope_Screen1" ScreenHeader="Oscilloscope" ScreenType="Oscilloscope_Screen">
+      <configuration>
+        <properties mode="CONTINUOUS" slope="POS" timeScale="us" trigHoldOff="0" clkDiv="1" trigDispPos="0" />
+        <symbols>
+          <symbol path="NONE" IsAnArrayElement="false" ElementIndex="-1" />
+          <symbol path="f32AI0Vol" IsAnArrayElement="false" ElementIndex="-1" />
+          <symbol path="f32AI1Vol" IsAnArrayElement="false" ElementIndex="-1" />
+        </symbols>
+        <channels>
+          <channel index="1" isEnabled="true" selectedSymbol="f32AI0Vol" triggerLevel="0" isTriggerSource="true" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="6" />
+          <channel index="2" isEnabled="true" selectedSymbol="f32AI1Vol" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="6" />
+          <channel index="3" isEnabled="false" selectedSymbol="NONE" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="1000" />
+          <channel index="4" isEnabled="false" selectedSymbol="NONE" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="1000" />
+          <channel index="5" isEnabled="false" selectedSymbol="NONE" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="1000" />
+          <channel index="6" isEnabled="false" selectedSymbol="NONE" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="1000" />
+          <channel index="7" isEnabled="false" selectedSymbol="NONE" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="1000" />
+          <channel index="8" isEnabled="false" selectedSymbol="NONE" triggerLevel="0" isTriggerSource="false" bitEn="false" bitIx="0" scaledMode="true" gain="1" offset="0" label="" y_Min_Scale_Value="0" y_Max_Scale_Value="1000" />
+        </channels>
+      </configuration>
+    </screen>
+  </screens>
+  <nodes>
+    <node ScreenId="DataScreen1" OffsetX="20" OffsetY="20" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="250" Height="50" ZIndex="2" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Signal Generator &amp; Monitor" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="20" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="120" Height="50" ZIndex="3" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Digital Input" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="159.99999999999997" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="4" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch0" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="159.99999999999997" OffsetY="120" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="5" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch1" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="400" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="6" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Digital Output" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="559" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="7" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch0" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="560" OffsetY="120" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="8" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch1" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="239.99999999999997" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="9" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TLEDsControl" Type="TLEDsControl">
+          <definitions Width="40" Height="40" DefaultColor="#FFFFFFFF" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
+            <colors>
+              <color ComparisonValue="0" Color="#FFFFFFFF" Comparison="IsEqualTo" />
+              <color ComparisonValue="1" Color="#FFFF0000" Comparison="IsEqualTo" />
+            </colors>
+          </definitions>
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="u32DI0State" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="640" OffsetY="80" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="10" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
+          <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="false" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="u32DO0State" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="640" OffsetY="120" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="94" Height="27" ZIndex="11" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="IPhoneSwitch" Type="iPhoneSwitch">
+          <definitions Width="NaN" Height="NaN" ButtonValue="1" ToggleOnValue="1" ToggleOffValue="0" ButtonLabel="" IsButtonChecked="false" LabelOffValue="" LabelOnValue="" FontColor="#FF000000" FontFamily="Arial Black" FontSize="12" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="u32DO1State" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="20" OffsetY="199" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="120" Height="50" ZIndex="12" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Analog Input" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="159.99999999999997" OffsetY="200" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="13" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch0" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="159.99999999999997" OffsetY="239" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="14" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch1" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="219.99999999999997" OffsetY="200" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="111.30000000447035" Height="36.629999999999995" ZIndex="15" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="Numeric" Type="Numeric2">
+          <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="20" NumericForegroundValue="#FF000000" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="2" Width="NaN" Height="NaN" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="f32AI0Vol" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="219.99999999999997" OffsetY="240" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="111.30000000447035" Height="36.629999999999995" ZIndex="16" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="Numeric" Type="Numeric2">
+          <definitions NumericFontFamilyValue="Arial Black" NumericFontSizeValue="20" NumericForegroundValue="#FF000000" NumericTextAlignmentValue="Right" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="2" Width="NaN" Height="NaN" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="f32AI1Vol" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="640" OffsetY="200" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="17" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextboxControl" Type="TextboxControl">
+          <definitions ColorBackground="#FFF5F5F5" Font="Arial Black" FontSizeValue="50" FontStyleValue="Normal" FontWeightValue="Normal" ColorFont="#FF000000" TextAlignmentValue="Right" SeparateThousandsWithComma="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" NumberOfDecimalPlaces="2" ColorBorder="#FFA9A9A9" BorderThickness="1" CornerRadius="1" Width="100" Height="40" ContainsAssignedSymbols="true" Text="" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="f32AO0Vol" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="400" OffsetY="200" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="140" Height="50" ZIndex="18" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="Analog Output" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="562" OffsetY="197" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="19" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch0" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="563" OffsetY="237" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="80" Height="50" ZIndex="20" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextTool" Type="TextTool">
+          <definitions BackgroundValue="#00FFFFFF" FontFamilyValue="Arial Black" FontSizeValue="16" FontStyleValue="Normal" FontWeightValue="Normal" ForegroundValue="#FF000000" TextAlignmentValue="Left" IsThousandSeparatorEnabled="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" DecimalPlaces="0" Width="NaN" Height="NaN" ContainsAssignedSymbols="false" Text="ch1" />
+        </content>
+      </innercontent>
+      <symbols />
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="640" OffsetY="240" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="100" Height="40" ZIndex="21" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TextboxControl" Type="TextboxControl">
+          <definitions ColorBackground="#FFF5F5F5" Font="Arial Black" FontSizeValue="50" FontStyleValue="Normal" FontWeightValue="Normal" ColorFont="#FF000000" TextAlignmentValue="Right" SeparateThousandsWithComma="false" ScalingFactor="1" ScalingOffset="0" ScalingFormat="" LeadingZeroes="0" NumberOfDecimalPlaces="2" ColorBorder="#FFA9A9A9" BorderThickness="1" CornerRadius="1" Width="100" Height="40" ContainsAssignedSymbols="true" Text="" />
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="f32AO1Vol" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+    <node ScreenId="DataScreen1" OffsetX="239.99999999999997" OffsetY="120" AllowMove="true" AllowResize="true" AllowRotate="false" AllowSelect="true" IsInRuntimeMode="false" Width="40" Height="40" ZIndex="1" IsLocked="false" UpdateWhenVisible="true" LabelBackgroundValue="#00FFFFFF" LabelFontFamilyValue="Segoe UI" LabelFontSizeValue="14" LabelFontStyleValue="Normal" LabelFontWeightValue="Normal" LabelForegroundValue="#FF000000" LabelTextAlignmentValue="Center" LabelTextTrimming="None" LabelTextWrapping="Wrap" LabelVerticalAlignment="Center" LabelHorizontalAlignment="Center" LabelVisibility="Collapsed" IsWritableControl="false" WritableValue="0" LabelValue="">
+      <innercontent>
+        <content ControlType="TLEDsControl" Type="TLEDsControl">
+          <definitions Width="40" Height="40" DefaultColor="#FFFFFFFF" BorderThickness="2" BoarderColor="#FF808080" IsWidthAndHeightSame="false" UseRGBFormatInsteadOfMappings="false" ShapeType="Circle" RotationAngle="0">
+            <colors>
+              <color ComparisonValue="0" Color="#FFFFFFFF" Comparison="IsEqualTo" />
+              <color ComparisonValue="1" Color="#FFFF0000" Comparison="IsEqualTo" />
+            </colors>
+          </definitions>
+        </content>
+      </innercontent>
+      <symbols>
+        <symbol path="u32DI1State" IsAnArrayElement="false" ElementIndex="-1" />
+      </symbols>
+    </node>
+  </nodes>
+  <explorer>
+    <content>
+      <nodes>
+        <node IsEnable="true" Name="Project1" NodeType="Project" ScreenType="None" UniqueID="Project2">
+          <node IsEnable="true" Name="DataScreen1" NodeType="Screen" ScreenType="DataScreen" UniqueID="DataScreen1" />
+          <node IsEnable="true" Name="Oscilloscope" NodeType="Screen" ScreenType="Oscilloscope_Screen" UniqueID="Oscilloscope_Screen1" />
+        </node>
+      </nodes>
+    </content>
+  </explorer>
+  <infineon XMC_Family="XMC_4000" />
+  <application>
+    <docking>
+      <ArrayOfDockingParams xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>-1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>110.7871198568873</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>682</PreviousDesiredHeightInDockedMode>
+          <Name>workspaceExplorerMainView</Name>
+          <State>Dock</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Right</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>124.9552772808587</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>826</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>165</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>true</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>true</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>5</IndexInDockMode>
+          <IndexInFloatMode>5</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>-1</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>false</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>1278</Width>
+            <Height>826</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>-1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>848.35323959350274</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>848.35323959350274</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>173.568281938326</PreviousDesiredHeightInDockedMode>
+          <Name>usrSymbolBrowser</Name>
+          <State>Dock</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Bottom</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>956.84601623778735</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>173.568281938326</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>200</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>true</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>true</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>5</IndexInDockMode>
+          <IndexInFloatMode>5</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>-1</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>false</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>956.84601623778735</Width>
+            <Height>826</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>-1</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>166.85964054961002</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>682</PreviousDesiredHeightInDockedMode>
+          <Name>toolboxMainView</Name>
+          <State>Dock</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Left</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>188.19870648135412</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>826</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>175</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>true</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>true</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>4</IndexInDockMode>
+          <IndexInFloatMode>4</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>-1</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>false</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>1278</Width>
+            <Height>826</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>2</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <Name>DataScreen1</Name>
+          <State>Document</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Left</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>90</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>90</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>false</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>false</IsSelectedTab>
+          <IsActiveWindow>true</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>2</IndexInDockMode>
+          <IndexInFloatMode>2</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,100,50</MDIBounds>
+          <TDIIndex>1</TDIIndex>
+          <IsSelected>true</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>true</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+        <DockingParams>
+          <PreviousFloatingWindowRect />
+          <FloatWindowState>Normal</FloatWindowState>
+          <ZorderInFloatMode>0</ZorderInFloatMode>
+          <TabOrderIndex>0</TabOrderIndex>
+          <PreviousContainerDesiredSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </PreviousContainerDesiredSize>
+          <PreviousDesiredWidthInDockedMode>0</PreviousDesiredWidthInDockedMode>
+          <PreviousDesiredHeightInDockedMode>0</PreviousDesiredHeightInDockedMode>
+          <Name>Oscilloscope_Screen1</Name>
+          <State>Document</State>
+          <NoHeader>false</NoHeader>
+          <SideDocked>Left</SideDocked>
+          <SideFloating>Left</SideFloating>
+          <TargetDocked />
+          <TargetFloating />
+          <DesiredWidthInDockedMode>90</DesiredWidthInDockedMode>
+          <DesiredHeightInDockedMode>90</DesiredHeightInDockedMode>
+          <DesiredWidthInFloatingMode>90</DesiredWidthInFloatingMode>
+          <DesiredHeightInFloatingMode>90</DesiredHeightInFloatingMode>
+          <NoDock>false</NoDock>
+          <CanDock>false</CanDock>
+          <CanClose>false</CanClose>
+          <IsSelectedTab>false</IsSelectedTab>
+          <IsActiveWindow>false</IsActiveWindow>
+          <WindowRect />
+          <TabGroupName />
+          <IsTabGroupOwner>false</IsTabGroupOwner>
+          <SideTabOrder>0</SideTabOrder>
+          <IndexInDockMode>1</IndexInDockMode>
+          <IndexInFloatMode>1</IndexInFloatMode>
+          <TabOrderInDockMode>0</TabOrderInDockMode>
+          <TabOrderInFloatMode>0</TabOrderInFloatMode>
+          <MDIBounds>0,0,124,50</MDIBounds>
+          <TDIIndex>0</TDIIndex>
+          <IsSelected>false</IsSelected>
+          <MDIMinimizedBounds>0,0,124,24</MDIMinimizedBounds>
+          <MDIWindowState>Normal</MDIWindowState>
+          <AllowMDIResize>true</AllowMDIResize>
+          <TDIGroupOrientation>Horizontal</TDIGroupOrientation>
+          <WayOfTDIGroup />
+          <DockForSide>Left</DockForSide>
+          <PreviousIndexInDockMode>0</PreviousIndexInDockMode>
+          <PreviousSideInDockMode>Left</PreviousSideInDockMode>
+          <DoShift>false</DoShift>
+          <SideRelativetoContainer>Left</SideRelativetoContainer>
+          <TabParent />
+          <DockWindowState>Normal</DockWindowState>
+          <CanMaximize>true</CanMaximize>
+          <CanMinimize>true</CanMinimize>
+          <CanResizeInDockedState>true</CanResizeInDockedState>
+          <CanResizeHeightInDockedState>true</CanResizeHeightInDockedState>
+          <CanResizeWidthInDockedState>true</CanResizeWidthInDockedState>
+          <CanResizeInFloatState>true</CanResizeInFloatState>
+          <CanResizeHeightInFloatState>true</CanResizeHeightInFloatState>
+          <CanResizeWidthInFloatState>true</CanResizeWidthInFloatState>
+          <CanFloatMaximize>true</CanFloatMaximize>
+          <IsFixedSize>false</IsFixedSize>
+          <IsFixedHeight>false</IsFixedHeight>
+          <IsFixedWidth>false</IsFixedWidth>
+          <FixedHeight>0</FixedHeight>
+          <FixedWidth>0</FixedWidth>
+          <ContainerSize>
+            <Width>0</Width>
+            <Height>0</Height>
+          </ContainerSize>
+          <PreviousHostWidth>90</PreviousHostWidth>
+          <PreviousHostHeight>90</PreviousHostHeight>
+          <PreviousContainerHeight>90</PreviousContainerHeight>
+          <PreviousContainerWidth>90</PreviousContainerWidth>
+          <TargetAutoHide />
+          <SplitPanelOffset>0</SplitPanelOffset>
+          <IsSwapped>false</IsSwapped>
+        </DockingParams>
+      </ArrayOfDockingParams>
+    </docking>
+  </application>
+</workspace>
