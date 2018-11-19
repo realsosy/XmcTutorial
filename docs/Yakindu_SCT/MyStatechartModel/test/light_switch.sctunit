@@ -1,0 +1,25 @@
+testclass light_switch_tests for statechart light_switch {
+	
+	@Test
+    operation isStateOffActiveAfterInit () {
+        enter
+        assert active (light_switch.main_region.Off)
+    }
+
+    @Test
+    operation isStateOnActiveAfterOperateInOffState () {
+        enter
+        raise operate
+        proceed 1 cycle
+        assert active (light_switch.main_region.On)
+    }
+
+    @Test
+    operation isStateOffActiveAfterOperateInOnState () {
+        isStateOnActiveAfterOperateInOffState
+        raise operate
+        proceed 1 cycle
+        assert active (light_switch.main_region.Off)
+    }
+
+}

@@ -1,0 +1,11 @@
+<testsuite name="light_switch_tests" time="">
+  <testcase name="isStateOffActiveAfterInit" classname="platform:/resource/MyFirst/test/light_switch.sctunit#light_switch_tests.isStateOffActiveAfterInit" time="">
+  </testcase>
+  <testcase name="isStateOnActiveAfterOperateInOffState" classname="platform:/resource/MyFirst/test/light_switch.sctunit#light_switch_tests.isStateOnActiveAfterOperateInOffState" time="">
+  </testcase>
+  <testcase name="isStateOffActiveAfterOperateInOnState" classname="platform:/resource/MyFirst/test/light_switch.sctunit#light_switch_tests.isStateOffActiveAfterOperateInOnState" time="">
+    <failure>Assertion failed: "//proceed 1 cycle        assert active (light_switch.main_region.Off)" (Line 22)
+    	Expected: Off, actual: [On]
+    </failure>
+  </testcase>
+</testsuite>
