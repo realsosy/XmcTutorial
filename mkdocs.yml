@@ -58,7 +58,7 @@ pages:
     - Statemachine Example (Stop Light): ProgFsmStopLight.md
 
 - Circuit Background:
-    - Digital Signal Interfacing: DigitalIos.md
+    - Digital Signal Interfacing: DigitalInterface.md
 #    - Analog Signal Interfacing
 
 #- Advanced:
