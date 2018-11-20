@@ -54,10 +54,11 @@ void ADXL345_WriteRegister(uint8_t reg, uint8_t value){
 }
 
 uint8_t ADXL345_ReadRegister(uint8_t reg){
-	//이 함수 내부를 완성해 보세요.
-
-
-
+	MasterDataTx[0] = 0x80 | reg;
+	MasterDataTx[1] = 0xFF;
+	SPI_MASTER_Transfer(&dhSPI_MASTER, MasterDataTx, MasterDataRx, FrameByte);
+	while(SPI_MASTER_IsRxBusy(&dhSPI_MASTER))  {  } /*Wait until MasterDataRx updated */
+	return(MasterDataRx[1]);
 }
 
 bool ADXL345_Begin(void){
@@ -71,8 +72,8 @@ bool ADXL345_Begin(void){
 	}
 
 	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
-
 	ADXL345_WriteRegister(ADXL345_BW_RATE, 0x0D); /* Set Conversion Rate 800Hz */
+
 
 	return(true);
 }
@@ -82,26 +83,43 @@ void ADXL345_GetXYZ_Polling(void){
 	lower = ADXL345_ReadRegister(ADXL345_DATAX0);
 	upper = ADXL345_ReadRegister(ADXL345_DATAX1);
 	AccelX = (int16_t) ( (upper << 8) | lower);
-	//AccelY, AccelZ 를 구하는 부분을 완성해 보세요.
+	lower = ADXL345_ReadRegister(ADXL345_DATAY0);
+	upper = ADXL345_ReadRegister(ADXL345_DATAY1);
+	AccelY = (int16_t) ( (upper << 8) | lower);
+	lower = ADXL345_ReadRegister(ADXL345_DATAZ0);
+	upper = ADXL345_ReadRegister(ADXL345_DATAZ1);
+	AccelZ = (int16_t) ( (upper << 8) | lower);
+}
 
+void ISR_SpiMasterRx(){
+	//DIGITAL_IO_ToggleOutput(&dhDO_SPI_MASTER);
+
+	// Get XYZ using ISR
+	if(bXyzComplete==false) {
+		AccelX = (int16_t)( ((uint16_t)MasterDataRx[3] << 8) | MasterDataRx[1] );
+		AccelY = (int16_t)( ((uint16_t)MasterDataRx[7] << 8) | MasterDataRx[5] );
+		AccelZ = (int16_t)( ((uint16_t)MasterDataRx[11] << 8) | MasterDataRx[9] );
+		bXyzComplete = true;
+	}
 }
 
 void ADXL345_GetXYZ(void){
 	// Get XYZ using ISR
-	//이 함수 내부를 완성해 보세요.
+	MasterDataTx[0] = 0x80|ADXL345_DATAX0;
+	MasterDataTx[1] = 0;
+	MasterDataTx[2] = 0x80|ADXL345_DATAX1;
+	MasterDataTx[3] = 0;
+	MasterDataTx[4] = 0x80|ADXL345_DATAY0;
+	MasterDataTx[5] = 0;
+	MasterDataTx[6] = 0x80|ADXL345_DATAY1;
+	MasterDataTx[7] = 0;
+	MasterDataTx[8] = 0x80|ADXL345_DATAZ0;
+	MasterDataTx[9] = 0;
+	MasterDataTx[10] = 0x80|ADXL345_DATAZ1;
+	MasterDataTx[11] = 0;
 
-
-
-
-
-}
-
-void ISR_SpiMasterRx(){
-	// Get XYZ using ISR
-	//이 함수 내부를 완성해 보세요.
-
-
-
+	bXyzComplete = false;
+	SPI_MASTER_Transfer(&dhSPI_MASTER, MasterDataTx, MasterDataRx, FrameByte*6);
 }
 
 void TestAdxl345(){

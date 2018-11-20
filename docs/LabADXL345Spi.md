@@ -62,14 +62,13 @@ date: 2017-09-01
 
     ```
     uint8_t ADXL345_ReadRegister(uint8_t reg){
-    ```
-
-
-
-
+	
+	
+	
+	
     	return(         );
     }
-    ​```
+    ```
 
 
 
