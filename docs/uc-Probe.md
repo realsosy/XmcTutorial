@@ -142,6 +142,7 @@ int main(void)
 
 * 시스템타이머 설정
     `Timer_1ms_Id = SYSTIMER_CreateTimer(1000, SYSTIMER_MODE_PERIODIC, (void*) CB_Timer_1ms, NULL);`
+
     * 시스템타이머가 1KHz 로 동작하도록, 즉 1msec 마다 `CB_Timer_1ms` 인터럽트가 수행되도록 설정한다.
 
 * 시스템타이머 시작
@@ -159,7 +160,6 @@ int main(void)
     * 전역변수로 `uint8_t g_var;` 선언되어있고,
     * `g_var++; `1초마다 그 값을 1씩 증가시킨다.
 
-    
 
 ### uC/Probe 의 설정
 
@@ -400,7 +400,6 @@ int main(void)
     * 현재의 `ticks` 값으로 각도 `channel->radians` 계산
     * 파형의 종류에 따라 `channel->value` 계산
 
-    
 
 ### uC/Probe 설정
 
@@ -410,7 +409,7 @@ int main(void)
     * 정상적으로 설치되었다면 다음과 같이
         * Communication/Scope/ 디렉토리에 `probe_scope.c`, `probe_scope.h` 파일이 존재하고
         * Communication/Scope/cfg 디렉토리에 `probe_scope_cfg.h` 파일이 존재한다.
-        ![AddScopeCode](./images/uCProbe_AddScopeCode.png)
+        ![AddScopeCode](./images/ucProbe_AddScopeCode.png)
 1. Scope code 포함
     * 위의 세개의 파일을 프로젝트에 포함시켜야 한다.
         * scope 라이브러리 파일: `probe_scope.c`, `probe_scope.h`
