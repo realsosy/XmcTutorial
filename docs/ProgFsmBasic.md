@@ -10,11 +10,10 @@ date: 2017-09-01
 
 ## State Machine 이란
 
-* **State Machine (상태기계)**란 시스템을 추상화 해서 표현하는 수학적 모델링 방법의 하나이다.
-
+* **StateMachine(상태기계)**란 시스템을 추상화 해서 표현하는 수학적 모델링 방법의 하나이다.
     * 대부분의 경우에 유한한 개수의 상태를 갖는 시스템을 표현하게 되므로 Finite-state machine (FSM, 유한상태기계)를 대신해서 줄여서 State Machine이라 일반적으로 부른다.
 
-* State Machine 으로 모델링 되는 시스템은 유한한 개수의 **State(상태) ** 를 갖게 된다.
+* State Machine 으로 모델링 되는 시스템은 유한한 개수의 **State(상태)** 를 갖게 된다.
 
 * 외부의 **Input(입력)** 에 따라서 이 State Machine 은 한 상태에서 다른 상태로 **Transition(천이)**하게 된다. 
 
@@ -37,14 +36,14 @@ date: 2017-09-01
 
     * 즉 다시 말해서 Output의 개수, 혹은 그 이상의 State를 사용해서 표현한다.
 
-  ![ProgFsmBasic_OnOffMoore](images/ProgFsmBasic_OnOffMoore.png)
+    ![ProgFsmBasic_OnOffMoore](images/ProgFsmBasic_OnOffMoore.png)
 
 ### B. Mealy Machine
 
 * Output은 State가 아니라 Transition 할 때 결정된다. 
     * 그러므로 Output의 개수와 무관하게 State를 결정할 수 있으므로, Moore Machine과 비교해서 더 간단하게 표현할 수 있는 경우들이 생긴다.  
 
-![ProgFsmBasic_OnOffMealy](images/ProgFsmBasic_OnOffMealy.png)
+    ![ProgFsmBasic_OnOffMealy](images/ProgFsmBasic_OnOffMealy.png)
 
 
 
@@ -54,13 +53,13 @@ date: 2017-09-01
 * 보다 유용하게 State Machine을 표현하기 위하여 David Harel 이 State Machine을 체계적으로 작성하는 방법을 제안하였다.
 * 이 방법을 Statechart 라 부르고, UML(Unified Modeling Language)의 State Machine 표현 방법의 표준이 되었다.
 * **Statechart = state-diagram + depth + orthogonality + broadcast communication**  이라 말할 수 있다.
-* **depth**: State가 내부적으로 substate 를 갖을 수 있다.  
-  * 이렇게 함으로써 계층적인 상태도 표현이 가능해 졌다.
-* **orthogoality**: 독립적으로 동작하는 State Machine을 별도로 표시한다.
-  * 이렇게 함으로써 무관한 상태들간의 조합을 피할 수 있다.
-* **broadcast**: state machine 간의 정보들을 주고 받을 수 있다.
-  * 이렇게 함으로써 State Machine 간의 동작을 동기화 시킬 수 있다.
-* 그 외에도 조건을 사용한 표현방법, history state를 사용하는 방법, 상태 내에서 entry, exit 동작 등을 추가할 수 있도록 확대하였다.
+    * **depth**: State가 내부적으로 substate 를 갖을 수 있다.  
+        * 이렇게 함으로써 계층적인 상태도 표현이 가능해 졌다.
+    * **orthogoality**: 독립적으로 동작하는 State Machine을 별도로 표시한다.
+        * 이렇게 함으로써 무관한 상태들간의 조합을 피할 수 있다.
+    * **broadcast**: state machine 간의 정보들을 주고 받을 수 있다.
+        * 이렇게 함으로써 State Machine 간의 동작을 동기화 시킬 수 있다.
+    * 그 외에도 조건을 사용한 표현방법, history state를 사용하는 방법, 상태 내에서 entry, exit 동작 등을 추가할 수 있도록 확대하였다.
 
 * **[Statechart 표현 방법]**
     * 각 State는 내부에 entry, always, exit 에 해당하는 동작을 갖을 수 있다.
@@ -78,6 +77,8 @@ date: 2017-09-01
 * 입력과 출력이 있으며,
 * 입력에 대하여 출력을 결정하는 특별한 동작을 하는 것
 
+    ![ProgFsmBasic_System](images/ProgFsmBasic_System.png)
+
 ```mermaid
 graph LR
 u(u) --> |Input| System
@@ -88,7 +89,7 @@ System --> |Output| y(y)
 
 * 수학적으로 표현하면
 
-   * 입력에 대한 출력의 대응 관계
+    * 입력에 대한 출력의 대응 관계
 * 이 관계를 표현하는 방법은 
     * 현재 입력값에 의해서만 출력이 결정되는 Static System 과
     * 과거의 모든 입력값과 현재 입력값에 의해서 결정되는 Dynamic System으로 구분되어 질 수 있다.  (과거의 입력값에 의해서 시스템의 현재 State를 결정한다)
@@ -101,10 +102,10 @@ System --> |Output| y(y)
     * 그러나, Dynamic System으로 모델링 되는 시스템은 현재의 입력값 만으로는 시스템의 출력을 결정할 수 없고 과거의 모든 입력으로 시스템의 State를 결정한 후 현재의 입력과 조합하여 원하는 출력을 얻을 수 있다.
     * 그러므로 Dynamic System을 제어하기 위해서는 보다 복잡한 수학적 방법이 필요하고, Continuous Variable Dynamic System을 대상으로 Control 관련 교과목을 배워야 한다.  Discrete Event Dynamic System의 경우에는 이보다는 직관적이므로 State Machine으로 모델링하고 설계하는 내용을 배우는 정도면 간단한 제어는 수행할 수 있다.  컴퓨터 공학 전공 과정에서는 UML, 혹은 Automata 이론 등이 있다.
 
-  |                | Continuous Variable   | Discrete Event |
-  | -------------- | --------------------- | -------------- |
-  | Static System  | Algebraic Equation    | Simple Mapping |
-  | Dynamic System | Differential Equation | State Machine  |
+|                | Continuous Variable   | Discrete Event |
+| -------------- | --------------------- | -------------- |
+| Static System  | Algebraic Equation    | Simple Mapping |
+| Dynamic System | Differential Equation | State Machine  |
 
 ## [Activity]
 
@@ -132,13 +133,21 @@ float MyHysteresis(float input);
 
 ```mermaid
 graph LR
-Falling(FALLING)
-Rising(RISING)
+StateLower(Lower)
+StateUpper(Upper)
 
-S(S)-->Falling
-Falling -->|Input > UPPER_THRESHOLD | Rising
-Rising -->|Input < LOWER_THRESHOLD | Falling
+S(S)-->StateLower
+StateLower -->|Input > UPPER_THRESHOLD | StateUpper
+StateUpper -->|Input < LOWER_THRESHOLD | StateLower
 ```
+
+
+
+![ProgFsmBasic_MyHysteresis](/images/ProgFsmBasic_MyHysteresis.png)
+
+
+
+
 
 **[구현]**
 
@@ -163,24 +172,24 @@ float MyHysteresis(float input);
 #define LOWER_VALUE 0.0
 
 enum Hysteresis_tag{
-	FALLING,
-	RISING
+	UPPER_STATE,
+	LOWER_STATE
 };
 
 
 float MyHysteresis(float input){
 
-	static enum Hysteresis_tag state = FALLING;
+	static enum Hysteresis_tag state = LOWER;
 
 	float output = 0.0;
 	switch(state){
 
-	case FALLING:
+	case LOWER:
 
 
 		break;
 
-	case RISING:
+	case UPPER:
 
 
 		break;
@@ -193,7 +202,7 @@ float MyHysteresis(float input){
 
 
 
-**[시험] **이 함수의 시험 조건을 설계합니다.
+**[시험] ** 이 함수의 시험 조건을 설계합니다.
 
 * 시험 Setup
     * LOWER_THRESHOLD = 1.0
@@ -209,13 +218,13 @@ float MyHysteresis(float input){
 
 | Step | Input | Exp. State | Meas. State | Exp. Output | Meas. Output |
 | ---- | ----- | ---------- | ----------- | ----------- | ------------ |
-| 0    | 0.0   | FALLING    |             | 0.0         |              |
-| 1    | 2.0   | FALLING    |             | 0.0         |              |
-| 2    | 2.9   | FALLING    |             | 0.0         |              |
-| 3    | 3.1   | RISING     |             | 5.0         |              |
-| 4    | 4.0   | RISING     |             | 5.0         |              |
-| 5    | 2.0   | RISING     |             | 5.0         |              |
-| 6    | 0.9   | FALLING    |             | 0.0         |              |
+| 0    | 0.0   | LOWER      |             | 0.0         |              |
+| 1    | 2.0   | LOWER      |             | 0.0         |              |
+| 2    | 2.9   | LOWER      |             | 0.0         |              |
+| 3    | 3.1   | UPPER      |             | 5.0         |              |
+| 4    | 4.0   | UPPER      |             | 5.0         |              |
+| 5    | 2.0   | UPPER      |             | 5.0         |              |
+| 6    | 0.9   | LOWER      |             | 0.0         |              |
 
 
 
