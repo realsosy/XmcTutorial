@@ -4,7 +4,7 @@ author: Wootaik Lee(wootaik@changwon.ac.kr)
 date: 2017-09-01  
 ---
 
-# State Machine - Stop Light Example
+# State Machine Example (Stop Light)
 
 
 

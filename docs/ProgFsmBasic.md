@@ -157,15 +157,6 @@ StateUpper -->|Input < LOWER_THRESHOLD | StateLower
 /*
  * Hysteresis.h
  */
-
-float MyHysteresis(float input);
-
-/*
- * Hysteresis.c
- */
-
-#include "Hysteresis.h"
-
 #define UPPER_THRESHOLD 3.0
 #define UPPER_VALUE 5.0
 #define LOWER_THRESHOLD 1.0
@@ -175,21 +166,32 @@ enum Hysteresis_tag{
 	UPPER_STATE,
 	LOWER_STATE
 };
+```
+
+
+```c
+float MyHysteresis(float input);
+
+/*
+ * Hysteresis.c
+ */
+
+#include "Hysteresis.h"
 
 
 float MyHysteresis(float input){
 
-	static enum Hysteresis_tag state = LOWER;
+	static enum Hysteresis_tag state = LOWER_STATE;
 
 	float output = 0.0;
 	switch(state){
 
-	case LOWER:
+	case LOWER_STATE:
 
 
 		break;
 
-	case UPPER:
+	case UPPER_STATE:
 
 
 		break;

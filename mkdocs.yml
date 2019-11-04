@@ -56,6 +56,7 @@ pages:
     - System Timer & Scheduler: ProgSystemTimerScheduler.md
     - Statemachine: ProgFsmBasic.md
     - Statemachine Example (Stop Light): ProgFsmStopLight.md
+    - Statemachine Example (Auto Increment): ProgFsmAutoIncrement.md
 
 - Circuit Background:
     - Digital Signal Interfacing: DigitalInterface.md
