@@ -7,30 +7,19 @@
 
 #include "Hysteresis.h"
 
-#define UPPER_THRESHOLD 3.0
-#define UPPER_VALUE 5.0
-#define LOWER_THRESHOLD 1.0
-#define LOWER_VALUE 0.0
-
-enum Hysteresis_tag{
-	FALLING,
-	RISING
-};
-
-
 float MyHysteresis(float input){
 
-	static enum Hysteresis_tag state = FALLING;
+	static enum Hysteresis_tag state = LOWER_STATE;
 
-	float output = 0.0;
+	float output;
 	switch(state){
 
-	case FALLING:
+	case LOWER_STATE:
 
 
 		break;
 
-	case RISING:
+	case UPPER_STATE:
 
 
 		break;
