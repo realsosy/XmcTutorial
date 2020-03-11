@@ -63,8 +63,8 @@ bool I2C_MasterTransEnable = false;
 
 uint8_t I2C_SlaveAddress = 0xA6;  /* 0x53: ADXL345 alternate address, A6 for write, A7 for read */
 
-uint32_t SysTimer100mId;
-bool SysTimer100mFlag=false;
+uint32_t SysTimer10mId;
+bool SysTimer10mFlag=false;
 
 bool bXyzComplete = false;
 int16_t AccelX;
@@ -178,8 +178,8 @@ void TestAdxl345(){
 
 }
 
-void SysTimer100m(){
-	SysTimer100mFlag = true;
+void SysTimer10m(){
+	SysTimer10mFlag = true;
 }
 
 int main(void)
@@ -199,9 +199,9 @@ int main(void)
 
 	ADXL345_Begin();
 
-	SysTimer100mId = SYSTIMER_CreateTimer(100000, SYSTIMER_MODE_PERIODIC, SysTimer100m, NULL);
+	SysTimer10mId = SYSTIMER_CreateTimer(100000, SYSTIMER_MODE_PERIODIC, SysTimer10m, NULL);
 
-	SYSTIMER_StartTimer(SysTimer100mId);
+	SYSTIMER_StartTimer(SysTimer10mId);
 
 	while(1){
 
@@ -228,11 +228,11 @@ int main(void)
 			I2C_MasterTransEnable = false;
 		}
 
-		if(SysTimer100mFlag == true){
+		if(SysTimer10mFlag == true){
 			if (AccelScanEnable == true){
 				TestAdxl345();
 			}
-			SysTimer100mFlag = false;
+			SysTimer10mFlag = false;
 		}
 
 	}

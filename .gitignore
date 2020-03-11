@@ -1,4 +1,6 @@
 *.autosave
 *.bak
 *.zip
+*.log
 desktop.ini
+
