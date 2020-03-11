@@ -34,6 +34,7 @@ pages:
     - Watchdog(Optional): Watchdog.md
     - ADXL345 with SPI: ADXL345Spi.md
     - ADXL345 with I2C(Optional): ADXL345I2c.md
+    - Semihosting: Semihosting.md
 #    - Compare & Capture: Ccu8SliceConfig.md
 #    - DAC LUT: DacLut.md
 #    - DMA: DmaCh.md
