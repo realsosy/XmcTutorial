@@ -8,7 +8,7 @@ date: Mar 11 2020
 
 ## 목적
 
-* 마이크로컨트롤러의 이벤트(Event) 개념을 이해하고 EVENT_DETECTOR, EVENT_GENERATOR APP 의 활용방법을 익힌다.
+* 마이크로컨트롤러의 Semihosting 개념을 이해하고 Debugger를 사용하여 `printf()`를 활용할 수 있도록 힌다.
 
 ## 참고자료
 
