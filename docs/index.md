@@ -7,30 +7,27 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 ## Objectives & Scopes
 
 * Objectives
-
-  * 마이크로컨트롤러 개발 관련 내용을 전문적으로 배우려는 대학생 및 일반인을 위한 지침서
-  * Infineon의 XMC4000-series 를 활용하여 개발하려는 사람을 위한 활용서​
+	* 마이크로컨트롤러 개발 관련 내용을 전문적으로 배우려는 대학생 및 일반인을 위한 지침서
+	* Infineon의 XMC4000-series 를 활용하여 개발하려는 사람을 위한 활용서​
 
 * Scopes
-
-  * 초급: 모듈별 개념 설명 with DAVE
-  * 중급: DAVE APP 고급 / XMC lib 활용
-  * 고급: XMC의 고급 기능 활용
+    * 초급: 모듈별 개념 설명 with DAVE
+    * 중급: DAVE APP 고급 / XMC lib 활용
+    * 고급: XMC의 고급 기능 활용
 
 * 관련 URL
+    * [Google Drive](https://goo.gl/vkcuA1)
+    * [Read the Docs](http://xmctutorial.readthedocs.io/ko/latest/)
+    * [GitHub](https://github.com/realsosy/XmcTutorial)
 
-  * [Google Drive](https://goo.gl/vkcuA1)
-  * [Read the Docs](http://xmctutorial.readthedocs.io/ko/latest/)
-  * [GitHub](https://github.com/realsosy/XmcTutorial)
-
-  ​
+  
 
 ## 초급
 
 * 개요
-  * 대상: 일반 C 프로그래밍 경험을 갖는 초보 emb 개발자
-  * 내용: emb 특징, 기본 interface 개론(DIO, ADC, DAC, PWM), Dave App, uC-Probe
-  * 프로젝트: Signal generator & monitor
+    * 대상: 일반 C 프로그래밍 경험을 갖는 초보 emb 개발자
+    * 내용: emb 특징, 기본 interface 개론(DIO, ADC, DAC, PWM), Dave App, uC-Probe
+    * 프로젝트: Signal generator & monitor
 
 1. Getting Started XMC: Follow-up example (DIO, PWM, ADC)  
 2. Development Environment
@@ -45,16 +42,16 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 11. [Mini Project] Signal Generator & Monitor
 
 * [Programing 관련 필요 지식]
-  * Pointer
-  * Structure
-  * Function
+    * Pointer
+    * Structure
+    * Function
 
 ## 중급
 
 * 개요
-  * 대상: emb 경험자
-  * 내용: 중급 interface(Timer CCU4/8, USIC or USB), XMC lib
-  * 프로젝트: raidar
+    * 대상: emb 경험자
+    * 내용: 중급 interface(Timer CCU4/8, USIC or USB), XMC lib
+    * 프로젝트: raidar
 
 1. Counter, Timer
 2. CCU8 Slice Config
@@ -66,15 +63,15 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 8. [Example] Radar
 
 * [Programing 관련 필요 지식]
-  * 모듈화 & Library
-  * State-machine
+    * 모듈화 & Library
+    * State-machine
 
 ## 고급(준비중)
 
 * 개요
-  * 대상: XMC 성능을 최대한 활용하고자 하는 개발자
-  * 내용: 고급 interface(MultiCAN, SDMMC, ETH), FreeRTOS, CMSIS, XMC Toolbox
-  * 제외 interface 모듈(HRPWM, POSIF, DSD, EBU, LEDTS)
+    * 대상: XMC 성능을 최대한 활용하고자 하는 개발자
+    * 내용: 고급 interface(MultiCAN, SDMMC, ETH), FreeRTOS, CMSIS, XMC Toolbox
+    * 제외 interface 모듈(HRPWM, POSIF, DSD, EBU, LEDTS)
 
 1. DAC LUT
 2. DMA
@@ -89,7 +86,7 @@ Author: Wootaik Lee (wootaik@changwon.ac.kr)
 11. Library for Servo motors(optional)
 
 * [Programing 관련 필요 지식]
-  * Real-Time OS
+	* Real-Time OS
 
 ## Programming 배경 지식
 
