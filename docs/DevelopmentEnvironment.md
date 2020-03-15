@@ -66,11 +66,11 @@ DAVE는 대표적인 통합개발환경인 이클립스(Eclipse)를 기반으로
     ![DevEnv_CreatingProject1](./images/DevEnv_CreatingProject1.png)
 
 * 프로젝트 불러오기
-    - 상단의 File 메뉴에서 import를 선택한다.
+    - 상단의 File 메뉴에서 import를 선택한다.  
     ![DevEnv_ProjectImport0](./images/DevEnv_ProjectImport0.png)
-    - Existing Projects into Workspace를 선택한다.
+    - Existing Projects into Workspace를 선택한다.   
     ![DevEnv_ProjectImport1](./images/DevEnv_ProjectImport1.png)
-    - 아래의 그림과 같이 Browse를 선택하고 프로젝트가 있는 폴더위치를 설정한다. 그리고 Import 하고자 하는 프로젝트를 체크하고 Finish를 누른다.
+    - 아래의 그림과 같이 Browse를 선택하고 프로젝트가 있는 폴더위치를 설정한다. 그리고 Import 하고자 하는 프로젝트를 체크하고 Finish를 누른다.  
     ![DevEnv_ProjectImport2](./images/DevEnv_ProjectImport2.png)
     - 위의 그림의 폴더 위치는 DAVE가 제공하는 예제코드의 위치이다. 이 곳에서 유용한 예제코드를 불러올 수 있다.
 
@@ -86,7 +86,7 @@ DAVE는 대표적인 통합개발환경인 이클립스(Eclipse)를 기반으로
     ![DevEnv_AddHeaderSource1](./images/DevEnv_AddHeaderSource1.png)
 
 * 프로젝트 활성화
-    - 작업하고자 하는 프로젝트의 마우스 우클릭 메뉴에서 Set Active Project를 선택하여 활성화한다. 활성화 된 프로젝트의 이름은 bold체가 된다.
+    - 작업하고자 하는 프로젝트의 마우스 우클릭 메뉴에서 Set Active Project를 선택하여 활성화한다. 활성화 된 프로젝트의 이름은 bold체가 된다.  
     ![DevEnv_SetProject](./images/DevEnv_SetProject.png)
 
 * 프로젝트의 디버그/릴리즈 설정
@@ -154,9 +154,9 @@ DAVE에서 디버거를 사용하기 위해서는 보드와의 연결, 프로그
     ![DevEnv_Debug0](./images/DevEnv_Debug0.png)
 
 ### 디버거 활용: Breakpoint와 변수값 확인
-* Breakpoint는 특정 위치에서 프로그램의 실행을 정지시키는 기능이다. 아래의 그림에서는 PWM_SetFreq(&dhPWM_1, u32NewFreq) 함수가 실행되기 전 프로그램은 일시 정지된다. Breakpoint는 아래 그림의 표시 된 영역에서 정지시키고자 하는 라인에 맞춰 더블클릭하여 설정한다.
+* Breakpoint는 특정 위치에서 프로그램의 실행을 정지시키는 기능이다. 아래의 그림에서는 PWM_SetFreq(&dhPWM_1, u32NewFreq) 함수가 실행되기 전 프로그램은 일시 정지된다. Breakpoint는 아래 그림의 표시 된 영역에서 정지시키고자 하는 라인에 맞춰 더블클릭하여 설정한다.  
 ![DevEnv_Debug1](./images/DevEnv_Debug1.png)
-* 디버거에서 프로그램 실행 중 변수 값을 확인 할 수 있다. 변수 값을 보기 위해서는 아래 그림과 같이 Expressions 탭을 추가해야 한다. Expressions 탭에서 Add new expression을 누르고 확인하고자 하는 변수 이름을 입력한다.
+* 디버거에서 프로그램 실행 중 변수 값을 확인 할 수 있다. 변수 값을 보기 위해서는 아래 그림과 같이 Expressions 탭을 추가해야 한다. Expressions 탭에서 Add new expression을 누르고 확인하고자 하는 변수 이름을 입력한다.  
 ![DevEnv_Debug2](./images/DevEnv_Debug2.png)
 ![DevEnv_Debug3](./images/DevEnv_Debug3.png)
 ## 개발 보드(Board)
