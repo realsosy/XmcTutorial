@@ -12,7 +12,12 @@ date: Sep 01 2016
 ## 참고자료
 
 * [XMC4500 Reference Manual v1.5 2014-04]
-    - xmc4500_rm_v1.5_2014_04.pdf
+    
+- xmc4500_rm_v1.5_2014_04.pdf
+    
+* [The Call Stack from Computer Science]: https://www.youtube.com/watch?v=Q2sFmqvpBe0
+
+
 
 ## 시작하며
 
