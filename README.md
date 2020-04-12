@@ -15,8 +15,8 @@
 
 *   관련 URL
 
-    *   Google Drive: https://goo.gl/vkcuA1
+    *   Google Drive: https://bit.ly/3eh6VjC
     *   Read the Docs: http://xmctutorial.readthedocs.io/ko/latest/
     *   GitHub: https://github.com/realsosy/XmcTutorial
 
-    ​
+    
