@@ -79,6 +79,7 @@ XMC4500에는 CCU4(Capture Compare Unit 4)와 CCU8(Capture Compare Unit 8)라는
 ### 개략(Overview)
 
 PWM APP은 CCU4 와 CCU8 모듈을 사용하여 다음의 기능을 제공한다.
+
 * PWM 주파수와 듀티싸이클을 설정할 수 있다.
 * 최적의 PWM 분해능을 얻기 위하여 PWM에서 사용하는 타이머의 주기를 계산해 준다. 이 타이머는 내부적으로 prescaler를 가지고 있는 16비트 카운터이다.
 * PWM은 프로그램 초기화시에 시작될 수도 있고, `PWM_Start()` 을 사용하여 사용자가 시작하게 할 수도 있다.
