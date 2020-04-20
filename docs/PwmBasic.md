@@ -49,9 +49,11 @@ $$
 \bar{y} = D \cdot Y_{max}
 $$
 
-### PWM 파형의 사용예
-
 로 간단하게 표현된다. 이 경우에는 신호의 평균값 \\(\bar{y}\\) 이 듀티싸이클 \\(D\\) 와 직접적으로 비례하는 관계를 갖게 된다.
+
+
+
+### PWM 파형의 사용예
 
 ![Averaging Circuit](./images/PwmBasic_RcRl.png)
 
@@ -265,9 +267,7 @@ PWM APP을 초기화하고, 현재의 동작상태를 검사하고, 시작/중�
 * `void PWM_Stop(PWM_t *const handle_ptr);`
 * `bool PWM_GetTimerStatus(PWM_t *const handle_ptr);`
 
-타이머가 동작중인지 대기상태(idle)인지 확인
-
-* PWM의 주기와 듀티싸이클 값 등을 설정한다. 아울러 핀의 출력 상태 또한 설정한다.
+PWM의 주기와 듀티싸이클 값 등을 설정한다. 아울러 핀의 출력 상태 또한 설정한다.
 
 * `PWM_STATUS_t PWM_SetFreq(PWM_t *const handle_ptr, uint32_t pwm_freq_hz);`
 
@@ -275,10 +275,9 @@ PWM APP을 초기화하고, 현재의 동작상태를 검사하고, 시작/중�
 
 * `PWM_STATUS_t PWM_SetFreqAndDutyCycle(PWM_t *const handle_ptr, uint32_t pwm_freq_hz, uint32_t duty_cycle);`
 
-* `PWM_STATUS_t PWM_SetPeriodMatchValue(PWM_t *const handle_ptr, uint32_t period_match_value);`; period_match_value: 주기일치 레지스터에 직접적으로 쓰는 값
+* `PWM_STATUS_t PWM_SetPeriodMatchValue(PWM_t *const handle_ptr, uint32_t period_match_value);`  
 
-* `void PWM_SetPassiveLevel(PWM_t *const handle_ptr, PWM_OUTPUT_PASSIVE_LEVEL_t pwm_output_passive_level);
-	* `; pwm_output_passive_level: PWM_OUTPUT_PASSIVE_LEVEL_HIGH/LOW
+* `void PWM_SetPassiveLevel(PWM_t *const handle_ptr, PWM_OUTPUT_PASSIVE_LEVEL_t pwm_output_passive_level);` 
 
 Event와 관련된 상태를 읽고 Event 플래그를 초기화 한다.
 
@@ -414,6 +413,8 @@ pwm_status = PWM_SetDutyCycle(&PWM_0, 2000); // Change duty cycle value to 20%.
 ## 실습프로젝트
 
 * Lab PwmBasic
+
+
 
 ## 요약
 
