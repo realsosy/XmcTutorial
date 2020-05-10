@@ -129,6 +129,6 @@ void ISR_dhPWM_0_period_match(void)
 다음의 사항들을 구현해보자.
 
 * INTERRUPT_0 APP의 Enable interrupt at initialization 설정을 해제하고 메쏘드를 사용하여 직접 인터럽트를 Enable 해보자.
-* 인터럽트를 블럭시켜보자
+* 인터럽트를 활성화/비활성화 시켜보자
     - PIN_INTERRUPT를 추가하고 Falling Edge에서 인터럽트가 발생하도록 한다. 그리고 BUTTON2(P1.15)에 맵핑한다.
-    - BUTTON2를 누를 때마다 INTERRUPT_0를 Enable/Disable 상태를 변경하도록 코딩해보자.
+    - BUTTON2를 누를 때마다 INTERRUPT_0를 Enable/Disable 상태를 변경하도록 한다.
