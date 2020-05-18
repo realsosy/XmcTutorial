@@ -174,6 +174,8 @@ int main(void)
 * DIGITAL_IO APP을 2개 추가하고 각각 BUTTON1, BUTTON2와 연결한다.
 * 소프트웨어 타이머를 추가하고 100 ms 주기로 콜백 함수를 실행시킨다.
 * 콜백함수에는 다음의 동작을 구현한다.
-    - BUTTON1을 누르면 u32SwTimer_200ms 소프트웨어타이머를 삭제한다.
-    - BUTTON2을 누르면 u32SwTimer_1s 소프트웨어타이머를 삭제한다.
-    - BUTTON1과 BUTTON2를 동시에 누르면, u32SwTimer_200ms, u32SwTimer_1s 중 삭제된 소프트웨어 타이머를 재 생성하고 시작한다.
+    - BUTTON1을 누르면 Timer_200ms 소프트웨어타이머를 삭제한다.
+    - BUTTON2을 누르면 Timer_1s 소프트웨어타이머를 중지한다.
+    - BUTTON1과 BUTTON2를 동시에 누르면, 
+        - Timer_200ms 가 삭제되었다면 다시 생성하고 시작시킨다.
+        - Timer_1s 가 중지되었다면 다시 시작한다.

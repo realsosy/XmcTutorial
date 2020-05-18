@@ -207,7 +207,7 @@ typedef enum SYSTIMER_MODE
 
   `uint32_t  SYSTIMER_CreateTimer (uint32_t period, SYSTIMER_MODE_t mode, SYSTIMER_CALLBACK_t callback, void *args);`
 
-    - period[us] : 소프트타이머의
+    - period[us] : 소프트타이머의 주기
     - mode : SYSTIMER_MODE_ONE_SHOT / SYSTIMER_MODE_PERIODIC
     - callback : 소프트타이머의 콜백 함수
     - args : 콜백 함수의 파라미터
