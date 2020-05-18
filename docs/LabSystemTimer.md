@@ -49,7 +49,7 @@ date: Jan. 10 2017
 
 #### Functions
 * main
-    - SYSTIMER_CreateTimer 메쏘드를 사용하여 Timer_200ms_Id, u32SwTimer_1s_Id 소프트웨어 타이머 두 개를 생성한다.
+    - SYSTIMER_CreateTimer 메쏘드를 사용하여 Timer_200ms_Id, Timer_1s_Id 소프트웨어 타이머 두 개를 생성한다.
     - 두 소프트웨어 타이머를 SYSTIMER_StartTimer 메쏘드를 사용하여 시작한다.
 
 | Name           | period[us] | mode                   | callback       |
