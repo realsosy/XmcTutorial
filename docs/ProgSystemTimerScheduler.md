@@ -64,7 +64,7 @@ date: 2017-09-01
     * 우선순위가 높은 ISR실행중 우선순위가 낮은 Interrupt가 발생하면, 우선순위 높은 ISR이 끝난 후에 낮은 Interrupt를 실행하게 된다.  (낮은 Interrupt는 이동안 Block 된다)
     * ISR 실행 중 다른 ISR를 실행할 수 있는 시스템은 Nested Interrupt 를 지원한다고 말한다.
 
-![SystemTimerScheduler-InterruptPriority](images/SystemTimerScheduler-InterruptPriority.png)
+![SystemTimerScheduler-InterruptPriority](images/SystemTimerScheduler-InterruptPriority.svg)
 
 
 * Interrupt와 Scheduler의 유사성
@@ -79,7 +79,7 @@ date: 2017-09-01
     * 특정 이벤트에 대하여 즉각적으로 반응을 보여 처리해야 하는 경우는 Interrupt를 활용한다.
     * 일반적으로 Interrupt 는 Scheduler 보다 우선적으로 실행하게 된다.
 
-![SystemTimerScheduler-InterruptScheduler](images/SystemTimerScheduler-InterruptScheduler.png)
+![SystemTimerScheduler-InterruptScheduler](images/SystemTimerScheduler-InterruptScheduler.svg)
 
 ### Interrupt Service Routine 을 사용할 때 주의 사항
 
@@ -98,34 +98,26 @@ date: 2017-09-01
 
 ### Infinite-loop을 활용한 실행 
 
-* **SevenSegLab ** 의 예제를 다시 살펴보자.
+**SevenSegLab ** 의 예제를 다시 살펴보자.
+
+```
+Initialize Button
+Initialize Segment
+Loop:
+	Number <= Check Button status
+	Convert Number to SegmentNum
+	Display Segment
+	Delay
+End Loop
+```
+
+
+
 * main 함수에 있는 Infinite-loop 에서 필요한 실행 코드들을 순차적으로 무한반복으로 실행하도록 구성되어 있다. 
 * 전체 실행 주기를 맞추기 위해서 delay()함수를 만들어 loop 의 끝부분에서 실행하도록 되어 있다.
 * 이 예제에서 CPU는 다른 코드를 실행할 필요가 없으므로 문제가 없지만, 복잡한 다른 일을 실행해야 한다면 **귀중한 CPU의 시간을 낭비하는 delay() 함수 대신** 다른 방법을 강구해야 한다.
-```mermaid
-sequenceDiagram
-	Main ->> Button: Initialize Button
-	Main ->> Seg: Initialize Seg
-	loop Every Cycle
-		Main ->> Button: CheckButton()
-	    activate Button
-	    Button -->> Main: Update Number
-	    deactivate Button
-	    Main ->> Seg: ConvertSeg()
-	    activate Seg
-	    Seg -->> Main: Update SegmentNum
-	    deactivate Seg
-	    Main ->> Seg: DisplaySeg()
-	    activate Seg
-	    Seg -->> Main: 
-	    deactivate Seg
-	    activate Main
-	    Main ->> Main: delay()
-	    deactivate Main
-	end
-```
 
-![ProgSystemTimerScheduler_Delay](images/ProgSystemTimerScheduler_Delay.png)
+![ProgSystemTimerScheduler_Delay](images/SystemTimerScheduler-SequenceDelay.svg)
 
 ### Interrupt 활용한 주기적 실행
 
@@ -145,23 +137,7 @@ sequenceDiagram
 
     
 
-```mermaid
-sequenceDiagram
-	opt Every SYSTIMER INTERRUPT 1ms
-		SYSTIMER ->> Task: Task1ms()
-		activate Task
-		Note right of Task: Task1ms() blocks other timing		
-		deactivate Task
-	end
-	opt Every SYSTIMER INTERRUPT 10ms
-		SYSTIMER ->> Task: Task10ms()
-		activate Task
-		Note right of Task: Task10ms() blocks other timing		
-		deactivate Task
-	end
-```
-
-![ProgSystemTimerScheduler_SysTimerTask](images/ProgSystemTimerScheduler_SysTimerTask.png)
+![ProgSystemTimerScheduler_SysTimerTask](images/SystemTimerScheduler-SystemTimerTask.svg)
 
 
 
@@ -180,32 +156,9 @@ sequenceDiagram
 * Scheduler_Loop() 함수는 설정된 주기 정보에 따라 Task 들을 호출한다.
     * 사용자는 **실행주기에 맞는 Task에 해당 동작**을 프로그래밍 한다.
 
-```mermaid
-sequenceDiagram
-	Main ->> Scheduler: Scheduler_Init()
-	activate Scheduler
-	Scheduler ->> Tasks: TaskInit()
-	
-	deactivate Scheduler
-	loop Every Cycle
-		Main ->> Scheduler: Scheduler_Loop()
-        opt Every1ms
-        	Scheduler ->> Tasks: Task1ms()
-        end
-        opt Every10ms
-        	Scheduler ->> Tasks: Task10ms()
-        end
-        opt Every100ms
-        	Scheduler ->> Tasks: Task100ms()
-        end
-        opt Every1000ms
-        	Scheduler ->> Tasks: Task1000ms()
-        end
-       	Scheduler ->> Tasks: TaskIdle()
-    end
-```
+![SystemTimerScheduler-SchedulerTask](./images/SystemTimerScheduler-SchedulerTask.svg)
 
-![ProgSystemTimerScheduler_SchedulerTask](images/ProgSystemTimerScheduler_SchedulerTask.png)
+
 
 #### Scheduler 구현
 
@@ -215,26 +168,7 @@ sequenceDiagram
 * SystemTimer 와 Scheduler_Loop() 사이에는 Flag를 하나 사용하여 동기화 시킨다.
 * 이와 같이 구현함으로써 ISR로 인한 실행 지연등을 최소화한 상태로 주기적인 사용자 Task 를 실행시킬 수 있게 된다.
 
-```mermaid
-sequenceDiagram
-	opt Every SYSTIMER INTERRUPT
-		SYSTIMER ->> Scheduler: CallBack1ms()
-		activate Scheduler
-		Note right of Scheduler: TickCounter++		
-		Note right of Scheduler: Set Task[XXms]Flag
-		deactivate Scheduler
-	end
-	loop infinite loop
-		main ->> Scheduler: Scheduler_Loop()
-		activate Scheduler
-		Note right of Scheduler: Check Task[XXms]Flag 		
-		Note right of Scheduler: Call Task[XXms]( ) 		
-		Note right of Scheduler: Clear Task[XXms]Flag 		
-		deactivate Scheduler
-	end
-```
-
-![ProgSystemTimerScheduler_SchedulerMain](images/ProgSystemTimerScheduler_SchedulerMain.png)
+![ProgSystemTimerScheduler_SchedulerMain](./images/SystemTimerScheduler-SchedulerMain.svg)
 
 ```c
 static uint32_t TickCounter = 0;
@@ -246,7 +180,7 @@ static void TaskIdle(void);
 static void Task1ms(void);
 static void Task10ms(void);
 
-void CallBack1ms(){
+void TickInterruptHandler(){   // CallBack1ms()
 	TickCounter++;
 	if(TickCounter == 10000){
 		TickCounter = 0;
@@ -286,49 +220,16 @@ void StaticScheduler_Loop(void){
 }
 ```
 
+
+
 #### 사용예 
 
 *   간단한 Scheduler 를 사용하 SevenSegLab을 재구성하면 다음과 같다.
 
-```mermaid
-sequenceDiagram
-	Main ->> Scheduler: Scheduler_Init()
-	Scheduler ->> Tasks: TaskInit()
-	activate Tasks
-	Tasks ->> Button: Initialize Button
-	Tasks ->> Seg: Initialize Seg
-	deactivate Tasks
-	loop Every Cycle
-		Main ->> Scheduler: Scheduler_Loop()
-        opt Every1ms
-        	Scheduler ->> Tasks: Task1ms()
-        end
-        opt Every10ms
-        	Scheduler ->> Tasks: Task10ms()
-			Tasks ->> Button: CheckButton()
-            activate Button
-            Button -->> Tasks: Update Number
-            deactivate Button
-            Tasks ->> Seg: ConvertSeg()
-            activate Seg
-            Seg -->> Tasks: Update SegmentNum
-            deactivate Seg
-            Tasks ->> Seg: DisplaySeg()
-            activate Seg
-            Seg -->> Tasks: 
-            deactivate Seg
-        end
-        opt Every100ms
-        	Scheduler ->> Tasks: Task100ms()
-        end
-        opt Every1000ms
-        	Scheduler ->> Tasks: Task1000ms()
-        end
-       	Scheduler ->> Tasks: TaskIdle()
-    end
-```
 
-![ProgSystemTimerScheduler_SevenSegLab](images/ProgSystemTimerScheduler_SevenSegLab.png)
+![ProgSystemTimerScheduler_SevenSegLab](images/SystemTimerScheduler-SevenSeg.svg)
+
+
 
 ### Homework
 
