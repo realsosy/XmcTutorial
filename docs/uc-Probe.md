@@ -30,7 +30,7 @@ date: Sep 01 2016
 
 * Monitoring & Calibration 환경
 
-디버거를 사용하면 언제든지 브레이크포인트를 걸어서 프로그램의 내부상태를 확인할 수 있다. 그러나 대부분의 임베디드 시스템은 마이크로컨트롤러가 독립적으로 동작하는 것이 아니라 외부에 연결되어 있는 기타 다른 장치들과 상호작용을 하면서 동작하므로 함부르 브레이크포인트를 걸어 중단시킬 수 없다. 특시 연속적인 신호의 변환을 하는 신호처리 시스템이나 제어시스템의 경우에는 입출력 값과 내부 변수 값 등을 시스템을 멈추지 않고 살펴보고 필요에 따라서 임의로 변경하는 단계가 필요하다. 시스템을 동작시키는 상황에서, 중요 변수들을 살펴보는 것을 Monitoring 이라 하고, 중요 파라메터들을 변경하는 것을 Calibration 이라고 한다. Monitoring & Calibration 환경은 임베디드 시스템 개발에서 빼어놓을 수 없는 필수적인 환경이다. Monitoring & Calibration 환경은 개발단계에서 살펴보면 시스템 통합되는 단계 전후에서 활용이 되는 것이 일반적이지만, 이것의 활용을 더욱 확대하여 시스템의 출하 이후 각종 진단이나 새롭게 Calibration 하는 용도로도 활용할 수 있고, 별도의 사용자 인터페이스가 없는 시스템에서는 이 환경을 약간 수정하여서 사용자 인터페이스로도 활용하기도 한다.
+디버거를 사용하면 언제든지 브레이크포인트를 걸어서 프로그램의 내부상태를 확인할 수 있다. 그러나 대부분의 임베디드 시스템은 마이크로컨트롤러가 독립적으로 동작하는 것이 아니라 외부에 연결되어 있는 기타 다른 장치들과 상호작용을 하면서 동작하므로 함부로 브레이크포인트를 걸어 중단시킬 수 없다. 특시 연속적인 신호의 변환을 하는 신호처리 시스템이나 제어시스템의 경우에는 입출력 값과 내부 변수 값 등을 시스템을 멈추지 않고 살펴보고 필요에 따라서 임의로 변경하는 단계가 필요하다. 시스템을 동작시키는 상황에서, 중요 변수들을 살펴보는 것을 Monitoring 이라 하고, 중요 파라메터들을 변경하는 것을 Calibration 이라고 한다. Monitoring & Calibration 환경은 임베디드 시스템 개발에서 빼어놓을 수 없는 필수적인 환경이다. Monitoring & Calibration 환경은 개발단계에서 살펴보면 시스템 통합되는 단계 전후에서 활용이 되는 것이 일반적이지만, 이것의 활용을 더욱 확대하여 시스템의 출하 이후 각종 진단이나 새롭게 Calibration 하는 용도로도 활용할 수 있고, 별도의 사용자 인터페이스가 없는 시스템에서는 이 환경을 약간 수정하여서 사용자 인터페이스로도 활용하기도 한다.
 
 ## Micrium uC/Probe
 
@@ -53,7 +53,7 @@ uC/Probe 는 임베디드 시스템의 내부 정보를 손쉽게 그래픽한 �
 3. GUI 화면의 구성
     - Widget 목록에서 Drag-and-drop 방식으로 화면을 구성한다.
     - 필요에 따라 여러개의 화면을 구성할 수 있다.
-4. 변수화 Widget 의 연결
+4. 변수와 Widget 의 연결
 5. uC/Probe 를 수행
     - uC/Probe 는 화면에 구성되어 있는 변수들의 정보를 통신을 통해서 요청하고 타켓프로세서에서 그 값을 읽어들여 출력하게 된다.
 
@@ -69,7 +69,7 @@ uC/Probe 는 임베디드 시스템의 내부 정보를 손쉽게 그래픽한 �
 
 
 
-## Monitoring & Calibration 기본
+## [Ex1] Monitoring & Calibration 기본
 
 * 목적
 
@@ -82,7 +82,7 @@ uc/Probe 를 사용하여 중요 변수를 monitoring 하고 calibration 하는 
     * 1 msec 마다 ticks 변수를 증가시키고, 이 값이 1000 이 되면 0으로 다시 rollover 시킨다
     * 1 초마다 g_var 변수를 증가시키고, LED1을 토글 한다.
 
-프로젝트 xmc4500_relaxlite_ucprobe_ex1 를 import 한다.
+프로젝트 ucProbe_ex1 를 import 한다.
 
 ```c
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
@@ -147,9 +147,8 @@ int main(void)
 
 * 시스템타이머 시작
     `SYSTIMER_StartTimer(Timer_1ms_Id);`
-
-    * Timer_1ms 동작 시작
-
+* Timer_1ms 동작 시작
+    
 * tick 카운터 변수 관리
     * `CB_Timer_1ms()` 함수 내에서 `static uint32_t ticks = 0;` 으로 정적변수로 선언하여 카운터 값을 관리한다.
     * 핸들러의 수행시 마다 `ticks++;` 하여 1씩 증가시키고,
@@ -169,7 +168,7 @@ int main(void)
 
 * uC/Probe 를 실행하고 파일을 저장한다.
     * 프로젝트 단위로 함께 관리하는 것이 용이하므로 프로젝트의 디렉토리에 프로젝트명으로 저장한다.
-![CreateProject](./images/ucProbe_CreateProject.png)
+![CreateProject](./images/uCProbe_CreateProject.png)
 
 * Symbol 파일의 등록
     * 프로젝트에서 생성된 실행파일 (./Debug/xmc4500_relaxlite_ucprobe_ex1.elf) 을 등록 선택한다.
@@ -218,7 +217,9 @@ int main(void)
 
 위의 예제와 같이 전역변수를 손쉽게 Monitoring 할 수 있으며 Calibration 할 수 있다.
 
-## 오실로스코프 활용
+
+
+## [Ex2] 오실로스코프 활용
 
 * 목적
 
@@ -230,9 +231,10 @@ uC/Probe의 ProbeScope 기능을 활성화하고 활용하는 방법을 배운�
     * 2개(channel)의 파형을 생성시킨다.
     * 각 채널별로 사인파, 구형파, 삼각파를 선택할 수 있도록 한다.
     * 각 파형의 주파수(frequency), 진폭(amplitude), 오프셋(offset)을 설정할 수 있도록 한다.
-    * 구형파와 삼각파는 퓨리에 시리즈 (Fourier Series)로 근사화 한다.
+    
+        
 
-프로젝트 xmc4500_relaxlite_ucprobe_ex2 를 import 한다.
+프로젝트 ucProbe_ex2 를 import 한다.
 
 ```c
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
@@ -470,7 +472,9 @@ ProbeScope_Sampling();
         * trigger 조건등을 설정할 수 있다.  
     ![ViewScope](./images/ucProbe_ViewScope.png)
 
-## Data 로깅과 스크립트 활용 (고급)
+
+
+## [Ex3] Data 로깅과 스크립트 활용 (고급)
 
 * 목적
 
