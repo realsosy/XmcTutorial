@@ -41,7 +41,7 @@ date: 2017-09-01
 
 **[참고]**
 
-* Critical Instance(임계 순간)
+* Critical Instant(임계 순간)
     * 위의 예에서 0ms 와 10ms 순간에는 Task5ms와 Task10ms 가 동시에 실행되어야 한다.
     * 프로그래밍을 하는 방식에 따라 Task5ms 와 Task10ms 중 먼저 호출되는 것이 먼저 실행되게 된다.
     * 실행주기가 짧은 것은 먼저 끝나는 것이 바람직하다. (잘못하면 다음 실행주기 전까지 끝내지 못할 가능성이 높다)
@@ -233,10 +233,13 @@ void StaticScheduler_Loop(void){
 
 ### Homework
 
-* src/MyStaticScheduler.zip 파일을 import 하여 Scheduler 의 동작 코드를 이해한다. 향후 이 Scheduler 를 사용하여 스케쥴링 하게 됩니다. 
+* src/_StaticScheduler.zip 파일을 import 하여 Scheduler 의 동작 코드를 이해한다. 향후 이 Scheduler 를 사용하여 스케쥴링 하게 됩니다. 
     * P1.0의 LED2 가 5Hz의 주기로 blinking 되는지 확인한다.
     * 이 프로젝트에는 uC/Probe code 가 삽입되어 있습니다. uCProbe를 연결하여 실행하면 TickCounter 변수가 0~1,000 까지 1초의 주기로 계속 증가하는 것을 확인할 수 있습니다.
-    * Scheduler를 사용하여 P1.1의 LED1이 0.5Hz의 주기로 blinking 되도록 한다.
+
+1. P1.0 LED2가 500ms주기로 Toggle 하도록 수정하여 보세요.
+    * Hint) Task500ms 를 추가하여도 되고, Task100ms 가 실행되는 회수를 세면서 5번마다 1번씩 실행하여도 됩니다. (2번째 방법을 추천합니다.)
+2. P1.1의 LED1이 500ms 주기로 Toggle 하도록 기능을 추가해 보세요. 단 LED2를 Toggle 하는 동작과 동시에 하는 것이 아니라, 200ms 의 Time Offset을 갖도록 하세요. (Task 간의 충돌, 임계순간,을 피하는 Scheduling을 해보세요.)
 
  
 
