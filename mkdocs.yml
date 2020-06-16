@@ -66,13 +66,13 @@ pages:
 #- Advanced:
 #    - Project Template: ProjectTemplate.md
 
-- Examples & Mini projects:
-    - Final SignalGeneratorMonitor: LabSigGenMon.md
+- Examples:
     - Ultrasonic Sensor: UltrasonicSensor.md
 
-- Demo(Signal Generator & Monitor):
+- [Project1]Signal Generator & Monitor:
     - Requirement Specification: SigGenMon_0ReqSpec.md
     - Design: SigGenMon_1Design.md
+    - SW Implementation: LabSigGenMon.md
     - Test: SigGenMon_3TestReport.md
 
 - References: 'References.md'
