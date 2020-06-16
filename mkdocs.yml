@@ -69,7 +69,7 @@ pages:
 - Examples:
     - Ultrasonic Sensor: UltrasonicSensor.md
 
-- [Project1]Signal Generator & Monitor:
+- Project1 Signal Generator & Monitor:
     - Requirement Specification: SigGenMon_0ReqSpec.md
     - Design: SigGenMon_1Design.md
     - SW Implementation: LabSigGenMon.md
