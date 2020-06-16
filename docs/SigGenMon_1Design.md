@@ -152,10 +152,13 @@
 ![analogin](./images/analogin.png)
 
 * 아날로그 신호를 입력받기 위한 회로이다. 전압 범위를 조정하기 전압분배회로, 전압증폭회로 그리고 고주파 신호를 차단하기위한 저역통과필터를 포함
+
 * 전압 범위 : 0 ~ 5 [V]
+
 * Op-amp Biasing Voltage : 3.3 [V]
   
     * XMC4500 ADC 전압 범위가 최대 3.3 [V]
+    
 * 아날로그 입력회로 이득 : 0.652
     * 전압분배회로 이득 :  $ \frac{1}{2}$
     
@@ -166,14 +169,16 @@
         $$ Gain = 1+\frac{R3}{R4} = 1+\frac{9.1k}{30k} = 1.303$$
         
     * 따라서, 총 이득은 
-        $$ AI_{GAIN} = \frac{1}{2}\times 1.303 = 0.652 $$
+        $$ AiGAIN = \frac{1}{2}\times 1.303 = 0.652 $$
 
 * Cutoff Frequency : 10 [kHz]
   
     ​    $$ CutoffFrequency =  \frac{1}{2\pi R5C1} = \frac{1}{2\pi \times 15k \times 1000p} = 10610$$ [Hz]
+    
 * R2, R4 저항 값을 변경하여 사용자가 전압 이득 변경 가능
   
     * 핀 소켓 사용
+    
 * R5 저항 값을 변경하여 사용자가 Cutoff Frequency 변경가능
   
     * 핀 소켓 사용
@@ -186,7 +191,7 @@
 * 전압 범위 : 0.6 ~ VDDS [V]
 * Op-amp 전압 증폭회로 이득 : 2
   
-    $$ AO\_Gain =1+\frac{R2}{R3} = 1+\frac{10k}{10k} = 2$$
+    $$ AOGain =1+\frac{R2}{R3} = 1+\frac{10k}{10k} = 2$$
 * R2 저항을 변경하여 이득 변경 가능
   
     * 핀 소켓 사용
@@ -211,19 +216,21 @@
 
 - Analog Input 0 / Analog Input 1 신호 샘플링
 - ADC 변환값을 실제 전압(f32AI0Vol/f32AI1Vol)으로 변환
-    - $$ AI\_Vol = \frac{ADC\_Ch}{4095}\times3.3\times \frac{1}{AI\_GAIN} $$
-    - $ AI\_Vol$는 실제 입력되는 아날로그 전압으로 f32AI0Vol/f32AI1Vol 변수가 이에 해당한다.
-    - $ ADC\_Channel $는 ADC Ch0/Ch1의 변환값이다.
-    - $ AI\_GAIN $ 값은 Electric Design-Analog Input 참고
+  
+    $$ AiVol = \frac{AdcCh}{4095}\times3.3\times \frac{1}{AiGAIN} $$
+    
+    - $ AiVol$는 실제 입력되는 아날로그 전압으로 f32AI0Vol/f32AI1Vol 변수가 이에 해당한다.
+    - $ AdcChannel $는 ADC Ch0/Ch1의 변환값이다.
+    - $ AiGAIN $ 값은 Electric Design-Analog Input 참고
 
 #### Sense_Vdds
 
 - Signal Interface Shield 기준전압 측정
 - ADC 변환값에서 실제 전압으로 변환
   
-    $$ f32Vdds = \frac{ADC\_Ch2}{4095}\times3.3\times \frac{1}{GAIN} $$
+    $$ f32Vdds = \frac{AdcCh2}{4095}\times3.3\times \frac{1}{GAIN} $$
     
-    - ADC_Ch2는 ADC Ch2의 ADC 변환값이다.
+    - AdcCh2는 ADC Ch2의 ADC 변환값이다.
     - GAIN 값은 2이다. 관련된 정보는 도면 참고
 
 ![Software2](./images/Software2.svg)
@@ -236,12 +243,13 @@
 
 - 출력 전압(f32AO0Vol/f32AO1Vol)을 만들기 위해서 DAC에 입력 할 값 연산 
   
-    $$ DAC =  \frac{4095}{2.2}(AO\_Vol\times \frac{1}{AO\_GAIN}-0.3)$$
+    $$ Dac =  \frac{4095}{2.2}(AoVol\times \frac{1}{AoGAIN}-0.3)$$
     
-    - $ DAC $는 DAC 하드웨어에 써야 할 값이다.
-    - $ AO\_ Vol $는 실제 출력되는 아날로그 전압으로 f32AO0Vol/f32AO1Vol 변수가 이에 해당한다.
-    - $ AO\_ GAIN $ 값은 Electric Design-Analog Output 참고
+    - $ Dac $는 DAC 하드웨어에 써야 할 값이다.
+    - $ AoVol $는 실제 출력되는 아날로그 전압으로 f32AO0Vol/f32AO1Vol 변수가 이에 해당한다.
+    - $ AoGAIN $ 값은 Electric Design-Analog Output 참고
 - 출력전압에 해당하는 아날로그 신호 출력
+
 - f32AO0Vol/f32AO1Vol 변수가 아날로그 출력 범위를 넘어설 경우 다음의 동작을 한다.
     - 0.6 V 미만의 전압이 입력 됐을 때, 0.6V로 변환
     - 3.3 V 모드 일 때, 3.3 V보다 높은 값이 입력 됐을 때, 3.3 V로 변환
