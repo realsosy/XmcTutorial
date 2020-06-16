@@ -50,7 +50,7 @@
 
 * 5V CMOS 출력 -> 5V TTL 입력
 
-  5V CMOS $$ V_{OH} $$가 5V TTL $ V_{IH} $보다 높고, 5V CMOS $ V_{OL} $이 5V TTL $ V_{IL} $보다 낮으므로 추가회로 없이 인터페이스 가능하다.
+  5V CMOS $ V_{OH} $가 5V TTL $ V_{IH} $보다 높고, 5V CMOS $ V_{OL} $이 5V TTL $ V_{IL} $보다 낮으므로 추가회로 없이 인터페이스 가능하다.
 
 * 5V TTL 출력 -> 5V CMOS 입력
 
