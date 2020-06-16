@@ -160,13 +160,17 @@
     * 전압분배회로 이득 :  $ \frac{1}{2}$
     
         $$ Gain = \frac{R2}{R1+R2} = \frac{13k}{13k+13k}=\frac{1}{2}$$
+    
     * Op-amp 전압 증폭회로 이득 : 1.303
     
         $$ Gain = 1+\frac{R3}{R4} = 1+\frac{9.1k}{30k} = 1.303$$
-    * 따라서, 총 이득은 $$ AI_{GAIN} = \frac{1}{2}\times 1.303 = 0.652 $$
+        
+    * 따라서, 총 이득은 
+        $$ AI_{GAIN} = \frac{1}{2}\times 1.303 = 0.652 $$
+
 * Cutoff Frequency : 10 [kHz]
   
-    ​    $$ Cutoff\_Frequency =  \frac{1}{2\pi R5C1} = \frac{1}{2\pi \times 15k \times 1000p} = 10610$$ [Hz]
+    ​    $$ CutoffFrequency =  \frac{1}{2\pi R5C1} = \frac{1}{2\pi \times 15k \times 1000p} = 10610$$ [Hz]
 * R2, R4 저항 값을 변경하여 사용자가 전압 이득 변경 가능
   
     * 핀 소켓 사용
@@ -181,10 +185,10 @@
 * 아날로그 신호를 출력하기 위한 회로이며, 전압 증폭회로로 구성
 * 전압 범위 : 0.6 ~ VDDS [V]
 * Op-amp 전압 증폭회로 이득 : 2
-    
+  
     $$ AO\_Gain =1+\frac{R2}{R3} = 1+\frac{10k}{10k} = 2$$
 * R2 저항을 변경하여 이득 변경 가능
-    
+  
     * 핀 소켓 사용
 
 
@@ -208,15 +212,15 @@
 - Analog Input 0 / Analog Input 1 신호 샘플링
 - ADC 변환값을 실제 전압(f32AI0Vol/f32AI1Vol)으로 변환
     - $$ AI\_Vol = \frac{ADC\_Ch}{4095}\times3.3\times \frac{1}{AI\_GAIN} $$
-    - $$ AI\_Vol$$는 실제 입력되는 아날로그 전압으로 f32AI0Vol/f32AI1Vol 변수가 이에 해당한다.
-    - $$ ADC\_Channel $$는 ADC Ch0/Ch1의 변환값이다.
-    - $$ AI\_GAIN $$ 값은 Electric Design-Analog Input 참고
+    - $ AI\_Vol$는 실제 입력되는 아날로그 전압으로 f32AI0Vol/f32AI1Vol 변수가 이에 해당한다.
+    - $ ADC\_Channel $는 ADC Ch0/Ch1의 변환값이다.
+    - $ AI\_GAIN $ 값은 Electric Design-Analog Input 참고
 
 #### Sense_Vdds
 
 - Signal Interface Shield 기준전압 측정
 - ADC 변환값에서 실제 전압으로 변환
-    
+  
     $$ f32Vdds = \frac{ADC\_Ch2}{4095}\times3.3\times \frac{1}{GAIN} $$
     
     - ADC_Ch2는 ADC Ch2의 ADC 변환값이다.
@@ -231,12 +235,12 @@
 #### Actuate_AO
 
 - 출력 전압(f32AO0Vol/f32AO1Vol)을 만들기 위해서 DAC에 입력 할 값 연산 
-    
+  
     $$ DAC =  \frac{4095}{2.2}(AO\_Vol\times \frac{1}{AO\_GAIN}-0.3)$$
     
-    - $$ DAC $$는 DAC 하드웨어에 써야 할 값이다.
-    - $ AO\_Vol $는 실제 출력되는 아날로그 전압으로 f32AO0Vol/f32AO1Vol 변수가 이에 해당한다.
-    - $ AO\_GAIN $ 값은 Electric Design-Analog Output 참고
+    - $ DAC $는 DAC 하드웨어에 써야 할 값이다.
+    - $ AO\_ Vol $는 실제 출력되는 아날로그 전압으로 f32AO0Vol/f32AO1Vol 변수가 이에 해당한다.
+    - $ AO\_ GAIN $ 값은 Electric Design-Analog Output 참고
 - 출력전압에 해당하는 아날로그 신호 출력
 - f32AO0Vol/f32AO1Vol 변수가 아날로그 출력 범위를 넘어설 경우 다음의 동작을 한다.
     - 0.6 V 미만의 전압이 입력 됐을 때, 0.6V로 변환
