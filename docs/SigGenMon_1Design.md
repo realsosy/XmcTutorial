@@ -154,18 +154,24 @@
 * 아날로그 신호를 입력받기 위한 회로이다. 전압 범위를 조정하기 전압분배회로, 전압증폭회로 그리고 고주파 신호를 차단하기위한 저역통과필터를 포함
 * 전압 범위 : 0 ~ 5 [V]
 * Op-amp Biasing Voltage : 3.3 [V]
+  
     * XMC4500 ADC 전압 범위가 최대 3.3 [V]
 * 아날로그 입력회로 이득 : 0.652
-    * 전압분배회로 이득 : $$ \frac{1}{2}$$
-    * $$ Gain = \frac{R2}{R1+R2} = \frac{13k}{13k+13k}=\frac{1}{2}$$
+    * 전압분배회로 이득 :  $ \frac{1}{2}$
+    
+        $$ Gain = \frac{R2}{R1+R2} = \frac{13k}{13k+13k}=\frac{1}{2}$$
     * Op-amp 전압 증폭회로 이득 : 1.303
-    * $$ Gain = 1+\frac{R3}{R4} = 1+\frac{9.1k}{30k} = 1.303$$
-    * 따라서, 총 이득은 $$ AI\_GAIN = \frac{1}{2}\times 1.303 = 0.652 $$
+    
+        $$ Gain = 1+\frac{R3}{R4} = 1+\frac{9.1k}{30k} = 1.303$$
+    * 따라서, 총 이득은 $$ AI_{GAIN} = \frac{1}{2}\times 1.303 = 0.652 $$
 * Cutoff Frequency : 10 [kHz]
-    * $$ Cutoff\_Frequency =  \frac{1}{2\pi R5C1} = \frac{1}{2\pi \times 15k \times 1000p} = 10610$$ [Hz]
+  
+    ​    $$ Cutoff\_Frequency =  \frac{1}{2\pi R5C1} = \frac{1}{2\pi \times 15k \times 1000p} = 10610$$ [Hz]
 * R2, R4 저항 값을 변경하여 사용자가 전압 이득 변경 가능
+  
     * 핀 소켓 사용
 * R5 저항 값을 변경하여 사용자가 Cutoff Frequency 변경가능
+  
     * 핀 소켓 사용
 
 ### Analog Output
