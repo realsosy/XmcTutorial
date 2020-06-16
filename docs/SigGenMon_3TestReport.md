@@ -4,9 +4,9 @@
 
 * 이 문서는 Signal Generator & Monitor 기능 검사를 하기 위한 테스트 환경, 테스트 케이스를 설명한다.
 * 기능 시험은 다음의 절차에 따라 진행된다.
-  * H/W 시험
-  * S/W with PC 시험
-  * Integration 시험
+    * H/W 시험
+    * S/W with PC 시험
+    * Integration 시험
 
 ## H/W 시험
 
@@ -19,8 +19,8 @@
 ### Test Setup
 
 * Power Selector를 사용하여 외부회로 전압 설정
-  * 3.3V Mode Test 시, 1, 2번 연결
-  * 5V Mode Test 시, 0, 1번 연결
+    * 3.3V Mode Test 시, 1, 2번 연결
+    * 5V Mode Test 시, 0, 1번 연결
 * 5V Mode 테스트 시, 파워서플라이를 CON1_0(5V), CON1\_6(GND) 연결
 * 테스트 케이스에 따라 Function Generator를 Stimulus Point와 연결
 * 테스트 케이스에 따라 Oscilloscope 를 Test Point와 연결
@@ -88,10 +88,10 @@
 ### Test Setup
 
 * 시험을 위해 점프선을 사용하여 위의 그림과 같이 연결한다.
-  * X2 17 - X2 19
-  * X2 16 - X2 18
-  * X1 10 - X1 14
-  * X1 12 - X1 16
+    * X2 17 - X2 19
+    * X2 16 - X2 18
+    * X1 10 - X1 14
+    * X1 12 - X1 16
 
 ### Test Result
 
@@ -122,13 +122,13 @@
 ### Test Setup
 
 * Power Selector를 사용하여 운용 전압을 설정
-  * 3.3V Mode Test 시, 1, 2번 연결
-  * 5V Mode Test 시, 0, 1번 연결
+    * 3.3V Mode Test 시, 1, 2번 연결
+    * 5V Mode Test 시, 0, 1번 연결
 * 위의 그림과 같이 점퍼선을 사용하여 연결한다.
-  * CON1_1 - CON1\_2
-  * CON1_7 - CON1\_8
-  * CON1_4 - CON1\_5
-  * CON1_10 - CON1\_11
+    * CON1_1 - CON1\_2
+    * CON1_7 - CON1\_8
+    * CON1_4 - CON1\_5
+    * CON1_10 - CON1\_11
 
 ### Test Result
 
