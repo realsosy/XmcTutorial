@@ -27,6 +27,15 @@ COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
 
 ![LabCounter_SystemDiagram](./images/LabCounter_SystemDiagram.png)
 
+**[주의]**
+
+* P1.14와 P1.10을 Jumping wire 로 연결한다
+
+  * Counter App은 P1.14를 입력으로 사용할 수 없다. 대신 P1.10을 사용할 수 있다.
+  * Counter의 입력으로 Pulse 신호를 발생하는 스위치 신호는 P1.14에 연결되어 있다. 그러므로 Jumping wire로 이 신호를 전기적으로 연결해 준다.
+
+  
+
 ### 예제 동작
 * BUTTON1을 누르면 카운터 값을 증가한다.
 * 카운터 값은 3 초과 시 0으로 리셋되며 이 값은 디버거를 통해서 확인 할 수 있다.
@@ -37,10 +46,9 @@ COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
 #### DAVE APP
 * DIGITAL_IO
 
-| Name            | Pin direction |
-|-----------------|---------------|
-| dhDIGITAL_IN_0  | Input         |
-| dhDIGITAL_OUT_0 | Input/Output  |
+| Name             | Pin direction |
+| ---------------- | ------------- |
+| dhDIGITAL_IN_0   | Input         |
 
 * COUNTER(dhCOUNTER_0)
 
@@ -60,7 +68,6 @@ COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
 
 #### Functions
 * main
-    - dhDIGITAL_IN_0의 값이 0이면 dhDIGITAL_OUT_0을 HIGH상태로 1이면 LOW상태로 만든다.
     - 현재 카운터 값을 읽는다.
 * dhCOUNTER_0_count_match
     - 카운터 값이 4이면 발생하는 카운트 일치 이벤트에 의해 실행되는 인터럽트 서비스 루틴이다.
@@ -91,29 +98,25 @@ COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
 
   ![LabCounter_Config2](./images/LabCounter_Config2.png)
 
-5. 툴바에서 **Add New APP** 을 사용하여 다음과 같이 DIGITAL_IO APP을 검색하고 2개 추가한다.
+5. 툴바에서 **Add New APP** 을 사용하여 다음과 같이 DIGITAL_IO APP 추가한다.
 
   ![LabCounter_AddApp2](./images/LabCounter_AddApp2.png)
 
-6. DIGITAL_IO_0과 DIGITAL_IO_1의 오른쪽 마우스 메뉴에서 **Rename Instance Label** 을 선택하여 라벨이름을 각각 dhDIGITAL_IN_0, dhDIGITAL_OUT_0으로 변경한다.
+6. DIGITAL_IO_0의 오른쪽 마우스 메뉴에서 **Rename Instance Label** 을 선택하여 라벨이름을  dhDIGITAL_IN_0으로 변경한다.
 
 7. dhDIGITAL_IN_0을 다음과 같이 설정한다.
 
   ![LabCounter_Config3](./images/LabCounter_Config3.png)
 
-8. dhDIGITAL_OUT0을 다음과 같이 설정한다.
+8. dhDIGITAL_OUT0의 **HW Signal Connections** 메뉴에서 다음과 같이 설정한다.
 
-  ![LabCounter_Config4](./images/LabCounter_Config4.png)
-
-9. dhDIGITAL_OUT0의 **HW Signal Connections** 메뉴에서 다음과 같이 설정한다.
-
-  ![LabCounter_Config5](./images/LabCounter_Config5.png)
+![LabCounter_Config5](./images/LabCounter_Config5.png)
 
 10. 툴바에서 **Add New APP** 을 사용하여 다음과 같이 INTERRUPT APP을 검색하고 추가한다.
 
   ![LabCounter_AddApp3](./images/LabCounter_AddApp3.png)
 
-  ![LabCounter_AddApp4](./images/LabCounter_AddApp4.png)
+
 
 11. dhCOUNTER_0의 **HW Signal Connections** 메뉴에서 다음과 같이 설정한다.
 
@@ -131,7 +134,7 @@ COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
 
 15. main 함수에 다음과 같이 코드를 입력한다.
 
-```
+```c
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
 
 /**
@@ -143,6 +146,8 @@ COUNTER APP을 사용하여 0~3의 값을 처리하는 카운터를 만든다.
  * invoking the APP initialization dispatcher routine - DAVE_Init() and hosting the place-holder for user application
  * code.
  */
+
+uint16_t CounterValue = 0;
 
 int main(void)
 {
@@ -166,23 +171,14 @@ int main(void)
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
   while(1U)
   {
-	  if (DIGITAL_IO_GetInput(&dhDIGITAL_IN_0) == 0)
-	  {
-		  DIGITAL_IO_SetOutputHigh(&dhDIGITAL_OUT_0);
-	  }
-	  else
-	  {
-		  DIGITAL_IO_SetOutputLow(&dhDIGITAL_OUT_0);
-	  }
-
-	  counter_value = COUNTER_GetCurrentCount(&dhCOUNTER_0);
+      CounterValue = COUNTER_GetCurrentCount(&dhCOUNTER_0);
   }
 }
 
-void dhCOUNTER_0_count_match(void)
+void dhCOUNTER_0_event_match(void)
 {
-	COUNTER_ClearEvent(&dhCOUNTER_0, COUNTER_EVENT_COUNT_MATCH);
-	COUNTER_ResetCounter(&dhCOUNTER_0);
+    COUNTER_ClearEvent(&dhCOUNTER_0, COUNTER_EVENT_COUNT_MATCH);
+    COUNTER_ResetCounter(&dhCOUNTER_0);
 }
 ```
 

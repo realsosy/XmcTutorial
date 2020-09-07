@@ -11,21 +11,21 @@
     <downwardMapList xsi:type="ResourceModel:App" href="../../CLOCK_XMC4/v4_0_22/CLOCK_XMC4_0.app#/"/>
   </requiredApps>
   <hwResources name="Global" URI="http://resources/4.1.12/app/GLOBAL_CCU4/0/hwres_peripheral_ccu4_global" resourceGroupUri="peripheral/ccu4/sv0/global" solverVariable="true" mResGrpUri="peripheral/ccu4/sv0/global">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/CCU43/CCU43_3.dd#//@provided.0"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/CCU41/CCU41_1.dd#//@provided.0"/>
     <solverVarMap index="2">
-      <value variableName="sv0" solverValue="3"/>
+      <value variableName="sv0" solverValue="1"/>
     </solverVarMap>
     <solverVarMap index="2">
-      <value variableName="sv0" solverValue="3"/>
+      <value variableName="sv0" solverValue="1"/>
     </solverVarMap>
   </hwResources>
   <hwResources name="CCU4 sync start" URI="http://resources/4.1.12/app/GLOBAL_CCU4/0/hwres_peripheral_scu_gcu_ccu4_global_enable" resourceGroupUri="peripheral/scu/*/gcu/ccu4_global_enable/sv0" solverVariable="true" mResGrpUri="peripheral/scu/*/gcu/ccu4_global_enable/sv0">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/SCU/SCU_0.dd#//@provided.6"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/SCU/SCU_0.dd#//@provided.16"/>
     <solverVarMap index="5">
-      <value variableName="sv0" solverValue="3"/>
+      <value variableName="sv0" solverValue="1"/>
     </solverVarMap>
     <solverVarMap index="5">
-      <value variableName="sv0" solverValue="3"/>
+      <value variableName="sv0" solverValue="1"/>
     </solverVarMap>
   </hwResources>
   <connections URI="http://resources/4.1.12/app/GLOBAL_CCU4/0/http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_clock_fccu/http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_clk" systemDefined="true" sourceSignal="clk_ccu_output" targetSignal="clock_ccu" targetVirtualSignal="//@virtualSignals.1" proxySrcVirtualSignalUri="http://resources/4.0.22/app/CLOCK_XMC4/0/vs_fccu" containingProxySignal="true">

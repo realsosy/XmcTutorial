@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
-		<cconfiguration id="com.ifx.xmc4000.appRelease.544707232">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ifx.xmc4000.appRelease.544707232" moduleId="org.eclipse.cdt.core.settings" name="Release">
+		<cconfiguration id="com.ifx.xmc4000.appRelease.1015132302">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ifx.xmc4000.appRelease.1015132302" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -16,19 +16,19 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="com.ifx.xmc4000.appBuildArtefactType" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.ifx.xmc4000.appBuildArtefactType,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" description="" id="com.ifx.xmc4000.appRelease.544707232" name="Release" parent="com.ifx.xmc4000.appRelease">
-					<folderInfo id="com.ifx.xmc4000.appRelease.544707232." name="/" resourcePath="">
-						<toolChain id="com.ifx.xmc4000.appRelease.toolChain.292386004" name="ARM-GCC Application" superClass="com.ifx.xmc4000.appRelease.toolChain">
-							<option id="com.ifx.xmc4000.option.debugging.level.2102611934" name="Debug level" superClass="com.ifx.xmc4000.option.debugging.level" value="org.eclipse.cdt.cross.arm.gnu.base.option.debugging.level.none" valueType="enumerated"/>
-							<option id="com.ifx.xmc4000.option.targetPath.548051462" name="Target Path" superClass="com.ifx.xmc4000.option.targetPath" value="/DeviceRoot/Microcontrollers/XMC4000/XMC4500 Series/XMC4500-F100x1024" valueType="string"/>
-							<option id="com.ifx.xmc4000.option.target.fpu.1979634755" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.option.target.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
-							<option id="com.ifx.xmc4000.option.targetName.540743973" name="Target Name" superClass="com.ifx.xmc4000.option.targetName" value="XMC4500-F100x1024" valueType="string"/>
-							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform.1450782507" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
-							<builder buildPath="${workspace_loc:/Counter}/Release" id="com.ifx.XMC4000.toolchainBuilder.803805720" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="XMC Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ifx.XMC4000.toolchainBuilder"/>
-							<tool id="com.ifx.xmc4000.appRelease.compiler.1011764314" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appRelease.compiler">
-								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level.730383015" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.optimization.level.size" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.compiler.option.misc.mfloat.838133463" name="Floating point" superClass="com.ifx.xmc4000.compiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.compiler.option.include.paths.1743974202" name="Include paths (-I)" superClass="com.ifx.xmc4000.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+				<configuration artifactName="${ProjName}" buildArtefactType="com.ifx.xmc4000.appBuildArtefactType" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.ifx.xmc4000.appBuildArtefactType,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" description="" id="com.ifx.xmc4000.appRelease.1015132302" name="Release" parent="com.ifx.xmc4000.appRelease">
+					<folderInfo id="com.ifx.xmc4000.appRelease.1015132302." name="/" resourcePath="">
+						<toolChain id="com.ifx.xmc4000.appRelease.toolChain.986665855" name="ARM-GCC Application" superClass="com.ifx.xmc4000.appRelease.toolChain">
+							<option id="com.ifx.xmc4000.option.debugging.level.1791990647" name="Debug level" superClass="com.ifx.xmc4000.option.debugging.level" value="org.eclipse.cdt.cross.arm.gnu.base.option.debugging.level.none" valueType="enumerated"/>
+							<option id="com.ifx.xmc4000.option.targetPath.1445669323" name="Target Path" superClass="com.ifx.xmc4000.option.targetPath" value="/DeviceRoot/Microcontrollers/XMC4000/XMC4500 Series/XMC4500-F100x1024" valueType="string"/>
+							<option id="com.ifx.xmc4000.option.target.fpu.177515479" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.option.target.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="com.ifx.xmc4000.option.targetName.1721491611" name="Target Name" superClass="com.ifx.xmc4000.option.targetName" value="XMC4500-F100x1024" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform.1810116064" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
+							<builder buildPath="${workspace_loc:/Counter}/Release" id="com.ifx.XMC4000.toolchainBuilder.1191957816" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="XMC Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ifx.XMC4000.toolchainBuilder"/>
+							<tool id="com.ifx.xmc4000.appRelease.compiler.50124685" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appRelease.compiler">
+								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level.1758737832" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.optimization.level.size" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.compiler.option.misc.mfloat.166206214" name="Floating point" superClass="com.ifx.xmc4000.compiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.compiler.option.include.paths.222306138" name="Include paths (-I)" superClass="com.ifx.xmc4000.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Infineon/XMC4500_series/Include&quot;"/>
@@ -36,15 +36,15 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Dave/Generated}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def.360395872" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def.211474016" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="XMC4500_F100x1024"/>
 								</option>
-								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.304782304" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"/>
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.1513570845" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"/>
 							</tool>
-							<tool id="com.ifx.xmc4000.appRelease.cppcompiler.906521662" name="ARM-GCC C++ Compiler" superClass="com.ifx.xmc4000.appRelease.cppcompiler">
-								<option id="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level.1328873135" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.optimization.level.size" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.cppcompiler.option.misc.mfloat.1213190505" name="Floating point" superClass="com.ifx.xmc4000.cppcompiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.cppcompiler.option.include.paths.664253625" name="Include paths (-I)" superClass="com.ifx.xmc4000.cppcompiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+							<tool id="com.ifx.xmc4000.appRelease.cppcompiler.1801311731" name="ARM-GCC C++ Compiler" superClass="com.ifx.xmc4000.appRelease.cppcompiler">
+								<option id="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level.1608772358" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.optimization.level.size" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.cppcompiler.option.misc.mfloat.1120416303" name="Floating point" superClass="com.ifx.xmc4000.cppcompiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.cppcompiler.option.include.paths.1563647448" name="Include paths (-I)" superClass="com.ifx.xmc4000.cppcompiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Infineon/XMC4500_series/Include&quot;"/>
@@ -53,36 +53,36 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries}&quot;"/>
 								</option>
 							</tool>
-							<tool id="com.ifx.xmc4000.appRelease.assembler.450200784" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appRelease.assembler">
-								<option id="com.ifx.xmc4000.assembler.option.misc.mfloat.595341560" name="Floating point" superClass="com.ifx.xmc4000.assembler.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.assembler.option.include.paths.1977899099" name="Include paths (-I)" superClass="com.ifx.xmc4000.assembler.option.include.paths" valueType="includePath">
+							<tool id="com.ifx.xmc4000.appRelease.assembler.263975944" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appRelease.assembler">
+								<option id="com.ifx.xmc4000.assembler.option.misc.mfloat.770004811" name="Floating point" superClass="com.ifx.xmc4000.assembler.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.assembler.option.include.paths.974199625" name="Include paths (-I)" superClass="com.ifx.xmc4000.assembler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Dave/Generated}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def.1504883069" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def.1568403393" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="XMC4500_F100x1024"/>
 								</option>
-								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1242776130" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.519333400" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
 							</tool>
-							<tool id="com.ifx.xmc4000.appRelease.linker.533473029" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appRelease.linker">
-								<option id="com.ifx.xmc4000.appLinker.option.misc.fpu.497021718" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appLinker.option.misc.mfloat.951371752" name="Floating point" superClass="com.ifx.xmc4000.appLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appLinker.option.nosys.specs.1034169804" superClass="com.ifx.xmc4000.appLinker.option.nosys.specs" value="true" valueType="boolean"/>
-								<inputType id="com.ifx.xmc4000.appLinker.inputType.456781667" name="ARM-GCC for XMC Linker Input Type" superClass="com.ifx.xmc4000.appLinker.inputType">
+							<tool id="com.ifx.xmc4000.appRelease.linker.519842479" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appRelease.linker">
+								<option id="com.ifx.xmc4000.appLinker.option.misc.fpu.408671582" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appLinker.option.misc.mfloat.659539796" name="Floating point" superClass="com.ifx.xmc4000.appLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appLinker.option.nosys.specs.41736952" superClass="com.ifx.xmc4000.appLinker.option.nosys.specs" value="true" valueType="boolean"/>
+								<inputType id="com.ifx.xmc4000.appLinker.inputType.1956541529" name="ARM-GCC for XMC Linker Input Type" superClass="com.ifx.xmc4000.appLinker.inputType">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
 							</tool>
-							<tool id="com.ifx.xmc4000.appRelease.cpplinker.1271134995" name="ARM-GCC C++ Linker" superClass="com.ifx.xmc4000.appRelease.cpplinker">
-								<option id="com.ifx.xmc4000.appCppLinker.option.misc.fpu.1825245199" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appCppLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appCppLinker.option.misc.mfloat.408322702" name="Floating point" superClass="com.ifx.xmc4000.appCppLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appCppLinker.option.nosys.specs.802015801" superClass="com.ifx.xmc4000.appCppLinker.option.nosys.specs" value="true" valueType="boolean"/>
+							<tool id="com.ifx.xmc4000.appRelease.cpplinker.980150148" name="ARM-GCC C++ Linker" superClass="com.ifx.xmc4000.appRelease.cpplinker">
+								<option id="com.ifx.xmc4000.appCppLinker.option.misc.fpu.1329016497" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appCppLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appCppLinker.option.misc.mfloat.896630603" name="Floating point" superClass="com.ifx.xmc4000.appCppLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appCppLinker.option.nosys.specs.1365182719" superClass="com.ifx.xmc4000.appCppLinker.option.nosys.specs" value="true" valueType="boolean"/>
 							</tool>
-							<tool id="com.ifx.xmc4000.libLinker.1142581710" name="ARM-GCC Archiver" superClass="com.ifx.xmc4000.libLinker"/>
-							<tool id="com.ifx.xmc4000.appRelease.createflash.30177644" name="ARM-GCC Create Flash Image" superClass="com.ifx.xmc4000.appRelease.createflash"/>
-							<tool id="com.ifx.xmc4000.appRelease.createlisting.582500060" name="ARM-GCC Create Listing" superClass="com.ifx.xmc4000.appRelease.createlisting"/>
-							<tool id="com.ifx.xmc4000.printsize.725668857" name="ARM-GCC Print Size" superClass="com.ifx.xmc4000.printsize"/>
+							<tool id="com.ifx.xmc4000.libLinker.947831988" name="ARM-GCC Archiver" superClass="com.ifx.xmc4000.libLinker"/>
+							<tool id="com.ifx.xmc4000.appRelease.createflash.214002887" name="ARM-GCC Create Flash Image" superClass="com.ifx.xmc4000.appRelease.createflash"/>
+							<tool id="com.ifx.xmc4000.appRelease.createlisting.1282663427" name="ARM-GCC Create Listing" superClass="com.ifx.xmc4000.appRelease.createlisting"/>
+							<tool id="com.ifx.xmc4000.printsize.958475194" name="ARM-GCC Print Size" superClass="com.ifx.xmc4000.printsize"/>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
@@ -92,8 +92,8 @@
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
-		<cconfiguration id="com.ifx.xmc4000.appDebug.512649991">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ifx.xmc4000.appDebug.512649991" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+		<cconfiguration id="com.ifx.xmc4000.appDebug.110610261">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ifx.xmc4000.appDebug.110610261" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -107,19 +107,19 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="com.ifx.xmc4000.appBuildArtefactType" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.ifx.xmc4000.appBuildArtefactType,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" description="" id="com.ifx.xmc4000.appDebug.512649991" name="Debug" parent="com.ifx.xmc4000.appDebug">
-					<folderInfo id="com.ifx.xmc4000.appDebug.512649991." name="/" resourcePath="">
-						<toolChain id="com.ifx.xmc4000.appDebug.toolChain.661184576" name="ARM-GCC Application" superClass="com.ifx.xmc4000.appDebug.toolChain">
-							<option id="com.ifx.xmc4000.option.debugging.level.426279346" name="Debug level" superClass="com.ifx.xmc4000.option.debugging.level"/>
-							<option id="com.ifx.xmc4000.option.targetPath.1583394123" name="Target Path" superClass="com.ifx.xmc4000.option.targetPath" value="/DeviceRoot/Microcontrollers/XMC4000/XMC4500 Series/XMC4500-F100x1024" valueType="string"/>
-							<option id="com.ifx.xmc4000.option.target.fpu.1352029536" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.option.target.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
-							<option id="com.ifx.xmc4000.option.targetName.1679056553" name="Target Name" superClass="com.ifx.xmc4000.option.targetName" value="XMC4500-F100x1024" valueType="string"/>
-							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform.2099380235" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
-							<builder buildPath="${workspace_loc:/Counter}/Debug" id="com.ifx.XMC4000.toolchainBuilder.1422493998" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="XMC Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ifx.XMC4000.toolchainBuilder"/>
-							<tool id="com.ifx.xmc4000.appDebug.compiler.1099937668" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appDebug.compiler">
-								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level.308166875" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false"/>
-								<option id="com.ifx.xmc4000.compiler.option.misc.mfloat.772759078" name="Floating point" superClass="com.ifx.xmc4000.compiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.compiler.option.include.paths.669943287" name="Include paths (-I)" superClass="com.ifx.xmc4000.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+				<configuration artifactName="${ProjName}" buildArtefactType="com.ifx.xmc4000.appBuildArtefactType" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=com.ifx.xmc4000.appBuildArtefactType,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug" description="" id="com.ifx.xmc4000.appDebug.110610261" name="Debug" parent="com.ifx.xmc4000.appDebug">
+					<folderInfo id="com.ifx.xmc4000.appDebug.110610261." name="/" resourcePath="">
+						<toolChain id="com.ifx.xmc4000.appDebug.toolChain.2051685454" name="ARM-GCC Application" superClass="com.ifx.xmc4000.appDebug.toolChain">
+							<option id="com.ifx.xmc4000.option.debugging.level.13155537" name="Debug level" superClass="com.ifx.xmc4000.option.debugging.level"/>
+							<option id="com.ifx.xmc4000.option.targetPath.1102581333" name="Target Path" superClass="com.ifx.xmc4000.option.targetPath" value="/DeviceRoot/Microcontrollers/XMC4000/XMC4500 Series/XMC4500-F100x1024" valueType="string"/>
+							<option id="com.ifx.xmc4000.option.target.fpu.1674306850" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.option.target.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
+							<option id="com.ifx.xmc4000.option.targetName.1548957578" name="Target Name" superClass="com.ifx.xmc4000.option.targetName" value="XMC4500-F100x1024" valueType="string"/>
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.GNU_ELF" id="com.ifx.xmc4000.targetPlatform.1600142405" isAbstract="false" name="Windows Platform" osList="win32" superClass="com.ifx.xmc4000.targetPlatform"/>
+							<builder buildPath="${workspace_loc:/Counter}/Debug" id="com.ifx.XMC4000.toolchainBuilder.236916849" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="XMC Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ifx.XMC4000.toolchainBuilder"/>
+							<tool id="com.ifx.xmc4000.appDebug.compiler.1034817746" name="ARM-GCC C Compiler" superClass="com.ifx.xmc4000.appDebug.compiler">
+								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level.1248247957" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.optimization.level" useByScannerDiscovery="false"/>
+								<option id="com.ifx.xmc4000.compiler.option.misc.mfloat.1120628276" name="Floating point" superClass="com.ifx.xmc4000.compiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.compiler.option.include.paths.1000250013" name="Include paths (-I)" superClass="com.ifx.xmc4000.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Infineon/XMC4500_series/Include&quot;"/>
@@ -127,15 +127,15 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Dave/Generated}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def.1580677827" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def.1550705570" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.c.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="XMC4500_F100x1024"/>
 								</option>
-								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.359206831" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"/>
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.579229532" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input"/>
 							</tool>
-							<tool id="com.ifx.xmc4000.appDebug.cppcompiler.204385706" name="ARM-GCC C++ Compiler" superClass="com.ifx.xmc4000.appDebug.cppcompiler">
-								<option id="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level.126197150" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false"/>
-								<option id="com.ifx.xmc4000.cppcompiler.option.misc.mfloat.803012792" name="Floating point" superClass="com.ifx.xmc4000.cppcompiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.cppcompiler.option.include.paths.166404637" name="Include paths (-I)" superClass="com.ifx.xmc4000.cppcompiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
+							<tool id="com.ifx.xmc4000.appDebug.cppcompiler.388919803" name="ARM-GCC C++ Compiler" superClass="com.ifx.xmc4000.appDebug.cppcompiler">
+								<option id="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level.1250801934" name="Optimization level" superClass="org.eclipse.cdt.cross.arm.gnu.cpp.compiler.option.optimization.level" useByScannerDiscovery="false"/>
+								<option id="com.ifx.xmc4000.cppcompiler.option.misc.mfloat.1946610114" name="Floating point" superClass="com.ifx.xmc4000.cppcompiler.option.misc.mfloat" useByScannerDiscovery="false" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.cppcompiler.option.include.paths.1524367106" name="Include paths (-I)" superClass="com.ifx.xmc4000.cppcompiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}/Libraries/CMSIS/Infineon/XMC4500_series/Include&quot;"/>
@@ -144,36 +144,36 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries}&quot;"/>
 								</option>
 							</tool>
-							<tool id="com.ifx.xmc4000.appDebug.assembler.2057341289" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appDebug.assembler">
-								<option id="com.ifx.xmc4000.assembler.option.misc.mfloat.408592923" name="Floating point" superClass="com.ifx.xmc4000.assembler.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.assembler.option.include.paths.1936312290" name="Include paths (-I)" superClass="com.ifx.xmc4000.assembler.option.include.paths" valueType="includePath">
+							<tool id="com.ifx.xmc4000.appDebug.assembler.1048101562" name="ARM-GCC Assembler" superClass="com.ifx.xmc4000.appDebug.assembler">
+								<option id="com.ifx.xmc4000.assembler.option.misc.mfloat.163467559" name="Floating point" superClass="com.ifx.xmc4000.assembler.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.assembler.option.include.paths.924222431" name="Include paths (-I)" superClass="com.ifx.xmc4000.assembler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Libraries/XMCLib/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Dave/Generated}&quot;"/>
 								</option>
-								<option id="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def.2058562269" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
+								<option id="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def.1805479923" name="Defined symbols (-D)" superClass="org.eclipse.cdt.cross.arm.gnu.assembler.option.preprocessor.def" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="XMC4500_F100x1024"/>
 								</option>
-								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.431514268" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
+								<inputType id="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1590520815" superClass="org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input"/>
 							</tool>
-							<tool id="com.ifx.xmc4000.appDebug.linker.1951424431" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appDebug.linker">
-								<option id="com.ifx.xmc4000.appLinker.option.misc.fpu.185180616" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appLinker.option.misc.mfloat.1578490954" name="Floating point" superClass="com.ifx.xmc4000.appLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appLinker.option.nosys.specs.816730013" superClass="com.ifx.xmc4000.appLinker.option.nosys.specs" value="true" valueType="boolean"/>
-								<inputType id="com.ifx.xmc4000.appLinker.inputType.2118217588" name="ARM-GCC for XMC Linker Input Type" superClass="com.ifx.xmc4000.appLinker.inputType">
+							<tool id="com.ifx.xmc4000.appDebug.linker.548803555" name="ARM-GCC C Linker" superClass="com.ifx.xmc4000.appDebug.linker">
+								<option id="com.ifx.xmc4000.appLinker.option.misc.fpu.1510283501" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appLinker.option.misc.mfloat.1414294440" name="Floating point" superClass="com.ifx.xmc4000.appLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appLinker.option.nosys.specs.2137566637" superClass="com.ifx.xmc4000.appLinker.option.nosys.specs" value="true" valueType="boolean"/>
+								<inputType id="com.ifx.xmc4000.appLinker.inputType.1741176919" name="ARM-GCC for XMC Linker Input Type" superClass="com.ifx.xmc4000.appLinker.inputType">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
 								</inputType>
 							</tool>
-							<tool id="com.ifx.xmc4000.appDebug.cpplinker.1065679657" name="ARM-GCC C++ Linker" superClass="com.ifx.xmc4000.appDebug.cpplinker">
-								<option id="com.ifx.xmc4000.appCppLinker.option.misc.fpu.430695857" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appCppLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appCppLinker.option.misc.mfloat.193059430" name="Floating point" superClass="com.ifx.xmc4000.appCppLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
-								<option id="com.ifx.xmc4000.appCppLinker.option.nosys.specs.1024479512" superClass="com.ifx.xmc4000.appCppLinker.option.nosys.specs" value="true" valueType="boolean"/>
+							<tool id="com.ifx.xmc4000.appDebug.cpplinker.1531134134" name="ARM-GCC C++ Linker" superClass="com.ifx.xmc4000.appDebug.cpplinker">
+								<option id="com.ifx.xmc4000.appCppLinker.option.misc.fpu.2096558753" name="Fpu (-mfpu)" superClass="com.ifx.xmc4000.appCppLinker.option.misc.fpu" value="org.eclipse.cdt.cross.arm.gnu.base.option.mfpu.fpv4-sp-d16" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appCppLinker.option.misc.mfloat.1417613222" name="Floating point" superClass="com.ifx.xmc4000.appCppLinker.option.misc.mfloat" value="org.eclipse.cdt.cross.arm.gnu.base.option.other.mfloat.softfp" valueType="enumerated"/>
+								<option id="com.ifx.xmc4000.appCppLinker.option.nosys.specs.1248050711" superClass="com.ifx.xmc4000.appCppLinker.option.nosys.specs" value="true" valueType="boolean"/>
 							</tool>
-							<tool id="com.ifx.xmc4000.libLinker.547063603" name="ARM-GCC Archiver" superClass="com.ifx.xmc4000.libLinker"/>
-							<tool id="com.ifx.xmc4000.appDebug.createflash.256078181" name="ARM-GCC Create Flash Image" superClass="com.ifx.xmc4000.appDebug.createflash"/>
-							<tool id="com.ifx.xmc4000.appDebug.createlisting.940006496" name="ARM-GCC Create Listing" superClass="com.ifx.xmc4000.appDebug.createlisting"/>
-							<tool id="com.ifx.xmc4000.printsize.870343206" name="ARM-GCC Print Size" superClass="com.ifx.xmc4000.printsize"/>
+							<tool id="com.ifx.xmc4000.libLinker.1246007399" name="ARM-GCC Archiver" superClass="com.ifx.xmc4000.libLinker"/>
+							<tool id="com.ifx.xmc4000.appDebug.createflash.1022281412" name="ARM-GCC Create Flash Image" superClass="com.ifx.xmc4000.appDebug.createflash"/>
+							<tool id="com.ifx.xmc4000.appDebug.createlisting.1245066727" name="ARM-GCC Create Listing" superClass="com.ifx.xmc4000.appDebug.createlisting"/>
+							<tool id="com.ifx.xmc4000.printsize.1512230033" name="ARM-GCC Print Size" superClass="com.ifx.xmc4000.printsize"/>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
@@ -185,21 +185,21 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="Counter.com.ifx.xmc4000.appProject.437614205" name="ARM-GCC Application" projectType="com.ifx.xmc4000.appProject"/>
+		<project id="Counter.com.ifx.xmc4000.appProject.759350277" name="ARM-GCC Application" projectType="com.ifx.xmc4000.appProject"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.544707232;com.ifx.xmc4000.appRelease.544707232.;com.ifx.xmc4000.appRelease.assembler.450200784;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1242776130">
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.110610261;com.ifx.xmc4000.appDebug.110610261.;com.ifx.xmc4000.appDebug.compiler.1034817746;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.579229532">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.544707232;com.ifx.xmc4000.appRelease.544707232.;com.ifx.xmc4000.appRelease.compiler.1011764314;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.304782304">
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.1015132302;com.ifx.xmc4000.appRelease.1015132302.;com.ifx.xmc4000.appRelease.compiler.50124685;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.1513570845">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.512649991;com.ifx.xmc4000.appDebug.512649991.;com.ifx.xmc4000.appDebug.compiler.1099937668;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.c.compiler.base.input.359206831">
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appRelease.1015132302;com.ifx.xmc4000.appRelease.1015132302.;com.ifx.xmc4000.appRelease.assembler.263975944;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.519333400">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.512649991;com.ifx.xmc4000.appDebug.512649991.;com.ifx.xmc4000.appDebug.assembler.2057341289;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.431514268">
+		<scannerConfigBuildInfo instanceId="com.ifx.xmc4000.appDebug.110610261;com.ifx.xmc4000.appDebug.110610261.;com.ifx.xmc4000.appDebug.assembler.1048101562;org.eclipse.cdt.cross.arm.gnu.sourcery.windows.assembler.base.input.1590520815">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.cross.arm.gnu.ARM_CS_GCCWinManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>

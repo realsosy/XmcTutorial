@@ -28,7 +28,7 @@
   </requiredApps>
   <requiredApps URI="http://resources/4.1.10/app/COUNTER/0/appres_ccu8_global" requiredAppName="GLOBAL_CCU8" required="false" requiringMode="SHARABLE"/>
   <hwResources name="CCU4 Slice" URI="http://resources/4.1.10/app/COUNTER/0/hwres_ccu4_slice" resourceGroupUri="peripheral/ccu4/*/cc4/*" mResGrpUri="peripheral/ccu4/*/cc4/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/CCU43/CCU43_3.dd#//@provided.3"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/CCU41/CCU41_1.dd#//@provided.3"/>
   </hwResources>
   <hwResources name="CCU8 Slice" URI="http://resources/4.1.10/app/COUNTER/0/hwres_ccu8_slice" resourceGroupUri="" required="false" mResGrpUri="peripheral/ccu8/*/cc8/*"/>
   <connections URI="http://resources/4.1.10/app/COUNTER/0/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_global/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_global_signal" systemDefined="true" sourceSignal="ccu4_global" targetSignal="global_signal" targetVirtualSignal="//@virtualSignals.0" proxySrcVirtualSignalUri="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_globalsignal" containingProxySignal="true">

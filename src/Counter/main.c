@@ -1,8 +1,8 @@
 /*
  * main.c
  *
- *  Created on: 2017 Jan 07 15:16:59
- *  Author: ARCLAB
+ *  Created on: 2020 Sep 07 10:37:52
+ *  Author: Wootaik
  */
 
 
@@ -19,6 +19,8 @@
  * invoking the APP initialization dispatcher routine - DAVE_Init() and hosting the place-holder for user application
  * code.
  */
+
+uint16_t CounterValue = 0;
 
 int main(void)
 {
@@ -37,26 +39,16 @@ int main(void)
     }
   }
 
-  uint16_t counter_value;
-
   /* Placeholder for user application code. The while loop below can be replaced with user application code. */
+
   while(1U)
   {
-	  if (DIGITAL_IO_GetInput(&dhDIGITAL_IN_0) == 0)
-	  {
-		  DIGITAL_IO_SetOutputHigh(&dhDIGITAL_OUT_0);
-	  }
-	  else
-	  {
-		  DIGITAL_IO_SetOutputLow(&dhDIGITAL_OUT_0);
-	  }
-
-	  counter_value = COUNTER_GetCurrentCount(&dhCOUNTER_0);
+      CounterValue = COUNTER_GetCurrentCount(&dhCOUNTER_0);
   }
 }
 
-void dhCOUNTER_0_count_match(void)
+void dhCOUNTER_0_event_match(void)
 {
-	COUNTER_ClearEvent(&dhCOUNTER_0, COUNTER_EVENT_COUNT_MATCH);
-	COUNTER_ResetCounter(&dhCOUNTER_0);
+    COUNTER_ClearEvent(&dhCOUNTER_0, COUNTER_EVENT_COUNT_MATCH);
+    COUNTER_ResetCounter(&dhCOUNTER_0);
 }

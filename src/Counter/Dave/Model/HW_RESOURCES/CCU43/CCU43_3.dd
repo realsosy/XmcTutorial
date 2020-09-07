@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ResourceModel:Peripheral xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" URI="http://resources/0.1.29/peripheral/ccu4/3" description="Capture/Compare Unit 4 (CAPCOM4)" baseAddress="0x48004000">
   <provided xsi:type="ResourceModel:ResourceGroup" name="global" URI="http://resources/0.1.29/peripheral/ccu4/3/global">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/GLOBAL_CCU4/v4_1_12/GLOBAL_CCU4_0.app#//@hwResources.0"/>
     <resourcesList name="gctrl" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gctrl"/>
     <resourcesList name="gctrl_pcis" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gctrl/pcis"/>
     <resourcesList name="gstat" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/gstat"/>
@@ -63,7 +62,6 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="0b11" description="CCU4xECLK[C]"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="3" URI="http://resources/0.1.29/peripheral/ccu4/3/cc4/3">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/COUNTER/v4_1_10/COUNTER_0.app#//@hwResources.0"/>
     <resourcesList name="ins" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/cc43ins"/>
     <resourcesList name="ins_ev0is" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/cc43ins/ev0is"/>
     <resourcesList name="ins_ev1is" requiredResourceUri="http://resources/0.1.29/peripheral/ccu4/3/cc43ins/ev1is"/>

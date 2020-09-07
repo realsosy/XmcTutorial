@@ -48,7 +48,6 @@
     <resourcesList name="pwrclr_hib" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/pwrclr/hib"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="CCU4_GLOBAL_ENABLE 3" URI="http://resources/0.1.34/peripheral/scu/0/gcu/ccu4_global_enable/3">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/GLOBAL_CCU4/v4_1_12/GLOBAL_CCU4_0.app#//@hwResources.1"/>
     <resourcesList name="ccucon_gsc" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/ccucon/gsc43"/>
     <resourcesList name="gsc_enable" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/gsc43_enable"/>
   </provided>
@@ -110,6 +109,11 @@
     <resourcesList name="clkclr_ccucdi" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/clkclr/ccucdi"/>
     <resourcesList name="clkstat_ccucst" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/clkstat/ccucst"/>
     <resourcesList name="fccu" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/fccu"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="CCU4_GLOBAL_ENABLE 1" URI="http://resources/0.1.34/peripheral/scu/0/gcu/ccu4_global_enable/1">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/GLOBAL_CCU4/v4_1_12/GLOBAL_CCU4_0.app#//@hwResources.1"/>
+    <resourcesList name="ccucon_gsc" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/ccucon/gsc41"/>
+    <resourcesList name="gsc_enable" requiredResourceUri="http://resources/0.1.34/peripheral/scu/0/gsc41_enable"/>
   </provided>
   <addressBlock offset="0x0" size="0x4000" usage="registers"/>
 </ResourceModel:Peripheral>
