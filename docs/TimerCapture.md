@@ -63,66 +63,66 @@ Signal Name         | Input/Output | Availability | Description
 ![GeneralSetting](./images/TimerCapture_GeneralSetting.png)
 
 * Timer Settings: Select Timer Module
-  * CCU4: CCU4의 슬라이스 한개를 사용한다.
-  * CCU8: CCU8의 슬라이스 한개를 사용한다.
+    * CCU4: CCU4의 슬라이스 한개를 사용한다.
+    * CCU8: CCU8의 슬라이스 한개를 사용한다.
 * Timer Settings: Timer Resolution Configuration
-  * 타이머 분해능 결정 방법 선택
-  * Direct : Desired Timer Resolution 설정으로 분해능 결정
-  * Calculated from Max Capture Frequency : Max Frequency 설정으로 분해능 결정
+    * 타이머 분해능 결정 방법 선택
+    * Direct : Desired Timer Resolution 설정으로 분해능 결정
+    * Calculated from Max Capture Frequency : Max Frequency 설정으로 분해능 결정
 * Timer Settings: Desired Timer Resolution [nsec]
-  * Timer Resolution Configuration 설정에서 Direct 선택 시, 설정 가능
-  * [9 ~ 273064]
+    * Timer Resolution Configuration 설정에서 Direct 선택 시, 설정 가능
+    * [9 ~ 273064]
 * Timer Settings: Actual Timer Resolution [nsec]
-  * 실제 적용되는 타이머 분해능 표시
-  * [8.33 ~ 273066.67]
+    * 실제 적용되는 타이머 분해능 표시
+    * [8.33 ~ 273066.67]
 * Timer Settings: Min Frequency [Hz]
-  * 캡처 할 신호의 최소 주파수 설정
-  * 이 설정으로 타이머 내부 프리스케일러 모드(normal mode 또는 floating mode)를 결정
-  * [1 ~ Max Frequency]
+    * 캡처 할 신호의 최소 주파수 설정
+    * 이 설정으로 타이머 내부 프리스케일러 모드(normal mode 또는 floating mode)를 결정
+    * [1 ~ Max Frequency]
 * Timer Settings: Max Frequency [Hz]
-  * 캡처 할 신호의 최대 주파수 설정
-  * Timer Resolution Configuration 설정에서 Direct 선택 시, 현재 타이머 분해능 설정 하에서 캡처 할 수 있는 신호의 최대 주파수를 표시
-  * Timer Resolution Configuration 설정에서 Calculated from Max Capture Frequency 선택 시, 타이머 분해능은 최대 주파수를 바탕으로 계산된다. 
-  * [Min Frequency ~ fccu/2]
+    * 캡처 할 신호의 최대 주파수 설정
+    * Timer Resolution Configuration 설정에서 Direct 선택 시, 현재 타이머 분해능 설정 하에서 캡처 할 수 있는 신호의 최대 주파수를 표시
+    * Timer Resolution Configuration 설정에서 Calculated from Max Capture Frequency 선택 시, 타이머 분해능은 최대 주파수를 바탕으로 계산된다. 
+    * [Min Frequency ~ fccu/2]
 * Timer Settings: Start after initialization
-  * Enable 시, 초기화 후 자동으로 신호 캡처 시작.
+    * Enable 시, 초기화 후 자동으로 신호 캡처 시작.
 * Capture Settings: Capture edge
-  * 캡처 할 엣지 신호를 선택
-  * Rise-to-Rise/Rise-to-Fall/Fall-to-Rise/Fall-to-Fall 중 선택 가능
-  * Rise-to-Rise/Fall-to-Fall 선택시, 신호의 주기, 듀티 싸이클을 계산 할 수 있다.
-  * Rise-to-Fall/Fall-to-Rise 선택시, 신호의 주기, 듀티 싸이클을 계산 할 수 없다.
+    * 캡처 할 엣지 신호를 선택
+    * Rise-to-Rise/Rise-to-Fall/Fall-to-Rise/Fall-to-Fall 중 선택 가능
+    * Rise-to-Rise/Fall-to-Fall 선택시, 신호의 주기, 듀티 싸이클을 계산 할 수 있다.
+    * Rise-to-Fall/Fall-to-Rise 선택시, 신호의 주기, 듀티 싸이클을 계산 할 수 없다.
 * Capture Settings: Overwrite Capture Value
-  * Enable: 새로운 캡처 이벤트가 발생했을 때, 이전 캡처 결과값을 읽지 않았더라도 덮어쓴다.
-  * Disable: 이전 캡처 결과값을 읽지 않았다면 덮어쓰지 않는다.
+    * Enable: 새로운 캡처 이벤트가 발생했을 때, 이전 캡처 결과값을 읽지 않았더라도 덮어쓴다.
+    * Disable: 이전 캡처 결과값을 읽지 않았다면 덮어쓰지 않는다.
 
 ![AdvancedSetting](./images/TimerCapture_AdvancedSettings.png)
 
 * Input Source
-  * 캡처 할 신호 입력 방법 선택
-  * GPIO : 사용 할 핀 선택, 관련 설정을 할 수 있다.
-  * Internal Signal : 캡처 할 내부 페리퍼럴 신호를 선택 할 수 있다.
+    * 캡처 할 신호 입력 방법 선택
+    * GPIO : 사용 할 핀 선택, 관련 설정을 할 수 있다.
+    * Internal Signal : 캡처 할 내부 페리퍼럴 신호를 선택 할 수 있다.
 * Signal Processing: Low pass filter configuration
-  * 입력 신호 노이즈를 걸러내기 위한 저역통과필터를 설정 할 수 있다.
-  * 입력 신호가 변화 후 설정한 클럭 동안 같은 신호가 유지된다면 천이가 된다고 인식한다.
-  * Disabled : Filter 기능을 사용하지 않는다.
-  * 3 Clock Cycles/5 Clock Cycles/7 Clock Cycles 중 선택가능
+    * 입력 신호 노이즈를 걸러내기 위한 저역통과필터를 설정 할 수 있다.
+    * 입력 신호가 변화 후 설정한 클럭 동안 같은 신호가 유지된다면 천이가 된다고 인식한다.
+    * Disabled : Filter 기능을 사용하지 않는다.
+    * 3 Clock Cycles/5 Clock Cycles/7 Clock Cycles 중 선택가능
 
 ![InterruptSetting](./images/TimerCapture_InterruptSettings.png)
 
 * Enable capture event
-  * 캡처 이벤트 후 실행 할 수 있는 user callback 함수를 활성화시킨다.
+    * 캡처 이벤트 후 실행 할 수 있는 user callback 함수를 활성화시킨다.
 * Interrupt Settings: Capture interrupt callback
-  * 인터럽트 callback 함수의 이름
+    * 인터럽트 callback 함수의 이름
 * Capture IRQ
-  * NVIC에서 설명
+    * NVIC에서 설명
 
 ![PinSetting](./images/TimerCapture_PinSettings.png)
 
 * Enable advanced pin configuration
-  * 입력 핀 advanced settings을 활성화한다.
+    * 입력 핀 advanced settings을 활성화한다.
 * Input Pin: Mode
-  * Tristate/Pull Up/Pull Down/Continuous Sampling Mode/Inverted Tristate/Inverted Pull Up/Inverted Pull Down 중 선택
-  * DigitalIos 문서 참조
+    * Tristate/Pull Up/Pull Down/Continuous Sampling Mode/Inverted Tristate/Inverted Pull Up/Inverted Pull Down 중 선택
+    * DigitalIos 문서 참조
 
 
 

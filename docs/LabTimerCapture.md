@@ -41,36 +41,36 @@ date: 2017-09-01
 #### DAVE APP
 
 * dhPWM
-  * 초기 설정 사용
+    * 초기 설정 사용
 * dhCAPTURE_PERIOD
-  * Timer Resolution Configuration  Direct
-  * Desired Timer Resolution[nsec] : 100
-  * Min Frequency [Hz] : 2000
-  * Start after initialization : Enable
-  * Capture edge : Rise-to-Rise
-  * Overwrite Capture Value : Enable
-  * Enable capture event : Enable
-  * Capture interrupt callback : CapturePeriodIRQHandler
+    * Timer Resolution Configuration  Direct
+    * Desired Timer Resolution[nsec] : 100
+    * Min Frequency [Hz] : 2000
+    * Start after initialization : Enable
+    * Capture edge : Rise-to-Rise
+    * Overwrite Capture Value : Enable
+    * Enable capture event : Enable
+    * Capture interrupt callback : CapturePeriodIRQHandler
 * dhCAPTURE_ONTIME
-  * Timer Resolution Configuration  Direct
-  * Desired Timer Resolution[nsec] : 100
-  * Min Frequency [Hz] : 2000
-  * Start after initialization : Enable
-  * Capture edge : Rise-to-Fall
-  * Overwrite Capture Value : Enable
-  * Enable capture event : Enable
-  * Capture interrupt callback : CaptureOnTimeIRQHandler
+    * Timer Resolution Configuration  Direct
+    * Desired Timer Resolution[nsec] : 100
+    * Min Frequency [Hz] : 2000
+    * Start after initialization : Enable
+    * Capture edge : Rise-to-Fall
+    * Overwrite Capture Value : Enable
+    * Enable capture event : Enable
+    * Capture interrupt callback : CaptureOnTimeIRQHandler
 
 #### Function
 
 * CapturePeriodIRQHandler
-  * PWM 신호 한 주기 입력 시마다 수행
-  * SignalPeriod 변수에 PWM 신호의 주기를 저장한다. 단위는 타이머 틱의 개수이다.
-* CaptureOntimeIRQHandler
+    * PWM 신호 한 주기 입력 시마다 수행
+    * SignalPeriod 변수에 PWM 신호의 주기를 저장한다. 단위는 타이머 틱의 개수이다.
 
-  * PWM on Time의 Falling edge 감지 후 수행
-  * CapturedTime 변수에 PWM on time 시간을 저장한다. 단위는 타이머 틱의 개수이다.
-  * CapturedTimeInNanoSec 변수에 PWM On time 시간을 저장한다. 단위는 나노초이다.
+* CaptureOntimeIRQHandler
+    * PWM on Time의 Falling edge 감지 후 수행
+    * CapturedTime 변수에 PWM on time 시간을 저장한다. 단위는 타이머 틱의 개수이다.
+    * CapturedTimeInNanoSec 변수에 PWM On time 시간을 저장한다. 단위는 나노초이다.
 
 
 
@@ -173,12 +173,12 @@ void CaptureOntimeIRQHandler(){
 ### 실행결과
 
 * PWM 주기 측정
-  * p1.0과 p1.1을 점퍼선으로 연결 후, 프로그램을 실행한다. 그 후, 프로그램을 일시정지하고 아래와 같이 SignalPeriod 변수를 확인한다.
+    * p1.0과 p1.1을 점퍼선으로 연결 후, 프로그램을 실행한다. 그 후, 프로그램을 일시정지하고 아래와 같이 SignalPeriod 변수를 확인한다.
 
 ![LabTimerCapture_MakingProgram11](images/LabTimerCapture_MakingProgram11.png)
 
 * PWM ontime 측정
-  * p1.0과 p1.2를 점퍼선으로 연결 후, 프로그램을 실행한다. 그 후, 프로그램을 일시정지하고 아래와 같이 CapturedTime, CapturedTimeInNanoSec 변수를 확인한다.
+    * p1.0과 p1.2를 점퍼선으로 연결 후, 프로그램을 실행한다. 그 후, 프로그램을 일시정지하고 아래와 같이 CapturedTime, CapturedTimeInNanoSec 변수를 확인한다.
 
 ![LabTimerCapture_MakingProgram12](images/LabTimerCapture_MakingProgram12.png)
 
