@@ -27,7 +27,7 @@ Timer/count기능을 사용하여 Ultrasonic Sensor를 동작시킨다.
 
 ## 초음파센서의 원리
 
-![image alt text](images\UltrasonicSensorPrinciple.png)
+![image alt text](.\images\UltrasonicSensorPrinciple.png)
 
 * 음파를 쏘고 음파가 물체에 부딪혀 되돌아 올 때까지의 시간을 측정하여 거리 측정
 
@@ -45,7 +45,7 @@ $$
 
 ## HC-SR04 신호 모듈레이션 방법
 
-![image alt text](images\UltrasonicSensorModule.png)
+![image alt text](.\images\UltrasonicSensorModule.png)
 
 * 다음의 순서로 동작
 
@@ -79,11 +79,11 @@ $$
 
 ## H/W Setup
 
-![image alt text](images\UltrasonicSensorFigCircuit.png)
+![image alt text](.\images\UltrasonicSensorFigCircuit.png)
 
 
 
-![Circuit](images\UltrasonicSensorCircuit.png)
+![Circuit](.\images\UltrasonicSensorCircuit.png)
 
 
 
@@ -99,7 +99,7 @@ $$
 
 ## S/W Setup
 
-![image alt text](images\UltrasonicSensorSWSetup.png)
+![image alt text](.\images\UltrasonicSensorSWSetup.png)
 
 ### dhPWM_0
 
@@ -157,13 +157,13 @@ $$
 
 ## 거리측정실험
 
-![Distance](images\UltrasonicSensorDistance.png)
+![Distance](.\images\UltrasonicSensorDistance.png)
 
 Echo의 Pulse width와 그에 따른 거리를 uC/Probe로 관찰 할 수 있다.
 
 ## 측정각도실험
 
-![Angle](images\UltrasonicSensorAngle.png)
+![Angle](.\images\UltrasonicSensorAngle.png)
 
 대상 물체를 이동하여 D의 거리에 변화를 주면 그림과 같이 모니터링 가능하다.
 
