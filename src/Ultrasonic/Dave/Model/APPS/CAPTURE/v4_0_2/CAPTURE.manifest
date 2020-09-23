@@ -1,0 +1,327 @@
+package Model.APPS.CAPTURE.v4_0_2;
+
+/*
+ Copyright (c) 2016, Infineon Technologies AG
+ All rights reserved.
+											
+ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+ following conditions are met:
+																			 
+ Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+ disclaimer.
+  
+ Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+ disclaimer in the documentation and/or other materials provided with the distribution.
+  
+ Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ products derived from this software without specific prior written permission.
+																			 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+																			 
+ To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with
+ Infineon Technologies AG: dave@infineon.com. */
+/*************** Revision History **********************************************
+Version     Date          Description
+
+4.0.0       20-Jun-2016   Initial version for DAVEv4<br>
+4.0.1       29-Jun-2016   Beta version<br>
+4.0.2       14-Jul-2016   Release version<br>
+*******************************************************************************/
+// Import statements
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+import ifx.davex.app.manifest.*
+
+class  CAPTURE extends CAPTURE_GUI {
+
+     /* Note  : Following APP properties are mandatory and important */
+     
+     /* Begin : APP property section */
+    
+    def version               = '4.0.2'
+    
+    def categoriesDescription = ["General Purpose/Timed Signals"] 
+
+    def minDaveVersion        = '4.2.4'
+    
+    def keywords              = ['all', 'ccu4', 'ccu8', 'capture', 'signal analysis', 'period', 'duty', 'duty cycle']
+    
+    def softwareIDs       = ["XMC4.5.*.*.*":"1.0.0",
+                             "XMC4.4.*.*.*":"1.0.0",
+                             "XMC4.3.*.*.*":"1.0.0",
+                             "XMC4.2.*.*.*":"1.0.0",
+                             "XMC4.1.*.*.*":"1.0.0",
+                             "XMC4.7.*.*.*":"1.0.0",
+                             "XMC4.8.*.*.*":"1.0.0",
+                             "XMC1.1.*.*.*":"1.0.0",
+                             "XMC1.2.*.*.*":"1.0.0",
+                             "XMC1.3.*.*.*":"1.0.0",
+                             "XMC1.4.*.*.*":"1.0.0"]
+    
+    def singleton     = false
+
+    def initProvider  = true
+    
+    def deprecated    = false
+    
+    def sharable      = false
+
+    def description = "Perform signal analysis to find out the duty cycle and the period of an unknown input signal."
+    
+    /* End   : APP property section */
+    
+    /* Begin : User APP property section */
+    
+    /* End   : User APP property section */
+    MVirtualResourceGroup hwres_ccu4_cc4  /* Hardware resource of cc4 slice */
+    MVirtualResourceGroup hwres_ccu8_cc8  /* Hardware resource of cc8 slice */
+    MVirtualResourceGroup hwres_port_pad_capture_in
+    MVirtualResourceGroup hwres_cpu_nvic_interrupt_event_0   /* Transmit interrupt NVIC node */
+    
+    MRequiredApp app_global_ccu4  /* GLOBAL_CCU4 APP to enable the CCU4 module */
+    MRequiredApp app_global_ccu8  /* GLOBAL_CCU8 APP to enable the CCU8 module */
+    MRequiredApp appres_cpu_ctrl
+    
+    MVirtualSignal vs_capture_ccu4_global_enable  /* Input signal, connected with gloabl_enable signal of GLOBAL_CCU4 APP */
+    MVirtualSignal vs_capture_ccu8_global_enable  /* Input signal, connected with gloabl_enable signal of GLOBAL_CCU8 APP */
+    MVirtualSignal vs_capture_input
+    MVirtualSignal vs_ccu4_cc4_gp0_unsync
+    MVirtualSignal vs_ccu8_cc8_gp0_unsync
+    MVirtualSignal vs_ccu4_cc4_event0
+    MVirtualSignal vs_ccu8_cc8_event0
+    MVirtualSignal vs_interrupt_capture
+    
+    MVirtualSignalRA vs_global_ccu4_enable  /* Local reference to the global signal of GLOBAL_CCU4 APP */
+    MVirtualSignalRA vs_global_ccu8_enable  /* Local reference to the global signal of GLOBAL_CCU8 APP */
+    
+    GCheck gcheck_floating_prescaler_mode = GCheck()
+    GInteger ginteger_prescaler = GInteger()
+    GFloat gfloat_clock = GFloat()
+    GInteger ginteger_min_period = GInteger()
+    GInteger ginteger_max_period = GInteger()
+    GFloat gfloat_float_freq_limit = GFloat()
+    /* APP Constructor */
+    public CAPTURE(DaveEnv daveEnv) {
+        /******************************************************************Local Variables************************************************************************************/
+        final int PRESCALER_MAX = 15
+        final int MHZ_1 = 1000000
+        final int PERIOD_BIT_WIDTH = 16
+        
+        String family = 'null' /* Used for conditional execution of code based on the microcontroller family, eg. xmc4 */
+        String series = 'null' /* Used for conditional execution of code based on the microcontroller series, eg. xmc45 */
+        String device = 'null' /* Used for conditional execution of code based on the microcontroller series, eg. xmc14.03 */
+        String fn_regexp = ~/^[^\d\W]\w*\Z/
+        
+        family = daveEnv.project.selectedDevice.deviceId.family
+        series = daveEnv.project.selectedDevice.deviceId.series
+        device = daveEnv.project.selectedDevice.deviceId.device
+        
+        /*******************************************************************Hardware resource consumption***********************************************************************/
+        hwres_ccu4_cc4 = MVirtualResourceGroup("CC4 Timer", ["peripheral", "ccu4", "*", "cc4", "*"], MF({gcombo_select_timer.value == "CCU4"}, Boolean));
+        hwres_ccu8_cc8 = MVirtualResourceGroup("CC8 Timer", ["peripheral", "ccu8", "*", "cc8", "*"], MF({gcombo_select_timer.value == "CCU8"}, Boolean));
+        hwres_port_pad_capture_in = MVirtualResourceGroup("Capture Input Pin",["port", "p", "*", "pad", "*"], MF({gcombo_input_source.value == 'GPIO'}, Boolean));
+        hwres_cpu_nvic_interrupt_event_0 = MVirtualResourceGroup("Capture Event Node", ["peripheral","cpu","0","nvic","interrupt","*"], MF({gcheck_capture_event.value}, Boolean))
+        
+        app_global_ccu4 = MRequiredApp("GLOBAL_CCU4","GLOBAL_CCU4", RSHARABLE, "4.0.2", MF({gcombo_select_timer.value == "CCU4"}, Boolean));
+        app_global_ccu8 = MRequiredApp("GLOBAL_CCU8","GLOBAL_CCU8", RSHARABLE, "4.0.2", MF({gcombo_select_timer.value == "CCU8"}, Boolean));
+        
+        /*************************************************************************Virtual Signals*******************************************************************************/
+        vs_capture_ccu4_global_enable = MVirtualSignal(hwres_ccu4_cc4, "global_enable", "global_signal", MF({gcombo_select_timer.value == "CCU4"}, Boolean), false)
+        vs_capture_ccu8_global_enable = MVirtualSignal(hwres_ccu8_cc8, "global_enable", "global_signal", MF({gcombo_select_timer.value == "CCU8"}, Boolean), false)
+                
+        vs_global_ccu4_enable = MVirtualSignalRA(app_global_ccu4, "vs_global_ccu4_globalsignal")
+        vs_global_ccu8_enable = MVirtualSignalRA(app_global_ccu8, "vs_global_ccu8_globalsignal")
+        
+        vs_ccu4_cc4_gp0_unsync =  MVirtualSignal(hwres_ccu4_cc4,"capture_input", "gp0_unsync", true, MF({gcombo_input_source.value == 'Internal Signal'}, Boolean));
+        vs_ccu8_cc8_gp0_unsync =  MVirtualSignal(hwres_ccu8_cc8,"capture_input", "gp0_unsync", true, MF({gcombo_input_source.value == 'Internal Signal'}, Boolean));
+        
+        vs_ccu4_cc4_event0 = MVirtualSignal(hwres_ccu4_cc4, "capture event", "e0as", MF({gcheck_capture_event.value}, Boolean), false);
+        vs_ccu8_cc8_event0 = MVirtualSignal(hwres_ccu8_cc8, "capture event", "e0as", MF({gcheck_capture_event.value}, Boolean), false);
+        
+        @AddPin
+         vs_capture_input =  MVirtualSignal(hwres_port_pad_capture_in,"capture_pad", "pad", MF({gcombo_input_source.value == 'GPIO'}, Boolean), MF({gcombo_input_source.value == 'GPIO'}, Boolean));
+     
+         vs_interrupt_capture =  MVirtualSignal( hwres_cpu_nvic_interrupt_event_0, "capture_interrupt", "signal_in", MF({gcheck_capture_event.value}, Boolean), false)
+        /**************************************************************************APP configuration*****************************************************************************/
+        if(family == 'XMC4')
+        {
+          appres_cpu_ctrl = MRequiredApp("CPU_CTRL_XMC4","CPU_CTRL_XMC4", RSHARABLE, "4.0.2", MF({gcheck_capture_event.value}, Boolean))
+          
+          ginterruptprio_capture.subPriorityVisible = true
+          ginterruptprio_capture.minSubPriority = MF({0}, Integer)
+          ginterruptprio_capture.maxSubPriority = MF({
+                                                      if (gcheck_capture_event.value)
+                                                        appres_cpu_ctrl.getVal(["gint_maxInterruptSubPriority","value"])
+                                                      else
+                                                        return 3
+                                                     }, Integer)
+          
+          ginterruptprio_capture.minPriority = MF({0}, Integer)
+          ginterruptprio_capture.maxPriority = MF({
+                                                    if (gcheck_capture_event.value)
+                                                      appres_cpu_ctrl.getVal(["gint_maxInterruptPreemptPriority","value"])
+                                                    else
+                                                      return 63
+                                                   }, Integer)
+          
+        }
+        else
+        {
+          appres_cpu_ctrl = MRequiredApp("CPU_CTRL_XMC1","CPU_CTRL_XMC1", RSHARABLE, "4.0.2", MF({gcheck_capture_event.value}, Boolean))
+          ginterruptprio_capture.subPriorityVisible = false
+          
+          ginterruptprio_capture.priorityValue = MF({3}, Integer)
+          
+          ginterruptprio_capture.minPriority = MF({0}, Integer)
+          ginterruptprio_capture.maxPriority = MF({3}, Integer)
+        }
+        
+        /* For XCM1100 and XMC1200 devices, only CCU4 module available. So option to select CCU8 is disabled */
+        if (((family+series) == 'XMC11') || ((family+series) == 'XMC12') || ((family+series+device) == 'XMC1403'))
+        {
+          gcombo_select_timer.options   =  ["CCU4"]
+          gcombo_select_timer.value     =  "CCU4"
+          gcombo_select_timer.enabled   =  false
+        }
+        
+        gstring_desired_resolution_na.visible = MF({(gcombo_resolution_config.value != 'Direct')}, Boolean)
+        
+        gfloat_desired_resolution.visible = MF({(gcombo_resolution_config.value == 'Direct')}, Boolean)
+         
+        glabel_float_mode_frequency_message.text = MF({
+                                                        String note = null
+                                                        if (gcheck_floating_prescaler_mode.value)
+                                                          note  = "Note : Floating prescaler mode is enabled. If frequency is configured higher than "+(gfloat_float_freq_limit.value).toInteger()+"Hz, normal \n\tprescaler mode is enabled."
+                                                        else
+                                                          note  = "Note : Normal prescaler mode is enabled."
+                                                      }, String)
+        
+        gfloat_desired_resolution.enabled = MF({(gcombo_resolution_config.value == 'Direct')}, Boolean)
+        
+        ginteger_input_max_freq.visible = MF({(gcombo_resolution_config.value != 'Direct')}, Boolean)
+        ginteger_direct_max_freq.visible = MF({(gcombo_resolution_config.value == 'Direct')}, Boolean)
+        
+        glabel_capture_config_message.visible = MF({(gcombo_capture_edge.value == 'Rise-to-Fall') || (gcombo_capture_edge.value == 'Fall-to-Rise')}, Boolean)
+        
+        ggroup_interrupt_settings.visible = MF({(gcheck_capture_event.value)}, Boolean)
+        
+        gstring_capture_callback.enabled = MF({gcheck_capture_event.value}, Boolean)
+        
+        gmessage_capture_callback_empty.visible = MF({
+            Boolean ExpressionMatch
+            Matcher matcher = (gstring_capture_callback.value =~ fn_regexp)
+            ExpressionMatch = !matcher.matches()
+            ExpressionMatch &= gcheck_capture_event.value
+            return ExpressionMatch
+        }, Boolean)
+        
+        gtab_pin_settings.visible = MF({gcombo_input_source.value == 'GPIO'}, Boolean)
+        
+        ggroup_input_pin.visible = MF({gcheck_enable_adv_pin_config.value}, Boolean)
+        
+        gcombo_pin_hysteresis.visible = MF({(family == 'XMC1') && (gcombo_input_source.value == 'GPIO')}, Boolean)
+        glabel_pin_hysteresis.visible = MF({(family == 'XMC1') && (gcombo_input_source.value == 'GPIO')}, Boolean)
+        
+        
+        /***********************************************************************************APP Calculations**********************************************************************/
+        gfloat_clock.value  = MF({
+                                  Double clock
+                                  if (gcombo_select_timer.value == "CCU4")
+                                    clock = (Double)(app_global_ccu4.getVal(["gfloat_clkFreq", "value"])); // get clock form global APP.
+                                  else
+                                    clock = (Double)(app_global_ccu8.getVal(["gfloat_clkFreq", "value"])); // get clock form global APP.
+                                  return clock;
+                                 }, Double);
+        
+        ginteger_min_period.value = 1;
+        ginteger_max_period.value = MF({(2.power(PERIOD_BIT_WIDTH)-1)},Integer);
+                
+        gfloat_desired_resolution.minValue = MF({Math.ceil(1000/gfloat_clock.value)},Double); // in nsec.
+        gfloat_desired_resolution.maxValue = MF({Math.ceil(2.power(PRESCALER_MAX) * (1000/gfloat_clock.value) )}, Double);
+                     
+        ginteger_prescaler.value = MF({
+                                        Double Divider
+                                        Integer value
+                                        
+                                        if (gcombo_resolution_config.value == 'Direct')
+                                        {
+                                          Divider = gfloat_desired_resolution.value /(1000 / gfloat_clock.value);// calculate the clock divider required
+                                          value = (Math.floor(Math.log(Divider) / Math.log( 2 ) )).toInteger(); // find the nearest integer in upper side
+                                        }
+                                        else
+                                        {
+                                          Divider = (gfloat_clock.value * 1000000) / (ginteger_input_max_freq.value * 2);// calculate the clock divider required
+                                          value = (Math.floor(Math.log(Divider) / Math.log( 2 ) )).toInteger(); // find the nearest integer in upper side
+                                        }
+                                        
+                                        if(value > PRESCALER_MAX)
+                                        {
+                                          value = PRESCALER_MAX;
+                                        }
+                                        value; 
+                                      },Integer);
+        
+        gfloat_float_freq_limit.value =  MF({(gfloat_clock.value * 1000000) / (ginteger_max_period.value * 2.power(ginteger_prescaler.value))},Double)
+                                  
+        gcheck_floating_prescaler_mode.value = MF({
+                                                   if (ginteger_input_min_freq.value < gfloat_float_freq_limit.value)
+                                                     return true
+                                                   else
+                                                     return false
+                                                   },Boolean);
+                                  
+        gfloat_actual_resolution.value = MF({
+                                             Double Actual_Resolution = 0;
+                                             Actual_Resolution = (Double) (((Double)1000 / (Double)gfloat_clock.value) *  2.power(ginteger_prescaler.value));
+                                             return(Actual_Resolution);
+                                             },Double);
+        
+        ginteger_direct_max_freq.value = MF({Double value;
+                                        value = ((gfloat_clock.value * MHZ_1) / ((ginteger_min_period.value + 1) * 2.power(ginteger_prescaler.value)));
+                                        value = Math.floor(value);
+                                        value.toInteger();
+                                        },Integer);
+        
+        ginteger_input_min_freq.minValue = MF({1},Integer);
+		ginteger_input_min_freq.maxValue = MF({
+			                                  if (gcombo_resolution_config.value == 'Direct')
+											  {
+												ginteger_direct_max_freq.value
+											  }
+											  else
+											  {
+												ginteger_input_max_freq.value
+											  }
+		                                    },Integer);
+        
+		ginteger_input_max_freq.minValue = MF({ginteger_input_min_freq.value},Integer);
+		
+        ginteger_input_max_freq.maxValue = MF({((gfloat_clock.value * MHZ_1)/2).toInteger()},Integer);
+        /**********************************************************************************Signal Connections*********************************************************************/
+        addConnectionConstraint(vs_global_ccu4_enable, vs_capture_ccu4_global_enable, MF({gcombo_select_timer.value == "CCU4"}, Boolean));
+        addConnectionConstraint(vs_global_ccu8_enable, vs_capture_ccu8_global_enable, MF({gcombo_select_timer.value == "CCU8"}, Boolean));
+        addConnectionConstraint(vs_capture_input, vs_ccu4_cc4_gp0_unsync, MF({(gcombo_select_timer.value == "CCU4") && (gcombo_input_source.value == 'GPIO')}, Boolean));
+        addConnectionConstraint(vs_capture_input, vs_ccu8_cc8_gp0_unsync, MF({(gcombo_select_timer.value == "CCU8") && (gcombo_input_source.value == 'GPIO')}, Boolean));
+        addConnectionConstraint(vs_ccu4_cc4_event0, vs_interrupt_capture, MF({(gcombo_select_timer.value == "CCU4") && (gcheck_capture_event.value)}, Boolean));
+        addConnectionConstraint(vs_ccu8_cc8_event0, vs_interrupt_capture, MF({(gcombo_select_timer.value == "CCU8") && (gcheck_capture_event.value)}, Boolean));
+    }
+    
+    // File Generation
+    def generateFiles(){
+        copy("capture.c", "capture.c")
+        copy("capture.h", "capture.h")
+        generate("capture_confc.tmpl", "capture_conf.c")
+        generate("capture_confh.tmpl", "capture_conf.h")
+        generate("capture_externh.tmpl", "capture_extern.h")
+    }
+    
+    /**
+     * Add main code here
+     */
+}
