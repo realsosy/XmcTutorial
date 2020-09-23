@@ -32,13 +32,16 @@ Timer/count기능을 사용하여 Ultrasonic Sensor를 동작시킨다.
 * 음파를 쏘고 음파가 물체에 부딪혀 되돌아 올 때까지의 시간을 측정하여 거리 측정
 
 $$
-\begin{align}
-L = &{1\over2} \times t \times v\\
-&L : Distance[m]\\
-&t:time[s]\\
-&v:the~speed~of~soundwave(340m/s)
-\end{align}
+L = {1\over2} \times t \times v
 $$
+
+$$
+L: Distance[m]\\
+t:time[s]\\
+v:the~speed~of~soundwave(340m/s)
+$$
+
+
 
 ## HC-SR04 신호 모듈레이션 방법
 
