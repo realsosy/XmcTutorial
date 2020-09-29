@@ -46,6 +46,8 @@ pages:
     - Counter: LabCounter.md
     - Timer: LabTimer.md
     - Capture: LabTimerCapture.md
+    - Real-time Clock: LabRtc.md
+    - Watchdog(Optional): LabWatchDog.md
     - SPI: LabSpiMasterSlave.md
     - IIC(Optional): LabI2CMasterSlave.md
     - ADXL345 with SPI: LabADXL345Spi.md
