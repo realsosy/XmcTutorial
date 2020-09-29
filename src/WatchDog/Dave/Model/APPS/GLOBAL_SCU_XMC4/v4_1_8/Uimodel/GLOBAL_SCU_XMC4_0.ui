@@ -1,0 +1,19 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 585, 622">
+		<p1:GTab text="Interrupt Settings" widgetName="gtab_Intr" visible="true" enabled="true">
+			<p1:GTab.control>
+				<p1:Tab>
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GCheck text="Enable interrupt at initialization" manifestObj="true" widgetName="gcheck_enable_intr" value="true" description="Enables interrupt at initialization"/>
+					<p1:GInterruptPrio text="Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="3" priorityValue="63" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" manifestObj="true" widgetName="ginterruptprio_priority" description="Preemption priority and  subpriority indicated will be dynamically assigned based on the number of bits configured in the CPU_CTRL_XMC4 APP.&#13;&#10;">
+						<p1:GInterruptPrio.layoutData>
+							<GridData widthHint="565"/>
+						</p1:GInterruptPrio.layoutData>
+					</p1:GInterruptPrio>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>

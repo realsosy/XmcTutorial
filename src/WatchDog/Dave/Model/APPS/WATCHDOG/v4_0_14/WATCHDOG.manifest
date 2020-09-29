@@ -1,0 +1,302 @@
+package Model.APPS.WATCHDOG.v4_0_14;
+
+/*
+ Copyright (c) 2016, Infineon Technologies AG
+ All rights reserved.
+											
+ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+ following conditions are met:
+																			 
+ Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+ disclaimer.
+  
+ Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+ disclaimer in the documentation and/or other materials provided with the distribution.
+  
+ Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ products derived from this software without specific prior written permission.
+																			 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+																			 
+ To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with
+ Infineon Technologies AG: dave@infineon.com. */
+/*************** Revision History **********************************************
+Version     Date          Description
+
+4.0.0       16-Feb-2015   Initial version for DAVEv4<br>
+4.0.2       20-May-2015   Coding guidelines update for PR release<br>
+4.0.4       20-Jun-2015   Pre-warn event settings are updated according to the latest 
+                          GLOBAL_SCU APP.<br>
+4.0.6       08-Jul-2015   Updated the help doc.<br>
+4.0.8       08-Oct-2015   1. XMC14, XMC48, XMC47 device support added<br>
+4.0.10      18-Dec-2015   1. Support for promotion of Prewarn event as NMI is added <br>
+                          2. Max range calculation is updated in the manifest, so that that range is enhanced.<br>
+                          3. Added support for XMC4300 devices.<br>
+4.0.12      06-Jan-2016   1. Help doc updated by adding NMI usage example.<br>
+4.0.14      09-Feb-2016   1. For XMC4000 devices minimum CLOCK APP version supported is 4.0.18.<br>
+                          2. A message is generated if watchdog clock is disabled in CLOCK_XMC4 APP.
+                             And code generation is not allowed.<br>                                                  
+*******************************************************************************/
+/* Import statements */
+import ifx.davex.app.manifest.*
+import ifx.davex.manifest.enumeration.RequiringMode;
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+class  WATCHDOG extends WATCHDOG_GUI {
+
+	/**
+	 * APP version
+	 * Format: a string with three digit separated by a dot.
+	 */
+    def version            = '4.0.14'
+    
+	/**
+	 * APP categories declaration. 
+	 * It is list of strings. Subcategories are separated by slash.
+	 * No limits on number of categories and subcategories depth.
+	 */
+	def categoriesDescription = ["System"] 
+
+	/** 
+	 * Minimum DAVE version required for this APP.
+	 * 
+	 * It is string with three digit separated by a dot.
+	 */
+	def minDaveVersion           = '4.0.0'
+	
+	/** 
+	 * Keywords used by search feature in APPs selection view
+	 * 
+	 * It is a list of string.
+	 */
+	def keywords      = [
+		                 'all',
+		                 'Window Watchdog Timer',  
+			             'Watchdog',
+			             'WDT'
+						 ]
+	
+	/** 
+	 * softwareIDs is used to declare which devices are compatible with this APP.
+	 * It is a map with key a string containing a pattern that shall match the SW id of
+	 * the device and as value the minimal version of the APP.
+	 */
+	def softwareIDs       = [
+		"XMC4.5.*.*.*":"1.0.0",
+		"XMC4.4.*.*.*":"1.0.0",
+		"XMC4.3.*.*.*":"1.0.0",
+		"XMC4.2.*.*.*":"1.0.0",
+		"XMC4.1.*.*.*":"1.0.0",
+		"XMC4.7.*.*.*":"1.0.0",
+		"XMC4.8.*.*.*":"1.0.0",
+		"XMC1.1.*.*.*":"1.0.0",
+		"XMC1.2.*.*.*":"1.0.0",
+		"XMC1.3.*.*.*":"1.0.0",
+		"XMC1.4.*.*.*":"1.0.0"
+		]
+
+	/**
+	 * Singleton property:
+	 * When it is true the APP can be instantiated only once.
+	 */
+	def singleton     = true
+	/**
+	 * initProvider property
+	 * It shall be true to add a call to <APPName>_Init()
+	 */
+	def initProvider  = true
+	/**
+	 * Deprecated APP
+	 * Set it to true to indicate that the APP shall be not used for new projects.
+	 */
+	def deprecated    = false
+	/**
+	 * Sharable property.
+	 * It shall be true to allows multiple APPs to require the same instance of this APP.
+	 */
+	def sharable      = false
+
+	/**
+	 *  APP function description.
+	 */ 
+	def description = "Provides interface to configure watchdog timer."
+	
+	/* End   : WATCHDOG property section */
+	
+	/* Begin : User variable section */
+
+	MVirtualResourceGroup hwres_wdt_wdt  /* Hardware resource of watchdog timer */
+	MVirtualResourceGroup hwres_scu_gcu_interrupt_prewarn  /* Hardware resource for pre-warn settings in SCU module */
+	MRequiredApp appres_clockapp  /* Consume either CLOCK_XMC4 or CLOCK_XMC1 based on the device selected and get the clock frequency */
+	MRequiredApp appres_scuglobalapp  /* Consume either GLOBAL_SCU_XMC4 or GLOBAL_SCU_XMC1 based on the device to map the pre-warn event with interrupt node */
+	MRequiredApp appres_cpuctrlapp    /* Consume either CPU_CTRL_XMC4 or CPU_CTRL_XMC1 based on the device to map the pre-warn event with interrupt node and promote as NMI */
+	MVirtualSignal vs_watchdog_srv_request  /* Output signal, generate the pulse of specified width after successful service of the watchdog. */
+	MVirtualSignal vs_watchdog_prewarn_int  /* Output signal, used to connect with the SCU_GLOBAL APP. */
+    MVirtualSignalRA vs_scuglobalapp_node  	/* Reference to the interrupt node signal from GLOBAL_SCU APP */
+	MVirtualSignalRA vs_cpuctrllapp_node /* Reference to the interrupt signal from CPU_CTRL APP */
+	
+    /* This holds the unit time of watchdog timer in terms of milli seconds. This is calculated each time the input clock got updated. */
+	GFloat watchdog_unit_time  = GFloat(widgetName: "watchdog_unit_time",value:0.0)
+	/* This holds maximum time of watchdog timer can support in milli seconds. This is calculated each time the input clock got updated. */
+	GFloat watchdog_max_time   = GFloat(widgetName: "watchdog_max_time",value:0.0)
+	/* This holds input clock supplied to the watchdog module */
+	GFloat watchdog_clock   = GFloat(widgetName: "watchdog_clock",value:0.0)
+	/* This holds the actual upper bound value, where count in terms of timer register. Used during code generation in templates. */
+	GString watchdog_upper_bound= GString(widgetName: "watchdog_Upper_bound",value:'null')
+	/* This holds the actual lower bound value, where count in terms of timer register. Used during code generation in templates. */
+	GString watchdog_lower_bound= GString(widgetName: "watchdog_Lower_bound",value:'null')
+	
+	/**
+	 *  Calculates the actual window time in milli seconds.
+	 *  Inputs :  watchdog_input_time - desired window bound time from GUI
+	 *            watchdog_unit_time  - calculated based on the input clock
+	 */
+	Float actual_time(watchdog_input_time,watchdog_unit_time) {
+		Long watchdog_register_value = Math.ceil(watchdog_input_time/watchdog_unit_time);
+		Float watchdog_actual_time_value = watchdog_register_value*watchdog_unit_time;
+		return watchdog_actual_time_value.round(5)
+	}
+	
+	/**
+	 *  Calculates the register equivalent value of the actual window time.
+	 *  Inputs :  watchdog_input_time - desired window bound time from GUI
+	 *            watchdog_unit_time  - calculated based on the input clock
+	 */
+	String register_value(watchdog_input_time,watchdog_unit_time) {
+		Long watchdog_register = Math.ceil(watchdog_input_time/watchdog_unit_time);
+		String register_value = watchdog_register.toHexString(watchdog_register)
+		return register_value
+	}
+	/* End   : User variable section */
+
+	/* WATCHDOG Constructor */
+	public WATCHDOG(DaveEnv daveEnv) {
+		/* -------------------------------------------------------------- */
+		/* ---------- Target Specific User Variable Initialization ------ */
+		/* -------------------------------------------------------------- */
+		gtab_dummy_tab.visible = false /* This is added to add the description for the controls without glabel in UI */
+		
+		String fn_regexp = ~/^[^\d\W]\w*\Z/ /* This is a regular expression used to check the callback handler format */
+		String family = 'null' /* Used for execution of code based on the microcontroller family, eg. xmc4*/
+		family = daveEnv.project.selectedDevice.deviceId.family
+		
+		/* -------------------------------------------------------------- */
+		/* -------------- Hardware resource consumption block ----------- */
+		/* -------------------------------------------------------------- */
+		hwres_wdt_wdt                   =  MVirtualResourceGroup("wdt", ["peripheral", "wdt", "*", "wdt"], true)
+		hwres_scu_gcu_interrupt_prewarn =  MVirtualResourceGroup("gcu_prewarn", ["peripheral", "scu", "*", "gcu","interrupt","prewarn"], true)
+
+		/* -------------------------------------------------------------- */
+		/* ------------------ App consumption Block --------------------- */
+		/* -------------------------------------------------------------- */		
+		if(family == "XMC4")
+		{
+		  appres_clockapp     =  MRequiredApp("CLOCK_XMC4","clock app",RSHARABLE,"4.0.18",true)
+		  watchdog_clock.value  = MF({appres_clockapp.getVal(["gfloat_wdtactfreq", "value"])}, Float)
+		  
+		  appres_scuglobalapp =  MRequiredApp("GLOBAL_SCU_XMC4","GLOBAL_SCU_XMC4", RSHARABLE, "4.0.2", MF({if((gcheck_prewarningevent.value == true) && 
+			                                                                                                  (gcombo_servicerequest.value == "Via Interrupt")) 
+		                                                                                                        true 
+																											else 
+																											    false
+																											},Boolean))
+		  vs_scuglobalapp_node  =  MVirtualSignalRA(appres_scuglobalapp, "vs_nvic_signal_in")
+		  
+		  appres_cpuctrlapp = MRequiredApp("CPU_CTRL_XMC4","CPU_CTRL_XMC4", RSHARABLE, "4.0.2", MF({if((gcheck_prewarningevent.value == true) &&
+			                                                                                           (gcombo_servicerequest.value == "Via NMI"))
+			                                                                                           true
+		                                                                                            else
+				                                                                                       false
+		                                                                                            },Boolean))
+		  vs_cpuctrllapp_node  =  MVirtualSignalRA(appres_cpuctrlapp, "vs_nmi_irq")
+		  
+		  gstring_eventhandler.visible = MF({(gcombo_servicerequest.value == "Via Interrupt")}, Boolean)
+		  gstring_nmi_eventhandler.visible = MF({(gcombo_servicerequest.value == "Via NMI")}, Boolean)
+		  
+		  gmessage_clock_settings.visible = MF({!(appres_clockapp.getVal(["gcheck_enable_wdt_clock", "value"]))}, Boolean)
+		  
+		}
+		else
+		{
+		  Float Standby_Clock = 0.032768 /* Standby clock frequency available for XMC1000 devices in Mhz, supplied to watchdog module */  
+		  appres_clockapp     =  MRequiredApp("CLOCK_XMC1","clock app",RSHARABLE,"4.0.2",true)
+		  watchdog_clock.value  = Standby_Clock
+		  appres_scuglobalapp =  MRequiredApp("GLOBAL_SCU_XMC1","GLOBAL_SCU_XMC1", RSHARABLE, "4.0.2", MF({if((gcheck_prewarningevent.value == true) && 
+			                                                                                                  (gcombo_servicerequest.value == "Via Interrupt")) 
+		                                                                                                        true 
+																											else 
+																											    false
+																											},Boolean))
+		  vs_scuglobalapp_node  =  MVirtualSignalRA(appres_scuglobalapp, "vs_sr1_signal_in")
+		  gmessage_clock_settings.visible = MF({false}, Boolean)
+        }                                                                                                                                               
+		/* Defines condition when to show the message for wrong callback handler name */
+		gmessage_valid_isr_name.visible = MF({
+			Matcher matcher = (gstring_eventhandler.value =~ fn_regexp)
+			Boolean expression_match = !matcher.matches()
+			expression_match &= gcheck_prewarningevent.value
+			return expression_match
+		}, Boolean)
+		
+		/* -------------------------------------------------------------- */
+		/* ------------------ APP IO Signals ---------------------------- */
+		/* -------------------------------------------------------------- */
+		vs_watchdog_srv_request  = MVirtualSignal(hwres_wdt_wdt, "service_indication_pulse", "wdt_srv_request", true, true)
+		vs_watchdog_prewarn_int  = MVirtualSignal(hwres_scu_gcu_interrupt_prewarn, "event_pre_warning", "int", true, false) 
+		
+		/* -------------------------------------------------------------- */
+		/* ------------------ Required logic ---------------------------- */
+		/* -------------------------------------------------------------- */
+		watchdog_unit_time.value =  MF({(Double)(1 / (watchdog_clock.value * 1000)) }, Float); /* unit time in terms of milli seconds */
+		watchdog_max_time.value = MF({(Double)(watchdog_unit_time.value * 0xFFFFFFFF)}, Float);
+		
+		gfloat_desired_lower_bound.maxValue = MF({ (watchdog_max_time.value).round(2) }, Float);
+		gfloat_desired_upper_bound.maxValue = MF({ (watchdog_max_time.value).round(2) }, Float);
+				
+		gfloat_desired_upper_bound.minValue = MF({ gfloat_desired_lower_bound.value+0.01}, Float);
+		
+		gfloat_actual_lower_bound.maxValue = MF({ (watchdog_max_time.value).round(2) }, Float);
+		gfloat_actual_upper_bound.maxValue = MF({ (watchdog_max_time.value).round(2) }, Float);
+		
+		gfloat_actual_lower_bound.value = MF({actual_time(gfloat_desired_lower_bound.value,watchdog_unit_time.value)},Float);
+		gfloat_actual_upper_bound.value = MF({actual_time(gfloat_desired_upper_bound.value,watchdog_unit_time.value)},Float);
+		
+		gstring_eventhandler.enabled = MF({ gcheck_prewarningevent.value},Boolean)
+		gcombo_servicerequest.enabled = MF({ (gcheck_prewarningevent.value) && (family == "XMC4") },Boolean)
+		
+		watchdog_lower_bound.value = MF({register_value(gfloat_actual_lower_bound.value,watchdog_unit_time.value)},String);
+		watchdog_upper_bound.value = MF({register_value(gfloat_actual_upper_bound.value,watchdog_unit_time.value)},String);
+		             
+        addConnectionConstraint(vs_watchdog_prewarn_int, vs_scuglobalapp_node, MF({if((gcheck_prewarningevent.value == true) && 
+                                                                                      (gcombo_servicerequest.value == "Via Interrupt")) 
+                                                                                        true 
+																					else 
+																					    false
+																					},Boolean))
+		if(family == "XMC4")
+		{
+		  addConnectionConstraint(vs_watchdog_prewarn_int, vs_cpuctrllapp_node, MF({if((gcheck_prewarningevent.value == true) &&
+			                                                                           (gcombo_servicerequest.value == "Via NMI"))
+			                                                                            true
+		                                                                            else
+			                                                                            false
+		                                                                            },Boolean))
+		}
+	}
+	
+	/* File Generation */
+	def generateFiles(){
+		copy("watchdog.c", "watchdog.c")
+		copy("watchdog.h", "watchdog.h")
+		generate("watchdog_confc.tmpl", "watchdog_conf.c")
+		generate("watchdog_confh.tmpl", "watchdog_conf.h")
+		generate("watchdog_externh.tmpl", "watchdog_extern.h")
+	}
+}

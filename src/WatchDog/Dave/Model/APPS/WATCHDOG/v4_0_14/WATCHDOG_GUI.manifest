@@ -1,0 +1,47 @@
+package Model.APPS.WATCHDOG.v4_0_14;
+
+/* Import statements */
+import ifx.davex.app.manifest.*
+
+abstract class WATCHDOG_GUI extends AppManifest {
+	/* Begin : UI variable section */
+	 public GTab gtab_configuration;
+	 public GTab gtab_event;
+	 public GTab gtab_dummy_tab;
+	 public GImage gimage_config;
+	 public GImage gimage_prewarn;
+	 public GInteger ginteger_service_pulse_width;
+	 public GCombo gcombo_servicerequest;
+	 public GFloat gfloat_desired_upper_bound;
+	 public GFloat gfloat_actual_upper_bound;
+	 public GFloat gfloat_desired_lower_bound;
+	 public GFloat gfloat_actual_lower_bound;
+	 public GString gstring_eventhandler;
+	 public GString gstring_nmi_eventhandler;
+	 public GCheck gcheck_prewarningevent;
+	 public GMessage gmessage_valid_isr_name;
+	 public GMessage gmessage_clock_settings;
+
+	 public WATCHDOG_GUI(DaveEnv daveEnv){
+
+	 gtab_configuration = GTab(widgetName:"gtab_configuration", text:"General Settings", enabled:true, visible:true)
+	 gtab_event = GTab(widgetName:"gtab_event", text:"Interrupt Settings", enabled:true, visible:true)
+	 gtab_dummy_tab = GTab(widgetName:"gtab_dummy_tab", text:"Dummy tab", enabled:true, visible:true)
+	 gimage_config = GImage(widgetName:"gimage_config", path: "doc/wdt_config.JPG", enabled:true, visible:true)
+	 gimage_prewarn = GImage(widgetName:"gimage_prewarn", path: "doc/wdt_prewarn.JPG", enabled:true, visible:true)
+	 ginteger_service_pulse_width = GInteger(widgetName:"ginteger_service_pulse_width", value:1, minValue:1, maxValue:256, enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_servicerequest = GCombo(widgetName:"gcombo_servicerequest", options:["Via Interrupt","Via NMI"], value:"Via Interrupt", enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_desired_upper_bound = GFloat(widgetName:"gfloat_desired_upper_bound", value:30000, minValue:0, maxValue:178956.97, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_upper_bound = GFloat(widgetName:"gfloat_actual_upper_bound", value:0.0, minValue:0, maxValue:178956.97, enabled:false, visible:true, isMandatoryValue:false)
+	 gfloat_desired_lower_bound = GFloat(widgetName:"gfloat_desired_lower_bound", value:0, minValue:0, maxValue:178956.97, enabled:true, visible:true, isMandatoryValue:false)
+	 gfloat_actual_lower_bound = GFloat(widgetName:"gfloat_actual_lower_bound", value:0.0, minValue:0, maxValue:178956.97, enabled:false, visible:true, isMandatoryValue:false)
+	 gstring_eventhandler = GString(widgetName:"gstring_eventhandler", value:"Watchdog_Handler", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_nmi_eventhandler = GString(widgetName:"gstring_nmi_eventhandler", value:"NMI_Handler", enabled:false, visible:true, isMandatoryValue:false)
+	 gcheck_prewarningevent = GCheck(widgetName:"gcheck_prewarningevent", value:false, enabled:true, visible:true)
+	 gmessage_valid_isr_name = GMessage(widgetName:"gmessage_valid_isr_name", text:"Not a valid function name.", isError:false, visible:true)
+	 gmessage_clock_settings = GMessage(widgetName:"gmessage_clock_settings", text:"Watchdog Clock is not enabled in the \"Clock Selection Settings\" tab of the CLOCK_XMC4 APP. Enable the same to continue.", isError:true, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}

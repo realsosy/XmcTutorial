@@ -1,0 +1,99 @@
+package Model.APPS.WATCHDOG.v4_0_14.Templates;
+
+import Model.APPS.WATCHDOG.v4_0_14.WATCHDOG
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2016, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-02-16:
+ *     - Initial version<br>
+ *
+ * 2015-05-08:
+ *     - Removed the C++ guard<br>
+ *
+ * 2015-11-30:
+ *     - watchdog_interruptbehaviour is removed<br>
+ *     - Instaed of WATCHDOG_EVENT_CONFIGURATION macro, two macros are added
+ *       WATCHDOG_EVENT_VIA_SCU, WATCHDOG_EVENT_VIA_NMI.
+ *
+ * @endcond
+ *
+ */
+
+#ifndef WATCHDOG_CONF_H
+#define WATCHDOG_CONF_H
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+
+""");
+String appInst  = null
+for (Object appIns : appInstancesList ) {
+	
+if((appIns.gcheck_prewarningevent.value == true) && (appIns.gcombo_servicerequest.value == 'Via Interrupt'))
+{
+	out.print("""
+#if(UC_FAMILY == XMC4)
+#include <GLOBAL_SCU_XMC4/global_scu_xmc4.h>
+#else
+#include <GLOBAL_SCU_XMC1/global_scu_xmc1.h>
+#endif
+""");
+}	
+	
+ out.print("""
+
+/**********************************************************************************************************************
+ * MACROS
+ **********************************************************************************************************************/
+#define WATCHDOG_MAJOR_VERSION (${WATCHDOG.version.split("\\.")[0]}U)
+#define WATCHDOG_MINOR_VERSION (${WATCHDOG.version.split("\\.")[1]}U)
+#define WATCHDOG_PATCH_VERSION (${WATCHDOG.version.split("\\.")[2]}U)
+
+
+/** This is used to define the Watchdog timer service behavior */
+#define WATCHDOG_EVENT_VIA_SCU    (${if(appIns.gcombo_servicerequest.value == 'Via Interrupt') '1'  else '0'}U)
+
+#define WATCHDOG_EVENT_VIA_NMI    (${appIns.hwres_scu_gcu_interrupt_prewarn.getRegValue("","nmireqen_prwarn")}U)
+
+/** Prewarning Event Enabled */
+#define WATCHDOG_PREWARNING_CHECK       (${if(appIns.gcheck_prewarningevent.value == true) '1'  else '0'}U)
+""");
+}
+
+out.print("""
+#endif /* WATCHDOG_CONF_H */
+""")

@@ -1,0 +1,51 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e">
+	<p1:Tab.layout>
+		<GridLayout verticalSpacing="10" horizontalSpacing="10"/>
+	</p1:Tab.layout>
+	<p1:TabFolder>
+		<p1:TabFolder.layoutData>
+			<GridData widthHint="642" heightHint="500"/>
+		</p1:TabFolder.layoutData>
+		<p1:GTab text="General Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_configuration">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_4">
+					<p1:GImage visible="true" manifestObj="true" widgetName="gimage_config" bounds="1, 0, 646, 279" path="doc/wdt_config.JPG">
+						<p1:GFloat x:Style="BORDER" minValue="0" maxValue="178956.97" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,2" manifestObj="true" widgetName="gfloat_desired_upper_bound" bounds="92, 47, 147, 21" toolTipText="Set the time to service the watchdog, exceeding the value triggers a reset(wdt_rst signal). " description="Servicing WDT while the counter is below lower bound value, leads to system reset.&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Always the upper bound value has to be greater than lower bound value.&lt;/li&gt;&#13;&#10;&lt;li&gt;Range can be calculated by using below formula:&lt;br&gt;&#13;&#10;&lt;/b&gt;Range = (1/clock frequency) * 0xFFFFFFFF&lt;/b&gt;&lt;/li&gt;&#9;&#13;&#10;&lt;/ul&gt;&#13;&#10;" value="30000"/>
+						<p1:GFloat bounds="92, 74, 147, 21" format="*,2" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="178956.97" minValue="0" widgetName="gfloat_actual_upper_bound" x:Style="BORDER" description="Calculated based on desired upper bound value.&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Calculations used:&lt;br&gt;&#13;&#10;watchdog_unit_time = 1 / watchdog_clock_value&lt;br&gt;&#13;&#10;watchdog_register_value = Math.ceil(Desired value / watchdog_unit_time)&lt;br&gt;&#13;&#10;watchdog_actual_time_value = watchdog_register_value * watchdog_unit_time&lt;/li&gt;&#13;&#10;&lt;/ul&gt;" enabled="false"/>
+						<p1:GFloat bounds="92, 143, 147, 21" format="*,2" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="178956.97" minValue="0" widgetName="gfloat_desired_lower_bound" x:Style="BORDER" description="No service of WDT after the counter exceeds the upper bound value, leads to system reset&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Range can be calculated by using below formula:&lt;br&gt;&#13;&#10;&lt;/b&gt;Range = (1/clock frequency) * 0xFFFFFFFF&lt;/b&gt;&lt;/li&gt;&#13;&#10;&lt;/ul&gt;" toolTipText="Set the minimum time before watchdog can be serviced." value="0"/>
+						<p1:GFloat bounds="92, 170, 147, 21" format="*,2" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="178956.97" minValue="0" widgetName="gfloat_actual_lower_bound" x:Style="BORDER" description="Calculated based on desired lower bound value.&#13;&#10;&lt;ul&gt;&#13;&#10;&lt;li&gt;Calculations used:&lt;br&gt;&#13;&#10;watchdog_unit_time = 1 / watchdog_clock_value&lt;br&gt;&#13;&#10;watchdog_register_value = Math.ceil(Desired value / watchdog_unit_time)&lt;br&gt;&#13;&#10;watchdog_actual_time_value = watchdog_register_value * watchdog_unit_time&lt;/li&gt;&#13;&#10;&lt;/ul&gt;" enabled="false"/>
+						<p1:GInteger x:Style="NONE" minValue="1" maxValue="256" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_service_pulse_width" bounds="92, 232, 147, 23" toolTipText="Set the pulse width, in units of watchdog clock cycles." description="This defines for how may clock cycles the service indication pulse is being generated.&lt;br&gt;&#13;&#10;Note : The value entered in UI is decremented by 1 and updated in register." value="1"/>
+					</p1:GImage>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_event">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_41">
+					<p1:GImage visible="true" manifestObj="true" widgetName="gimage_prewarn" bounds="2, 5, 642, 276" path="doc/wdt_prewarn.JPG">
+						<p1:GMessage bounds="17, 140, 223, 17" isError="false" manifestObj="true" text="Not a valid function name." widgetName="gmessage_valid_isr_name"/>
+						<p1:GCheck manifestObj="true" widgetName="gcheck_prewarningevent" bounds="17, 50, 13, 14" description="Triggers alarm signal after first crossing of the upper bound value.&#13;&#10;This can be generated as normal SCU interrpt. In case of XMC 4000 devices&#13;&#10;also can be promoted as NMI by selection &quot;Event request&quot; routing option.&#13;&#10;&#13;&#10;In case of normal interrupt required handler name can be added in &quot;Event handler&quot; field and define the ISR. &#13;&#10;&#13;&#10;In case of NMI, default CMSIS NMI handler &quot;NMI_Handler&quot; is used to define the ISR." toolTipText="Enable event to detect overflow of the watchdog timer.&#13;&#10;"/>
+						<p1:GCombo bounds="103, 76, 136, 21" description="Prewarning alarm event is routed to SCU:&lt;br&gt;&#13;&#10;1.via Interrupt&lt;br&gt;&#13;&#10;2.via NMI" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="Via Interrupt&#13;&#10;Via NMI" toolTipText="Set the routing of event through interrupt handler." value="Via Interrupt" widgetName="gcombo_servicerequest"/>
+						<p1:GString bounds="103, 105, 136, 21" description="While generating as normal interrupt, ISR name can be changed.&lt;br&gt;&#13;&#10;Prototype of the handler is:&lt;br&gt;&#13;&#10;void myhandler(void)&#13;&#10;" manifestObj="true" toolTipText="User defined interrupt service routine. External definition of &#13;&#10;entered ISR name is generated in watchdog_extern.h file" value="Watchdog_Handler" widgetName="gstring_eventhandler" x:Style="BORDER"/>
+						<p1:GString bounds="103, 105, 136, 21" description="While generating as NMI interrupt, CMSIS name has to be used.&lt;br&gt;&#13;&#10;Prototype of the handler is:&lt;br&gt;&#13;&#10;void NMI_Handler(void)&#13;&#10;" manifestObj="true" toolTipText="User defined interrupt service routine. External definition of &#13;&#10;entered ISR name is generated in watchdog_extern.h file" value="NMI_Handler" widgetName="gstring_nmi_eventhandler" x:Style="BORDER" enabled="false"/>
+						<p1:GMessage text="Watchdog Clock is not enabled in the &quot;Clock Selection Settings&quot; tab of the CLOCK_XMC4 APP. Enable the same to continue." visible="true" manifestObj="true" widgetName="gmessage_clock_settings" bounds="17, 167, 223, 64" isError="true"/>
+					</p1:GImage>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Dummy tab" visible="true" enabled="true" manifestObj="true" widgetName="gtab_dummy_tab">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_5">
+					<p1:GLabel text="Desired [ms]:" visible="true" widgetName="glabel_desired_upper_bound" bounds="19, 13, 77, 15"/>
+					<p1:GLabel text="Actual [ms]:" visible="true" widgetName="glabel_actual_upper_bound" bounds="19, 38, 79, 15"/>
+					<p1:GLabel bounds="19, 92, 74, 15" text="Actual [ms]:" widgetName="glabel_actual_lower_bound"/>
+					<p1:GLabel bounds="19, 67, 92, 15" text="Desired [ms]:" widgetName="glabel_desired_lower_bound"/>
+					<p1:GLabel text="Service indication pulse width" visible="true" widgetName="glabel_service_pulse_width" bounds="19, 116, 166, 15"/>
+					<p1:GLabel text="Enable" visible="true" widgetName="glabel_prewarningevent" bounds="18, 141, 55, 15"/>
+					<p1:GLabel text="Event request" visible="true" widgetName="glabel_servicerequest" bounds="12, 171, 78, 15"/>
+					<p1:GLabel text="Event handler" visible="true" widgetName="glabel_eventhandler" bounds="11, 200, 80, 15"/>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>
