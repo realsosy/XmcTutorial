@@ -1,0 +1,543 @@
+package Model.APPS.RTC.v4_1_12;
+
+/*
+ Copyright (c) 2015-2016, Infineon Technologies AG
+ All rights reserved.
+											
+ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+ following conditions are met:
+																			 
+ Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+ disclaimer.
+  
+ Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+ disclaimer in the documentation and/or other materials provided with the distribution.
+  
+ Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ products derived from this software without specific prior written permission.
+																			 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+																			 
+ To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with
+ Infineon Technologies AG: dave@infineon.com. */
+
+/*************** Revision History **********************************************
+ Version      Date          Description 
+
+ 4.0.0       16-Feb-2015   Initial version for DAVE v4
+ 4.0.1       20-Feb-2015   Documentation updated
+ 4.0.2       17-Apr-2015   Updated SetTime,SetAlarmTime APIs
+ 4.1.0       25-May-2015   Enum RTC_InterruptEnableType is changed to RTC_INT
+ 4.1.2       16-Jun-2015   GLOBAL_SCU enum elements are passed to GLOBAL_SCU_XMC4_RegisterCallback()
+ 4.1.4       08-Jul-2015   Help documentation updated
+ 4.1.6       09-Oct-2015   Support added for xmc1400 and xmc4800.<br>
+ 4.1.8       15-Dec-2015   Added the NMI support for XMC4000 devices.<br>
+                           Support added for XMC4300.
+ 4.1.10      06-Jan-2016   Example usage added for RTC NMI trigger.<br>
+ 4.1.12      15-Jul-2015   Added APIs to set and get time and alarm in standard time format.<br>
+********************************************************************************/  
+// Import statements
+import ifx.davex.app.manifest.*
+
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
+class  RTC extends RTC_GUI {
+
+	// Note  : RTC properties are mandatory and important
+	// Begin : RTC property section
+	def version            = '4.1.12'
+	
+	def categoriesDescription = ["System","General Purpose/Timed Signals"] 
+
+	// Minimum DAVE version required for the App
+	def minDaveVersion           = '4.0.0'
+	
+	// Keywords to search in Apps selection view
+	def keywords = [
+					 "Real Time Clock",
+				     "RTC",
+				     "Timer",
+					 "all"
+		           ]
+	
+	// Software IDs and its required minimum version
+	def softwareIDs  = [
+	                     "XMC4.8.*.*.*":"1.0.0",
+		                 "XMC4.7.*.*.*":"1.0.0",
+		                 "XMC4.5.*.*.*":"1.0.0",
+		                 "XMC4.4.*.*.*":"1.0.0",
+						 "XMC4.3.*.*.*":"1.0.0",
+		                 "XMC4.2.*.*.*":"1.0.0",
+		                 "XMC4.1.*.*.*":"1.0.0",
+						 "XMC1.4.*.*.*":"1.0.0",
+						 "XMC1.3.*.*.*":"1.0.0",
+						 "XMC1.2.*.*.*":"1.0.0",
+						 "XMC1.1.*.*.*":"1.0.0"
+		              ]
+
+
+	def singleton     = true
+	def initProvider  = true
+	def deprecated    = false
+	def sharable      = true
+
+	// App short description 
+	def description = "Provides timing and alarm functions using RTC in the calendar time format."
+	
+	// End   : RTC property section
+	
+	// Begin : User variable section
+	MVirtualResourceGroup hwres_gcu_rtctick
+	MVirtualResourceGroup hwres_gcu_rtcalarm
+		
+	MVirtualSignal vs_gcu_intrtctick_int
+	MVirtualSignal vs_gcu_intrtcalarm_int
+	
+
+	/* Proxy signals */
+	MVirtualSignalRA vs_global_scu_xmc4_node
+	MVirtualSignalRA vs_cpuctrl_app_node
+	
+	MRequiredApp appres_clk_xmc1
+	MRequiredApp appres_clk_xmc4
+	MRequiredApp appres_global_scu
+	MRequiredApp appres_cpu
+
+	GInteger gint_WeekDay =  GInteger(widgetName:"gint_WeekDay")
+
+	// End   : User variable section
+
+	// RTC Constructor
+	public RTC(DaveEnv daveEnv) {
+		String family = daveEnv.project.selectedDevice.deviceId.family
+		String fn_regexp = ~/^[^\d\W]\w*\Z/
+
+		gtab_dummy.visible =  MF({
+									if((family == 'XMC4')||(family=='XMC1'))
+									{
+										false
+									}
+									else
+									{
+										true
+									}
+								 },Boolean)
+				
+		if(family == 'XMC4')
+		{
+			hwres_gcu_rtctick = MVirtualResourceGroup("GCU RTC TICK",["peripheral","scu","0","gcu","interrupt","rtctick"])
+			hwres_gcu_rtcalarm = MVirtualResourceGroup("GCU RTC ALARM",["peripheral","scu","0","gcu","interrupt","rtcalarm"])
+				
+			vs_gcu_intrtctick_int =  MVirtualSignal(hwres_gcu_rtctick, "event_timer", "int", true, false) 
+			vs_gcu_intrtcalarm_int =  MVirtualSignal(hwres_gcu_rtcalarm, "event_alarm", "int", true, false) 
+	
+			/* Enable Event trigger for timer combo for 4x family */
+			gcombo_eventtrigger_timer.enabled =  true
+			
+			/* Enable Event trigger for alarm combo for 4x family */
+			gcombo_eventtrigger_alarm.enabled =  true
+			
+			/*Enable the visibility of super imposed gString if, event trigger is NMI Interrupt.*/
+			gstring_nmihandler_timer_si.visible = MF({ 
+										if((gcombo_eventtrigger_timer.value == "NMI Interrupt"))
+										 {
+											 true
+										 }
+										 else
+										 {
+											 false
+										 }
+									 },Boolean)
+			
+			gstring_nmihandler_alarm_si.visible = MF({
+										if((gcombo_eventtrigger_alarm.value == "NMI Interrupt"))
+										{
+										  true
+										}
+										else
+										{
+										  false
+										}
+									},Boolean)
+			
+			gstring_realtime_handler.visible = MF({ 
+										if((gcombo_eventtrigger_timer.value == "SCU Interrupt"))
+										 {
+											 true
+										 }
+										 else
+										 {
+											 false
+										 }
+									 },Boolean)
+			gstring_alarm_event_handler.visible =  MF({
+										if((gcombo_eventtrigger_alarm.value == "SCU Interrupt"))
+										{
+										  true
+										}
+										else
+										{
+										  false
+										}
+									},Boolean)
+			
+			appres_clk_xmc4 =  MRequiredApp("CLOCK_XMC4", "CLOCK_XMC4", RSHARABLE,"4.0.2")
+			
+			gstring_clksrc.value = MF(
+										{
+											String clocksource = appres_clk_xmc4.getVal(["gcombo_rtcclksrc", "value"]) as String
+											return clocksource
+										}, String)
+			
+			/* consume GLOBAL_SCU APP based on event selection / alarm enable */
+			appres_global_scu = MRequiredApp("GLOBAL_SCU_XMC4", "GLOBAL_SCU_XMC4", RSHARABLE,"4.0.2",
+									 MF(
+									 { 
+										if(((gcombo_eventtrigger_timer.value == "SCU Interrupt") && 
+											((gcheck_pdays.value == true) ||
+											 (gcheck_pmonths.value == true)||
+											 (gcheck_pyears.value == true) ||
+											 (gcheck_phours.value == true) ||
+											 (gcheck_pmins.value == true) ||
+											 (gcheck_psecs.value == true)))  ||
+										    (gcheck_alarm_enable.value == true && (gcombo_eventtrigger_alarm.value == "SCU Interrupt")))
+										 {
+											 true
+										 }
+										 else
+										 {
+											 false
+										 }
+									 },Boolean))
+			
+			/* consume GLOBAL_SCU APP based on event selection / alarm enable */
+			appres_cpu = MRequiredApp("CPU_CTRL_XMC4", "CPU_CTRL_XMC4", RSHARABLE,"4.0.2",
+									 MF(
+									 {
+										if(((gcombo_eventtrigger_timer.value == "NMI Interrupt") &&
+											((gcheck_pdays.value == true) ||
+											 (gcheck_pmonths.value == true)||
+											 (gcheck_pyears.value == true) ||
+											 (gcheck_phours.value == true) ||
+											 (gcheck_pmins.value == true) ||
+											 (gcheck_psecs.value == true)))  ||
+											(gcheck_alarm_enable.value == true && (gcombo_eventtrigger_alarm.value == "NMI Interrupt")))
+										 {
+											 true
+										 }
+										 else
+										 {
+											 false
+										 }
+									 },Boolean))
+			vs_cpuctrl_app_node  =  MVirtualSignalRA(appres_cpu, "vs_nmi_irq")
+			
+			
+		}
+		else if(family == 'XMC1')
+		{
+			gcombo_eventtrigger_timer.enabled =  false
+			gcombo_eventtrigger_alarm.enabled =  false
+			
+			appres_clk_xmc1 =  MRequiredApp("CLOCK_XMC1", "CLOCK_XMC1", RSHARABLE,"4.0.2")
+			
+			gstring_clksrc.value = MF(
+										{
+											String clocksource = appres_clk_xmc1.getVal(["gcombo_rtcclksrc", "value"]) as String
+											return clocksource
+										}, String)
+			
+			/* consume GLOBAL_SCU APP based on event selection / alarm enable */
+			appres_global_scu = MRequiredApp("GLOBAL_SCU_XMC1", "GLOBAL_SCU_XMC1", RSHARABLE,"4.0.2",
+										MF(
+										{ 
+											if(((gcombo_eventtrigger_timer.value == "SCU Interrupt") && 
+												((gcheck_pdays.value == true) ||
+												 (gcheck_pmonths.value == true)||
+												 (gcheck_pyears.value == true) ||
+												 (gcheck_phours.value == true) ||
+												 (gcheck_pmins.value == true) ||
+												 (gcheck_psecs.value == true)))  ||
+											    (gcheck_alarm_enable.value == true && (gcombo_eventtrigger_alarm.value == "SCU Interrupt")))
+											 {
+												 true
+											 }
+											 else
+											 {
+												 false
+											 }
+									    },Boolean))
+		}
+
+		/* Enable alarm event handler label based on alarm enable check box */
+		glabel_alarm_event_handler.enabled = MF({
+			                                    if((gcheck_alarm_enable.value == true) &&
+											       (gcombo_eventtrigger_alarm.value == "SCU Interrupt"))
+										        {
+											      true
+										        }
+										        else
+										        {
+											      false
+										        }
+											  },Boolean)
+		
+		/* warn if valid isr name is not entered */
+		gmessage_valid_alarm_isr_name.visible = MF({
+													Matcher matcher = (gstring_alarm_event_handler.value =~ fn_regexp)
+													Boolean temp = !matcher.matches()
+													return temp
+												   }, Boolean)
+		
+		/* Enable alarm event handler string if alarm enable option is selected */
+		gstring_alarm_event_handler.enabled = MF({
+												 if((gcheck_alarm_enable.value == true) &&
+											        (gcombo_eventtrigger_alarm.value == "SCU Interrupt"))
+										         {
+											       true
+										         }
+										         else
+										         {
+											       false
+										         }
+											   },Boolean)
+	
+		/* Enable real time event handler label based on event selection */
+		glabel_realtime_handler.enabled = MF({
+												if((gcombo_eventtrigger_timer.value == "SCU Interrupt") &&
+												   ((gcheck_pdays.value == true) ||
+													(gcheck_pmonths.value == true)||
+													(gcheck_pyears.value == true) ||
+													(gcheck_phours.value == true) ||
+													(gcheck_pmins.value == true) ||
+													(gcheck_psecs.value == true)))
+												 {
+													 true
+												 }
+												 else
+												 {
+													 false
+												 }
+											  },Boolean)
+	
+		/* Enable real time handler string based on event selection check box */
+		gstring_realtime_handler.enabled = MF({
+												if((gcombo_eventtrigger_timer.value == "SCU Interrupt") &&
+												   ((gcheck_pdays.value == true) ||
+													(gcheck_pmonths.value == true)||
+													(gcheck_pyears.value == true) ||
+													(gcheck_phours.value == true) ||
+													(gcheck_pmins.value == true) ||
+													(gcheck_psecs.value == true)))
+												 {
+													 true
+												 }
+												 else
+												 {
+													 false
+												 }
+											   },Boolean)
+		
+		/* warn the message if valid time isr name is not entered */
+		gmessage_valid_time_isr_name.visible = MF({
+													Matcher matcher = (gstring_realtime_handler.value =~ fn_regexp)
+													Boolean temp = !matcher.matches()
+													return temp
+												  }, Boolean)
+
+		/* Show the timer status value based on event trigger timer selection */
+    	gstring_timerstatus.value = MF({
+										if(gcombo_eventtrigger_timer.value == "SCU Interrupt"){
+											"Triggers SCU Interrupt"
+										}
+										else{
+											"Triggers NMI"
+										}
+									}, String)
+		
+		/* Show the alarm status value based on event trigger alarm selection */
+		gstring_alarmstatus.value = MF({
+										if(gcombo_eventtrigger_alarm.value == "SCU Interrupt"){
+											"Triggers SCU Interrupt"
+										}
+										else{
+											"Triggers NMI"
+										}
+									}, String)
+		
+		/* compute the max value for the Day */
+		gint_day.maxValue = MF({
+								if(gint_month.value == 2)
+								{
+									if(gint_year.value % 4 == 0)
+									{
+										29
+									}
+									else
+									{
+										28
+									}
+								}
+								else if((gint_month.value == 1) || (gint_month.value == 3) ||
+									   (gint_month.value == 5) || (gint_month.value == 7) ||
+									   (gint_month.value == 8) || (gint_month.value == 10) ||
+									   (gint_month.value == 12))
+								{
+										31
+								}
+								else
+								{
+										30
+								}},Integer)
+		
+		/* compute the max value for the Alarm Day */
+		gint_alarm_day.maxValue = MF({
+										if(gint_alarm_month.value == 2)
+										{
+											if(gint_alarm_year.value % 4 == 0)
+											{
+												29
+											}
+											else
+											{
+												28
+											}
+										}
+										else if((gint_alarm_month.value == 1) || (gint_alarm_month.value == 3) ||
+											   (gint_alarm_month.value == 5) || (gint_alarm_month.value == 7) ||
+											   (gint_alarm_month.value == 8) || (gint_alarm_month.value == 10) ||
+											   (gint_alarm_month.value == 12))
+										{
+												31
+										}
+										else
+										{
+												30
+										}},Integer)
+	
+		/* compute the value for the WeekDay */
+		gint_WeekDay.value = MF({ 
+									int vx
+									int tx
+									int ix
+									int feb
+									int year	
+									int month
+									int day
+									int result
+									
+								    Map vx_list = [0:0, 1:20, 2:0, 3:16, 4:24, 5:20, 6:0, 7:24, 8:4, 9:12, 10:8, 11:16, 12:12]
+									
+									month = gint_month.value	
+									year = gint_year.value
+									day = gint_day.value
+										
+									vx = vx_list[month]
+									
+									if(year > 1900)
+									{
+										year = year - 1900
+									}
+									  
+									// check for feb month
+									feb = (month  > 2)? 1 : 0
+									ix = ((year - 21) % 28) + vx + feb
+									  
+									// check leap year
+									ix = ix + (ix / 4)
+									
+									tx = (ix % 7) + day;
+									
+									result = tx % 7
+									
+									return result
+								},Integer)
+		
+		/* Connections */
+		if(family == 'XMC4')
+		{
+			/* connect rtc tick interrupt signal to nmi node */
+			addConnectionConstraint(vs_gcu_intrtctick_int, vs_cpuctrl_app_node, MF({
+										if((gcombo_eventtrigger_timer.value == "NMI Interrupt") &&
+									       ((gcheck_psecs.value == true)  || (gcheck_pmins.value == true) ||
+										    (gcheck_phours.value == true) || (gcheck_pdays.value == true) ||
+										    (gcheck_pmonths.value == true)|| (gcheck_pyears.value == true)
+											))
+										 {
+											 true
+										 }
+										 else
+										 {
+											 false
+										 }	 
+									  },Boolean))
+			
+			/* connect rtc alarm interrupt signal to global_scu node */
+			addConnectionConstraint(vs_gcu_intrtcalarm_int, vs_cpuctrl_app_node,
+									   MF({
+										   if((gcombo_eventtrigger_alarm.value == "NMI Interrupt") &&
+											  (gcheck_alarm_enable.value == true))
+											  {
+											 true
+										   }
+										   else
+										   {
+											 false
+										   }
+										 },Boolean))
+			
+			
+			
+			vs_global_scu_xmc4_node =  MVirtualSignalRA(appres_global_scu, "vs_nvic_signal_in") 
+			
+			/* connect rtc tick interrupt signal to global_scu node */
+			addConnectionConstraint(vs_gcu_intrtctick_int, vs_global_scu_xmc4_node,
+								    MF({
+										if((gcombo_eventtrigger_timer.value == "SCU Interrupt") &&
+									       ((gcheck_psecs.value == true)  || (gcheck_pmins.value == true) ||
+										    (gcheck_phours.value == true) || (gcheck_pdays.value == true) ||
+										    (gcheck_pmonths.value == true)|| (gcheck_pyears.value == true)
+											))
+										 {
+											 true
+										 }
+										 else
+										 {
+											 false
+										 }	 
+									  },Boolean))
+	
+			/* connect rtc alarm interrupt signal to global_scu node */
+			addConnectionConstraint(vs_gcu_intrtcalarm_int, vs_global_scu_xmc4_node,
+			     					  MF({ 
+										   if((gcombo_eventtrigger_alarm.value == "SCU Interrupt") &&
+									          (gcheck_alarm_enable.value == true))
+									   	   {
+											 true	  
+										   }
+										   else
+										   {
+										     false		  
+										   }
+									     },Boolean))
+		}
+			
+	}
+	
+	// File Generation
+	def generateFiles(){
+		copy("rtc.c","rtc.c")
+		copy("rtc.h","rtc.h")
+		generate("rtc_confh.tmpl","rtc_conf.h")
+		generate("rtc_confc.tmpl","rtc_conf.c")
+		generate("rtc_externh.tmpl","rtc_extern.h")
+	}
+	
+}

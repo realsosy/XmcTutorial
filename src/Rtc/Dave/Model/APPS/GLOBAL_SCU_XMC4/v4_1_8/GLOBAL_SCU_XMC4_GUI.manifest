@@ -1,0 +1,19 @@
+package Model.APPS.GLOBAL_SCU_XMC4.v4_1_8;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class GLOBAL_SCU_XMC4_GUI extends AppManifest {
+	/* Begin : UI variable section */
+	 public GCheck gcheck_enable_intr;
+	 public GInterruptPrio ginterruptprio_priority;
+
+	 public GLOBAL_SCU_XMC4_GUI(DaveEnv daveEnv){
+
+	 gcheck_enable_intr = GCheck(widgetName:"gcheck_enable_intr", value:true, enabled:true, visible:true)
+	 ginterruptprio_priority = GInterruptPrio(widgetName:"ginterruptprio_priority", priorityValue:63, minPriority:0, maxPriority:63, subPriorityValue:0, minSubPriority:0, maxSubPriority:3, subPriorityVisible:true, enabled:true, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}

@@ -1,0 +1,425 @@
+package Model.APPS.RTC.v4_1_12.Templates;
+
+import Model.APPS.RTC.v4_1_12.RTC
+
+out.print("""
+/**
+ * @cond
+ ***********************************************************************************************************************
+ *
+ * Copyright (c) 2015, Infineon Technologies AG
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification,are permitted provided that the
+ * following conditions are met:
+ *
+ *   Redistributions of source code must retain the above copyright notice, this list of conditions and the  following
+ *   disclaimer.
+ *
+ *   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+ *   following disclaimer in the documentation and/or other materials provided with the distribution.
+ *
+ *   Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+ *   products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT  OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes
+ * with Infineon Technologies AG (dave@infineon.com).
+ ***********************************************************************************************************************
+ *
+ * Change History
+ * --------------
+ *
+ * 2015-02-16:
+ *     - Initial version<br>
+ * 2015-11-18:
+ *     - When the timer/alarm event triggers NMI, the corresponding event callback from RTC config structure is removed.<br>
+ *
+ * @endcond
+ *
+ */
+
+
+/***********************************************************************************************************************
+ * HEADER FILES
+ **********************************************************************************************************************/
+#include "rtc.h"
+	
+""");
+String UserFunc = null;
+
+for(Object appIns : appInstancesList )
+{
+	String objLabel = appIns.getInstanceLabel()
+	
+	if(appIns.gcombo_eventtrigger_timer.value == "NMI Interrupt")
+	{
+	  appIns.hwres_gcu_rtctick.getRegValue("","nmireqen_pi")
+	}
+	if(appIns.gcombo_eventtrigger_alarm.value == "NMI Interrupt")
+	{
+	  appIns.hwres_gcu_rtcalarm.getRegValue("","nmireqen_ai")
+	}
+
+/* GUI configurations made for RTC APP. */
+out.print("""
+/***********************************************************************************************************************
+ * DATA STRUCTURES
+ **********************************************************************************************************************/
+const RTC_CONFIG_t ${objLabel}_config  = 
+{
+""");
+ if(appIns.gcheck_start_rtc.value == true)
+ {
+out.print("""
+  /* RTC start at Initialization */
+  .start = RTC_START_ENABLE,
+""");
+ }
+ else
+ {
+out.print("""
+  /* RTC start at Initialization */
+  .start = RTC_START_DISABLE,
+"""); 	 	
+ }
+  /**
+   * Interrupt Configurations
+   */
+ 
+ if(appIns.gcheck_psecs.value == true)
+ {
+out.print("""
+  /* Timer Periodic seconds interrupt enabled */
+  .periodic_sec_intr = RTC_INT_PERIODIC_SEC_ENABLE,
+""");
+ }
+ else
+ {
+out.print("""
+  /* Timer Periodic seconds interrupt disabled */
+  .periodic_sec_intr = RTC_INT_PERIODIC_SEC_DISABLE,
+"""); 	 	
+ }
+ if(appIns.gcheck_pmins.value == true)
+ {
+out.print("""
+  /* Timer Periodic minutes interrupt enabled */
+  .periodic_min_intr = RTC_INT_PERIODIC_MIN_ENABLE,
+""");  	
+ }
+ else
+ {
+out.print("""
+  /* Timer Periodic minutes interrupt disabled */
+  .periodic_min_intr = RTC_INT_PERIODIC_MIN_DISABLE,
+"""); 	 	
+ }
+ if(appIns.gcheck_phours.value == true)
+ {
+out.print("""
+  /* Timer Periodic hours interrupt enabled */
+  .periodic_hour_intr = RTC_INT_PERIODIC_HOUR_ENABLE,
+""");  	
+ }
+ else
+ {
+out.print("""
+  /* Timer Periodic hours interrupt disabled */
+  .periodic_hour_intr = RTC_INT_PERIODIC_HOUR_DISABLE,
+"""); 	 	
+ }
+ if( appIns.gcheck_pdays.value == true)
+ {
+out.print("""
+  /* Timer Periodic days interrupt enabled */
+  .periodic_day_intr = RTC_INT_PERIODIC_DAY_ENABLE,
+""");
+ }
+ else
+ {
+out.print("""
+  /* Timer Periodic days interrupt disabled */
+  .periodic_day_intr = RTC_INT_PERIODIC_DAY_DISABLE,
+"""); 	 	
+ }
+ if(appIns.gcheck_pmonths.value == true)
+ {
+out.print("""
+  /* Timer Periodic months interrupt enabled */
+  .periodic_month_intr = RTC_INT_PERIODIC_MONTH_ENABLE,
+""");
+ }
+ else
+ {
+out.print("""
+  /* Timer Periodic months interrupt disabled */
+  .periodic_month_intr = RTC_INT_PERIODIC_MONTH_DISABLE,
+"""); 	 	
+ }
+ if(appIns.gcheck_pyears.value == true)
+ {
+out.print("""
+  /* Timer Periodic years interrupt enabled */
+  .periodic_year_intr = RTC_INT_PERIODIC_YEAR_ENABLE,
+""");  	
+ }
+ else
+ {
+out.print("""
+  /* Timer Periodic years interrupt disabled */
+  .periodic_year_intr = RTC_INT_PERIODIC_YEAR_DISABLE,
+"""); 	 	
+ }
+ if(appIns.gcheck_alarm_enable.value == true)
+ {
+out.print("""
+  /* Alarm interrupt enabled */
+  .alarm_intr = RTC_INT_ALARM_ENABLE,
+""");
+ }
+ else
+ {
+out.print("""
+  /* Alarm interrupt disabled */
+  .alarm_intr = RTC_INT_ALARM_DISABLE,
+""");
+ }
+    
+/*
+ * Listener functions for RTC Interrupt Events
+ */
+if(appIns.gstring_realtime_handler.enabled == true)
+{
+ userfunc = appIns.gstring_realtime_handler.value
+ if((userfunc != ""))
+ {
+   if(appIns.gcombo_eventtrigger_timer.value == "SCU Interrupt")
+   {
+out.print("""
+   /* Event: Periodic Interrupt */ 
+  .pi_listener = ${userfunc},
+""");      
+   }
+ } 
+}
+
+ userfunc = appIns.gstring_alarm_event_handler.value
+ if(appIns.gcheck_alarm_enable.value == true)
+ {
+   if((userfunc != "") &&
+	  (appIns.gcombo_eventtrigger_alarm.value == "SCU Interrupt"))
+   {
+out.print("""
+  /* Event: Alarm Interrupt */	
+  .ai_listener = ${userfunc}
+""");
+   }  
+ }
+out.print("""\n};""");
+
+Integer Timess  =  appIns.gint_sec.value
+Integer Timemm  =  appIns.gint_min.value
+Integer Timehh  =  appIns.gint_hour.value
+Integer Datedd  =  appIns.gint_day.value
+Integer WeekDay =  appIns.gint_WeekDay.value
+Integer Datemm  =  appIns.gint_month.value
+Integer Dateyyyy  =  appIns.gint_year.value
+
+Integer alarm_month  = appIns.gint_alarm_month.value
+Integer Alarmdd  = appIns.gint_alarm_day.value
+Integer Alarmyyyy  = appIns.gint_alarm_year.value
+
+/* Alarm time configuration */
+Integer Alarmhh  = appIns.gint_alarm_hour.value
+Integer Alarmmm2  = appIns.gint_alarm_min.value
+Integer Alarmss  = appIns.gint_alarm_sec.value
+
+
+out.print("""
+const XMC_RTC_CONFIG_t ${objLabel}_time_alarm_config =
+{""");
+String dayname = null;
+String monthname = null;
+out.print("""
+{
+  .seconds = ${Timess}U,
+  .minutes = ${Timemm}U,
+  .hours = ${Timehh}U,
+  /* To be in sync with RTC hardware, day of month entered in UI is 
+     subtracted by 1 */
+  .days = ${Datedd - 1}U,""");
+
+if(WeekDay < 6)
+{
+  WeekDay += 1;
+}
+else if(WeekDay == 6)
+{
+  WeekDay = 0;
+}
+
+if(WeekDay == 0 )
+{
+	dayname = "XMC_RTC_WEEKDAY_SUNDAY"
+}
+else if(WeekDay == 1 )
+{
+	dayname = "XMC_RTC_WEEKDAY_MONDAY"
+}
+else if(WeekDay == 2 )
+{
+	dayname = "XMC_RTC_WEEKDAY_TUESDAY"
+}
+else if(WeekDay == 3 )
+{
+	dayname = "XMC_RTC_WEEKDAY_WEDNESDAY"
+}
+else if(WeekDay == 4 )
+{
+	dayname = "XMC_RTC_WEEKDAY_THURSDAY"
+}
+else if(WeekDay == 5 )
+{
+	dayname = "XMC_RTC_WEEKDAY_FRIDAY"
+}
+else if(WeekDay == 6 )
+{
+	dayname = "XMC_RTC_WEEKDAY_SATURDAY"
+}
+out.print("""
+  .daysofweek = ${dayname},""");
+if(Datemm == 1)
+{
+	monthname = "XMC_RTC_MONTH_JANUARY"
+}
+else if(Datemm == 2)
+{
+	monthname = "XMC_RTC_MONTH_FEBRUARY"
+}
+else if(Datemm == 3)
+{
+	monthname = "XMC_RTC_MONTH_MARCH"
+}
+else if(Datemm == 4)
+{
+	monthname = "XMC_RTC_MONTH_APRIL"
+}
+else if(Datemm == 5)
+{
+	monthname = "XMC_RTC_MONTH_MAY"
+}
+else if(Datemm == 6)
+{
+	monthname = "XMC_RTC_MONTH_JUNE"
+}
+else if(Datemm == 7)
+{
+	monthname = "XMC_RTC_MONTH_JULY"
+}
+else if(Datemm == 8)
+{
+	monthname = "XMC_RTC_MONTH_AUGUST"
+}
+else if(Datemm == 9)
+{
+	monthname = "XMC_RTC_MONTH_SEPTEMBER"
+}
+else if(Datemm == 10)
+{
+	monthname = "XMC_RTC_MONTH_OCTOBER"
+}
+else if(Datemm == 11)
+{
+	monthname = "XMC_RTC_MONTH_NOVEMBER"
+}
+else if(Datemm == 12)
+{
+	monthname = "XMC_RTC_MONTH_DECEMBER"
+}
+out.print("""
+  /* To be in sync with RTC hardware, month entered in UI is subtracted by 1 */
+  .month = ${monthname},
+  .year = ${Dateyyyy}U
+},
+{
+  .seconds = ${Alarmss}U,
+  .minutes = ${Alarmmm2}U,
+  .hours = ${Alarmhh}U,
+  /* To be in sync with RTC hardware, day of month entered in UI is subtracted 
+     by 1 */
+  .days = ${Alarmdd - 1}U,""");
+  if(alarm_month == 1)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_JANUARY"
+  }
+  else if(alarm_month == 2)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_FEBRUARY"
+  }
+  else if(alarm_month == 3)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_MARCH"
+  }
+  else if(alarm_month == 4)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_APRIL"
+  }
+  else if(alarm_month == 5)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_MAY"
+  }
+  else if(alarm_month == 6)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_JUNE"
+  }
+  else if(alarm_month == 7)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_JULY"
+  }
+  else if(alarm_month == 8)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_AUGUST"
+  }
+  else if(alarm_month == 9)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_SEPTEMBER"
+  }
+  else if(alarm_month == 10)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_OCTOBER"
+  }
+  else if(alarm_month == 11)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_NOVEMBER"
+  }
+  else if(alarm_month == 12)
+  {
+	  Alarmmonthname = "XMC_RTC_MONTH_DECEMBER"
+  }
+  out.print("""
+/* To be in sync with RTC hardware, month entered in UI is subtracted by 1 */
+  .month = ${Alarmmonthname},
+  .year = ${Alarmyyyy}U
+},
+.prescaler = DEFAULT_DIVIDERVALUE""");
+
+out.print("""\n};""");
+ 
+out.print("""
+RTC_t ${objLabel} =
+{
+  .time_alarm_config = &${objLabel}_time_alarm_config,
+  .config = &${objLabel}_config,
+  .initialized = false
+};
+""");
+   
+} // end of for

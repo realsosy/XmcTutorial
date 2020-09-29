@@ -1,0 +1,127 @@
+package Model.APPS.RTC.v4_1_12;
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+abstract class RTC_GUI extends AppManifest {
+	/* Begin : UI variable section */
+	 public GTab gtab_dummy;
+	 public GInteger gint_day;
+	 public GInteger gint_month;
+	 public GInteger gint_year;
+	 public GInteger gint_hour;
+	 public GInteger gint_min;
+	 public GInteger gint_sec;
+	 public GInteger gint_alarm_day;
+	 public GInteger gint_alarm_month;
+	 public GInteger gint_alarm_year;
+	 public GInteger gint_alarm_hour;
+	 public GInteger gint_alarm_min;
+	 public GInteger gint_alarm_sec;
+	 public GCombo gcombo_eventtrigger_timer;
+	 public GCombo gcombo_eventtrigger_alarm;
+	 public GString gstring_clksrc;
+	 public GString gstring_timerstatus;
+	 public GString gstring_realtime_handler;
+	 public GString gstring_nmihandler_timer_si;
+	 public GString gstring_alarmstatus;
+	 public GString gstring_alarm_event_handler;
+	 public GString gstring_nmihandler_alarm_si;
+	 public GCheck gcheck_start_rtc;
+	 public GCheck gcheck_pdays;
+	 public GCheck gcheck_pmonths;
+	 public GCheck gcheck_pyears;
+	 public GCheck gcheck_phours;
+	 public GCheck gcheck_pmins;
+	 public GCheck gcheck_psecs;
+	 public GCheck gcheck_alarm_enable;
+	 public GLabel glabel_eventtrigger_timer;
+	 public GLabel glabel_realtime_handler;
+	 public GLabel glabel_eventtrigger_alarm;
+	 public GLabel glabel_alarm_event_handler;
+	 public GLabel glabel_day;
+	 public GLabel glabel_month;
+	 public GLabel glabel_year;
+	 public GLabel glabel_hour;
+	 public GLabel glabel_min;
+	 public GLabel glabel_sec;
+	 public GLabel glabel_alarm_day;
+	 public GLabel glabel_alarm_month;
+	 public GLabel glabel_alarm_year;
+	 public GLabel glabel_alarm_hour;
+	 public GLabel glabel_alarm_min;
+	 public GLabel glabel_alarm_sec;
+	 public GLabel glabel_timerstatus;
+	 public GLabel glabel_alarmstatus;
+	 public GGroup ggroup_14;
+	 public GGroup ggroup_timer_settings;
+	 public GGroup ggroup_alarm_settings;
+	 public GGroup ggroup_timerevent_settings;
+	 public GGroup ggroup_periodic;
+	 public GGroup ggroup_alarmevent_settings;
+	 public GMessage gmessage_valid_time_isr_name;
+	 public GMessage gmessage_valid_alarm_isr_name;
+
+	 public RTC_GUI(DaveEnv daveEnv){
+
+	 gtab_dummy = GTab(widgetName:"gtab_dummy", text:"Dummy", enabled:true, visible:true)
+	 gint_day = GInteger(widgetName:"gint_day", value:1, minValue:1, maxValue:Long.MAX_VALUE, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_month = GInteger(widgetName:"gint_month", value:1, minValue:1, maxValue:12, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_year = GInteger(widgetName:"gint_year", value:1970, minValue:1970, maxValue:9999, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_hour = GInteger(widgetName:"gint_hour", value:0, minValue:0, maxValue:23, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_min = GInteger(widgetName:"gint_min", value:0, minValue:0, maxValue:59, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_sec = GInteger(widgetName:"gint_sec", value:0, minValue:0, maxValue:59, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_alarm_day = GInteger(widgetName:"gint_alarm_day", value:1, minValue:1, maxValue:Long.MAX_VALUE, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_alarm_month = GInteger(widgetName:"gint_alarm_month", value:1, minValue:1, maxValue:12, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_alarm_year = GInteger(widgetName:"gint_alarm_year", value:1970, minValue:1970, maxValue:9999, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_alarm_hour = GInteger(widgetName:"gint_alarm_hour", value:0, minValue:0, maxValue:23, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_alarm_min = GInteger(widgetName:"gint_alarm_min", value:1, minValue:0, maxValue:59, enabled:true, visible:true, isMandatoryValue:false)
+	 gint_alarm_sec = GInteger(widgetName:"gint_alarm_sec", value:0, minValue:0, maxValue:59, enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_eventtrigger_timer = GCombo(widgetName:"gcombo_eventtrigger_timer", options:["SCU Interrupt","NMI Interrupt"], value:"SCU Interrupt", enabled:true, visible:true, isMandatoryValue:false)
+	 gcombo_eventtrigger_alarm = GCombo(widgetName:"gcombo_eventtrigger_alarm", options:["SCU Interrupt","NMI Interrupt"], value:"SCU Interrupt", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_clksrc = GString(widgetName:"gstring_clksrc", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_timerstatus = GString(widgetName:"gstring_timerstatus", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_realtime_handler = GString(widgetName:"gstring_realtime_handler", value:"Time_Handler", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_nmihandler_timer_si = GString(widgetName:"gstring_nmihandler_timer_si", value:"NMI_Handler", enabled:false, visible:true, isMandatoryValue:false)
+	 gstring_alarmstatus = GString(widgetName:"gstring_alarmstatus", value:"", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_alarm_event_handler = GString(widgetName:"gstring_alarm_event_handler", value:"Alarm_Handler", enabled:true, visible:true, isMandatoryValue:false)
+	 gstring_nmihandler_alarm_si = GString(widgetName:"gstring_nmihandler_alarm_si", value:"NMI_Handler", enabled:false, visible:true, isMandatoryValue:false)
+	 gcheck_start_rtc = GCheck(widgetName:"gcheck_start_rtc", value:true, enabled:true, visible:true)
+	 gcheck_pdays = GCheck(widgetName:"gcheck_pdays", value:false, enabled:true, visible:true)
+	 gcheck_pmonths = GCheck(widgetName:"gcheck_pmonths", value:false, enabled:true, visible:true)
+	 gcheck_pyears = GCheck(widgetName:"gcheck_pyears", value:false, enabled:true, visible:true)
+	 gcheck_phours = GCheck(widgetName:"gcheck_phours", value:false, enabled:true, visible:true)
+	 gcheck_pmins = GCheck(widgetName:"gcheck_pmins", value:false, enabled:true, visible:true)
+	 gcheck_psecs = GCheck(widgetName:"gcheck_psecs", value:false, enabled:true, visible:true)
+	 gcheck_alarm_enable = GCheck(widgetName:"gcheck_alarm_enable", value:false, enabled:true, visible:true)
+	 glabel_eventtrigger_timer = GLabel(widgetName:"glabel_eventtrigger_timer", text:"Event trigger:", enabled:true, visible:true)
+	 glabel_realtime_handler = GLabel(widgetName:"glabel_realtime_handler", text:"Event handler:", enabled:true, visible:true)
+	 glabel_eventtrigger_alarm = GLabel(widgetName:"glabel_eventtrigger_alarm", text:"Event trigger:", enabled:true, visible:true)
+	 glabel_alarm_event_handler = GLabel(widgetName:"glabel_alarm_event_handler", text:"Event handler:", enabled:true, visible:true)
+	 glabel_day = GLabel(widgetName:"glabel_day", text:"Day for timer", enabled:true, visible:true)
+	 glabel_month = GLabel(widgetName:"glabel_month", text:"Month for timer", enabled:true, visible:true)
+	 glabel_year = GLabel(widgetName:"glabel_year", text:"Year for timer", enabled:true, visible:true)
+	 glabel_hour = GLabel(widgetName:"glabel_hour", text:"Hours for timer", enabled:true, visible:true)
+	 glabel_min = GLabel(widgetName:"glabel_min", text:"Minutes for timer", enabled:true, visible:true)
+	 glabel_sec = GLabel(widgetName:"glabel_sec", text:"Seconds for timer", enabled:true, visible:true)
+	 glabel_alarm_day = GLabel(widgetName:"glabel_alarm_day", text:"Day for alarm", enabled:true, visible:true)
+	 glabel_alarm_month = GLabel(widgetName:"glabel_alarm_month", text:"Month for alarm", enabled:true, visible:true)
+	 glabel_alarm_year = GLabel(widgetName:"glabel_alarm_year", text:"Year for alarm", enabled:true, visible:true)
+	 glabel_alarm_hour = GLabel(widgetName:"glabel_alarm_hour", text:"Hours for alarm", enabled:true, visible:true)
+	 glabel_alarm_min = GLabel(widgetName:"glabel_alarm_min", text:"Minutes for alarm", enabled:true, visible:true)
+	 glabel_alarm_sec = GLabel(widgetName:"glabel_alarm_sec", text:"Seconds for alarm", enabled:true, visible:true)
+	 glabel_timerstatus = GLabel(widgetName:"glabel_timerstatus", text:"Timer event trigger status", enabled:true, visible:true)
+	 glabel_alarmstatus = GLabel(widgetName:"glabel_alarmstatus", text:"Alarm event trigger status", enabled:true, visible:true)
+	 ggroup_14 = GGroup(widgetName:"ggroup_14", text:"", enabled:true, visible:true)
+	 ggroup_timer_settings = GGroup(widgetName:"ggroup_timer_settings", text:"Timer Settings", enabled:true, visible:true)
+	 ggroup_alarm_settings = GGroup(widgetName:"ggroup_alarm_settings", text:"Alarm Settings", enabled:true, visible:true)
+	 ggroup_timerevent_settings = GGroup(widgetName:"ggroup_timerevent_settings", text:"Timer Event Settings", enabled:true, visible:true)
+	 ggroup_periodic = GGroup(widgetName:"ggroup_periodic", text:"Periodic Events", enabled:true, visible:true)
+	 ggroup_alarmevent_settings = GGroup(widgetName:"ggroup_alarmevent_settings", text:"Alarm Event Settings", enabled:true, visible:true)
+	 gmessage_valid_time_isr_name = GMessage(widgetName:"gmessage_valid_time_isr_name", text:"Not a valid function name", isError:false, visible:true)
+	 gmessage_valid_alarm_isr_name = GMessage(widgetName:"gmessage_valid_alarm_isr_name", text:"Not a valid function name", isError:false, visible:true)
+
+
+	 }
+	/* End : UI variable section */
+}

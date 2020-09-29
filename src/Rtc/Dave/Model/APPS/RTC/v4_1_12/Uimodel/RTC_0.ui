@@ -1,0 +1,119 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 500, 600">
+		<p1:GTab text="General Settings" visible="true" enabled="true" widgetName="gtab_general">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_5">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GGroup manifestObj="true" widgetName="ggroup_14">
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData widthHint="476" heightHint="281"/>
+						</p1:GGroup.layoutData>
+						<p1:GCheck description="Starts RTC after initialization" manifestObj="true" text="Start after initialization" value="true" widgetName="gcheck_start_rtc">
+							<p1:GCheck.layoutData>
+								<GridData horizontalSpan="2"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<p1:GLabel text="Clock source:" widgetName="glabel_clksrc"/>
+						<p1:GString description="Clock source(internal/external). Configured through CLOCK APP." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_clksrc" x:Style="BORDER">
+							<p1:GString.layoutData>
+								<GridData widthHint="188"/>
+							</p1:GString.layoutData>
+						</p1:GString>
+						<p1:GGroup text="Timer Settings" manifestObj="true" widgetName="ggroup_timer_settings">
+							<p1:GGroup.layoutData>
+								<GridData horizontalSpan="2" widthHint="459" heightHint="76"/>
+							</p1:GGroup.layoutData>
+						<p1:GLabel bounds="7, 25, 113, 15" description="date" text="Date [dd/mm/yyyy]:" widgetName="glabel_date"/>
+						<p1:GInteger bounds="130, 22, 26, 23" description="Day(1-31). Range may vary depending on month" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="1" value="1" widgetName="gint_day" toolTipText="Enter date:"/>
+						<p1:GLabel bounds="166, 25, 6, 15" text="/" widgetName="gLabel2"/>
+						<p1:GInteger bounds="182, 22, 26, 23" description="Month (1-12)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="12" minValue="1" value="01" widgetName="gint_month" toolTipText="Enter month:"/>
+						<p1:GLabel bounds="218, 25, 6, 15" text="/" widgetName="gLabel4"/>
+						<p1:GInteger bounds="234, 22, 35, 23" description="Year(1970-9999)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="9999" minValue="1970" value="1970" widgetName="gint_year" toolTipText="Enter year:"/>
+						<p1:GLabel bounds="7, 61, 93, 15" description="time" text="Time [hh:mm:ss]:" widgetName="glabel_time_g"/>
+						<p1:GInteger bounds="130, 58, 26, 23" description="Hours(0-23)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="23" minValue="0" value="0" widgetName="gint_hour" toolTipText="Enter hours:"/>
+						<p1:GLabel bounds="166, 61, 3, 15" text=":" widgetName="gLabel25"/>
+						<p1:GInteger bounds="182, 58, 26, 23" description="Minutes(0-59)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="59" minValue="0" value="0" widgetName="gint_min" toolTipText="Enter minutes:"/>
+						<p1:GLabel bounds="218, 61, 3, 15" text=":" widgetName="gLabel26"/>
+						<p1:GInteger bounds="234, 58, 34, 23" description="Seconds(0-59)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="59" minValue="0" value="0" widgetName="gint_sec" toolTipText="Enter seconds:"/>
+					</p1:GGroup>
+						<p1:GGroup manifestObj="true" text="Alarm Settings" widgetName="ggroup_alarm_settings">
+							<p1:GGroup.layoutData>
+								<GridData horizontalSpan="2" widthHint="458" heightHint="77"/>
+							</p1:GGroup.layoutData>
+						<p1:GLabel bounds="7, 25, 113, 15" description="date" text="Date [dd/mm/yyyy]:" widgetName="glabel_alarm_date"/>
+						<p1:GInteger bounds="130, 22, 26, 23" description="Day(1-31). Range may vary depending on month" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="1" value="1" widgetName="gint_alarm_day" toolTipText="Enter alarm date:"/>
+						<p1:GLabel bounds="166, 25, 6, 15" text="/" widgetName="gLabel2_a"/>
+						<p1:GInteger bounds="182, 22, 26, 23" description="Month (1-12)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="12" minValue="1" value="01" widgetName="gint_alarm_month" toolTipText="Enter alarm month:"/>
+						<p1:GLabel bounds="218, 25, 6, 15" text="/" widgetName="gLabel4_a"/>
+						<p1:GInteger bounds="234, 22, 35, 23" description="Year(1970-9999)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="9999" minValue="1970" value="1970" widgetName="gint_alarm_year" toolTipText="Enter alarm year:"/>
+						<p1:GLabel bounds="7, 61, 93, 15" description="time" text="Time [hh:mm:ss]:" widgetName="glabel_alarm_time"/>
+						<p1:GInteger bounds="130, 58, 26, 23" description="Hours(0-23)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="23" minValue="0" value="0" widgetName="gint_alarm_hour" toolTipText="Enter alarm hours:"/>
+						<p1:GLabel bounds="166, 61, 3, 15" text=":" widgetName="gLabel25_g_a"/>
+						<p1:GInteger bounds="182, 58, 26, 23" description="Minutes(0-59)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="59" minValue="0" value="1" widgetName="gint_alarm_min" toolTipText="Enter alarm minutes:"/>
+						<p1:GLabel bounds="218, 61, 3, 15" text=":" widgetName="gLabel26_g_a"/>
+						<p1:GInteger bounds="234, 58, 34, 23" description="Seconds(0-59)" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="59" minValue="0" value="0" widgetName="gint_alarm_sec" toolTipText="Enter alarm seconds:"/>
+					</p1:GGroup>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" widgetName="gtab_interrupt">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_7">
+					<p1:GGroup text="Timer Event Settings" manifestObj="true" widgetName="ggroup_timerevent_settings" bounds="5, 6, 483, 188" description="Timer event settings" layout="{x:Null}">
+						<p1:GGroup manifestObj="true" text="Periodic Events" widgetName="ggroup_periodic" description="Periodic events for timer" bounds="8, 20, 464, 73">
+							<p1:GCheck bounds="7, 23, 56, 16" description="Selection of this generates an interrupt on periodic days" manifestObj="true" text="Days" widgetName="gcheck_pdays"/>
+							<p1:GCheck bounds="97, 22, 68, 16" description="Selection of this generates an interrupt on periodic months" manifestObj="true" text="Months" widgetName="gcheck_pmonths"/>
+							<p1:GCheck bounds="195, 21, 59, 16" description="Selection of this generates an interrupt on periodic years" manifestObj="true" text="Years" widgetName="gcheck_pyears"/>
+							<p1:GCheck bounds="7, 54, 63, 16" description="Selection of this generates an interrupt on periodic hours" manifestObj="true" text="Hours" widgetName="gcheck_phours"/>
+							<p1:GCheck bounds="97, 52, 73, 16" description="Selection of this generates an interrupt on periodic minutes" manifestObj="true" text="Minutes" widgetName="gcheck_pmins"/>
+							<p1:GCheck bounds="195, 51, 93, 16" description="Selection of this generates an interrupt on periodic seconds" manifestObj="true" text="Seconds" widgetName="gcheck_psecs"/>
+						</p1:GGroup>
+						<p1:GLabel description="The timer event triggers either SCU Interrupt or NMI." manifestObj="true" text="Event trigger:" widgetName="glabel_eventtrigger_timer" toolTipText="Timer event can be used to trigger SCU interrupt or NMI." bounds="8, 106, 70, 15"/>
+						<p1:GCombo description="Timer event triggers SCU interrupt or NMI." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="SCU Interrupt&#13;&#10;NMI Interrupt" value="SCU Interrupt" widgetName="gcombo_eventtrigger_timer" toolTipText="Timer event triggers SCU interrupt or NMI." bounds="93, 103, 103, 21"/>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_timerstatus" x:Style="BORDER" description="Indicates the timer event trigger status" bounds="206, 103, 266, 21"/>
+						<p1:GLabel description="Interrupt handler" manifestObj="true" text="Event handler:" widgetName="glabel_realtime_handler" bounds="8, 137, 75, 15"/>
+						<p1:GString description="A valid C function identifier must be provided here. The function should be defined in the user code. &lt;br&gt;&lt;br&gt;&#13;&#10;e.g.&#13;&#10;void Time_Handler(void);&lt;br&gt;&#13;&#10;This event handler is relevant only when Event trigger is SCU Interrupt." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" toolTipText="User should define as: void Time_Handler(void) in &lt;br&gt; &#13;&#10;application code to match with the entered handler name through UI.&#13;&#10;This event handler is relevant only when Event trigger is SCU Interrupt." value="Time_Handler" widgetName="gstring_realtime_handler" x:Style="BORDER" bounds="93, 134, 379, 21"/>
+						<p1:GMessage description="Shows error message if ISR name is invalid" isError="false" manifestObj="true" text="Not a valid function name" widgetName="gmessage_valid_time_isr_name" bounds="8, 165, 161, 15"/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_nmihandler_timer_si" bounds="93, 134, 379, 21" value="NMI_Handler" enabled="false" toolTipText="When Event trigger is NMI, the event handler (NMI_Handler) should be defined in the application code."/>
+					</p1:GGroup>
+					<p1:GGroup bounds="4, 197, 483, 129" manifestObj="true" text="Alarm Event Settings" widgetName="ggroup_alarmevent_settings" layout="{x:Null}">
+						<p1:GCheck description="Enables alarm interrupt" manifestObj="true" text="Enable alarm interrupt" widgetName="gcheck_alarm_enable" bounds="8, 20, 138, 16"/>
+						<p1:GLabel description="The alarm event triggers either SCU Interrupt or NMI." manifestObj="true" text="Event trigger:" widgetName="glabel_eventtrigger_alarm" toolTipText="Alarm event can be used to trigger SCU interrupt or NMI." bounds="8, 49, 70, 15"/>
+						<p1:GCombo description="Alarm event triggers either SCU interrupt or NMI." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" options="SCU Interrupt&#13;&#10;NMI Interrupt" value="SCU Interrupt" widgetName="gcombo_eventtrigger_alarm" toolTipText="Alarm event triggers SCU interrupt or NMI." bounds="93, 46, 103, 21"/>
+						<p1:GString mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_alarmstatus" x:Style="BORDER" description="Indicates the alarm event trigger status" bounds="206, 46, 271, 21"/>
+						<p1:GLabel description="Event handler" manifestObj="true" text="Event handler:" widgetName="glabel_alarm_event_handler" bounds="8, 80, 75, 15"/>
+						<p1:GString description="A valid C function identifier must be provided here. The function should be defined in the user code. &lt;br&gt;&lt;br&gt;&#13;&#10;e.g.&#13;&#10;void Alarm_Handler(void);&lt;br&gt;&#13;&#10;This event handler is relevant only when Event trigger is SCU Interrupt." mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" toolTipText="User should define as: void Alarm_Handler(void) in &lt;br&gt; &#13;&#10;application code to match with the entered handler name through UI.&#13;&#10;This event handler is relevant only when Event trigger is SCU Interrupt." value="Alarm_Handler" widgetName="gstring_alarm_event_handler" x:Style="BORDER" bounds="93, 77, 384, 21"/>
+						<p1:GMessage description="Shows error message if ISR name is invalid" isError="false" manifestObj="true" text="Not a valid function name" widgetName="gmessage_valid_alarm_isr_name" bounds="8, 108, 161, 15"/>
+						<p1:GString x:Style="BORDER" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gstring_nmihandler_alarm_si" bounds="92, 77, 385, 21" value="NMI_Handler" enabled="false" toolTipText="When Event trigger is NMI, the event handler (NMI_Handler) should be defined in the application code."/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Dummy" visible="true" enabled="true" manifestObj="true" widgetName="gtab_dummy">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_1">
+					<p1:GLabel text="Day for timer" visible="true" manifestObj="true" widgetName="glabel_day" bounds="15, 46, 55, 15"/>
+					<p1:GLabel text="Month for timer" visible="true" manifestObj="true" widgetName="glabel_month" bounds="100, 45, 55, 15"/>
+					<p1:GLabel text="Year for timer" visible="true" manifestObj="true" widgetName="glabel_year" bounds="189, 45, 55, 15"/>
+					<p1:GLabel text="Hours for timer" visible="true" manifestObj="true" widgetName="glabel_hour" bounds="19, 74, 55, 15"/>
+					<p1:GLabel text="Minutes for timer" visible="true" manifestObj="true" widgetName="glabel_min" bounds="103, 74, 55, 15"/>
+					<p1:GLabel text="Seconds for timer" visible="true" manifestObj="true" widgetName="glabel_sec" bounds="191, 74, 55, 15"/>
+					<p1:GLabel text="Day for alarm" visible="true" manifestObj="true" widgetName="glabel_alarm_day" bounds="13, 125, 55, 15"/>
+					<p1:GLabel text="Month for alarm" visible="true" manifestObj="true" widgetName="glabel_alarm_month" bounds="98, 125, 67, 15"/>
+					<p1:GLabel text="Year for alarm" visible="true" manifestObj="true" widgetName="glabel_alarm_year" bounds="192, 123, 55, 15"/>
+					<p1:GLabel text="Hours for alarm" visible="true" manifestObj="true" widgetName="glabel_alarm_hour" bounds="14, 153, 55, 15"/>
+					<p1:GLabel text="Minutes for alarm" visible="true" manifestObj="true" widgetName="glabel_alarm_min" bounds="100, 154, 55, 15"/>
+					<p1:GLabel text="Seconds for alarm" visible="true" manifestObj="true" widgetName="glabel_alarm_sec" bounds="193, 155, 55, 15"/>
+					<p1:GLabel text="Timer event trigger status" visible="true" manifestObj="true" widgetName="glabel_timerstatus" bounds="102, 197, 55, 15"/>
+					<p1:GLabel text="Alarm event trigger status" visible="true" manifestObj="true" widgetName="glabel_alarmstatus" bounds="103, 233, 55, 15"/>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>

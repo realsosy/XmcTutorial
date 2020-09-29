@@ -1,0 +1,134 @@
+package Model.APPS.GLOBAL_SCU_XMC4.v4_1_8;
+
+/*
+Copyright (c) 2015, Infineon Technologies AG
+All rights reserved.                       
+                                           
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+following conditions are met:  
+                                                                            
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+disclaimer.                       
+ 
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+disclaimer in the documentation and/or other materials provided with the distribution.                      
+ 
+Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+products derived from this software without specific prior written permission.                                          
+                                                                            
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                                 
+                                                                            
+To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with 
+Infineon Technologies AG: dave@infineon.com. */
+
+/*************** Revision History ****************************************************
+ Version      Date          Description 
+ 
+  4.0.0       16-Feb-2015   Initial version for DAVE v4
+  4.0.1       05-May-2015   Help documentation updated
+  4.1.2       16-Jun-2015   GLOBAL_SCU_XMC4_RegisterCallback API return type is modified
+                            to GLOBAL_SCU_XMC4_STATUS_t <br>
+  4.1.4       26-Jun-2015   GLOBAL_SCU_XMC4_EnableEvent, GLOBAL_SCU_XMC4_DisableEvent APIs
+                            parameter is modified with type GLOBAL_SCU_XMC4_EVENT_t 
+  4.1.6       09-Oct-2015   Added support for XMC4800	
+  4.1.8       15-Dec-2015   Added support for XMC4300						
+ ************************************************************************************/
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+class  GLOBAL_SCU_XMC4 extends GLOBAL_SCU_XMC4_GUI {
+
+    // Note  : SCU properties are mandatory and important
+    // Begin : SCU property section
+    def version            = '4.1.8'
+
+    def categoriesDescription = ["System/~Global Reg control"]// Minimum DAVE version required for the App
+    def minDaveVersion        = '4.0.0'
+
+    // Keywords to search in Apps selection view
+    def keywords      =
+    [
+ 		"all"
+    ]
+
+    // Software IDs and its required minimum version
+    def softwareIDs  = [
+
+        	             "XMC4.8.*.*.*":"1.0.0",
+		                 "XMC4.7.*.*.*":"1.0.0",
+		                 "XMC4.5.*.*.*":"1.0.0",
+		                 "XMC4.3.*.*.*":"1.0.0",
+		                 "XMC4.4.*.*.*":"1.0.0",
+		                 "XMC4.2.*.*.*":"1.0.0",
+		                 "XMC4.1.*.*.*":"1.0.0"
+                       ]
+
+    def singleton     = true
+    def initProvider  = true
+    def deprecated    = false
+    def sharable      = true
+    def ioApp         = false
+
+    // App short description
+    def description = "GLOBAL_SCU_XMC4 APP allows to register callback functions and to handle the service request Events."
+
+    // End   : SCU property section
+
+    // Begin : User variable section
+    MVirtualResourceGroup hwres_global_scu_xmc4_node
+
+    MVirtualSignal vs_nvic_signal_in
+
+    MRequiredApp appres_cpu
+    
+    SolverVariable node_0
+    SolverVariable node_1
+    
+    // End   : User variable section
+
+    // SCU Constructor
+    public GLOBAL_SCU_XMC4(DaveEnv daveEnv) {
+
+        String family = daveEnv.project.selectedDevice.deviceId.family
+        
+        appres_cpu =  MRequiredApp("CPU_CTRL_XMC4", "CPU", RSHARABLE,"4.0.2")
+         
+        node_0 = SolverVariable();
+        node_1 = SolverVariable();
+        
+        addLinearConstraint(node_1, node_0, 1);
+		
+		/* Reserve the resource group for node 0 */
+        hwres_global_scu_xmc4_node =  MVirtualResourceGroup("NVIC Node", ["peripheral","cpu","0","nvic","interrupt",node_0], true)
+        vs_nvic_signal_in =  MVirtualSignal(hwres_global_scu_xmc4_node, "sr_irq0",  "signal_in", true, false) /* required{}, exposeToUser{} */
+        addUriElementRangeConstraint(node_0, MF({[0]}, List))
+			
+		ginterruptprio_priority.maxPriority = MF({
+            Integer temp = appres_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"]) as Integer
+            return temp
+           }, Integer)
+			
+		ginterruptprio_priority.maxSubPriority =  MF({
+				Integer temp = appres_cpu.getVal(["gint_maxInterruptSubPriority", "value"]) as Integer
+				return temp
+			}, Integer)
+
+    }
+
+    // File Generation
+    def generateFiles(){
+        copy("global_scu_xmc4.c", "global_scu_xmc4.c")
+        copy("global_scu_xmc4.h", "global_scu_xmc4.h")
+        generate("global_scu_xmc4_confc.tmpl", "global_scu_xmc4_conf.c")
+        generate("global_scu_xmc4_confh.tmpl", "global_scu_xmc4_conf.h")
+        generate("global_scu_xmc4_externh.tmpl", "global_scu_xmc4_extern.h")
+    }
+
+}

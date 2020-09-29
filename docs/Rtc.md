@@ -29,7 +29,11 @@ RTC 없이 일반 타이머(카운터)를 사용하여 시간을 관리할 수�
 * 저전력 소비
 
 일반적인 하드웨어 타이머들은 클럭 소스로 usec 정밀도의 신호를 사용하고 있다. 예를 들어 1usec 주기의 신호로 클럭 소스를 사용하고, 타이머의 데이터 폭이 16비트라고 하면, 타이머가 Overflow 되는 때까지의 시간은
-$$1\cdot 10^{-6}[sec]\times 65,536 \approx 65.5 [msec]$$
+
+$$
+1\cdot 10^{-6}[sec]\times 65,536 \approx 65.5 [msec]
+$$
+
 가 된다. 다시 말하여 65.5 msec 마다 overflow 인터럽트를 발생시켜야 연속적으로 시간을 관리할 수 있게 된다. 클럭소스의 속도를 늦춘다고 하더라도 상당히 빈번한 인터럽트가 발생하게 되고, 이것을 처리하기 위하여 쓸데없는 부가작업들이 많이 따르게 된다. 이 문제를 해결하기 위하여 초단위 정도의 정밀도를 가지고 상대적으로 긴 시간을 측정할 수 있는 타이머 서브시스템을 구성하게 되었고 이것이 바로 RTC 이다.  
 RTC는 일반적으로 32.768KHz 의 클록 신호를 많이 사용한다. 이 클록 소스를 사용하면 32,768, 즉 15bit 의 자료형일 경우 1sec 마다 오버플로우를 발생하게 된다. 이것을 필요에 따라 프리스케일러로 클록 속도를 낮춰서 사용하면 인간에게 친숙한 단위의 초,분,시간을 쉽게 정수로 관리할 수 있게 된다.
 
@@ -383,9 +387,16 @@ RTC_GetStdTime(&std_current_alarm);
 ```
 
 * [NOTE] _NMI 인터럽트 사용 시 이벤트 플래그를 리셋 해줘야 한다_
-XMC_SCU_INTERRUPT_ClearEventStatus((XMC_SCU_INTERRUPT_EVENT_t)XMC_SCU_INTERRUPT_EVENT_RTC_PERIODIC);
-XMC_SCU_INTERRUPT_EVENT_RTC_PERIODIC
-XMC_SCU_INTERRUPT_EVENT_RTC_ALARM
+
+  ```c
+  XMC_SCU_INTERRUPT_ClearEventStatus((XMC_SCU_INTERRUPT_EVENT_t)XMC_SCU_INTERRUPT_EVENT_RTC_PERIODIC);
+
+  XMC_SCU_INTERRUPT_ClearEventStatus((XMC_SCU_INTERRUPT_EVENT_t)XMC_SCU_INTERRUPT_EVENT_RTC_ALARM);
+
+  ```
+  
+  
+
 
 ## 실습프로젝트
 
