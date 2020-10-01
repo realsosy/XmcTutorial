@@ -106,7 +106,7 @@ static void TaskInit(void){
 * in Scheduler.c
 
 ```c
-    static void Task1000ms(void){
+static void Task1000ms(void){
     WATCHDOG_Service();
 }
 ```
