@@ -37,10 +37,10 @@ RTC App을 현재 시간을 설정하고 Alarm을 활용하는 방법을 배운�
 
 #### DAVE APP
 * RTC
-  * 매초마다 Timer Event를 발생시킨다.
-  * Alarm Event를 활성화 한다.
+    * 매초마다 Timer Event를 발생시킨다.
+    * Alarm Event를 활성화 한다.
 * DIGITAL_IO
-  * Timer Event와 Alarm Event 발생시 Toggle 하도록 한다.
+    * Timer Event와 Alarm Event 발생시 Toggle 하도록 한다.
 
 #### Functions
 * Time_Handler()
@@ -58,96 +58,95 @@ RTC App을 현재 시간을 설정하고 Alarm을 활용하는 방법을 배운�
 
 ### 프로그램 작성
 1. RTC App 설정
-   - Name: dhRTC_0
-   - Start after initialization: Check
-   - Interrupt Settings / Timer Event Settings / Seconds: Check
-   - Interrupt Settings / Alarm Event Settings / Enable alarm interrupt: Check
+    - Name: dhRTC_0
+    - Start after initialization: Check
+    - Interrupt Settings / Timer Event Settings / Seconds: Check
+    - Interrupt Settings / Alarm Event Settings / Enable alarm interrupt: Check
 2. DIO 추가 및 설정
-   - Name: dhDIGITAL_IO_0, dhDIGITAL_IO_1
-   - Output 으로 설정하고 P1.0과 P1.1 에 할당
+    - Name: dhDIGITAL_IO_0, dhDIGITAL_IO_1
+    - Output 으로 설정하고 P1.0과 P1.1 에 할당
 
 3. 프로그래밍
 
-   ```c
-   #include <DAVE.h>                
-   #include <time.h>
-   
-    void Time_Handler(void)
-    {
-      DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_0);
-    }
-   
-    void Alarm_Handler(void)
-    {
-      XMC_RTC_ALARM_t alarm_time;
-   
-      DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_1);
-   
-      RTC_GetAlarmTime(&alarm_time);     // Read the current alarm time
-   
-      alarm_time.seconds = alarm_time.seconds + 10;
-      if(alarm_time.seconds > 59)
-      {
-          alarm_time.seconds = 0;
-          alarm_time.minutes++;
-      }
-   
-      if(alarm_time.minutes > 59)
-      {
-   		 alarm_time.minutes = 0;
-   		 alarm_time.hours++;
-      }
-   
-     RTC_SetAlarmTime(&alarm_time);     // Reconfigure alarm time for next minute
-    }
-   
-   int main(void)
-   {
-     DAVE_STATUS_t status;
-     XMC_RTC_TIME_t timeval =
-     {
-   	.seconds = 0U,
-   	.minutes = 0U,
-   	.hours = 0U,
-   	.days = 3U,
-   	.month = 10,
-   	.year = 2020U
-     };
-   
-     XMC_RTC_ALARM_t alarm =
-     {
-        .seconds = 10U,
-        .minutes = 0U,
-        .hours = 0U,
-        .days = 3U,
-        .month = 10,
-        .year = 2020U
-     };
-   
-   
-     struct tm stdtimeval;
-   
-     status = DAVE_Init();           /* Initialization of DAVE APPs  */
-     RTC_SetTime(&timeval);
-     RTC_SetAlarmTime(&alarm);
-   
-     if(status != DAVE_STATUS_SUCCESS)
-     {
-       XMC_DEBUG("DAVE APPs initialization failed\n");
-       while(1U)
-       {    }
-     }
-   
-     while(1U)
-     {
-       RTC_GetTime(&timeval);
-       RTC_GetStdTime(&stdtimeval);
-     }
-   }
-   
-   ```
+```c
+#include <DAVE.h>                
+#include <time.h>
 
-   
+void Time_Handler(void)
+{
+  DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_0);
+}
+    
+void Alarm_Handler(void)
+{
+  XMC_RTC_ALARM_t alarm_time;
+
+  DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_1);
+
+  RTC_GetAlarmTime(&alarm_time);     // Read the current alarm time
+    
+  alarm_time.seconds = alarm_time.seconds + 10;
+  if(alarm_time.seconds > 59)
+  {
+     alarm_time.seconds = 0;
+     alarm_time.minutes++;
+  }
+    
+  if(alarm_time.minutes > 59)
+  {
+     alarm_time.minutes = 0;
+     alarm_time.hours++;
+  }
+    
+  RTC_SetAlarmTime(&alarm_time);     // Reconfigure alarm time for next minute
+}
+    
+int main(void)
+{
+  DAVE_STATUS_t status;
+  XMC_RTC_TIME_t timeval =
+  {
+    .seconds = 0U,
+    .minutes = 0U,
+    .hours = 0U,
+    .days = 3U,
+    .month = 10,
+    .year = 2020U
+  };
+    
+  XMC_RTC_ALARM_t alarm =
+  {
+    .seconds = 10U,
+    .minutes = 0U,
+    .hours = 0U,
+    .days = 3U,
+    .month = 10,
+    .year = 2020U
+  };
+    
+  struct tm stdtimeval;
+
+  status = DAVE_Init();           /* Initialization of DAVE APPs  */
+  RTC_SetTime(&timeval);
+  RTC_SetAlarmTime(&alarm);
+
+  if(status != DAVE_STATUS_SUCCESS)
+  {
+    XMC_DEBUG("DAVE APPs initialization failed\n");
+    while(1U)
+    {    }
+  }
+
+  while(1U)
+  {
+    RTC_GetTime(&timeval);
+    RTC_GetStdTime(&stdtimeval);
+  }
+}
+
+```
+
+    
 
 ### 실행결과
 * LED1은 1초 주기로 Toggle 하고 LED2 는 10초 주기로 Toggle 한다.
