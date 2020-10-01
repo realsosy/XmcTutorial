@@ -70,31 +70,27 @@ Watch Dog 서비스의 개념을 이해하고 활용할 수 있도록 한다.
 
 * in main.c
 
-    ```c
-    void WatchDog_Handler(void)
-    {
-        DIGITAL_IO_SetOutputHigh(&dhDIGITAL_IO_WatchDog);
-
-        WATCHDOG_ClearAlarm(); /* Clear the alarm event */
-
-        /* To add some measures to clear infinite loop */
-
-    }
-    ```
-
+```c
+void WatchDog_Handler(void)
+{
+    DIGITAL_IO_SetOutputHigh(&dhDIGITAL_IO_WatchDog);
+    WATCHDOG_ClearAlarm(); /* Clear the alarm event */
+    /* To add some measures to clear infinite loop */
+}
+```
   
 
 * in Scheduler.c
 
-    ```c
-    static void TaskInit(void){
-        /* Initialize ProbeScope */
-        ProbeScope_Init(1000); /* 1 KHz */
+```c
+static void TaskInit(void){
+    /* Initialize ProbeScope */
+    ProbeScope_Init(1000); /* 1 KHz */
 
-        WATCHDOG_Start(); // Start WatchDog
+    WATCHDOG_Start(); // Start WatchDog
 
-    }
-    ```
+}
+```
 
 * **[관찰]**
 
@@ -109,11 +105,11 @@ Watch Dog 서비스의 개념을 이해하고 활용할 수 있도록 한다.
 
 * in Scheduler.c
 
-    ```c
-        static void Task1000ms(void){
-        WATCHDOG_Service();
-    }
-    ```
+```c
+    static void Task1000ms(void){
+    WATCHDOG_Service();
+}
+```
   
 * **[관찰]**
 
@@ -127,23 +123,23 @@ Watch Dog 서비스의 개념을 이해하고 활용할 수 있도록 한다.
 
   * in Scheduler.c
 
-    ```c
-    uint32_t Ticks1000ms = 0;
-    static void Task1000ms(void){
-        Ticks1000ms++;
+```c
+uint32_t Ticks1000ms = 0;
+static void Task1000ms(void){
+    Ticks1000ms++;
 
     /* !!! Test purpose only. Wrong Operation in 7sec */
-        if(Ticks1000ms == 7){
-            while(1)
-            {
-              ;
-            }
+    if(Ticks1000ms == 7){
+        while(1)
+        {
+          ;
         }
-
-        WATCHDOG_Service();
-
     }
-    ```
+
+    WATCHDOG_Service();
+
+}
+```
 
 * **[관찰]**
 
