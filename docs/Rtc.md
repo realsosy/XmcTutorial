@@ -388,12 +388,12 @@ RTC_GetStdTime(&std_current_alarm);
 
 * [NOTE] _NMI 인터럽트 사용 시 이벤트 플래그를 리셋 해줘야 한다_
 
-  ```c
+```c
   XMC_SCU_INTERRUPT_ClearEventStatus((XMC_SCU_INTERRUPT_EVENT_t)XMC_SCU_INTERRUPT_EVENT_RTC_PERIODIC);
 
   XMC_SCU_INTERRUPT_ClearEventStatus((XMC_SCU_INTERRUPT_EVENT_t)XMC_SCU_INTERRUPT_EVENT_RTC_ALARM);
 
-  ```
+```
   
   
 

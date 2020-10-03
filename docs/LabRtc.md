@@ -44,7 +44,7 @@ RTC App을 현재 시간을 설정하고 Alarm을 활용하는 방법을 배운�
 
 #### Functions
 * Time_Handler()
-    
+  
     * Timer Event와 연결된 Interrupt Handler
     * LED1을 Toggle 한다.
     
@@ -79,27 +79,27 @@ void Time_Handler(void)
     
 void Alarm_Handler(void)
 {
-  XMC_RTC_ALARM_t alarm_time;
+    XMC_RTC_ALARM_t alarm_time;
 
-  DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_1);
+    RTC_GetAlarmTime(&alarm_time);
 
-  RTC_GetAlarmTime(&alarm_time);     // Read the current alarm time
-    
-  alarm_time.seconds = alarm_time.seconds + 10;
-  if(alarm_time.seconds > 59)
-  {
-     alarm_time.seconds = 0;
-     alarm_time.minutes++;
-  }
-    
-  if(alarm_time.minutes > 59)
-  {
-     alarm_time.minutes = 0;
-     alarm_time.hours++;
-  }
-    
-  RTC_SetAlarmTime(&alarm_time);     // Reconfigure alarm time for next minute
+    alarm_time.seconds = alarm_time.seconds + 10;
+
+    if(alarm_time.seconds > 59){
+    	alarm_time.seconds = alarm_time.seconds - 60;
+    	alarm_time.minutes ++;
+    }
+
+    if(alarm_time.minutes > 59){
+    	alarm_time.minutes = alarm_time.minutes - 60;
+    	alarm_time.hours ++;
+    }
+
+    RTC_SetAlarmTime(&alarm_time);
+
+	DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_1);
 }
+
     
 int main(void)
 {
@@ -146,7 +146,7 @@ int main(void)
 
 ```
 
-    
+​    
 
 ### 실행결과
 * LED1은 1초 주기로 Toggle 하고 LED2 는 10초 주기로 Toggle 한다.

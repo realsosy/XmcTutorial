@@ -11,34 +11,33 @@
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
 #include <time.h>
 
- void Time_Handler(void)
- {
+void Time_Handler(void)
+{
    DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_0);
- }
+}
 
- void Alarm_Handler(void)
- {
-   XMC_RTC_ALARM_t alarm_time;
+void Alarm_Handler(void)
+{
+    XMC_RTC_ALARM_t alarm_time;
 
-   DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_1);
+    RTC_GetAlarmTime(&alarm_time);
 
-   RTC_GetAlarmTime(&alarm_time);     // Read the current alarm time
+    alarm_time.seconds = alarm_time.seconds + 10;
 
-   alarm_time.seconds = alarm_time.seconds + 10;
-   if(alarm_time.seconds > 59)
-   {
-       alarm_time.seconds = 0;
-       alarm_time.minutes++;
-   }
+    if(alarm_time.seconds > 59){
+    	alarm_time.seconds = alarm_time.seconds - 60;
+    	alarm_time.minutes ++;
+    }
 
-   if(alarm_time.minutes > 59)
-   {
-		 alarm_time.minutes = 0;
-		 alarm_time.hours++;
-   }
+    if(alarm_time.minutes > 59){
+    	alarm_time.minutes = alarm_time.minutes - 60;
+    	alarm_time.hours ++;
+    }
 
-  RTC_SetAlarmTime(&alarm_time);     // Reconfigure alarm time for next minute
- }
+    RTC_SetAlarmTime(&alarm_time);
+
+	DIGITAL_IO_ToggleOutput(&dhDIGITAL_IO_1);
+}
 
 
 
@@ -67,14 +66,13 @@ int main(void)
 
   XMC_RTC_ALARM_t alarm =
   {
-     .seconds = 10U,
-     .minutes = 0U,
-     .hours = 0U,
-     .days = 3U,
-     .month = 10,
-     .year = 2020U
+	.seconds = 10U,
+	.minutes = 0U,
+	.hours = 0U,
+	.days = 3U,
+	.month = 10,
+	.year = 2020U
   };
-
 
   struct tm stdtimeval;
 
