@@ -25,7 +25,7 @@ PWM App을 이용하여 SG-90 제품의 데이터시트에 기술된 대로 올�
 
 ### 서보모터(MG-996R) 신호 모듈레이션 방법
 
-<img src=".\images\ServoMotor_SignalModulation.png">
+![SignalModulation](.\images\ServoMotor_SignalModulation.png)
 
 * SG-90는 일정한 주기의 PWM 신호로 제어되며, 신호의 on time 시간에 따라 로터의 위치가 결정된다.
 
@@ -91,11 +91,11 @@ $$
 
 1. 아래와 같이 회로도를 구성하고 S/W를 제작한다.
 
-<img src=".\images\ServoMotor_Circuit.jpg" width="50%">
+![](.\images\ServoMotor_Circuit.jpg)
 
 2. uC-probe로 Servo Angle을 변경하며 서보모터의 성능을 관찰한다.
 
-<img src=".\images\ServoMotor_Test.png">
+![](.\images\ServoMotor_Test.png)
 
 
 
