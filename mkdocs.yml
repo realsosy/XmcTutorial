@@ -69,7 +69,9 @@ pages:
 #    - Project Template: ProjectTemplate.md
 
 - Examples:
+    - Servo Motor: ServoMotor.md
     - Ultrasonic Sensor: UltrasonicSensor.md
+    - Ultrasonic Radar: UltrasonicRadar.md
     - SignalGenMon: LabSigGenMon.md
 
 - Project1 Signal Generator & Monitor:
