@@ -91,11 +91,11 @@ $$
 
 1. 아래와 같이 회로도를 구성하고 S/W를 제작한다.
 
-![](.\images\ServoMotor_Circuit.jpg)
+![Setup](.\images\ServoMotor_Circuit.jpg)
 
 2. uC-probe로 Servo Angle을 변경하며 서보모터의 성능을 관찰한다.
 
-![](.\images\ServoMotor_Test.png)
+![uCProbe](.\images\ServoMotor_Test.png)
 
 
 
