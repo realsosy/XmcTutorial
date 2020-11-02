@@ -267,7 +267,7 @@ $$
 ### Test case
 
 ![No obstacle](.\images\Radar_TestCase1.png)
-![](.\images\Radar_TestCase1_1.jpg
+![](.\images\Radar_TestCase1_1.jpg)
 
 <center>[Figure11. No obstacle]</center>
 
