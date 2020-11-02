@@ -1,4 +1,4 @@
-# Lab Radar
+# Radar
 
 ## 개요
 
@@ -39,32 +39,32 @@
 
 ### System Design
 
-<img src=".\images\Radar_SystemDiagram.png" width="80%">
+![System Diagram](.\images\Radar_SystemDiagram.png)
 
 <center>[Figure1. System Diagram]</center>
 
 #### XMC4500과 Radar의 Interface
 
 - US_Trig
-  - 초음파 센서 트리거 신호
-  - 전압 범위 : 0 ~ 3.3 [V]
+    - 초음파 센서 트리거 신호
+    - 전압 범위 : 0 ~ 3.3 [V]
 - US_Echo
-  - 초음파 센서의 출력신호. 초음파를 보내 반사되어 돌아오는 시간 정보를 가진다.
-  - 전압 범위 : 0 ~ 5 [V]
-  - XMC4500과 Interface하기 위해 **전압 분배회로**를 사용해서 전압 범위를 0 ~ 3.3 V로 변환한다.
+    - 초음파 센서의 출력신호. 초음파를 보내 반사되어 돌아오는 시간 정보를 가진다.
+    - 전압 범위 : 0 ~ 5 [V]
+    - XMC4500과 Interface하기 위해 **전압 분배회로**를 사용해서 전압 범위를 0 ~ 3.3 V로 변환한다.
 - Servo
-  - 서보모터 위치지령
-  - 50Hz의 PWM신호 사용
-  - 전압 범위 : 0 ~ 3.3 [V]
+    - 서보모터 위치지령
+    - 50Hz의 PWM신호 사용
+    - 전압 범위 : 0 ~ 3.3 [V]
 
 
 
 #### Component Description
 
 - 초음파 센서
-  - 전방 물체까지 거리 측정
-  - HC-SR04 사용
-  - 초음파 센서에서 출력되는  Echo 신호의 펄스폭을 사용해 물체까지 거리 계산
+    - 전방 물체까지 거리 측정
+    - HC-SR04 사용
+    - 초음파 센서에서 출력되는  Echo 신호의 펄스폭을 사용해 물체까지 거리 계산
 
 $$
 Distance[cm]~=~{{echo_-pulse_-width~[us]}\over{58}}
@@ -73,10 +73,10 @@ $$
 <center>[Equation1. Calculate distance using Echo signal]</center>
 
 - 서보 모터
-  - 초음파 센서의 측정 방향 조정
-  - SG-90 사용
-  - PWM신호의 on time으로 위치 지령
-  - 0.9ms(-60º) ~ 2.1ms(60º)
+    - 초음파 센서의 측정 방향 조정
+    - SG-90 사용
+    - PWM신호의 on time으로 위치 지령
+    - 0.9ms(-60º) ~ 2.1ms(60º)
 
 
 
@@ -86,7 +86,7 @@ $$
 - 초음파센서의 탐지 가능 각도가 약 -20º ~ +20º이므로, -10º ~ +10º 범위의 장애물 감지는 신뢰성이 높다.
 - 측정 정보의 정확성을 위해 20º의 분해능으로 서보를 동작시켜 측정한다.
 
-<img src=".\images\Radar_index_Degree.png">
+![Radar scanning theory](.\images\Radar_index_Degree.png)
 
 <center>[Figure2. Radar scanning theory]</center>
 
@@ -96,11 +96,12 @@ $$
 
 ### Hardware Design
 
-​                     <img src=".\images\Radar_HWDesign2.jpg" width="25%">               <img src=".\images\Radar_HWConnection.png" width="50%">
+![Hardware Design](.\images\Radar_HWDesign2.jpg)
+![Hardware Connection](.\images\Radar_HWConnection.png)
 
 <center>[Figure2. Hardware Design]</center>
 
-<img src=".\images\Radar_VoltDivision.png" width="40%">
+![Voltage division circuit](.\images\Radar_VoltDivision.png)
 
 <center>[Figure3. Voltage division circuit]</center>
 
@@ -112,7 +113,7 @@ $$
 
 #### Theory : Servo와 초음파 센서를 활용한 Timing 설계
 
-<img src=".\images\Radar_TimingRaw.png">
+![Timing diagram](.\images\Radar_TimingRaw.png)
 
 <center>[Figure4. Timing diagram using Servo & US]</center>
 
@@ -129,7 +130,7 @@ $$
 
 #### Method1 : PWM을 사용한 설계 (Type Polling)
 
-<img src=".\images\Radar_TimingPolling.png">
+![using PWM module](.\images\Radar_TimingPolling.png)
 
 <center>[Figure5. Timing diagram using PWM module]</center>
 
@@ -139,7 +140,7 @@ $$
 
 #### Method2 : IC & OC를 사용한 설계(Type Interrupt)
 
-<img src=".\images\Radar_TimingICOC.png">
+![using IC & OC](.\images\Radar_TimingICOC.png)
 
 <center>[Figure6. Timing diagram using IC & OC]</center>
 
@@ -151,7 +152,7 @@ $$
 
 ### Hardware
 
-<img src = ".\images\Radar_HW.jpg" width="40%">
+![Radar hardware](.\images\Radar_HW.jpg)
 
 <center>[Figure7. Radar hardware]</center>
 
@@ -159,37 +160,37 @@ $$
 
 ### 프로그램 구조
 
-<img src=".\images\Radar_DaveApp.png">
+![Software Architecture](.\images\Radar_DaveApp.png)
 
 <center>[Figure8. Software Architecture]</center>
 
 #### DAVE APP Settings
 
 - dhPWM_Servo
-  - 서보모터 위치 지령 신호 생성
-  - Frequency : 50 [Hz]
+    - 서보모터 위치 지령 신호 생성
+    - Frequency : 50 [Hz]
 - dhPWM_US
-  - 초음파센서 Trig 신호 생성
-  - Frequency : 50k [Hz]
-  - Duty : 50 [%]
-  - Enable single shot mode : Enable
+    - 초음파센서 Trig 신호 생성
+    - Frequency : 50k [Hz]
+    - Duty : 50 [%]
+    - Enable single shot mode : Enable
 - dhIC_US
-  - Input Capture, US의 Echo 신호의 펄스 폭(On-Time, Time Interval) 측정
-  - Desired Timer Resolution [nsec] : 600
-  - Start after initialization : Enable
-  - Capture edge : Rise-to-Fall
-  - Overwrite Capture Value : Enable
+    - Input Capture, US의 Echo 신호의 펄스 폭(On-Time, Time Interval) 측정
+    - Desired Timer Resolution [nsec] : 600
+    - Start after initialization : Enable
+    - Capture edge : Rise-to-Fall
+    - Overwrite Capture Value : Enable
 - dhOC_CA
-  - Output Compare, 서보모터 동작 후, 안정화를 위한 대기시간
-  - Time interval [usec] : 140000
-  - ISR_dhOC_CA : 초음파 센서의 트리거 신호(dhPWM_US)를 활성화
+    - Output Compare, 서보모터 동작 후, 안정화를 위한 대기시간
+    - Time interval [usec] : 140000
+    - ISR_dhOC_CA : 초음파 센서의 트리거 신호(dhPWM_US)를 활성화
 - fltObstacleDistanceArr[5]
-  - 스캔 결과 데이터 저장
-  - 단위 : cm
-  - 배열의 index는 0에서 4까지 차례대로 -40º, -20º, 0º, 20º, 40º 위치에서 장애물까지 거리
+    - 스캔 결과 데이터 저장
+    - 단위 : cm
+    - 배열의 index는 0에서 4까지 차례대로 -40º, -20º, 0º, 20º, 40º 위치에서 장애물까지 거리
 - bScanComplete
-  - 스캔 완료를 알리는 flag
-  - 1 : 스캔 완료 / 0 : 스캔 중
+    - 스캔 완료를 알리는 flag
+    - 1 : 스캔 완료 / 0 : 스캔 중
 
 #### Function Design
 
@@ -235,7 +236,7 @@ $$
 * 20º 간격으로 총 5 번 초음파를 동작시키고 그 값을 fltObstacleDistanceArr에 저장한다. 그러므로 Array의 index를 사용해서 해당 위치를 판단하고 관리한다.
 * 서보 동작의 경계점, 즉 'ServoAngle이 -40º 또는 +40º 지점, CaArrIdx가 0 또는 4인 지점'에서 서보모터  동작 방향을 반대로 바꿔야 하므로 아래 그림과 같이 동작시킨다.
 
-<img src=".\images\Radar_Statemachine.png">
+![Radar state machine](.\images\Radar_Statemachine.png)
 
 <center>[Figure9. Radar state machine]</center>
 
@@ -243,7 +244,7 @@ $$
 
 ### Test Environment
 
-<img src=".\images\Radar_TestEnv.jpg" width="70%">
+![Test Environment](.\images\Radar_TestEnv.jpg)
 
 <center>[Figure11. Test Environment]</center>
 
@@ -251,33 +252,36 @@ $$
 
 ### uC-probe Setting
 
-<img src=".\images\Radar_Probe.png">
+![uC-Probe distplay](.\images\Radar_Probe.png)
 
 <center>[Figure10. uC-Probe distplay]</center>
 
 - 1 : Advanced → Tree View Control
-  - i16CaArrIdx : 거리값이 저장되는 배열의 index
-  - i32CadelayMs : Servo가 회전하고 안정화되는데 걸리는 시간
-  - CaLoopIn10Ms : 함수 Sense_CollisionAvoidance의 동작 주기
+    - i16CaArrIdx : 거리값이 저장되는 배열의 index
+    - i32CadelayMs : Servo가 회전하고 안정화되는데 걸리는 시간
+    - CaLoopIn10Ms : 함수 Sense_CollisionAvoidance의 동작 주기
 - 2 : Charts →Line Chart
-  - fltObstacleDistanceArr : 장애물까지 거리 값이 저장된 배열
-  - Miscellaneous → Text Tool을 이용해 그래프의 가로축에 위치 표현
+    - fltObstacleDistanceArr : 장애물까지 거리 값이 저장된 배열
+    - Miscellaneous → Text Tool을 이용해 그래프의 가로축에 위치 표현
 
 ### Test case
 
-​     <img src=".\images\Radar_TestCase1.png" width="50%">    <img src=".\images\Radar_TestCase1_1.jpg" width="45%">
+![No obstacle](.\images\Radar_TestCase1.png)
+![](.\images\Radar_TestCase1_1.jpg
 
 <center>[Figure11. No obstacle]</center>
 
 
 
-​     <img src=".\images\Radar_TestCase2.png" width="50%">    <img src=".\images\Radar_TestCase2_1.jpg" width="45%">
+![at 40 degree](.\images\Radar_TestCase2.png
+![](.\images\Radar_TestCase2_1.jpg)
 
 <center>[Figure12. Detect obstacle at 40 degree]</center>
 
 
 
-​    <img src=".\images\Radar_TestCase3.png" width="50%">     <img src=".\images\Radar_TestCase3_1.jpg" width="45%">
+![at center](.\images\Radar_TestCase3.png)
+![](.\images\Radar_TestCase3_1.jpg)
 
 <center>[Figure13. Detect obstacle at center]</center>
 
