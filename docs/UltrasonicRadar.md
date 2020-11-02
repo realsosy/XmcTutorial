@@ -86,7 +86,7 @@ $$
 - 초음파센서의 탐지 가능 각도가 약 -20º ~ +20º이므로, -10º ~ +10º 범위의 장애물 감지는 신뢰성이 높다.
 - 측정 정보의 정확성을 위해 20º의 분해능으로 서보를 동작시켜 측정한다.
 
-![Radar scanning theory](.\images\Radar_index_Degree.png)
+![Radar scanning theory](.\images\Radar_Index_Degree.png)
 
 <center>[Figure2. Radar scanning theory]</center>
 
@@ -236,7 +236,7 @@ $$
 * 20º 간격으로 총 5 번 초음파를 동작시키고 그 값을 fltObstacleDistanceArr에 저장한다. 그러므로 Array의 index를 사용해서 해당 위치를 판단하고 관리한다.
 * 서보 동작의 경계점, 즉 'ServoAngle이 -40º 또는 +40º 지점, CaArrIdx가 0 또는 4인 지점'에서 서보모터  동작 방향을 반대로 바꿔야 하므로 아래 그림과 같이 동작시킨다.
 
-![Radar state machine](.\images\Radar_Statemachine.png)
+![Radar state machine](.\images\Radar_StateMachine.png)
 
 <center>[Figure9. Radar state machine]</center>
 
