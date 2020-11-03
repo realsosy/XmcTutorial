@@ -273,7 +273,7 @@ $$
 
 
 
-![at 40 degree](.\images\Radar_TestCase2.png
+![at 40 degree](.\images\Radar_TestCase2.png)
 ![](.\images\Radar_TestCase2_1.jpg)
 
 <center>[Figure12. Detect obstacle at 40 degree]</center>
