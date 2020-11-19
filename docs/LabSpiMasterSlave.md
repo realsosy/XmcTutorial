@@ -6,6 +6,12 @@ date: 2017-09-01
 
 # Serial Peripheral Interface Lab  
 
+## References
+
+[Serial Communication in sparkfun](https://learn.sparkfun.com/tutorials/serial-communication)
+
+[Serial Peripheral Interface (SPI) in sparkfun](https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi)
+
 ## Must Execute Code
 
 *   SpiMasterSlave.zip 프로젝트 import 하여 실행해 보세요.
@@ -230,7 +236,7 @@ void ISR_SpiSlaveRx(){
 
 *   MySpiMasterSlave 프로젝트를 Build 하고 실행해 보세요.
 
-    ​
+    
 
 *   Expression 창에 중요 변수들을 등록하고 그 값을 확인해 보세요.
 
@@ -260,7 +266,7 @@ void ISR_SpiSlaveRx(){
 | MasterDataRx[2] |             |          | SlaveDataTx[2] |             |          |
 | MasterDataRx[3] |             |          | SlaveDataTx[3] |             |          |
 
-    
+​    
 
 * MasterRxEnable을 사용하여 MASTER_Receive 을 1회 실행시키고 다음의 결과를 확인해 보세요.
 
