@@ -16,41 +16,46 @@ date: 2017-09-01
 ## Programming Library for ADXL345
 
 *   ADXL345를 사용하는 함수들을 설계하고 구현한다.  
-
 *   이것들을 모아서 Library를 만든다.
+
+
 
 *   Data
 
-    ```
-    int16_t AccelX;   /* -2g ~ +2g : -512 ~ 511
-    int16_t AccelY;
-    int16_t AccelZ;
-    ```
+```c
+int16_t AccelX;   /* -2g ~ +2g : -512 ~ 511 */
+int16_t AccelY;
+int16_t AccelZ;
+```
+
+
 
 *   Methods
 
-    ```C
-    void ADXL345_WriteRegister(uint8_t reg, uint8_t value);
-    uint8_t ADXL345_ReadRegister(uint8_t reg);
-    bool ADXL345_Begin(void);
-    void ADXL345_GetXYZ_Polling(void);
-    ```
+```C
+void ADXL345_WriteRegister(uint8_t reg, uint8_t value);
+uint8_t ADXL345_ReadRegister(uint8_t reg);
+bool ADXL345_Begin(void);
+void ADXL345_GetXYZ_Polling(void);
+```
+
+
 
 ## Basic: ReadRegister() WriteRegister()
 
 *   `ADXL345_WriteRegister( )`는 다음과 같이 만들 수 있다.
 
-    ```c
-    void ADXL345_WriteRegister(uint8_t reg, uint8_t value){
-    	MasterDataTx[0] = 0x00 | reg;
-    	MasterDataTx[1] = value;
-    	while(SPI_MASTER_IsTxBusy(&dhSPI_MASTER))  {  }
-    	SPI_MASTER_Transfer(&dhSPI_MASTER, MasterDataTx, MasterDataRx, FrameByte);
-    }
-    ```
+```c
+void ADXL345_WriteRegister(uint8_t reg, uint8_t value){
+    MasterDataTx[0] = 0x00 | reg;
+    MasterDataTx[1] = value;
+    while(SPI_MASTER_IsTxBusy(&dhSPI_MASTER))  {  }
+    SPI_MASTER_Transfer(&dhSPI_MASTER, MasterDataTx, MasterDataRx, FrameByte);
+}
+```
 
-    *   Full Duplex mode로 동작해야 하므로 `SPI_MASTER_Trasnfer` method를 사용하여 2byte의 MasterDataTx를 전송하고 MasterDataRx의 자료를 받는다.
-    *   전송이 완료되기 전에 다시 이 함수가 호출되어 Over-run 이 발생되는 상황을 방지하기 위하여 `SPI_MASTER_IsTxBusy( )`Method를 사용하여 **Busy-wait** 한다.
+*   Full Duplex mode로 동작해야 하므로 `SPI_MASTER_Trasnfer` method를 사용하여 2byte의 MasterDataTx를 전송하고 MasterDataRx의 자료를 받는다.
+*   전송이 완료되기 전에 다시 이 함수가 호출되어 Over-run 이 발생되는 상황을 방지하기 위하여 `SPI_MASTER_IsTxBusy( )`Method를 사용하여 **Busy-wait** 한다.
 
 **[Activity]** `ADXL345_ReadRegister( )` 함수를 완성하여 보아라
 
@@ -60,15 +65,15 @@ date: 2017-09-01
 
 *   `SPI_MASTER_Trasnfer( )` Method 동작이 모두 완료되어야 MasterDataRx에 Data 가 들어오게 된다.  어떻게 그때까지 **Busy-wait** 시킬 수 있나?
 
-    ```
-    uint8_t ADXL345_ReadRegister(uint8_t reg){
-	
-	
-	
-	
-    	return(         );
-    }
-    ```
+```c
+uint8_t ADXL345_ReadRegister(uint8_t reg){
+
+
+
+
+	return(         );
+}
+```
 
 
 
@@ -80,20 +85,20 @@ date: 2017-09-01
     *   BW_RATE: 현재 1000KHz 의 전송속도를 고려하여 800Hz로 Conversion Rate를 설정한다.
     *   POWER_CTL: Measurement bit를 Set 하여 Conversion을 시작한다.
 
-    ```
-    bool ADXL345_Begin(void){
-    	uint8_t device_id;
-    	/* Get & Check DEVID */
-    	device_id = ADXL345_ReadRegister(ADXL345_DEVID);
-    	if(device_id != 0xE5){
-    		return false;
-    	}
+```c
+bool ADXL345_Begin(void){
+	uint8_t device_id;
+	/* Get & Check DEVID */
+	device_id = ADXL345_ReadRegister(ADXL345_DEVID);
+	if(device_id != 0xE5){
+		return false;
+	}
 
-    	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
-    	ADXL345_WriteRegister(ADXL345_BW_RATE, 0x0D); /* Set Conversion Rate 800Hz */
-    	return(true);
-    }
-    ```
+	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
+	ADXL345_WriteRegister(ADXL345_BW_RATE, 0x0D); /* Set Conversion Rate 800Hz */
+	return(true);
+}
+```
 
 
 
@@ -104,7 +109,7 @@ date: 2017-09-01
 
 **[Activity]** Lower byte와 Upper byte 정보를 조합하여 AccelX 정보를 만들어 낸다.
 
-```
+```c
 void ADXL345_GetXYZ_Polling(void){
     uint16_t upper, lower;
     lower = ADXL345_ReadRegister(ADXL345_DATAX0);
