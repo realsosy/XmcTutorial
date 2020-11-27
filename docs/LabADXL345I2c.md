@@ -21,36 +21,36 @@ date: 2017-09-01
 
 *   Data
 
-    ```
-    int16_t AccelX;   /* -2g ~ +2g : -512 ~ 511
-    int16_t AccelY;
-    int16_t AccelZ;
-    ```
+```C
+int16_t AccelX;   /* -2g ~ +2g : -512 ~ 511
+int16_t AccelY;
+int16_t AccelZ;
+```
 
 *   Methods
 
-    ```C
-    void ADXL345_WriteRegister(uint8_t reg, uint8_t value);
-    uint8_t ADXL345_ReadRegister(uint8_t reg);
-    bool ADXL345_Begin(void);
-    void ADXL345_GetXYZ_Polling(void);
-    ```
+```C
+void ADXL345_WriteRegister(uint8_t reg, uint8_t value);
+uint8_t ADXL345_ReadRegister(uint8_t reg);
+bool ADXL345_Begin(void);
+void ADXL345_GetXYZ_Polling(void);
+```
 
 ## Basic: ReadRegister() WriteRegister()
 
 *   `ADXL345_WriteRegister( )`는 다음과 같이 만들 수 있다.
-
-    ```c
-    void ADXL345_WriteRegister(uint8_t reg, uint8_t value){
-    	I2C_MasterDataTx[0] =  reg;
-    	I2C_MasterDataTx[1] =  value;
-    	while( I2C_MASTER_IsRxBusy(&dhI2C_MASTER) == true) { };
-    	I2C_MASTER_Transmit(&dhI2C_MASTER, true, I2C_SlaveAddress, I2C_MasterDataTx, 2, true);
-    }
-    ```
-
     *   `I2C_MASTER_Trasmit` method를 사용하여 2byte의 MasterDataTx를 전송한다.
     *   전송이 완료되기 전에 다시 이 함수가 호출되어 Over-run 이 발생되는 상황을 방지하기 위하여 `SPI_MASTER_IsTxBusy( )`Method를 사용하여 **Busy-wait** 한다.
+
+```c
+void ADXL345_WriteRegister(uint8_t reg, uint8_t value){
+	I2C_MasterDataTx[0] =  reg;
+	I2C_MasterDataTx[1] =  value;
+	while( I2C_MASTER_IsRxBusy(&dhI2C_MASTER) == true) { };
+	I2C_MASTER_Transmit(&dhI2C_MASTER, true, I2C_SlaveAddress, I2C_MasterDataTx, 2, true);
+}
+```
+
 
 **[Activity]** `ADXL345_ReadRegister( )` 함수를 완성하여 보아라
 
@@ -60,17 +60,16 @@ date: 2017-09-01
 
 *   각 명령이 실행되는 중에 Over-run이 발생되는 것을 방지하기 위하여 **Busy-wait** 한다.
 
-    ```
-    uint8_t ADXL345_ReadRegister(uint8_t reg){
-    ```
+```C
+uint8_t ADXL345_ReadRegister(uint8_t reg){
 
 
 
 
 
-    	return(I2C_MasterDataRx[0]);
-    }
-    ​```
+return(I2C_MasterDataRx[0]);
+}
+```
 
 
 
@@ -82,22 +81,19 @@ date: 2017-09-01
     *   BW_RATE: 현재 100KHz 의 전송속도를 고려하여 100Hz로 Conversion Rate를 설정한다.
     *   POWER_CTL: Measurement bit를 Set 하여 Conversion을 시작한다.
 
-    ```
-    bool ADXL345_Begin(void){
-    	uint8_t device_id;
-    	/* Get & Check DEVID */
-    	device_id = ADXL345_ReadRegister(ADXL345_DEVID);
-    	if(device_id != 0xE5){
-    		return false;
-    	}
-
-    	ADXL345_WriteRegister(ADXL345_BW_RATE, 0x0A); /* Set Conversion Rate 100Hz */
-    	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
-    	return(true);
-    }
-    ```
-
-
+```C
+bool ADXL345_Begin(void){
+	uint8_t device_id;
+	/* Get & Check DEVID */
+	device_id = ADXL345_ReadRegister(ADXL345_DEVID);
+	if(device_id != 0xE5){
+		return false;
+	}
+	ADXL345_WriteRegister(ADXL345_BW_RATE, 0x0A); /* Set Conversion Rate 100Hz */
+	ADXL345_WriteRegister(ADXL345_POWER_CTL, 0x08); /* Enable measurements */
+	return(true);
+}
+```
 
 
 ## Read Acceleration X, Y, Z
@@ -143,12 +139,13 @@ void ADXL345_GetXYZ_Polling(void){
 
   * ADXL345_ReadRegister 참고
 
-  ```
-  void ADXL345_GetXYZ_Multiple(void){
+```C
+void ADXL345_GetXYZ_Multiple(void){
+	
 	/* To Do */
 	
-  }
-  ```
+}
+```
 
 
 ### Interrupt를 이용
@@ -159,14 +156,13 @@ void ADXL345_GetXYZ_Polling(void){
 
 *   Interrupt를 사용하여 `ADXL345_GetXYZ(void)` Method를 새롭게 만들고, Data의 수신이 완료되면 `CB_MasterReceiveComplete( )`에서 AccelX, AccelY, AccelZ 값을 Update 하도록 개선해 보아라.
 
-  ```
-    void CB_MasterReceiveComplete(){
+```C
+void CB_MasterReceiveComplete(){
+	
+	
+	
+	
+}
+```
 
 
-
-
-    }
-  ```
-
-
-    
